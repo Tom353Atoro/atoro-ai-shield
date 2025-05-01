@@ -11,22 +11,22 @@ const PillarsSection = () => {
       title: 'Cyber Security',
       description: 'Proactive penetration testing, ISO 27001 implementation, SOC 2 readiness, and continuous vCISO oversight that harden your cloud stack without slowing deployment.',
       link: '/services/cyber-security',
-      color: 'from-blue-500/10 to-blue-600/5',
-      borderColor: 'border-blue-200',
+      color: 'from-atoro-blue/10 to-atoro-blue/5',
+      borderColor: 'border-atoro-blue/20',
     },
     {
       title: 'Data Privacy',
       description: 'GDPR programs, DPO-as-a-Service, and automated privacy ops that turn regulatory complexity into a competitive edge.',
       link: '/services/data-privacy',
-      color: 'from-purple-500/10 to-purple-600/5',
-      borderColor: 'border-purple-200',
+      color: 'from-atoro-green/10 to-atoro-green/5',
+      borderColor: 'border-atoro-green/20',
     },
     {
       title: 'AI Governance',
       description: 'ISO 42001 certification support and virtual AI Governance Officer (vAIGO) services that keep your machine-learning features ethical, secure, and compliant.',
       link: '/services/ai-governance',
-      color: 'from-indigo-500/10 to-indigo-600/5',
-      borderColor: 'border-indigo-200',
+      color: 'from-atoro-teal/10 to-atoro-blue/5',
+      borderColor: 'border-atoro-teal/20',
     },
   ];
 
@@ -57,7 +57,7 @@ const PillarsSection = () => {
               
               <Link 
                 to={pillar.link}
-                className="inline-flex items-center text-atoro-blue hover:text-atoro-purple transition-colors group"
+                className="inline-flex items-center text-atoro-teal hover:text-atoro-blue transition-colors group"
               >
                 Learn more
                 <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />

@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 
 const Newsletter = () => {
   return (
-    <section className="py-20 bg-gradient-to-br from-atoro-blue to-atoro-purple text-white">
+    <section className="py-20 gradient-bg text-white">
       <Container>
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="mb-4">Stay Updated on Security Trends</h2>
@@ -23,7 +23,7 @@ const Newsletter = () => {
                 className="w-full sm:flex-1 bg-white/10 border-white/20 placeholder:text-white/60 text-white"
                 required
               />
-              <Button variant="secondary">
+              <Button className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green">
                 Subscribe
               </Button>
             </div>

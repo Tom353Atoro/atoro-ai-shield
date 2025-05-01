@@ -19,6 +19,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'heading': ['Inter', 'sans-serif'],
+				'sans': ['system-ui', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -64,11 +68,12 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				atoro: {
-					blue: '#1A29B1',
-					purple: '#7E69AB',
-					'dark-blue': '#1A1F2C',
-					'light-blue': '#D3E4FD',
-					'light-purple': '#E5DEFF',
+					teal: '#132A3F',
+					green: '#10FA94',
+					blue: '#0EA5E9',
+					'dark-teal': '#0F2231',
+					'light-green': '#7DFFC5',
+					'light-blue': '#BEE9FB',
 				}
 			},
 			borderRadius: {

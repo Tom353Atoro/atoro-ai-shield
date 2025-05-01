@@ -9,8 +9,8 @@ const Hero = () => {
   return (
     <section className="relative pt-32 pb-20 overflow-hidden bg-white bg-hero-pattern">
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-radial from-atoro-light-purple/20 to-transparent rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-atoro-light-blue/30 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-radial from-atoro-light-blue/20 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-atoro-light-green/30 to-transparent rounded-full blur-3xl" />
       </div>
       
       <Container className="relative z-10">
