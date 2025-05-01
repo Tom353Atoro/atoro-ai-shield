@@ -5,8 +5,10 @@ import { Container } from '@/components/ui/Container';
 import Newsletter from '@/components/home/Newsletter';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Brain, FileCode, Settings, BookOpen } from 'lucide-react';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Brain, FileCode, Settings, BookOpen, ArrowRight, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const AIGovernance = () => {
   return (
@@ -17,7 +19,7 @@ const AIGovernance = () => {
       <section className="pt-32 pb-16 bg-gradient-to-br from-atoro-teal to-atoro-dark-teal text-white">
         <Container>
           <div className="max-w-3xl">
-            <h1 className="mb-6">AI Governance</h1>
+            <h1 className="mb-6">Innovate with Confidence</h1>
             <p className="text-xl mb-8 opacity-90">
               ISO 42001 certification support and virtual AI Governance Officer (vAIGO) services that keep your 
               machine-learning features ethical, secure, and compliant.
