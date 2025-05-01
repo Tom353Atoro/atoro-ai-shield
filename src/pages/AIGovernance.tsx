@@ -40,6 +40,7 @@ const AIGovernance = () => {
       <section className="py-20 bg-white">
         <Container>
           <div className="text-center mb-16">
+            <Badge className="mb-4 bg-atoro-teal/10 text-atoro-teal hover:bg-atoro-teal/20">Why Choose Atoro</Badge>
             <h2 className="mb-4">AI Governance Solutions</h2>
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
               Our AI governance framework ensures your AI systems operate ethically, 
@@ -52,34 +53,45 @@ const AIGovernance = () => {
               {
                 icon: <Brain className="text-atoro-green" />,
                 title: "AI Risk Assessment",
-                description: "Comprehensive evaluation of AI systems for potential risks and biases."
+                description: "Comprehensive evaluation of AI systems for potential risks and biases.",
+                link: "/services/ai-governance/risk-assessment"
               },
               {
                 icon: <FileCode className="text-atoro-green" />,
                 title: "ISO 42001 Support",
-                description: "Guidance for implementing the ISO standard for AI management systems."
+                description: "Guidance for implementing the ISO standard for AI management systems.",
+                link: "/services/ai-governance/iso-42001"
               },
               {
                 icon: <Settings className="text-atoro-green" />,
                 title: "vAIGO Services",
-                description: "Virtual AI Governance Officer to oversee your AI operations and compliance."
+                description: "Virtual AI Governance Officer to oversee your AI operations and compliance.",
+                link: "/services/ai-governance/vaigo"
               },
               {
                 icon: <BookOpen className="text-atoro-green" />,
                 title: "AI Ethics Framework",
-                description: "Development of customized AI ethics principles and guidelines."
+                description: "Development of customized AI ethics principles and guidelines.",
+                link: "/services/ai-governance/ethics-framework"
               }
-            ].map((feature, index) => (
-              <Card key={index} className="border-gray-100 hover:shadow-md transition-shadow">
+            ].map((service, index) => (
+              <Card key={index} className="border-gray-100 hover:shadow-md transition-shadow group">
                 <CardContent className="pt-6">
                   <div className="mb-4 flex justify-center">
                     <div className="p-3 bg-gradient-to-br from-atoro-green/10 to-atoro-blue/10 rounded-lg">
-                      {feature.icon}
+                      {service.icon}
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-2 text-center">{feature.title}</h3>
-                  <p className="text-gray-600 text-center">{feature.description}</p>
+                  <h3 className="text-xl font-semibold mb-2 text-center">{service.title}</h3>
+                  <p className="text-gray-600 text-center">{service.description}</p>
                 </CardContent>
+                <CardFooter className="pt-0 pb-6 flex justify-center">
+                  <Button variant="ghost" className="text-atoro-teal group-hover:text-atoro-green group-hover:bg-atoro-green/10 transition-colors" asChild>
+                    <Link to={service.link} className="flex items-center gap-2">
+                      Learn more <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
+                </CardFooter>
               </Card>
             ))}
           </div>
@@ -89,9 +101,17 @@ const AIGovernance = () => {
       {/* Why AI Governance Section */}
       <section className="py-20 bg-gray-50">
         <Container>
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-atoro-green/10 text-atoro-green hover:bg-atoro-green/20">Key Outcomes</Badge>
+            <h2 className="mb-4">Why AI Governance Matters</h2>
+            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+              As AI becomes central to SaaS offerings, proper governance ensures your systems 
+              remain transparent, fair, and compliant with rapidly evolving regulations.
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="mb-6">Why AI Governance Matters</h2>
               <p className="text-lg text-gray-700 mb-8">
                 As AI becomes central to SaaS offerings, proper governance ensures your systems 
                 remain transparent, fair, and compliant with rapidly evolving regulations.
@@ -153,6 +173,72 @@ const AIGovernance = () => {
                   <p className="text-gray-600">Achieve ISO 42001 and other relevant certifications</p>
                 </div>
               </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Featured Service - vAIGO */}
+      <section className="py-20 bg-gradient-to-br from-atoro-teal to-atoro-dark-teal text-white">
+        <Container>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <Badge className="mb-4 bg-white/10 text-white hover:bg-white/20">Featured Service</Badge>
+              <h2 className="text-white mb-6">Virtual AI Governance Officer</h2>
+              <p className="text-lg mb-8 opacity-90">
+                Our vAIGO service provides ongoing AI governance expertise without the need for specialized in-house staff. 
+                Get a dedicated virtual AI ethics officer to help you navigate the complex world of responsible AI.
+              </p>
+              
+              <ul className="space-y-4 mb-8">
+                {[
+                  "Continuous AI risk monitoring",
+                  "Regular AI system audits and assessments",
+                  "Guidance on AI regulations and compliance",
+                  "AI ethics advisory and stakeholder communication"
+                ].map((feature, index) => (
+                  <li key={index} className="flex items-center gap-3">
+                    <CheckCircle className="h-5 w-5 text-atoro-green flex-shrink-0" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              
+              <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green" asChild>
+                <Link to="/services/ai-governance/vaigo">
+                  Learn More About vAIGO
+                </Link>
+              </Button>
+            </div>
+            
+            <div className="bg-white/10 p-8 rounded-lg border border-white/20">
+              <h3 className="text-2xl font-semibold mb-6">Common AI Governance Challenges</h3>
+              <ul className="space-y-5">
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full border border-atoro-green flex items-center justify-center flex-shrink-0">
+                    <span className="text-atoro-green">1</span>
+                  </div>
+                  <span>Keeping up with evolving AI regulations</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full border border-atoro-green flex items-center justify-center flex-shrink-0">
+                    <span className="text-atoro-green">2</span>
+                  </div>
+                  <span>Identifying and mitigating AI bias and risks</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full border border-atoro-green flex items-center justify-center flex-shrink-0">
+                    <span className="text-atoro-green">3</span>
+                  </div>
+                  <span>Implementing comprehensive AI governance frameworks</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full border border-atoro-green flex items-center justify-center flex-shrink-0">
+                    <span className="text-atoro-green">4</span>
+                  </div>
+                  <span>Balancing innovation with compliance requirements</span>
+                </li>
+              </ul>
             </div>
           </div>
         </Container>
