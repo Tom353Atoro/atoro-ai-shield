@@ -1,15 +1,16 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/Container';
 import { cn } from '@/lib/utils';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Shield, FileKey, Brain, Users } from 'lucide-react';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [resourcesDropdownOpen, setResourcesDropdownOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
   
@@ -20,10 +21,31 @@ const Navbar = () => {
       href: '/services',
       dropdown: true,
       items: [
-        { name: 'Security Team as a Service', href: '/services/security-team-aas', featured: true },
-        { name: 'Cyber Security', href: '/services/cyber-security' },
-        { name: 'Data Privacy', href: '/services/data-privacy' },
-        { name: 'AI Governance', href: '/services/ai-governance' },
+        { 
+          name: 'Cyber Security', 
+          href: '/services/cyber-security',
+          description: 'Proactive security for your SaaS business.',
+          icon: <Shield className="h-5 w-5 text-atoro-green" />
+        },
+        { 
+          name: 'Data Privacy', 
+          href: '/services/data-privacy',
+          description: 'Navigate GDPR with confidence and ease.',
+          icon: <FileKey className="h-5 w-5 text-atoro-blue" />
+        },
+        { 
+          name: 'AI Governance', 
+          href: '/services/ai-governance',
+          description: 'Ensure ethical AI practices and compliance.',
+          icon: <Brain className="h-5 w-5 text-atoro-teal" />
+        },
+        { 
+          name: 'Security Team as a Service', 
+          href: '/services/security-team-aas', 
+          featured: true,
+          description: 'Your dedicated virtual security department.',
+          icon: <Users className="h-5 w-5 text-atoro-green" />
+        },
       ],
     },
     {
@@ -40,6 +62,9 @@ const Navbar = () => {
     { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
   ];
+
+  // Check if the current route matches any of the service pages for active state
+  const isServicePage = location.pathname.includes('/services/');
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
@@ -59,7 +84,10 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className="text-gray-700 hover:text-atoro-blue font-medium transition duration-200"
+                  className={cn(
+                    "text-gray-700 hover:text-atoro-blue font-medium transition duration-200",
+                    location.pathname === link.href && "text-atoro-blue"
+                  )}
                 >
                   {link.name}
                 </Link>
@@ -70,7 +98,13 @@ const Navbar = () => {
                   onMouseEnter={() => link.name === 'Services' ? setServicesDropdownOpen(true) : setResourcesDropdownOpen(true)}
                   onMouseLeave={() => link.name === 'Services' ? setServicesDropdownOpen(false) : setResourcesDropdownOpen(false)}
                 >
-                  <button className="flex items-center text-gray-700 hover:text-atoro-blue font-medium transition duration-200 gap-1">
+                  <button className={cn(
+                    "flex items-center font-medium transition duration-200 gap-1",
+                    (link.name === 'Services' && isServicePage) || 
+                    (link.name === 'Resources' && location.pathname.includes('/resources/')) 
+                      ? "text-atoro-blue" 
+                      : "text-gray-700 hover:text-atoro-blue"
+                  )}>
                     {link.name}
                     <ChevronDown size={16} />
                   </button>
@@ -84,11 +118,20 @@ const Navbar = () => {
                           key={item.name}
                           to={item.href}
                           className={cn(
-                            "block px-4 py-2 text-sm hover:bg-gray-50 transition duration-200",
-                            item.featured ? "text-atoro-purple font-bold" : "text-gray-700"
+                            "flex items-center px-4 py-3 text-sm hover:bg-gray-50 transition duration-200",
+                            item.featured ? "text-atoro-green font-semibold" : "text-gray-700",
+                            location.pathname === item.href && "bg-gray-50"
                           )}
                         >
-                          {item.name}
+                          {item.icon && <span className="mr-3">{item.icon}</span>}
+                          <div>
+                            <div className={item.featured ? "text-atoro-green font-semibold" : "font-medium"}>
+                              {item.name}
+                            </div>
+                            {item.description && (
+                              <p className="text-xs text-gray-500 mt-0.5">{item.description}</p>
+                            )}
+                          </div>
                         </Link>
                       ))}
                     </div>
@@ -123,7 +166,10 @@ const Navbar = () => {
                 {!link.dropdown ? (
                   <Link
                     to={link.href}
-                    className="block py-2 text-base font-medium text-gray-700"
+                    className={cn(
+                      "block py-2 text-base font-medium",
+                      location.pathname === link.href ? "text-atoro-blue" : "text-gray-700"
+                    )}
                     onClick={toggleMobileMenu}
                   >
                     {link.name}
@@ -131,7 +177,13 @@ const Navbar = () => {
                 ) : (
                   <div className="py-2">
                     <button 
-                      className="flex items-center w-full text-left text-base font-medium text-gray-700"
+                      className={cn(
+                        "flex items-center w-full text-left text-base font-medium",
+                        (link.name === 'Services' && isServicePage) || 
+                        (link.name === 'Resources' && location.pathname.includes('/resources/')) 
+                          ? "text-atoro-blue" 
+                          : "text-gray-700"
+                      )}
                       onClick={() => {
                         if (link.name === 'Services') {
                           setServicesDropdownOpen(!servicesDropdownOpen);
@@ -152,12 +204,19 @@ const Navbar = () => {
                             key={item.name}
                             to={item.href}
                             className={cn(
-                              "block py-2 text-sm",
-                              item.featured ? "text-atoro-purple font-bold" : "text-gray-600"
+                              "flex items-center py-2",
+                              item.featured ? "text-atoro-green font-semibold" : "text-gray-600",
+                              location.pathname === item.href && "bg-gray-50 rounded-md px-2"
                             )}
                             onClick={toggleMobileMenu}
                           >
-                            {item.name}
+                            {item.icon && <span className="mr-2">{item.icon}</span>}
+                            <div>
+                              <span>{item.name}</span>
+                              {item.description && (
+                                <p className="text-xs text-gray-500">{item.description}</p>
+                              )}
+                            </div>
                           </Link>
                         ))}
                       </div>
