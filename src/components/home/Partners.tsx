@@ -4,6 +4,7 @@ import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Partner data structure that can be easily modified
 export const partnersData = {
@@ -11,23 +12,23 @@ export const partnersData = {
     id: 1,
     name: "Vanta",
     logo: "/lovable-uploads/5e1e7e8b-6f29-4ef6-896e-b33c052d8769.png",
-    width: 150
+    width: 180
   }, {
     id: 2,
     name: "DRATA",
     logo: "/lovable-uploads/92f8da33-0880-48be-815f-a45d074582db.png",
-    width: 180
+    width: 220
   }],
   audit: [{
     id: 3,
     name: "Tempo Audits",
     logo: "/lovable-uploads/2a43c2aa-a14c-448c-8429-8fb1d9c01ee3.png",
-    width: 160
+    width: 200
   }, {
     id: 4,
     name: "A-LIGN",
     logo: "/lovable-uploads/273bf97c-b513-4a94-8fdd-7a5bc90eb254.png",
-    width: 140
+    width: 180
   }]
 };
 
@@ -37,17 +38,21 @@ const PartnerLogo = ({
   partner: typeof partnersData.platform[0];
 }) => {
   const [loaded, setLoaded] = useState(false);
+  const isMobile = useIsMobile();
+  
+  // Scale down size for mobile
+  const adjustedWidth = isMobile ? partner.width * 0.8 : partner.width;
   
   return (
-    <div className="flex items-center justify-center px-8">
-      {!loaded && <Skeleton className="w-32 h-12" />}
+    <div className="flex items-center justify-center px-8 py-4">
+      {!loaded && <Skeleton className={`w-${isMobile ? '32' : '48'} h-${isMobile ? '12' : '16'}`} />}
       <img 
         src={partner.logo} 
         alt={`${partner.name} logo`}
-        className={cn("max-h-12 object-contain transition-opacity duration-300", 
+        className={cn("object-contain transition-opacity duration-300", 
           loaded ? "opacity-100" : "opacity-0"
         )}
-        style={{ width: partner.width ? `${partner.width}px` : 'auto' }}
+        style={{ width: adjustedWidth ? `${adjustedWidth}px` : 'auto', maxHeight: isMobile ? '48px' : '64px' }}
         onLoad={() => setLoaded(true)}
       />
     </div>
