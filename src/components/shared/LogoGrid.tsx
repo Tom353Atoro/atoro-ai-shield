@@ -62,10 +62,10 @@ const LogoGrid: React.FC<LogoGridProps> = ({
           {logos.map((logo) => (
             <div 
               key={logo.id} 
-              className="flex items-center justify-center h-32 bg-white p-6 rounded-lg border border-gray-100 shadow-sm"
+              className="flex items-center justify-center h-40 bg-white p-8 rounded-lg border border-gray-100 shadow-sm"
             >
               {!loadedImages[logo.id.toString()] && (
-                <Skeleton className="w-full h-20 rounded-md" />
+                <Skeleton className="w-full h-24 rounded-md" />
               )}
               <img
                 src={logo.imagePath}
@@ -75,8 +75,8 @@ const LogoGrid: React.FC<LogoGridProps> = ({
                   loadedImages[logo.id.toString()] ? "opacity-100" : "opacity-0"
                 )}
                 style={{ 
-                  width: logo.width ? `${isMobile ? logo.width * 0.9 : logo.width * 1.3}px` : 'auto',
-                  maxHeight: isMobile ? '60px' : '80px'
+                  width: logo.width ? `${isMobile ? logo.width * 0.8 : logo.width * 1.5}px` : 'auto',
+                  maxHeight: isMobile ? '80px' : '110px'
                 }}
                 onLoad={() => handleImageLoad(logo.id)}
               />
