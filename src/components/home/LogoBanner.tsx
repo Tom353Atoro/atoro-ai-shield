@@ -56,8 +56,8 @@ const LogoBanner: React.FC = () => {
   return (
     <LogoCarousel
       logos={logoData}
-      title="Our Technology Partners"
-      description="We work with leading technology providers to deliver exceptional solutions."
+      title="Trusted by and Building Trust with"
+      description="Forward thinking SaaS trust Atoro"
       className="bg-gray-50"
       autoScroll={true}
       scrollInterval={1500}  // Faster scrolling (from 2000ms to 1500ms)
