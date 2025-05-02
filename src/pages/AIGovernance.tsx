@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
 import { Container } from '@/components/ui/Container';
@@ -254,9 +255,6 @@ const AIGovernance = () => {
           </div>
         </Container>
       </section>
-
-      <Newsletter />
-      <Footer />
     </ServiceLayout>
   );
 };
