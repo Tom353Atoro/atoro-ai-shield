@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';
 import { Facebook, Twitter, Instagram, Linkedin, Github } from 'lucide-react';
+import Logo from '@/components/shared/Logo';
 
 const Footer = () => {
   return (
@@ -13,12 +14,7 @@ const Footer = () => {
             {/* Column 1: Logo and About */}
             <div className="space-y-4">
               <Link to="/" className="block">
-                <img 
-                  src="/lovable-uploads/8d13129b-c156-4ec7-b2ef-bbd0364fb711.png" 
-                  alt="Atoro Logo" 
-                  className="h-10"
-                  width="auto"
-                />
+                <Logo variant="white" size="medium" href="/" />
               </Link>
               <p className="text-gray-300 text-sm mt-4">
                 Focused security, data privacy, and AI governance solutions for fast-growing SaaS companies.

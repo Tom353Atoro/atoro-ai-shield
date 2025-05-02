@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -23,7 +24,13 @@ const Logo = ({
   };
   
   // Define variants
-  const logoSrc = "/lovable-uploads/8d13129b-c156-4ec7-b2ef-bbd0364fb711.png";
+  let logoSrc;
+  
+  if (variant === 'white') {
+    logoSrc = "/lovable-uploads/atoro-logo.png";
+  } else {
+    logoSrc = "/lovable-uploads/8d13129b-c156-4ec7-b2ef-bbd0364fb711.png";
+  }
   
   const logo = (
     <img 
