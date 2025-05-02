@@ -87,3 +87,189 @@
   }
 }
 
+/* Honeycomb Layout Styles */
+.honeycomb-container {
+  position: relative;
+  min-height: 520px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.honeycomb {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+}
+
+.hexagon {
+  position: relative;
+  width: 320px;
+  height: 360px;
+  margin: 1rem;
+  background-color: white;
+  border: 1px solid;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transform: translateY(0);
+}
+
+.hexagon:before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(315deg, #10FA94, #0EA5E9);
+  z-index: -1;
+  opacity: 0;
+  border-radius: 14px;
+  transition: opacity 0.4s ease;
+}
+
+.hexagon.active {
+  transform: translateY(-10px);
+}
+
+.hexagon.active:before {
+  opacity: 1;
+}
+
+.hexagon-content {
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+  position: relative;
+}
+
+.hexagon-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  opacity: 0.7;
+}
+
+/* Connections */
+.connection-line {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(16, 250, 148, 0.5), rgba(14, 165, 233, 0.5));
+  transition: all 0.4s ease;
+  z-index: 0;
+}
+
+.connection-line.active {
+  background: linear-gradient(90deg, rgba(16, 250, 148, 1), rgba(14, 165, 233, 1));
+  height: 3px;
+  box-shadow: 0 0 15px rgba(16, 250, 148, 0.7);
+}
+
+.connection-icon {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  padding: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+}
+
+/* Specific connection styling */
+.cyber-privacy {
+  width: 160px;
+  transform: rotate(-30deg);
+  top: 30%;
+  left: 28%;
+}
+
+.privacy-ai {
+  width: 160px;
+  transform: rotate(30deg);
+  top: 30%;
+  right: 28%;
+}
+
+.cyber-ai {
+  width: 280px;
+  bottom: 40%;
+  left: 33%;
+}
+
+.cyber-privacy-icon {
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.privacy-ai-icon {
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.cyber-ai-icon {
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Positioning for the hexagons */
+.hexagon-top {
+  align-self: flex-start;
+}
+
+.hexagon-bottom-left {
+  align-self: flex-end;
+  margin-right: -40px;
+}
+
+.hexagon-bottom-right {
+  align-self: flex-end;
+  margin-left: -40px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .honeycomb {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hexagon {
+    width: 90%;
+    max-width: 320px;
+    margin: 1rem 0;
+  }
+  
+  .hexagon-bottom-left,
+  .hexagon-bottom-right {
+    margin: 1rem 0;
+  }
+  
+  .connection-line {
+    display: none;
+  }
+}
+
+/* Animation for connection hover */
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
