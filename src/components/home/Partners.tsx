@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/card';
@@ -34,7 +33,6 @@ export const partnersData = {
     width: 140
   }]
 };
-
 const PartnerLogo = ({
   partner,
   onRemove
@@ -54,7 +52,6 @@ const PartnerLogo = ({
       <span className="text-sm text-gray-600 mt-1">{partner.name}</span>
     </div>;
 };
-
 const Partners = () => {
   const [editMode, setEditMode] = useState(false);
   const [partners, setPartners] = useState(partnersData);
@@ -66,7 +63,6 @@ const Partners = () => {
     logo: '',
     width: 150
   });
-
   const addPartner = () => {
     if (!newPartner.name || !newPartner.logo) return;
     setPartners(prev => ({
@@ -88,111 +84,12 @@ const Partners = () => {
       width: 150
     });
   };
-
   const removePartner = (category: keyof typeof partnersData, id: number) => {
     setPartners(prev => ({
       ...prev,
       [category]: prev[category].filter(partner => partner.id !== id)
     }));
   };
-
-  // Fix: Added return statement with JSX content
-  return (
-    <section className="py-16 bg-white">
-      <Container>
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-3">Our Partners</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            We work with the best in the industry to deliver quality service to our clients.
-          </p>
-          {/* Toggle edit mode button */}
-          <Button 
-            variant="outline" 
-            className="mt-4"
-            onClick={() => setEditMode(!editMode)}
-          >
-            {editMode ? 'Done Editing' : 'Edit Partners'}
-          </Button>
-        </div>
-
-        {/* Platform Partners */}
-        <div className="mb-12">
-          <h3 className="text-xl font-semibold mb-6 text-center">Platform Partners</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {partners.platform.map(partner => (
-              <PartnerLogo 
-                key={partner.id} 
-                partner={partner} 
-                onRemove={editMode ? () => removePartner('platform', partner.id) : undefined} 
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Audit Partners */}
-        <div>
-          <h3 className="text-xl font-semibold mb-6 text-center">Audit Partners</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {partners.audit.map(partner => (
-              <PartnerLogo 
-                key={partner.id} 
-                partner={partner} 
-                onRemove={editMode ? () => removePartner('audit', partner.id) : undefined} 
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Add partner form - only shown in edit mode */}
-        {editMode && (
-          <Card className="mt-12 p-6">
-            <h3 className="text-xl font-semibold mb-4">Add New Partner</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">Category</label>
-                <select
-                  className="w-full p-2 border rounded"
-                  value={newPartner.category}
-                  onChange={(e) => setNewPartner({...newPartner, category: e.target.value})}
-                >
-                  <option value="platform">Platform Partner</option>
-                  <option value="audit">Audit Partner</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Partner Name</label>
-                <Input
-                  value={newPartner.name}
-                  onChange={(e) => setNewPartner({...newPartner, name: e.target.value})}
-                  placeholder="Partner name"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Logo URL</label>
-                <Input
-                  value={newPartner.logo}
-                  onChange={(e) => setNewPartner({...newPartner, logo: e.target.value})}
-                  placeholder="https://example.com/logo.png"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Logo Width (px)</label>
-                <Input
-                  type="number"
-                  value={newPartner.width}
-                  onChange={(e) => setNewPartner({...newPartner, width: parseInt(e.target.value) || 150})}
-                  placeholder="150"
-                />
-              </div>
-              <Button onClick={addPartner} className="w-full">
-                <Plus className="mr-2 h-4 w-4" /> Add Partner
-              </Button>
-            </div>
-          </Card>
-        )}
-      </Container>
-    </section>
-  );
+  return;
 };
-
 export default Partners;

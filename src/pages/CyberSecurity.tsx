@@ -5,12 +5,12 @@ import { Container } from '@/components/ui/Container';
 import Newsletter from '@/components/home/Newsletter';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Shield, FileSearch, Lock, Users, ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TrustFactorsGrid from '@/components/shared/TrustFactorsGrid';
 import PillarsSection from '@/components/home/PillarsSection';
-import ServicesGrid from '@/components/services/ServicesGrid';
 
 const CyberSecurity = () => {
   return (
@@ -38,13 +38,64 @@ const CyberSecurity = () => {
         </Container>
       </section>
 
-      {/* Services Grid - replacing the "Why Choose Atoro" section */}
-      <ServicesGrid 
-        title="Our Cyber Security Services"
-        description="Atoro's cyber security services embed protection into your development lifecycle without slowing you down."
-      />
+      {/* Why Choose Atoro Section */}
+      <section className="py-20 bg-white">
+        <Container>
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-atoro-teal/10 text-atoro-teal hover:bg-atoro-teal/20">Why Choose Atoro</Badge>
+            <h2 className="mb-4">SaaS Security Without Compromise</h2>
+            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+              Atoro's cyber security services embed protection into your development lifecycle without slowing you down.
+              We serve as your on-demand security team, helping you reduce the risk of breaches, accelerate compliance,
+              and build trust with enterprise customers.
+            </p>
+          </div>
 
-      {/* Trust Factors Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <Shield className="text-atoro-green" />,
+                title: "Penetration Testing",
+                description: "Identify vulnerabilities in your application with thorough security testing by our experts.",
+                link: "/services/cyber-security/penetration-testing"
+              },
+              {
+                icon: <FileSearch className="text-atoro-green" />,
+                title: "ISO 27001 Implementation",
+                description: "Structured approach to implementing the ISO 27001 framework for information security.",
+                link: "/services/cyber-security/iso-27001"
+              },
+              {
+                icon: <Lock className="text-atoro-green" />,
+                title: "SOC 2 Readiness",
+                description: "Prepare your organization for SOC 2 certification with our comprehensive audit readiness program.",
+                link: "/services/cyber-security/soc2"
+              }
+            ].map((service, index) => (
+              <Card key={index} className="border border-gray-100 hover:border-atoro-green/30 hover:shadow-md transition-all overflow-hidden group">
+                <CardContent className="pt-6">
+                  <div className="mb-5 flex justify-center">
+                    <div className="p-3 bg-atoro-teal/5 rounded-lg">
+                      {service.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3 text-center">{service.title}</h3>
+                  <p className="text-gray-600 text-center">{service.description}</p>
+                </CardContent>
+                <CardFooter className="pt-0 pb-6 flex justify-center">
+                  <Button variant="ghost" className="text-atoro-teal group-hover:text-atoro-green group-hover:bg-atoro-green/10 transition-colors" asChild>
+                    <Link to={service.link} className="flex items-center gap-2">
+                      Learn more <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Trust Factors Grid - New component replacing the old Key Benefits section */}
       <TrustFactorsGrid />
 
       {/* Security Team as a Service */}
