@@ -11,6 +11,7 @@ import AboutAtoro from '@/components/home/AboutAtoro';
 import ThoughtLeadership from '@/components/home/ThoughtLeadership';
 import Testimonials from '@/components/home/Testimonials';
 import Newsletter from '@/components/home/Newsletter';
+import CertificationLogos from '@/components/shared/CertificationLogos';
 
 const Index = () => {
   return (
@@ -22,6 +23,7 @@ const Index = () => {
         <FlagshipService />
         <Partners />
         <OurPartners />
+        <CertificationLogos />
         <AboutAtoro />
         <ThoughtLeadership />
         <Testimonials />
