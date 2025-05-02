@@ -74,7 +74,7 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
   }, [api, autoScroll, scrollInterval]);
 
   const carouselOptions = {
-    align: "start",
+    align: "start" as const, // Use 'as const' to specify this is a literal type
     loop: true,
     dragFree: true,
     speed: speed
