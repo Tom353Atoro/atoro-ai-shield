@@ -12,6 +12,7 @@ import ThoughtLeadership from '@/components/home/ThoughtLeadership';
 import Testimonials from '@/components/home/Testimonials';
 import Newsletter from '@/components/home/Newsletter';
 import CertificationLogos from '@/components/shared/CertificationLogos';
+import LogoBanner from '@/components/home/LogoBanner';
 
 const Index = () => {
   return (
@@ -22,6 +23,7 @@ const Index = () => {
         <PillarsSection />
         <FlagshipService />
         <Partners />
+        <LogoBanner />
         <OurPartners />
         <CertificationLogos />
         <AboutAtoro />
