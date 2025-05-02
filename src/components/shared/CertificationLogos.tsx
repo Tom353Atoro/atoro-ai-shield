@@ -28,34 +28,33 @@ const CertificationLogos: React.FC<CertificationLogosProps> = ({
   description = "Our security practices and services are backed by industry-recognized certifications.",
   className = "",
 }) => {
-  // STATIC CERTIFICATION LOGOS
-  // Replace these with your actual certification logos
+  // CERTIFICATION LOGOS
   const certificationLogos = [
     {
       id: 1,
-      name: "ISO 27001",
-      imagePath: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=150",
-      alt: "ISO 27001 Certification",
+      name: "SOC 2",
+      imagePath: "/lovable-uploads/63ef7bec-da6c-47d4-84a5-9850570d144b.png",
+      alt: "SOC 2 Certification",
       width: 140
     },
     {
       id: 2,
-      name: "SOC 2 Type II",
-      imagePath: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=150",
-      alt: "SOC 2 Type II Certification",
-      width: 140
-    },
-    {
-      id: 3,
-      name: "GDPR Compliant",
-      imagePath: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=150",
+      name: "GDPR",
+      imagePath: "/lovable-uploads/4cc54b2b-b104-494e-be46-2976451d834c.png",
       alt: "GDPR Compliance Certification",
       width: 140
     },
     {
+      id: 3,
+      name: "ISO 27001",
+      imagePath: "/lovable-uploads/81d0cbb3-5fd3-4565-a7d0-df73812e5490.png",
+      alt: "ISO 27001 Certification",
+      width: 140
+    },
+    {
       id: 4,
-      name: "HIPAA Compliant",
-      imagePath: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=150",
+      name: "HIPAA",
+      imagePath: "/lovable-uploads/1b5ef3e0-1624-4c80-b9f0-33d25a819c7b.png",
       alt: "HIPAA Compliance Certification",
       width: 140
     }
