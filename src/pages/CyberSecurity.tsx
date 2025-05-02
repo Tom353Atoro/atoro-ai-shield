@@ -66,20 +66,11 @@ const CyberSecurity = () => {
               </div>
             </div>
             <div className="hidden md:block">
-              <Card className="bg-white/10 backdrop-blur border-white/20 overflow-hidden">
-                <AspectRatio ratio={16/9}>
-                  <img 
-                    src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&q=80&w=1200" 
-                    alt="Cyber security data visualization" 
-                    className="object-cover w-full h-full rounded-t-lg"
-                  />
-                </AspectRatio>
-                <CardContent className="p-4">
-                  <Badge className="bg-atoro-green text-atoro-teal mb-2">Enterprise Security</Badge>
-                  <h3 className="text-lg font-bold">Security Team as a Service</h3>
-                  <p className="text-sm text-white/80 mt-1">Get enterprise-grade security leadership without the overhead</p>
-                </CardContent>
-              </Card>
+              <img 
+                src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&q=80&w=1200" 
+                alt="Cyber security data visualization" 
+                className="object-cover w-full rounded-lg"
+              />
             </div>
           </div>
         </Container>
