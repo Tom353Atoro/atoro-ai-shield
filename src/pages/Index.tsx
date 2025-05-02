@@ -23,8 +23,8 @@ const Index = () => {
         <PillarsSection />
         <FlagshipService />
         <Partners />
-        <CertificationLogos />
         <AboutAtoro />
+        <CertificationLogos />
         <ThoughtLeadership />
         <Testimonials />
         <Newsletter />
