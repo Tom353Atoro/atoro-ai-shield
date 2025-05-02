@@ -41,41 +41,63 @@ const CyberSecurity = () => {
     <div className="flex min-h-screen flex-col">
       <Navbar />
       
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-atoro-teal to-atoro-dark-teal text-white">
+      {/* Hero Section - Optimized for space efficiency */}
+      <section className="pt-16 pb-8 bg-gradient-to-br from-atoro-teal to-atoro-dark-teal text-white">
         <Container>
-          <div className="max-w-3xl">
-            <h1 className="mb-6">Move Fast with Confidence</h1>
-            <p className="text-xl mb-8 opacity-90">
-              In the SaaS world, a single security slip-up can break customer trust or halt a big deal. 
-              Our holistic cyber security solutions help you move quickly without compromising safety.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green">
-                Book a Security Assessment
-              </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                View Security Solutions
-              </Button>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h1 className="mb-4 text-3xl md:text-4xl lg:text-5xl">Move Fast with Confidence</h1>
+              <p className="text-lg mb-6 opacity-90">
+                In the SaaS world, a single security slip-up can break customer trust. 
+                Our holistic cyber security solutions help you move quickly without compromising safety.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green">
+                  Book a Security Assessment
+                </Button>
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                  View Services
+                </Button>
+              </div>
+            </div>
+            <div className="hidden md:flex justify-center">
+              <div className="relative max-w-md">
+                <div className="absolute -top-6 -right-6 w-24 h-24 bg-atoro-green/20 rounded-full blur-xl"></div>
+                <div className="absolute -bottom-2 -left-8 w-32 h-32 bg-atoro-blue/20 rounded-full blur-xl"></div>
+                <Card className="border-2 border-white/10 bg-white/5 backdrop-blur-sm w-full p-4 transform rotate-2">
+                  <CardContent className="space-y-3 pt-2">
+                    <Badge className="bg-atoro-green text-atoro-teal mb-2">Featured Service</Badge>
+                    <h3 className="text-xl font-bold">Security Team as a Service</h3>
+                    <p className="text-sm opacity-90">Get enterprise-grade security leadership without the overhead of building an in-house team.</p>
+                    <ul className="space-y-2 text-sm">
+                      {["Dedicated vCISO", "Continuous monitoring", "Compliance support"].map((item) => (
+                        <li key={item} className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-atoro-green" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* Services Section - Moved up for more direct focus */}
-      <section className="py-20 bg-white">
+      {/* Services Section - More compact */}
+      <section className="py-12 bg-white">
         <Container>
-          <div className="text-center mb-16">
-            <Badge className="mb-4 bg-atoro-teal/10 text-atoro-teal hover:bg-atoro-teal/20">Our Services</Badge>
-            <h2 className="mb-4">Comprehensive Security Solutions</h2>
-            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-              Atoro's cyber security services embed protection into your development lifecycle without slowing you down.
-              We serve as your on-demand security team, helping you reduce the risk of breaches, accelerate compliance,
-              and build trust with enterprise customers.
+          <div className="text-center mb-10">
+            <Badge className="mb-3 bg-atoro-teal/10 text-atoro-teal hover:bg-atoro-teal/20">Our Services</Badge>
+            <h2 className="mb-3">Comprehensive Security Solutions</h2>
+            <p className="text-gray-700 max-w-2xl mx-auto">
+              Embed protection into your development lifecycle without slowing you down.
+              Reduce breach risks, accelerate compliance, and build customer trust.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 icon: <Shield className="text-atoro-green" />,
@@ -96,20 +118,20 @@ const CyberSecurity = () => {
                 link: "/services/cyber-security/soc2"
               }
             ].map((service, index) => (
-              <Card key={index} className="border border-gray-100 hover:border-atoro-green/30 hover:shadow-md transition-all overflow-hidden group">
+              <Card key={index} className="border border-gray-100 hover:border-atoro-green/30 hover:shadow-md transition-all overflow-hidden group h-full">
                 <CardContent className="pt-6">
-                  <div className="mb-5 flex justify-center">
+                  <div className="mb-4 flex justify-center">
                     <div className="p-3 bg-atoro-teal/5 rounded-lg">
                       {service.icon}
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-3 text-center">{service.title}</h3>
-                  <p className="text-gray-600 text-center">{service.description}</p>
+                  <h3 className="text-xl font-semibold mb-2 text-center">{service.title}</h3>
+                  <p className="text-gray-600 text-center text-sm">{service.description}</p>
                 </CardContent>
-                <CardFooter className="pt-0 pb-6 flex justify-center">
-                  <Button variant="ghost" className="text-atoro-teal group-hover:text-atoro-green group-hover:bg-atoro-green/10 transition-colors" asChild>
-                    <Link to={service.link} className="flex items-center gap-2">
-                      Learn more <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                <CardFooter className="pt-0 pb-5 flex justify-center">
+                  <Button variant="ghost" size="sm" className="text-atoro-teal group-hover:text-atoro-green group-hover:bg-atoro-green/10 transition-colors" asChild>
+                    <Link to={service.link} className="flex items-center gap-1">
+                      Learn more <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </Button>
                 </CardFooter>
@@ -120,18 +142,18 @@ const CyberSecurity = () => {
       </section>
 
       {/* Security Team as a Service - Featured Service */}
-      <section className="py-20 bg-gradient-to-br from-atoro-teal to-atoro-dark-teal text-white">
+      <section className="py-16 bg-gradient-to-br from-atoro-teal to-atoro-dark-teal text-white">
         <Container>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <Badge className="mb-4 bg-white/10 text-white hover:bg-white/20">Featured Service</Badge>
-              <h2 className="text-white mb-6">Security Team as a Service</h2>
-              <p className="text-lg mb-8 opacity-90">
+              <h2 className="text-white mb-4">Security Team as a Service</h2>
+              <p className="text-lg mb-6 opacity-90">
                 Get a dedicated virtual security department without the overhead of building an in-house team. 
                 Our experts become an extension of your organization, providing ongoing security oversight and guidance.
               </p>
               
-              <ul className="space-y-4 mb-8">
+              <ul className="space-y-3 mb-6">
                 {[
                   "On-demand security expertise",
                   "Continuous threat monitoring",
@@ -152,9 +174,9 @@ const CyberSecurity = () => {
               </Button>
             </div>
             
-            <div className="bg-white/10 p-8 rounded-lg border border-white/20">
-              <h3 className="text-2xl font-semibold mb-6">Common Security Challenges</h3>
-              <ul className="space-y-5">
+            <div className="bg-white/10 p-6 rounded-lg border border-white/20">
+              <h3 className="text-xl font-semibold mb-5">Common Security Challenges</h3>
+              <ul className="space-y-4">
                 <li className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full border border-atoro-green flex items-center justify-center flex-shrink-0">
                     <span className="text-atoro-green">1</span>
@@ -195,12 +217,12 @@ const CyberSecurity = () => {
         bgColor="bg-white"
       />
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-atoro-blue/10 to-atoro-green/10">
+      {/* CTA Section - More compact */}
+      <section className="py-12 bg-gradient-to-br from-atoro-blue/10 to-atoro-green/10">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
-            <h2 className="mb-6">Secure Your Foundation</h2>
-            <p className="text-lg text-gray-700 mb-8">
+            <h2 className="mb-4">Secure Your Foundation</h2>
+            <p className="text-gray-700 mb-6">
               Even if you're a startup, your security can be enterprise-grade. Let our experts help you
               strengthen your cyber defenses without slowing down your innovation.
             </p>
