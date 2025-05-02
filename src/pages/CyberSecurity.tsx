@@ -48,9 +48,6 @@ const CyberSecurity = () => {
         <Container>
           <div className="grid md:grid-cols-2 gap-8 items-center relative z-10">
             <div>
-              <div className="mb-8">
-                <Logo size="large" />
-              </div>
               <h1 className="mb-4 text-3xl md:text-4xl lg:text-5xl">
                 <span className="text-atoro-green">Move Fast</span> with Confidence
               </h1>

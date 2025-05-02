@@ -90,15 +90,6 @@ const Hero = () => {
       
       <Container className="relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-8">
-          <div className="flex justify-center mb-8">
-            <img 
-              src="/lovable-uploads/8d13129b-c156-4ec7-b2ef-bbd0364fb711.png" 
-              alt="Atoro Logo" 
-              className="h-16 md:h-20"
-              width="auto"
-            />
-          </div>
-          
           <h1 className="mb-6">
             <span className={`gradient-text transition-opacity duration-1000 ${fadeState === 'fade-in' ? 'opacity-100' : 'opacity-0'}`}>
               {cyclingWords[currentWordIndex]}
