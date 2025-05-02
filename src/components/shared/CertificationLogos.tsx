@@ -35,28 +35,28 @@ const CertificationLogos: React.FC<CertificationLogosProps> = ({
       name: "SOC 2",
       imagePath: "/lovable-uploads/63ef7bec-da6c-47d4-84a5-9850570d144b.png",
       alt: "SOC 2 Certification",
-      width: 140
+      width: 180
     },
     {
       id: 2,
       name: "GDPR",
       imagePath: "/lovable-uploads/4cc54b2b-b104-494e-be46-2976451d834c.png",
       alt: "GDPR Compliance Certification",
-      width: 140
+      width: 180
     },
     {
       id: 3,
       name: "ISO 27001",
       imagePath: "/lovable-uploads/81d0cbb3-5fd3-4565-a7d0-df73812e5490.png",
       alt: "ISO 27001 Certification",
-      width: 140
+      width: 180
     },
     {
       id: 4,
       name: "HIPAA",
       imagePath: "/lovable-uploads/1b5ef3e0-1624-4c80-b9f0-33d25a819c7b.png",
       alt: "HIPAA Compliance Certification",
-      width: 140
+      width: 180
     }
   ];
 

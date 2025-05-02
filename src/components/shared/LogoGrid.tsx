@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Define the type for each logo item
 interface LogoItem {
@@ -36,6 +37,7 @@ const LogoGrid: React.FC<LogoGridProps> = ({
   className = ''
 }) => {
   const [loadedImages, setLoadedImages] = useState<{[key: string]: boolean}>({});
+  const isMobile = useIsMobile();
 
   const handleImageLoad = (id: string | number) => {
     setLoadedImages(prev => ({
@@ -60,20 +62,21 @@ const LogoGrid: React.FC<LogoGridProps> = ({
           {logos.map((logo) => (
             <div 
               key={logo.id} 
-              className="flex items-center justify-center h-24 bg-white p-4 rounded-lg border border-gray-100 shadow-sm"
+              className="flex items-center justify-center h-32 bg-white p-6 rounded-lg border border-gray-100 shadow-sm"
             >
               {!loadedImages[logo.id.toString()] && (
-                <Skeleton className="w-full h-16 rounded-md" />
+                <Skeleton className="w-full h-20 rounded-md" />
               )}
               <img
                 src={logo.imagePath}
                 alt={logo.alt || `${logo.name} logo`}
                 className={cn(
-                  "max-h-16 mx-auto object-contain transition-opacity duration-300",
+                  "object-contain transition-opacity duration-300",
                   loadedImages[logo.id.toString()] ? "opacity-100" : "opacity-0"
                 )}
                 style={{ 
-                  width: logo.width ? `${logo.width}px` : 'auto',
+                  width: logo.width ? `${isMobile ? logo.width * 0.9 : logo.width * 1.3}px` : 'auto',
+                  maxHeight: isMobile ? '60px' : '80px'
                 }}
                 onLoad={() => handleImageLoad(logo.id)}
               />
