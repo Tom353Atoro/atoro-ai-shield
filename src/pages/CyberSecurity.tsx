@@ -1,42 +1,39 @@
 import React from 'react';
-import Navbar from '@/components/layout/Navbar';
+import ServiceLayout from '@/components/layout/ServiceLayout';
 import { Container } from '@/components/ui/Container';
-import Newsletter from '@/components/home/Newsletter';
-import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Shield, FileSearch, Lock, ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TestimonialSection from '@/components/shared/TestimonialSection';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
-import Logo from '@/components/shared/Logo';
 
 const CyberSecurity = () => {
   // Security-specific testimonials
-  const securityTestimonials = [{
-    quote: "Atoro's security assessment identified critical vulnerabilities our internal team had missed. Their remediation guidance was clear and actionable, significantly improving our security posture.",
-    author: "Michael Zhang",
-    title: "CTO",
-    company: "CloudSecure",
-    rating: 5
-  }, {
-    quote: "The Security Team as a Service model gave us enterprise-grade protection without the overhead of building an in-house security department. It's been transformative for our compliance journey.",
-    author: "Sarah Johnson",
-    title: "COO",
-    company: "DataShield",
-    rating: 4.5
-  }, {
-    quote: "Working with Atoro for our SOC 2 compliance was seamless. They guided us through the entire process and helped us achieve certification on our first attempt.",
-    author: "David Rivera",
-    title: "Head of Engineering",
-    company: "SecureStack",
-    rating: 5
-  }];
+  const securityTestimonials = [
+    {
+      quote: "Atoro's security assessment identified critical vulnerabilities our internal team had missed. Their remediation guidance was clear and actionable, significantly improving our security posture.",
+      author: "Michael Zhang",
+      title: "CTO",
+      company: "CloudSecure",
+      rating: 5
+    }, {
+      quote: "The Security Team as a Service model gave us enterprise-grade protection without the overhead of building an in-house security department. It's been transformative for our compliance journey.",
+      author: "Sarah Johnson",
+      title: "COO",
+      company: "DataShield",
+      rating: 4.5
+    }, {
+      quote: "Working with Atoro for our SOC 2 compliance was seamless. They guided us through the entire process and helped us achieve certification on our first attempt.",
+      author: "David Rivera",
+      title: "Head of Engineering",
+      company: "SecureStack",
+      rating: 5
+    }
+  ];
   
-  return <div className="flex min-h-screen flex-col">
-      <Navbar />
-      
+  return (
+    <ServiceLayout>
       {/* Hero Section with improved contrast */}
       <section className="pt-16 pb-8 bg-gradient-to-br from-atoro-dark-teal to-black text-white relative overflow-hidden">
         {/* Light overlay pattern for visibility */}
@@ -203,6 +200,8 @@ const CyberSecurity = () => {
 
       <Newsletter />
       <Footer />
-    </div>;
+    </ServiceLayout>
+  );
 };
+
 export default CyberSecurity;

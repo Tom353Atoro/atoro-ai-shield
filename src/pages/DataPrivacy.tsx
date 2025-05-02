@@ -1,6 +1,5 @@
-
 import React from 'react';
-import Navbar from '@/components/layout/Navbar';
+import ServiceLayout from '@/components/layout/ServiceLayout';
 import { Container } from '@/components/ui/Container';
 import Newsletter from '@/components/home/Newsletter';
 import Footer from '@/components/layout/Footer';
@@ -11,9 +10,7 @@ import { Link } from 'react-router-dom';
 
 const DataPrivacy = () => {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar />
-      
+    <ServiceLayout>
       {/* Hero Section */}
       <section className="pt-32 pb-16 bg-gradient-to-br from-atoro-teal to-atoro-dark-teal text-white">
         <Container>
@@ -300,7 +297,7 @@ const DataPrivacy = () => {
 
       <Newsletter />
       <Footer />
-    </div>
+    </ServiceLayout>
   );
 };
 
