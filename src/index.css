@@ -75,4 +75,15 @@
   .gradient-bg-subtle {
     @apply bg-gradient-to-br from-atoro-teal/5 to-atoro-blue/5;
   }
+
+  .fade-in {
+    opacity: 1;
+    transition: opacity 1s ease-in;
+  }
+
+  .fade-out {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+  }
 }
+

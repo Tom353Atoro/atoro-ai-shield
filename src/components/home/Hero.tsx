@@ -1,11 +1,31 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
+const cyclingWords = ["Cybersecurity", "Privacy", "AI Governance"];
+
 const Hero = () => {
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [fadeState, setFadeState] = useState('fade-in');
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Start fade out
+      setFadeState('fade-out');
+      
+      // After fade out completes, change word and fade in
+      setTimeout(() => {
+        setCurrentWordIndex((prev) => (prev + 1) % cyclingWords.length);
+        setFadeState('fade-in');
+      }, 1000); // This duration should match the CSS transition duration
+    }, 3000); // Total time each word is displayed
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative pt-32 pb-20 overflow-hidden bg-white bg-hero-pattern">
       <div className="absolute inset-0 z-0">
@@ -16,7 +36,9 @@ const Hero = () => {
       <Container className="relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="mb-6">
-            <span className="gradient-text">AI-First Security</span>{' '}
+            <span className={`gradient-text transition-opacity duration-1000 ${fadeState === 'fade-in' ? 'opacity-100' : 'opacity-0'}`}>
+              {cyclingWords[currentWordIndex]}
+            </span>{' '}
             <span className="block mt-2">for Fast-Growing SaaS</span>
           </h1>
           
