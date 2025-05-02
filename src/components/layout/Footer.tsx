@@ -2,100 +2,102 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Facebook, Twitter, Instagram, Linkedin, Github } from 'lucide-react';
 
 const Footer = () => {
-  const footerLinks = {
-    services: [
-      { name: 'Security Team as a Service', href: '/services/security-team-aas' },
-      { name: 'Cyber Security', href: '/services/cyber-security' },
-      { name: 'Data Privacy', href: '/services/data-privacy' },
-      { name: 'AI Governance', href: '/services/ai-governance' },
-    ],
-    resources: [
-      { name: 'Whitepapers', href: '/resources/whitepapers' },
-      { name: 'Webinars', href: '/resources/webinars' },
-      { name: 'Case Studies', href: '/resources/case-studies' },
-      { name: 'Tools & Templates', href: '/resources/downloads' },
-    ],
-    company: [
-      { name: 'Blog', href: '/blog' },
-      { name: 'Contact', href: '/contact' },
-    ],
-  };
-
   return (
-    <footer className="bg-gray-50 border-t border-gray-100 pt-12 pb-8">
+    <footer className="bg-atoro-teal text-white pb-6">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company info */}
-          <div className="col-span-1 lg:col-span-1">
-            <Link to="/" className="inline-block">
-              <span className="text-2xl font-bold text-atoro-blue">Atoro</span>
-            </Link>
-            <p className="mt-4 text-gray-600 text-sm">
-              Europe's first ISO 42001 certified AI security consultancy dedicated to fast-growing SaaS companies.
-            </p>
-            <div className="mt-6">
-              <p className="text-sm text-gray-500">© {new Date().getFullYear()} Atoro. All rights reserved.</p>
+        <div className="pt-16 pb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Column 1: Logo and About */}
+            <div className="space-y-4">
+              <Link to="/" className="block">
+                <img 
+                  src="/lovable-uploads/8d13129b-c156-4ec7-b2ef-bbd0364fb711.png" 
+                  alt="Atoro Logo" 
+                  className="h-10"
+                  width="auto"
+                />
+              </Link>
+              <p className="text-gray-300 text-sm mt-4">
+                Focused security, data privacy, and AI governance solutions for fast-growing SaaS companies.
+              </p>
+            </div>
+            
+            {/* Column 2: Services */}
+            <div className="space-y-4">
+              <h3 className="font-bold text-lg">Services</h3>
+              <ul className="space-y-2">
+                {['Cyber Security', 'Data Privacy', 'AI Governance', 'Security Team as a Service'].map((item) => (
+                  <li key={item}>
+                    <Link to={`/services/${item.toLowerCase().replace(/\s+/g, '-')}`} className="text-gray-300 hover:text-white transition-colors">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Column 3: Resources */}
+            <div className="space-y-4">
+              <h3 className="font-bold text-lg">Resources</h3>
+              <ul className="space-y-2">
+                {['Blog', 'Whitepapers', 'Webinars', 'Case Studies'].map((item) => (
+                  <li key={item}>
+                    <Link to={`/resources/${item.toLowerCase().replace(/\s+/g, '-')}`} className="text-gray-300 hover:text-white transition-colors">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Column 4: Contact */}
+            <div className="space-y-4">
+              <h3 className="font-bold text-lg">Contact</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a href="mailto:info@atoro.io" className="text-gray-300 hover:text-white transition-colors">
+                    info@atoro.io
+                  </a>
+                </li>
+                <li>
+                  <a href="tel:+1-555-123-4567" className="text-gray-300 hover:text-white transition-colors">
+                    +1-555-123-4567
+                  </a>
+                </li>
+                <li className="text-gray-300">
+                  123 Security Street, London, UK
+                </li>
+              </ul>
             </div>
           </div>
-
-          {/* Quick links */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase">Services</h3>
-            <ul className="mt-4 space-y-2">
-              {footerLinks.services.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-gray-600 hover:text-atoro-blue text-sm transition duration-200"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        </div>
+        
+        <hr className="border-gray-700 my-6" />
+        
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="text-gray-400 text-sm">
+            © {new Date().getFullYear()} Atoro. All rights reserved.
           </div>
-
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase">Resources</h3>
-            <ul className="mt-4 space-y-2">
-              {footerLinks.resources.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-gray-600 hover:text-atoro-blue text-sm transition duration-200"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Newsletter signup */}
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase">
-              Subscribe to our newsletter
-            </h3>
-            <p className="mt-4 text-sm text-gray-600">
-              Get the latest security insights and updates directly to your inbox.
-            </p>
-            <form className="mt-4">
-              <div className="flex flex-col sm:flex-row gap-2">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full sm:flex-1"
-                  required
-                />
-                <Button type="submit">
-                  Subscribe
-                </Button>
-              </div>
-            </form>
+          
+          <div className="flex space-x-4 mt-4 md:mt-0">
+            <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <Facebook size={18} />
+            </a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <Twitter size={18} />
+            </a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <Instagram size={18} />
+            </a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <Linkedin size={18} />
+            </a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <Github size={18} />
+            </a>
           </div>
         </div>
       </Container>

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -73,7 +72,12 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-              <span className="text-2xl font-bold text-atoro-blue">Atoro</span>
+              <img 
+                src="/lovable-uploads/8d13129b-c156-4ec7-b2ef-bbd0364fb711.png" 
+                alt="Atoro Logo" 
+                className="h-8 md:h-10"
+                width="auto"
+              />
             </Link>
           </div>
 

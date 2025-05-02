@@ -10,6 +10,8 @@ import { Shield, FileSearch, Lock, ArrowRight, CheckCircle } from 'lucide-react'
 import { Link } from 'react-router-dom';
 import TestimonialSection from '@/components/shared/TestimonialSection';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
+import Logo from '@/components/shared/Logo';
+
 const CyberSecurity = () => {
   // Security-specific testimonials
   const securityTestimonials = [{
@@ -31,6 +33,7 @@ const CyberSecurity = () => {
     company: "SecureStack",
     rating: 5
   }];
+  
   return <div className="flex min-h-screen flex-col">
       <Navbar />
       
@@ -45,6 +48,9 @@ const CyberSecurity = () => {
         <Container>
           <div className="grid md:grid-cols-2 gap-8 items-center relative z-10">
             <div>
+              <div className="mb-8">
+                <Logo size="large" />
+              </div>
               <h1 className="mb-4 text-3xl md:text-4xl lg:text-5xl">
                 <span className="text-atoro-green">Move Fast</span> with Confidence
               </h1>
@@ -79,21 +85,21 @@ const CyberSecurity = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[{
-            icon: <Shield className="text-atoro-green" />,
-            title: "Penetration Testing",
-            description: "Identify vulnerabilities in your application with thorough security testing by our experts.",
-            link: "/services/cyber-security/penetration-testing"
-          }, {
-            icon: <FileSearch className="text-atoro-green" />,
-            title: "ISO 27001 Implementation",
-            description: "Structured approach to implementing the ISO 27001 framework for information security.",
-            link: "/services/cyber-security/iso-27001"
-          }, {
-            icon: <Lock className="text-atoro-green" />,
-            title: "SOC 2 Readiness",
-            description: "Prepare your organization for SOC 2 certification with our comprehensive audit readiness program.",
-            link: "/services/cyber-security/soc2"
-          }].map((service, index) => <Card key={index} className="border border-gray-100 hover:border-atoro-green/30 hover:shadow-md transition-all overflow-hidden group h-full">
+              icon: <Shield className="text-atoro-green" />,
+              title: "Penetration Testing",
+              description: "Identify vulnerabilities in your application with thorough security testing by our experts.",
+              link: "/services/cyber-security/penetration-testing"
+            }, {
+              icon: <FileSearch className="text-atoro-green" />,
+              title: "ISO 27001 Implementation",
+              description: "Structured approach to implementing the ISO 27001 framework for information security.",
+              link: "/services/cyber-security/iso-27001"
+            }, {
+              icon: <Lock className="text-atoro-green" />,
+              title: "SOC 2 Readiness",
+              description: "Prepare your organization for SOC 2 certification with our comprehensive audit readiness program.",
+              link: "/services/cyber-security/soc2"
+            }].map((service, index) => <Card key={index} className="border border-gray-100 hover:border-atoro-green/30 hover:shadow-md transition-all overflow-hidden group h-full">
                 <CardContent className="pt-6">
                   <div className="mb-4 flex justify-center">
                     <div className="p-3 bg-atoro-teal/5 rounded-lg">
