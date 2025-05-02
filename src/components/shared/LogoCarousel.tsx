@@ -28,6 +28,7 @@ interface LogoCarouselProps {
   autoScroll?: boolean;
   scrollInterval?: number;
   showControls?: boolean;
+  speed?: number;
 }
 
 /**
@@ -39,8 +40,9 @@ interface LogoCarouselProps {
  * @param description - Optional description text
  * @param className - Optional additional CSS classes
  * @param autoScroll - Whether to auto-scroll the carousel (default: true)
- * @param scrollInterval - Time in ms between auto-scrolls (default: 3000)
+ * @param scrollInterval - Time in ms between auto-scrolls (default: 2000)
  * @param showControls - Whether to show navigation controls (default: true)
+ * @param speed - Transition speed in ms (default: 500)
  */
 const LogoCarousel: React.FC<LogoCarouselProps> = ({
   logos,
@@ -48,8 +50,9 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
   description,
   className = '',
   autoScroll = true,
-  scrollInterval = 3000,
-  showControls = true
+  scrollInterval = 2000,
+  showControls = true,
+  speed = 500
 }) => {
   const [api, setApi] = useState<any>(null);
   const [loaded, setLoaded] = useState<{[key: string]: boolean}>({});
@@ -70,6 +73,13 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
     return () => clearInterval(interval);
   }, [api, autoScroll, scrollInterval]);
 
+  const carouselOptions = {
+    align: "start",
+    loop: true,
+    dragFree: true,
+    speed: speed
+  };
+
   return (
     <section className={cn('py-12', className)}>
       <div className="container mx-auto px-4">
@@ -85,10 +95,7 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
         <Carousel 
           setApi={setApi}
           className="w-full"
-          opts={{
-            align: "start",
-            loop: true,
-          }}
+          opts={carouselOptions}
         >
           <CarouselContent className="-ml-4">
             {logos.map((logo) => (

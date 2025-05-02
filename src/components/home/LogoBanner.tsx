@@ -5,7 +5,7 @@ import LogoCarousel from '@/components/shared/LogoCarousel';
 /**
  * LogoBanner Component
  * 
- * Displays a scrolling banner of partner logos
+ * Displays a smooth, fast-scrolling banner of partner logos
  * 
  * HOW TO UPDATE:
  * 1. Upload your logo images to the public/logos directory
@@ -81,7 +81,8 @@ const LogoBanner: React.FC = () => {
       description="We work with leading technology providers to deliver exceptional solutions."
       className="bg-gray-50"
       autoScroll={true}
-      scrollInterval={3000}
+      scrollInterval={2000}
+      speed={500}
     />
   );
 };
