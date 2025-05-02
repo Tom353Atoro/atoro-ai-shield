@@ -19,10 +19,10 @@ const Index = () => {
       <Navbar />
       <main className="flex-grow">
         <Hero />
+        <LogoBanner />
         <PillarsSection />
         <FlagshipService />
         <Partners />
-        <LogoBanner />
         <CertificationLogos />
         <AboutAtoro />
         <ThoughtLeadership />
