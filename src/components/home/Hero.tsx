@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';
@@ -8,32 +7,24 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Plus, X } from 'lucide-react';
-
 const cyclingWords = ["Cybersecurity", "Privacy", "AI Governance"];
-
-const defaultClientLogos = [
-  {
-    id: 1,
-    src: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=150",
-    alt: "Tech Client Logo",
-  },
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=150",
-    alt: "SaaS Client Logo",
-  },
-  {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=150",
-    alt: "Fintech Client Logo",
-  },
-  {
-    id: 4,
-    src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=150",
-    alt: "Enterprise Client Logo",
-  }
-];
-
+const defaultClientLogos = [{
+  id: 1,
+  src: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=150",
+  alt: "Tech Client Logo"
+}, {
+  id: 2,
+  src: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=150",
+  alt: "SaaS Client Logo"
+}, {
+  id: 3,
+  src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=150",
+  alt: "Fintech Client Logo"
+}, {
+  id: 4,
+  src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=150",
+  alt: "Enterprise Client Logo"
+}];
 const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [fadeState, setFadeState] = useState('fade-in');
@@ -46,54 +37,44 @@ const Hero = () => {
     src: '',
     alt: ''
   });
-
   useEffect(() => {
     const interval = setInterval(() => {
       // Start fade out
       setFadeState('fade-out');
-      
+
       // After fade out completes, change word and fade in
       setTimeout(() => {
-        setCurrentWordIndex((prev) => (prev + 1) % cyclingWords.length);
+        setCurrentWordIndex(prev => (prev + 1) % cyclingWords.length);
         setFadeState('fade-in');
       }, 1000); // This duration should match the CSS transition duration
     }, 3000); // Total time each word is displayed
 
     return () => clearInterval(interval);
   }, []);
-
   const handleImageLoad = (id: number) => {
     setLoadedImages(prev => ({
       ...prev,
       [id]: true
     }));
   };
-
   const addClientLogo = () => {
     if (!newLogo.src || !newLogo.alt) return;
-    
-    setClientLogos(prev => [
-      ...prev,
-      {
-        id: Date.now(),
-        src: newLogo.src,
-        alt: newLogo.alt
-      }
-    ]);
-    
+    setClientLogos(prev => [...prev, {
+      id: Date.now(),
+      src: newLogo.src,
+      alt: newLogo.alt
+    }]);
+
     // Reset form
     setNewLogo({
       src: '',
       alt: ''
     });
   };
-  
   const removeClientLogo = (id: number) => {
     setClientLogos(prev => prev.filter(logo => logo.id !== id));
   };
-
-  return (
-    <section className="relative pt-32 pb-20 overflow-hidden bg-white bg-hero-pattern">
+  return <section className="relative pt-32 pb-20 overflow-hidden bg-white bg-hero-pattern">
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-radial from-atoro-light-blue/20 to-transparent rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-atoro-light-green/30 to-transparent rounded-full blur-3xl" />
@@ -122,83 +103,9 @@ const Hero = () => {
             </Button>
           </div>
           
-          <div className="mt-16 md:mt-20">
-            <div className="flex justify-between items-center mb-4">
-              <p className="text-sm text-gray-500">Trusted by innovative SaaS companies</p>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => setEditMode(!editMode)}
-                className="text-xs"
-              >
-                {editMode ? 'Done' : 'Edit Logos'}
-              </Button>
-            </div>
-            
-            {editMode && (
-              <Card className="p-4 mb-6 bg-white shadow-sm">
-                <h3 className="text-md font-semibold mb-3">Add New Client Logo</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label className="text-sm font-medium mb-1 block">Logo URL</label>
-                    <Input
-                      placeholder="Image URL or upload path"
-                      value={newLogo.src}
-                      onChange={(e) => setNewLogo({...newLogo, src: e.target.value})}
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="text-sm font-medium mb-1 block">Description</label>
-                    <Input
-                      placeholder="Logo description"
-                      value={newLogo.alt}
-                      onChange={(e) => setNewLogo({...newLogo, alt: e.target.value})}
-                    />
-                  </div>
-                </div>
-                
-                <Button onClick={addClientLogo} size="sm">
-                  <Plus size={14} className="mr-1" />
-                  Add Logo
-                </Button>
-              </Card>
-            )}
-            
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-              {clientLogos.map((logo) => (
-                <div 
-                  key={logo.id} 
-                  className="relative h-8 w-24 overflow-hidden rounded group"
-                >
-                  {!loadedImages[logo.id] && (
-                    <Skeleton className="absolute inset-0 w-full h-full" />
-                  )}
-                  <img
-                    src={logo.src}
-                    alt={logo.alt}
-                    className={cn(
-                      "h-full w-full object-cover filter grayscale hover:grayscale-0 transition-all",
-                      loadedImages[logo.id] ? "opacity-100" : "opacity-0"
-                    )}
-                    onLoad={() => handleImageLoad(logo.id)}
-                  />
-                  {editMode && (
-                    <button 
-                      onClick={() => removeClientLogo(logo.id)}
-                      className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <X size={12} />
-                    </button>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+          
         </div>
       </Container>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
