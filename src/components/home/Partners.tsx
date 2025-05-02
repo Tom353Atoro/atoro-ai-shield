@@ -4,6 +4,9 @@ import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Plus, X } from 'lucide-react';
 
 // Partner data structure that can be easily modified
 export const partnersData = {
@@ -37,37 +40,162 @@ export const partnersData = {
   ]
 };
 
-const PartnerLogo = ({ partner }: { partner: typeof partnersData.platform[0] }) => {
+const PartnerLogo = ({ partner, onRemove }: { 
+  partner: typeof partnersData.platform[0], 
+  onRemove?: () => void 
+}) => {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="relative flex items-center justify-center h-12">
-      {!loaded && <Skeleton className="absolute inset-0 w-full h-full rounded" />}
-      <img
-        src={partner.logo}
-        alt={`${partner.name} logo`}
-        width={partner.width}
-        height={48}
-        className={cn(
-          "object-contain max-h-12 transition-all duration-300",
-          loaded ? "opacity-100" : "opacity-0"
+    <div className="relative flex flex-col items-center">
+      <div className="relative flex items-center justify-center h-12 group">
+        {!loaded && <Skeleton className="absolute inset-0 w-full h-full rounded" />}
+        <img
+          src={partner.logo}
+          alt={`${partner.name} logo`}
+          width={partner.width}
+          height={48}
+          className={cn(
+            "object-contain max-h-12 transition-all duration-300",
+            loaded ? "opacity-100" : "opacity-0"
+          )}
+          onLoad={() => setLoaded(true)}
+        />
+        {onRemove && (
+          <button 
+            onClick={onRemove}
+            className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <X size={14} />
+          </button>
         )}
-        onLoad={() => setLoaded(true)}
-      />
+      </div>
+      <span className="text-sm text-gray-600 mt-1">{partner.name}</span>
     </div>
   );
 };
 
 const Partners = () => {
+  const [editMode, setEditMode] = useState(false);
+  const [partners, setPartners] = useState(partnersData);
+  
+  // New partner state
+  const [newPartner, setNewPartner] = useState({
+    category: 'platform',
+    name: '',
+    logo: '',
+    width: 150
+  });
+  
+  const addPartner = () => {
+    if (!newPartner.name || !newPartner.logo) return;
+    
+    setPartners(prev => ({
+      ...prev,
+      [newPartner.category]: [
+        ...prev[newPartner.category as keyof typeof partnersData],
+        {
+          id: Date.now(), // Generate unique ID
+          name: newPartner.name,
+          logo: newPartner.logo,
+          width: newPartner.width
+        }
+      ]
+    }));
+    
+    // Reset form
+    setNewPartner({
+      category: 'platform',
+      name: '',
+      logo: '',
+      width: 150
+    });
+  };
+  
+  const removePartner = (category: keyof typeof partnersData, id: number) => {
+    setPartners(prev => ({
+      ...prev,
+      [category]: prev[category].filter(partner => partner.id !== id)
+    }));
+  };
+  
   return (
     <section className="py-16 bg-gray-50">
       <Container>
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-2xl font-bold">Our Partners</h2>
+          <Button 
+            variant="outline" 
+            onClick={() => setEditMode(!editMode)}
+          >
+            {editMode ? 'Done' : 'Edit Partners'}
+          </Button>
+        </div>
+        
+        {editMode && (
+          <Card className="p-6 mb-8 bg-white shadow-sm">
+            <h3 className="text-lg font-semibold mb-4">Add New Partner</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div>
+                <label className="text-sm font-medium mb-1 block">Category</label>
+                <select 
+                  className="w-full p-2 border rounded"
+                  value={newPartner.category}
+                  onChange={(e) => setNewPartner({...newPartner, category: e.target.value})}
+                >
+                  <option value="platform">Platform Partners</option>
+                  <option value="audit">Audit Partners</option>
+                </select>
+              </div>
+              
+              <div>
+                <label className="text-sm font-medium mb-1 block">Partner Name</label>
+                <Input
+                  placeholder="Partner name"
+                  value={newPartner.name}
+                  onChange={(e) => setNewPartner({...newPartner, name: e.target.value})}
+                />
+              </div>
+              
+              <div>
+                <label className="text-sm font-medium mb-1 block">Logo URL</label>
+                <Input
+                  placeholder="Image URL or upload path"
+                  value={newPartner.logo}
+                  onChange={(e) => setNewPartner({...newPartner, logo: e.target.value})}
+                />
+              </div>
+              
+              <div>
+                <label className="text-sm font-medium mb-1 block">Width (px)</label>
+                <Input
+                  type="number"
+                  placeholder="Image width"
+                  value={newPartner.width}
+                  onChange={(e) => setNewPartner({...newPartner, width: parseInt(e.target.value) || 150})}
+                />
+              </div>
+            </div>
+            
+            <div className="mt-4">
+              <Button onClick={addPartner}>
+                <Plus size={16} className="mr-2" />
+                Add Partner
+              </Button>
+            </div>
+          </Card>
+        )}
+        
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <Card className="p-8 bg-white shadow-sm">
             <h3 className="text-xl font-semibold text-center mb-8">Platform Partners</h3>
             <div className="flex flex-wrap justify-center items-center gap-12">
-              {partnersData.platform.map(partner => (
-                <PartnerLogo key={partner.id} partner={partner} />
+              {partners.platform.map(partner => (
+                <PartnerLogo 
+                  key={partner.id} 
+                  partner={partner}
+                  onRemove={editMode ? () => removePartner('platform', partner.id) : undefined}
+                />
               ))}
             </div>
           </Card>
@@ -75,8 +203,12 @@ const Partners = () => {
           <Card className="p-8 bg-white shadow-sm">
             <h3 className="text-xl font-semibold text-center mb-8">Audit Partners</h3>
             <div className="flex flex-wrap justify-center items-center gap-12">
-              {partnersData.audit.map(partner => (
-                <PartnerLogo key={partner.id} partner={partner} />
+              {partners.audit.map(partner => (
+                <PartnerLogo 
+                  key={partner.id} 
+                  partner={partner}
+                  onRemove={editMode ? () => removePartner('audit', partner.id) : undefined}
+                />
               ))}
             </div>
           </Card>

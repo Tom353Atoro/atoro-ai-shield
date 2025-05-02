@@ -5,10 +5,13 @@ import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Plus, X } from 'lucide-react';
 
 const cyclingWords = ["Cybersecurity", "Privacy", "AI Governance"];
 
-const clientLogos = [
+const defaultClientLogos = [
   {
     id: 1,
     src: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=150",
@@ -35,6 +38,14 @@ const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [fadeState, setFadeState] = useState('fade-in');
   const [loadedImages, setLoadedImages] = useState<Record<number, boolean>>({});
+  const [editMode, setEditMode] = useState(false);
+  const [clientLogos, setClientLogos] = useState(defaultClientLogos);
+
+  // New logo state
+  const [newLogo, setNewLogo] = useState({
+    src: '',
+    alt: ''
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -56,6 +67,29 @@ const Hero = () => {
       ...prev,
       [id]: true
     }));
+  };
+
+  const addClientLogo = () => {
+    if (!newLogo.src || !newLogo.alt) return;
+    
+    setClientLogos(prev => [
+      ...prev,
+      {
+        id: Date.now(),
+        src: newLogo.src,
+        alt: newLogo.alt
+      }
+    ]);
+    
+    // Reset form
+    setNewLogo({
+      src: '',
+      alt: ''
+    });
+  };
+  
+  const removeClientLogo = (id: number) => {
+    setClientLogos(prev => prev.filter(logo => logo.id !== id));
   };
 
   return (
@@ -89,12 +123,53 @@ const Hero = () => {
           </div>
           
           <div className="mt-16 md:mt-20">
-            <p className="text-sm text-gray-500 mb-4">Trusted by innovative SaaS companies</p>
+            <div className="flex justify-between items-center mb-4">
+              <p className="text-sm text-gray-500">Trusted by innovative SaaS companies</p>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setEditMode(!editMode)}
+                className="text-xs"
+              >
+                {editMode ? 'Done' : 'Edit Logos'}
+              </Button>
+            </div>
+            
+            {editMode && (
+              <Card className="p-4 mb-6 bg-white shadow-sm">
+                <h3 className="text-md font-semibold mb-3">Add New Client Logo</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label className="text-sm font-medium mb-1 block">Logo URL</label>
+                    <Input
+                      placeholder="Image URL or upload path"
+                      value={newLogo.src}
+                      onChange={(e) => setNewLogo({...newLogo, src: e.target.value})}
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="text-sm font-medium mb-1 block">Description</label>
+                    <Input
+                      placeholder="Logo description"
+                      value={newLogo.alt}
+                      onChange={(e) => setNewLogo({...newLogo, alt: e.target.value})}
+                    />
+                  </div>
+                </div>
+                
+                <Button onClick={addClientLogo} size="sm">
+                  <Plus size={14} className="mr-1" />
+                  Add Logo
+                </Button>
+              </Card>
+            )}
+            
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {clientLogos.map((logo) => (
                 <div 
                   key={logo.id} 
-                  className="relative h-8 w-24 overflow-hidden rounded"
+                  className="relative h-8 w-24 overflow-hidden rounded group"
                 >
                   {!loadedImages[logo.id] && (
                     <Skeleton className="absolute inset-0 w-full h-full" />
@@ -108,6 +183,14 @@ const Hero = () => {
                     )}
                     onLoad={() => handleImageLoad(logo.id)}
                   />
+                  {editMode && (
+                    <button 
+                      onClick={() => removeClientLogo(logo.id)}
+                      className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <X size={12} />
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
