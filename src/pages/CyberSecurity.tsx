@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/layout/Navbar';
 import { Container } from '@/components/ui/Container';
@@ -10,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Shield, FileSearch, Lock, ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TestimonialSection from '@/components/shared/TestimonialSection';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 const CyberSecurity = () => {
   // Security-specific testimonials
@@ -41,12 +41,20 @@ const CyberSecurity = () => {
     <div className="flex min-h-screen flex-col">
       <Navbar />
       
-      {/* Hero Section - Optimized for space efficiency */}
-      <section className="pt-16 pb-8 bg-gradient-to-br from-atoro-teal to-atoro-dark-teal text-white">
+      {/* Hero Section with improved contrast */}
+      <section className="pt-16 pb-8 bg-gradient-to-br from-atoro-dark-teal to-black text-white relative overflow-hidden">
+        {/* Light overlay pattern for visibility */}
+        <div className="absolute inset-0 opacity-20 z-0">
+          <div className="absolute inset-0 bg-grid-white/10"></div>
+        </div>
+        
+        {/* Hero content with improved contrast */}
         <Container>
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="grid md:grid-cols-2 gap-8 items-center relative z-10">
             <div>
-              <h1 className="mb-4 text-3xl md:text-4xl lg:text-5xl">Move Fast with Confidence</h1>
+              <h1 className="mb-4 text-3xl md:text-4xl lg:text-5xl">
+                <span className="text-atoro-green">Move Fast</span> with Confidence
+              </h1>
               <p className="text-lg mb-6 opacity-90">
                 In the SaaS world, a single security slip-up can break customer trust. 
                 Our holistic cyber security solutions help you move quickly without compromising safety.
@@ -55,31 +63,23 @@ const CyberSecurity = () => {
                 <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green">
                   Book a Security Assessment
                 </Button>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                  View Services
-                </Button>
               </div>
             </div>
-            <div className="hidden md:flex justify-center">
-              <div className="relative max-w-md">
-                <div className="absolute -top-6 -right-6 w-24 h-24 bg-atoro-green/20 rounded-full blur-xl"></div>
-                <div className="absolute -bottom-2 -left-8 w-32 h-32 bg-atoro-blue/20 rounded-full blur-xl"></div>
-                <Card className="border-2 border-white/10 bg-white/5 backdrop-blur-sm w-full p-4 transform rotate-2">
-                  <CardContent className="space-y-3 pt-2">
-                    <Badge className="bg-atoro-green text-atoro-teal mb-2">Featured Service</Badge>
-                    <h3 className="text-xl font-bold">Security Team as a Service</h3>
-                    <p className="text-sm opacity-90">Get enterprise-grade security leadership without the overhead of building an in-house team.</p>
-                    <ul className="space-y-2 text-sm">
-                      {["Dedicated vCISO", "Continuous monitoring", "Compliance support"].map((item) => (
-                        <li key={item} className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-atoro-green" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              </div>
+            <div className="hidden md:block">
+              <Card className="bg-white/10 backdrop-blur border-white/20 overflow-hidden">
+                <AspectRatio ratio={16/9}>
+                  <img 
+                    src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&q=80&w=1200" 
+                    alt="Cyber security data visualization" 
+                    className="object-cover w-full h-full rounded-t-lg"
+                  />
+                </AspectRatio>
+                <CardContent className="p-4">
+                  <Badge className="bg-atoro-green text-atoro-teal mb-2">Enterprise Security</Badge>
+                  <h3 className="text-lg font-bold">Security Team as a Service</h3>
+                  <p className="text-sm text-white/80 mt-1">Get enterprise-grade security leadership without the overhead</p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </Container>

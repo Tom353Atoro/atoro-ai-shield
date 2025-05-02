@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';
@@ -7,6 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Plus, X } from 'lucide-react';
+
 const cyclingWords = ["Cybersecurity", "Privacy", "AI Governance"];
 const defaultClientLogos = [{
   id: 1,
@@ -25,6 +27,7 @@ const defaultClientLogos = [{
   src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=150",
   alt: "Enterprise Client Logo"
 }];
+
 const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [fadeState, setFadeState] = useState('fade-in');
@@ -37,6 +40,7 @@ const Hero = () => {
     src: '',
     alt: ''
   });
+
   useEffect(() => {
     const interval = setInterval(() => {
       // Start fade out
@@ -51,12 +55,14 @@ const Hero = () => {
 
     return () => clearInterval(interval);
   }, []);
+
   const handleImageLoad = (id: number) => {
     setLoadedImages(prev => ({
       ...prev,
       [id]: true
     }));
   };
+
   const addClientLogo = () => {
     if (!newLogo.src || !newLogo.alt) return;
     setClientLogos(prev => [...prev, {
@@ -71,13 +77,15 @@ const Hero = () => {
       alt: ''
     });
   };
+
   const removeClientLogo = (id: number) => {
     setClientLogos(prev => prev.filter(logo => logo.id !== id));
   };
-  return <section className="relative pt-32 pb-20 overflow-hidden bg-white bg-hero-pattern">
+
+  return <section className="relative pt-24 pb-16 overflow-hidden bg-gradient-to-br from-white to-gray-50">
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-radial from-atoro-light-blue/20 to-transparent rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-atoro-light-green/30 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-radial from-atoro-light-blue/30 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-atoro-light-green/40 to-transparent rounded-full blur-3xl" />
       </div>
       
       <Container className="relative z-10">
@@ -102,10 +110,9 @@ const Hero = () => {
               <Link to="/services">Explore Services</Link>
             </Button>
           </div>
-          
-          
         </div>
       </Container>
     </section>;
 };
+
 export default Hero;
