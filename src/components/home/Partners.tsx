@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/card';
@@ -13,24 +12,23 @@ export const partnersData = {
   platform: [{
     id: 1,
     name: "Vanta",
-    logo: "/lovable-uploads/4d060603-ad02-4190-9beb-cdb340b18bbc.png",
-    // Using uploaded image as demo
+    logo: "/lovable-uploads/5e1e7e8b-6f29-4ef6-896e-b33c052d8769.png",
     width: 150
   }, {
     id: 2,
     name: "DRATA",
-    logo: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=150",
+    logo: "/lovable-uploads/92f8da33-0880-48be-815f-a45d074582db.png",
     width: 180
   }],
   audit: [{
     id: 3,
     name: "Tempo Audits",
-    logo: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=150",
+    logo: "/lovable-uploads/2a43c2aa-a14c-448c-8429-8fb1d9c01ee3.png",
     width: 160
   }, {
     id: 4,
     name: "A-LIGN",
-    logo: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=150",
+    logo: "/lovable-uploads/273bf97c-b513-4a94-8fdd-7a5bc90eb254.png",
     width: 140
   }]
 };

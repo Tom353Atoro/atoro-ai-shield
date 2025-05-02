@@ -6,7 +6,6 @@ import Hero from '@/components/home/Hero';
 import PillarsSection from '@/components/home/PillarsSection';
 import FlagshipService from '@/components/home/FlagshipService';
 import Partners from '@/components/home/Partners';
-import OurPartners from '@/components/home/OurPartners';
 import AboutAtoro from '@/components/home/AboutAtoro';
 import ThoughtLeadership from '@/components/home/ThoughtLeadership';
 import Testimonials from '@/components/home/Testimonials';
@@ -24,7 +23,6 @@ const Index = () => {
         <FlagshipService />
         <Partners />
         <LogoBanner />
-        <OurPartners />
         <CertificationLogos />
         <AboutAtoro />
         <ThoughtLeadership />
