@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/layout/Navbar';
 import { Container } from '@/components/ui/Container';
@@ -9,8 +10,10 @@ import { Badge } from '@/components/ui/badge';
 import { Shield, FileSearch, Lock, Users, ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TrustFactorsGrid from '@/components/shared/TrustFactorsGrid';
+
 const CyberSecurity = () => {
-  return <div className="flex min-h-screen flex-col">
+  return (
+    <div className="flex min-h-screen flex-col">
       <Navbar />
       
       {/* Hero Section */}
@@ -37,25 +40,38 @@ const CyberSecurity = () => {
       {/* Why Choose Atoro Section */}
       <section className="py-20 bg-white">
         <Container>
-          
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-atoro-teal/10 text-atoro-teal hover:bg-atoro-teal/20">Why Choose Atoro</Badge>
+            <h2 className="mb-4">SaaS Security Without Compromise</h2>
+            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+              Atoro's cyber security services embed protection into your development lifecycle without slowing you down.
+              We serve as your on-demand security team, helping you reduce the risk of breaches, accelerate compliance,
+              and build trust with enterprise customers.
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[{
-            icon: <Shield className="text-atoro-green" />,
-            title: "Penetration Testing",
-            description: "Identify vulnerabilities in your application with thorough security testing by our experts.",
-            link: "/services/cyber-security/penetration-testing"
-          }, {
-            icon: <FileSearch className="text-atoro-green" />,
-            title: "ISO 27001 Implementation",
-            description: "Structured approach to implementing the ISO 27001 framework for information security.",
-            link: "/services/cyber-security/iso-27001"
-          }, {
-            icon: <Lock className="text-atoro-green" />,
-            title: "SOC 2 Readiness",
-            description: "Prepare your organization for SOC 2 certification with our comprehensive audit readiness program.",
-            link: "/services/cyber-security/soc2"
-          }].map((service, index) => <Card key={index} className="border border-gray-100 hover:border-atoro-green/30 hover:shadow-md transition-all overflow-hidden group">
+            {[
+              {
+                icon: <Shield className="text-atoro-green" />,
+                title: "Penetration Testing",
+                description: "Identify vulnerabilities in your application with thorough security testing by our experts.",
+                link: "/services/cyber-security/penetration-testing"
+              },
+              {
+                icon: <FileSearch className="text-atoro-green" />,
+                title: "ISO 27001 Implementation",
+                description: "Structured approach to implementing the ISO 27001 framework for information security.",
+                link: "/services/cyber-security/iso-27001"
+              },
+              {
+                icon: <Lock className="text-atoro-green" />,
+                title: "SOC 2 Readiness",
+                description: "Prepare your organization for SOC 2 certification with our comprehensive audit readiness program.",
+                link: "/services/cyber-security/soc2"
+              }
+            ].map((service, index) => (
+              <Card key={index} className="border border-gray-100 hover:border-atoro-green/30 hover:shadow-md transition-all overflow-hidden group">
                 <CardContent className="pt-6">
                   <div className="mb-5 flex justify-center">
                     <div className="p-3 bg-atoro-teal/5 rounded-lg">
@@ -72,7 +88,8 @@ const CyberSecurity = () => {
                     </Link>
                   </Button>
                 </CardFooter>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </Container>
       </section>
@@ -93,10 +110,17 @@ const CyberSecurity = () => {
               </p>
               
               <ul className="space-y-4 mb-8">
-                {["On-demand security expertise", "Continuous threat monitoring", "Regular security assessments", "Incident response support"].map((feature, index) => <li key={index} className="flex items-center gap-3">
+                {[
+                  "On-demand security expertise",
+                  "Continuous threat monitoring",
+                  "Regular security assessments",
+                  "Incident response support"
+                ].map((feature, index) => (
+                  <li key={index} className="flex items-center gap-3">
                     <CheckCircle className="h-5 w-5 text-atoro-green flex-shrink-0" />
                     <span>{feature}</span>
-                  </li>)}
+                  </li>
+                ))}
               </ul>
               
               <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green" asChild>
@@ -162,6 +186,8 @@ const CyberSecurity = () => {
 
       <Newsletter />
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default CyberSecurity;
