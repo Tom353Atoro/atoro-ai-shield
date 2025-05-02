@@ -9,6 +9,8 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Shield, FileSearch, Lock, Users, ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import TrustFactorsGrid from '@/components/shared/TrustFactorsGrid';
+import PillarsSection from '@/components/home/PillarsSection';
 
 const CyberSecurity = () => {
   return (
@@ -93,55 +95,8 @@ const CyberSecurity = () => {
         </Container>
       </section>
 
-      {/* Key Benefits Section */}
-      <section className="py-20 bg-gray-50">
-        <Container>
-          <div className="text-center mb-16">
-            <Badge className="mb-4 bg-atoro-green/10 text-atoro-green hover:bg-atoro-green/20">Key Outcomes</Badge>
-            <h2 className="mb-4">Security That Drives Business Growth</h2>
-            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-              Our approach to security creates tangible business value, helping you build trust faster and scale with confidence.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              {
-                title: "Holistic Defense",
-                description: "Identify and fix vulnerabilities across your applications, cloud infrastructure, and internal processes before attackers find them.",
-                icon: <Shield className="h-6 w-6 text-atoro-green" />
-              },
-              {
-                title: "Compliance-Ready Systems",
-                description: "We align your security controls with industry standards (SOC 2, ISO 27001) as we strengthen them, preparing you for audits and due diligence.",
-                icon: <FileSearch className="h-6 w-6 text-atoro-green" />
-              },
-              {
-                title: "SaaS-Focused Strategies",
-                description: "Security tailored to your tech stack and workflow – ensuring DevSecOps best practices and cloud-native security measures.",
-                icon: <Lock className="h-6 w-6 text-atoro-green" />
-              },
-              {
-                title: "Continuous Monitoring",
-                description: "Cyber threats constantly evolve; we make sure your defenses do too through ongoing monitoring and periodic security health checks.",
-                icon: <Users className="h-6 w-6 text-atoro-green" />
-              },
-            ].map((benefit, index) => (
-              <Card key={index} className="border-0 shadow-none bg-white">
-                <CardContent className="p-8 flex gap-6">
-                  <div className="flex-shrink-0 w-12 h-12 bg-atoro-green/10 rounded-full flex items-center justify-center">
-                    {benefit.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
-                    <p className="text-gray-600">{benefit.description}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </section>
+      {/* Trust Factors Grid - New component replacing the old Key Benefits section */}
+      <TrustFactorsGrid />
 
       {/* Security Team as a Service */}
       <section className="py-20 bg-gradient-to-br from-atoro-teal to-atoro-dark-teal text-white">
@@ -208,6 +163,9 @@ const CyberSecurity = () => {
           </div>
         </Container>
       </section>
+
+      {/* Include the PillarsSection here to show all services */}
+      <PillarsSection />
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-atoro-blue/10 to-atoro-green/10">
