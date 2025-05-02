@@ -40,9 +40,9 @@ interface LogoCarouselProps {
  * @param description - Optional description text
  * @param className - Optional additional CSS classes
  * @param autoScroll - Whether to auto-scroll the carousel (default: true)
- * @param scrollInterval - Time in ms between auto-scrolls (default: 2000)
+ * @param scrollInterval - Time in ms between auto-scrolls (default: 1500)
  * @param showControls - Whether to show navigation controls (default: true)
- * @param speed - Transition speed in ms (default: 500)
+ * @param speed - Transition speed in ms (default: 300)
  */
 const LogoCarousel: React.FC<LogoCarouselProps> = ({
   logos,
@@ -50,9 +50,9 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
   description,
   className = '',
   autoScroll = true,
-  scrollInterval = 2000,
+  scrollInterval = 1500,
   showControls = true,
-  speed = 500
+  speed = 300
 }) => {
   const [api, setApi] = useState<any>(null);
   const [loaded, setLoaded] = useState<{[key: string]: boolean}>({});
@@ -81,7 +81,7 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
   };
 
   return (
-    <section className={cn('py-12', className)}>
+    <section className={cn('py-10', className)}>
       <div className="container mx-auto px-4">
         {/* Title and description */}
         {(title || description) && (
@@ -101,17 +101,17 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
             {logos.map((logo) => (
               <CarouselItem 
                 key={logo.id} 
-                className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                className="pl-4 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
               >
-                <div className="flex items-center justify-center h-24 bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
+                <div className="flex items-center justify-center h-20 bg-white p-4 rounded-lg">
                   {!loaded[logo.id.toString()] && (
-                    <Skeleton className="w-full h-16 rounded-md" />
+                    <Skeleton className="w-full h-12 rounded-md" />
                   )}
                   <img
                     src={logo.imagePath}
                     alt={logo.alt || `${logo.name} logo`}
                     className={cn(
-                      "max-h-16 mx-auto object-contain transition-opacity duration-300",
+                      "max-h-12 mx-auto object-contain transition-opacity duration-300",
                       loaded[logo.id.toString()] ? "opacity-100" : "opacity-0"
                     )}
                     style={{ 

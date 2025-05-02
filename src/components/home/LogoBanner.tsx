@@ -18,59 +18,38 @@ const LogoBanner: React.FC = () => {
   const logoData = [
     {
       id: 1,
-      name: "TechCorp",
-      imagePath: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=150",
-      alt: "TechCorp Logo",
+      name: "Rewardful",
+      imagePath: "/lovable-uploads/67e0fd6c-3db8-4cd6-a32b-c0841aa5535e.png",
+      alt: "Rewardful Logo",
       width: 150
     },
     {
       id: 2,
-      name: "DigitalWave",
-      imagePath: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=150", 
-      alt: "DigitalWave Logo",
+      name: "Pipedrive",
+      imagePath: "/lovable-uploads/5c1f26c2-fb1a-41c2-9088-86b87a45c090.png", 
+      alt: "Pipedrive Logo",
       width: 130
     },
     {
       id: 3,
-      name: "InnovateTech",
-      imagePath: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=150",
-      alt: "InnovateTech Logo",
+      name: "RankMath",
+      imagePath: "/lovable-uploads/f926ed34-34dd-42fb-8d87-9364b8d59353.png",
+      alt: "RankMath Logo",
       width: 140
     },
     {
       id: 4,
-      name: "FutureSoft",
-      imagePath: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=150",
-      alt: "FutureSoft Logo",
+      name: "HeartpaceHR",
+      imagePath: "/lovable-uploads/12f9a0de-861c-4d03-a543-0682cd8b577e.png",
+      alt: "HeartpaceHR Logo",
       width: 160
     },
     {
       id: 5,
-      name: "DataFlow",
-      imagePath: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=150",
-      alt: "DataFlow Logo",
-      width: 145
-    },
-    {
-      id: 6,
-      name: "CloudNine",
-      imagePath: "/lovable-uploads/4d060603-ad02-4190-9beb-cdb340b18bbc.png", 
-      alt: "CloudNine Logo",
-      width: 150
-    },
-    {
-      id: 7,
-      name: "Quantum",
-      imagePath: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=150",
-      alt: "Quantum Logo",
-      width: 135
-    },
-    {
-      id: 8,
-      name: "SkyLink",
-      imagePath: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=150",
-      alt: "SkyLink Logo",
-      width: 140
+      name: "Clutch",
+      imagePath: "/lovable-uploads/855b40a9-957c-452d-8ce6-f0318e60dea6.png",
+      alt: "Clutch Logo",
+      width: 130
     }
   ];
 
@@ -81,8 +60,8 @@ const LogoBanner: React.FC = () => {
       description="We work with leading technology providers to deliver exceptional solutions."
       className="bg-gray-50"
       autoScroll={true}
-      scrollInterval={2000}
-      speed={500}
+      scrollInterval={1500}  // Faster scrolling (from 2000ms to 1500ms)
+      speed={300}  // Quicker transitions (from 500ms to 300ms)
     />
   );
 };
