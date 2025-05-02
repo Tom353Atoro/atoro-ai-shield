@@ -7,11 +7,36 @@ import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Shield, FileSearch, Lock, Users, ArrowRight, CheckCircle } from 'lucide-react';
+import { Shield, FileSearch, Lock, ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import TrustFactorsGrid from '@/components/shared/TrustFactorsGrid';
+import TestimonialSection from '@/components/shared/TestimonialSection';
 
 const CyberSecurity = () => {
+  // Security-specific testimonials
+  const securityTestimonials = [
+    {
+      quote: "Atoro's security assessment identified critical vulnerabilities our internal team had missed. Their remediation guidance was clear and actionable, significantly improving our security posture.",
+      author: "Michael Zhang",
+      title: "CTO",
+      company: "CloudSecure",
+      rating: 5,
+    },
+    {
+      quote: "The Security Team as a Service model gave us enterprise-grade protection without the overhead of building an in-house security department. It's been transformative for our compliance journey.",
+      author: "Sarah Johnson",
+      title: "COO",
+      company: "DataShield",
+      rating: 4.5,
+    },
+    {
+      quote: "Working with Atoro for our SOC 2 compliance was seamless. They guided us through the entire process and helped us achieve certification on our first attempt.",
+      author: "David Rivera",
+      title: "Head of Engineering",
+      company: "SecureStack",
+      rating: 5,
+    }
+  ];
+
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
@@ -37,12 +62,12 @@ const CyberSecurity = () => {
         </Container>
       </section>
 
-      {/* Why Choose Atoro Section */}
+      {/* Services Section - Moved up for more direct focus */}
       <section className="py-20 bg-white">
         <Container>
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-atoro-teal/10 text-atoro-teal hover:bg-atoro-teal/20">Why Choose Atoro</Badge>
-            <h2 className="mb-4">SaaS Security Without Compromise</h2>
+            <Badge className="mb-4 bg-atoro-teal/10 text-atoro-teal hover:bg-atoro-teal/20">Our Services</Badge>
+            <h2 className="mb-4">Comprehensive Security Solutions</h2>
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
               Atoro's cyber security services embed protection into your development lifecycle without slowing you down.
               We serve as your on-demand security team, helping you reduce the risk of breaches, accelerate compliance,
@@ -94,10 +119,7 @@ const CyberSecurity = () => {
         </Container>
       </section>
 
-      {/* Trust Factors Grid - New component replacing the old Key Benefits section */}
-      <TrustFactorsGrid />
-
-      {/* Security Team as a Service */}
+      {/* Security Team as a Service - Featured Service */}
       <section className="py-20 bg-gradient-to-br from-atoro-teal to-atoro-dark-teal text-white">
         <Container>
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -162,6 +184,16 @@ const CyberSecurity = () => {
           </div>
         </Container>
       </section>
+
+      {/* Customer Testimonials - Security specific */}
+      <TestimonialSection 
+        testimonials={securityTestimonials}
+        title="What Our Security Clients Say"
+        description="Read how we've helped companies like yours strengthen their security posture."
+        variant="featured"
+        showRatings={true}
+        bgColor="bg-white"
+      />
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-atoro-blue/10 to-atoro-green/10">
