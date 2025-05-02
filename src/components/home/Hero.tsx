@@ -4,12 +4,37 @@ import { Link } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const cyclingWords = ["Cybersecurity", "Privacy", "AI Governance"];
+
+const clientLogos = [
+  {
+    id: 1,
+    src: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=150",
+    alt: "Tech Client Logo",
+  },
+  {
+    id: 2,
+    src: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=150",
+    alt: "SaaS Client Logo",
+  },
+  {
+    id: 3,
+    src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=150",
+    alt: "Fintech Client Logo",
+  },
+  {
+    id: 4,
+    src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=150",
+    alt: "Enterprise Client Logo",
+  }
+];
 
 const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [fadeState, setFadeState] = useState('fade-in');
+  const [loadedImages, setLoadedImages] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,6 +50,13 @@ const Hero = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleImageLoad = (id: number) => {
+    setLoadedImages(prev => ({
+      ...prev,
+      [id]: true
+    }));
+  };
 
   return (
     <section className="relative pt-32 pb-20 overflow-hidden bg-white bg-hero-pattern">
@@ -59,16 +91,23 @@ const Hero = () => {
           <div className="mt-16 md:mt-20">
             <p className="text-sm text-gray-500 mb-4">Trusted by innovative SaaS companies</p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-              {/* Placeholder logos - would be replaced with actual client logos */}
-              {[1, 2, 3, 4].map((item) => (
+              {clientLogos.map((logo) => (
                 <div 
-                  key={item} 
-                  className={cn(
-                    "h-8 w-24 bg-gray-200 rounded",
-                    "flex items-center justify-center text-gray-400 text-xs"
-                  )}
+                  key={logo.id} 
+                  className="relative h-8 w-24 overflow-hidden rounded"
                 >
-                  Client Logo
+                  {!loadedImages[logo.id] && (
+                    <Skeleton className="absolute inset-0 w-full h-full" />
+                  )}
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className={cn(
+                      "h-full w-full object-cover filter grayscale hover:grayscale-0 transition-all",
+                      loadedImages[logo.id] ? "opacity-100" : "opacity-0"
+                    )}
+                    onLoad={() => handleImageLoad(logo.id)}
+                  />
                 </div>
               ))}
             </div>
