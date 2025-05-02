@@ -10,7 +10,6 @@ import { Badge } from '@/components/ui/badge';
 import { Shield, FileSearch, Lock, Users, ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TrustFactorsGrid from '@/components/shared/TrustFactorsGrid';
-import PillarsSection from '@/components/home/PillarsSection';
 
 const CyberSecurity = () => {
   return (
@@ -163,9 +162,6 @@ const CyberSecurity = () => {
           </div>
         </Container>
       </section>
-
-      {/* Include the PillarsSection here to show all services */}
-      <PillarsSection />
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-atoro-blue/10 to-atoro-green/10">
