@@ -6,7 +6,7 @@ import ServicePillars from '@/components/services/ServicePillars';
 
 const MethodologySection = () => {
   return (
-    <section className="py-16 bg-white overflow-hidden">
+    <section className="py-16 bg-gray-50 overflow-hidden">
       <Container>
         <div className="text-center mb-12">
           <Badge className="mb-2 bg-atoro-teal/10 text-atoro-teal">Our Methodology</Badge>
@@ -16,10 +16,8 @@ const MethodologySection = () => {
           </p>
         </div>
         
-        <div className="max-w-5xl mx-auto mt-12 relative">
-          <div className="bg-white p-4 rounded-lg shadow-lg">
-            <ServicePillars />
-          </div>
+        <div className="max-w-5xl mx-auto mt-12">
+          <ServicePillars />
         </div>
       </Container>
     </section>

@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Shield, FileCheck, Users, Lock, CodeXml } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const ServicePillars = () => {
   const [activePillar, setActivePillar] = useState<string | null>("security-operations");
@@ -31,56 +32,24 @@ const ServicePillars = () => {
       position: "bottom-right"
     }
   ];
-  
-  const connections = [
-    {
-      id: "ops-gov",
-      from: "security-operations",
-      to: "governance",
-      className: "cyber-privacy",
-      iconClassName: "cyber-privacy-icon"
-    },
-    {
-      id: "gov-comp",
-      from: "governance",
-      to: "compliance",
-      className: "privacy-ai",
-      iconClassName: "privacy-ai-icon"
-    },
-    {
-      id: "ops-comp",
-      from: "security-operations",
-      to: "compliance",
-      className: "cyber-ai",
-      iconClassName: "cyber-ai-icon"
-    }
-  ];
 
   const handlePillarClick = (id: string) => {
     setActivePillar(id);
   };
 
-  const getConnectionClasses = (connection: any) => {
-    const isActive = 
-      connection.from === activePillar || 
-      connection.to === activePillar;
-    
-    return `connection-line ${connection.className} ${isActive ? 'active' : ''}`;
-  };
-
-  // Define the positions for each pillar in the honeycomb layout
+  // Define the positions for each pillar in the layout
   const getPositionClass = (position: string) => {
     switch (position) {
-      case "top": return "hexagon-top";
-      case "bottom-left": return "hexagon-bottom-left";
-      case "bottom-right": return "hexagon-bottom-right";
+      case "top": return "md:col-span-2 md:col-start-2";
+      case "bottom-left": return "md:col-span-2 md:col-start-1";
+      case "bottom-right": return "md:col-span-2 md:col-start-3";
       default: return "";
     }
   };
 
   return (
-    <div className="honeycomb-container">
-      <div className="honeycomb">
+    <div className="w-full max-w-4xl mx-auto px-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {pillars.map((pillar) => {
           const Icon = pillar.icon;
           const isActive = activePillar === pillar.id;
@@ -88,15 +57,20 @@ const ServicePillars = () => {
           return (
             <div 
               key={pillar.id}
-              className={`hexagon ${getPositionClass(pillar.position)} ${isActive ? 'active' : ''}`}
+              className={cn(
+                "bg-white border rounded-lg p-6 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer",
+                getPositionClass(pillar.position),
+                isActive ? "border-l-4 border-l-atoro-green" : "border-gray-200"
+              )}
               onClick={() => handlePillarClick(pillar.id)}
             >
               <div className="hexagon-content">
-                <div>
-                  <Icon className={`h-10 w-10 ${pillar.color} hexagon-icon`} />
-                  <h3 className="text-2xl font-bold mt-8 mb-4">{pillar.title}</h3>
-                  <p className="text-gray-600">{pillar.description}</p>
+                <div className="flex items-start justify-between">
+                  <h3 className="text-xl font-bold mb-3">{pillar.title}</h3>
+                  <Icon className={`h-8 w-8 ${pillar.color}`} />
                 </div>
+                <p className="text-gray-600 mb-4">{pillar.description}</p>
+                
                 <div className="mt-4">
                   <ul className="space-y-2">
                     {pillar.id === "security-operations" && (
@@ -155,19 +129,6 @@ const ServicePillars = () => {
             </div>
           );
         })}
-        
-        {/* Connection lines */}
-        {connections.map((connection) => (
-          <div 
-            key={connection.id} 
-            className={getConnectionClasses(connection)}
-            aria-hidden="true"
-          >
-            <div className={`connection-icon ${connection.iconClassName}`}>
-              <CodeXml className="h-4 w-4 text-atoro-teal" />
-            </div>
-          </div>
-        ))}
       </div>
     </div>
   );
