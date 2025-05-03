@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ServiceLayout from '@/components/layout/ServiceLayout';
@@ -13,114 +12,92 @@ import CertificationLogos from '@/components/shared/CertificationLogos';
 import ContactForm from '@/components/services/ContactForm';
 import TeamMemberCard from '@/components/services/TeamMemberCard';
 import ServicePillars from '@/components/services/ServicePillars';
-
 const SecurityTeamService = () => {
   // Service-specific testimonials
-  const serviceTestimonials = [
-    {
-      quote: "Atoro's Security Team as a Service model gave us enterprise-grade protection without the overhead of building an in-house security department. It's been transformative for our compliance journey.",
-      author: "Sarah Johnson",
-      title: "COO",
-      company: "DataShield",
-      rating: 5
-    }, 
-    {
-      quote: "Working with Atoro for our SOC 2 compliance was seamless. Their team was responsive on Slack and guided us through the entire process, helping us achieve certification on our first attempt.",
-      author: "David Rivera",
-      title: "Head of Engineering",
-      company: "SecureStack",
-      rating: 5
-    },
-    {
-      quote: "Having Atoro manage our Drata implementation saved us countless hours and helped us close enterprise deals that required SOC 2 certification. Their expertise was invaluable.",
-      author: "Michael Zhang",
-      title: "CTO",
-      company: "CloudSecure",
-      rating: 4.5
-    }
-  ];
+  const serviceTestimonials = [{
+    quote: "Atoro's Security Team as a Service model gave us enterprise-grade protection without the overhead of building an in-house security department. It's been transformative for our compliance journey.",
+    author: "Sarah Johnson",
+    title: "COO",
+    company: "DataShield",
+    rating: 5
+  }, {
+    quote: "Working with Atoro for our SOC 2 compliance was seamless. Their team was responsive on Slack and guided us through the entire process, helping us achieve certification on our first attempt.",
+    author: "David Rivera",
+    title: "Head of Engineering",
+    company: "SecureStack",
+    rating: 5
+  }, {
+    quote: "Having Atoro manage our Drata implementation saved us countless hours and helped us close enterprise deals that required SOC 2 certification. Their expertise was invaluable.",
+    author: "Michael Zhang",
+    title: "CTO",
+    company: "CloudSecure",
+    rating: 4.5
+  }];
 
   // Team members data
-  const teamMembers = [
-    {
-      name: "Alex Morgan",
-      title: "Lead Security Architect",
-      photo: "/lovable-uploads/team-member-1.png",
-      credentials: "CISSP, CISM, 15+ years in enterprise security"
-    },
-    {
-      name: "Sophia Chen",
-      title: "Compliance Specialist",
-      photo: "/lovable-uploads/team-member-2.png",
-      credentials: "ISO 27001 LA, CISA, Former Big 4 Auditor"
-    },
-    {
-      name: "Marcus Johnson",
-      title: "Penetration Test Lead",
-      photo: "/lovable-uploads/team-member-3.png",
-      credentials: "OSCP, CEH, 10+ years in offensive security"
-    }
-  ];
+  const teamMembers = [{
+    name: "Alex Morgan",
+    title: "Lead Security Architect",
+    photo: "/lovable-uploads/team-member-1.png",
+    credentials: "CISSP, CISM, 15+ years in enterprise security"
+  }, {
+    name: "Sophia Chen",
+    title: "Compliance Specialist",
+    photo: "/lovable-uploads/team-member-2.png",
+    credentials: "ISO 27001 LA, CISA, Former Big 4 Auditor"
+  }, {
+    name: "Marcus Johnson",
+    title: "Penetration Test Lead",
+    photo: "/lovable-uploads/team-member-3.png",
+    credentials: "OSCP, CEH, 10+ years in offensive security"
+  }];
 
   // Benefits data
-  const benefits = [
-    {
-      id: "cost-savings",
-      title: "70% Cost Reduction",
-      description: "Eliminate the expense of hiring, training and retaining an in-house security team while gaining access to a broader range of expertise.",
-      icon: <DollarSign className="h-10 w-10 text-atoro-green" />
-    },
-    {
-      id: "speed",
-      title: "Accelerated Compliance",
-      description: "Achieve certifications in 60-90 days rather than 6-12 months, unlocking enterprise deals that require formal compliance.",
-      icon: <Clock className="h-10 w-10 text-atoro-green" />
-    },
-    {
-      id: "done-for-you",
-      title: "Fully Managed Solution",
-      description: "We handle everything from policy creation to audits while your team stays focused on building your core product.",
-      icon: <Check className="h-10 w-10 text-atoro-green" />
-    },
-    {
-      id: "growth",
-      title: "Unlock Enterprise Deals",
-      description: "Remove security objections from your sales cycle and confidently pursue larger clients with stringent vendor requirements.",
-      icon: <Users className="h-10 w-10 text-atoro-green" />
-    }
-  ];
+  const benefits = [{
+    id: "cost-savings",
+    title: "70% Cost Reduction",
+    description: "Eliminate the expense of hiring, training and retaining an in-house security team while gaining access to a broader range of expertise.",
+    icon: <DollarSign className="h-10 w-10 text-atoro-green" />
+  }, {
+    id: "speed",
+    title: "Accelerated Compliance",
+    description: "Achieve certifications in 60-90 days rather than 6-12 months, unlocking enterprise deals that require formal compliance.",
+    icon: <Clock className="h-10 w-10 text-atoro-green" />
+  }, {
+    id: "done-for-you",
+    title: "Fully Managed Solution",
+    description: "We handle everything from policy creation to audits while your team stays focused on building your core product.",
+    icon: <Check className="h-10 w-10 text-atoro-green" />
+  }, {
+    id: "growth",
+    title: "Unlock Enterprise Deals",
+    description: "Remove security objections from your sales cycle and confidently pursue larger clients with stringent vendor requirements.",
+    icon: <Users className="h-10 w-10 text-atoro-green" />
+  }];
 
   // Features data
-  const features = [
-    {
-      title: "Responsive Slack Support",
-      description: "Direct access to our security experts with 1-hour SLA during business hours, ensuring your questions never block progress.",
-      icon: <MessageSquare className="h-12 w-12 text-atoro-teal p-2 bg-atoro-teal/10 rounded-lg" />
-    },
-    {
-      title: "On-Demand Testing",
-      description: "Up to 4 comprehensive penetration tests annually, plus continuous vulnerability scanning to identify risks before they become breaches.",
-      icon: <Bug className="h-12 w-12 text-atoro-teal p-2 bg-atoro-teal/10 rounded-lg" />
-    },
-    {
-      title: "Platform Management",
-      description: "Full implementation and management of Drata or Vanta, turning complex compliance workflows into streamlined processes.",
-      icon: <FileCheck className="h-12 w-12 text-atoro-teal p-2 bg-atoro-teal/10 rounded-lg" />
-    },
-    {
-      title: "Dedicated Experts",
-      description: "A named team of security professionals with the specialized expertise you need, without the recruiting challenges.",
-      icon: <Shield className="h-12 w-12 text-atoro-teal p-2 bg-atoro-teal/10 rounded-lg" />
-    },
-    {
-      title: "Trust Center Deployment",
-      description: "Customer-facing security documentation and trust portal to showcase your security posture and expedite security reviews.",
-      icon: <Lock className="h-12 w-12 text-atoro-teal p-2 bg-atoro-teal/10 rounded-lg" />
-    }
-  ];
-
-  return (
-    <ServiceLayout>
+  const features = [{
+    title: "Responsive Slack Support",
+    description: "Direct access to our security experts with 1-hour SLA during business hours, ensuring your questions never block progress.",
+    icon: <MessageSquare className="h-12 w-12 text-atoro-teal p-2 bg-atoro-teal/10 rounded-lg" />
+  }, {
+    title: "On-Demand Testing",
+    description: "Up to 4 comprehensive penetration tests annually, plus continuous vulnerability scanning to identify risks before they become breaches.",
+    icon: <Bug className="h-12 w-12 text-atoro-teal p-2 bg-atoro-teal/10 rounded-lg" />
+  }, {
+    title: "Platform Management",
+    description: "Full implementation and management of Drata or Vanta, turning complex compliance workflows into streamlined processes.",
+    icon: <FileCheck className="h-12 w-12 text-atoro-teal p-2 bg-atoro-teal/10 rounded-lg" />
+  }, {
+    title: "Dedicated Experts",
+    description: "A named team of security professionals with the specialized expertise you need, without the recruiting challenges.",
+    icon: <Shield className="h-12 w-12 text-atoro-teal p-2 bg-atoro-teal/10 rounded-lg" />
+  }, {
+    title: "Trust Center Deployment",
+    description: "Customer-facing security documentation and trust portal to showcase your security posture and expedite security reviews.",
+    icon: <Lock className="h-12 w-12 text-atoro-teal p-2 bg-atoro-teal/10 rounded-lg" />
+  }];
+  return <ServiceLayout>
       {/* Hero Section */}
       <section className="pt-16 pb-12 bg-gradient-to-br from-atoro-dark-teal to-black text-white relative overflow-hidden">
         {/* Background pattern for visibility */}
@@ -149,11 +126,7 @@ const SecurityTeamService = () => {
               </div>
             </div>
             <div className="hidden md:block">
-              <img 
-                alt="Security Team Service" 
-                className="object-cover w-full rounded-lg shadow-lg" 
-                src="/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg" 
-              />
+              <img alt="Security Team Service" className="object-cover w-full rounded-lg shadow-lg" src="/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg" />
             </div>
           </div>
         </Container>
@@ -213,15 +186,13 @@ const SecurityTeamService = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {benefits.map((benefit) => (
-              <Card key={benefit.id} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            {benefits.map(benefit => <Card key={benefit.id} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardContent className="p-8">
                   <div className="mb-6">{benefit.icon}</div>
                   <h3 className="text-xl font-bold mb-3">{benefit.title}</h3>
                   <p className="text-gray-600">{benefit.description}</p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </Container>
       </section>
@@ -255,15 +226,13 @@ const SecurityTeamService = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-            {features.map((feature, index) => (
-              <div key={index} className="bg-white/10 p-6 rounded-lg border border-white/20 hover:bg-white/20 transition-colors">
+            {features.map((feature, index) => <div key={index} className="bg-white/10 p-6 rounded-lg border border-white/20 hover:bg-white/20 transition-colors">
                 <div className="flex justify-center mb-4">
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-center">{feature.title}</h3>
                 <p className="text-white/80 text-center">{feature.description}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </Container>
       </section>
@@ -280,9 +249,7 @@ const SecurityTeamService = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            {teamMembers.map((member, index) => (
-              <TeamMemberCard key={index} member={member} />
-            ))}
+            {teamMembers.map((member, index) => <TeamMemberCard key={index} member={member} />)}
           </div>
           
           <div className="mt-12 text-center">
@@ -312,14 +279,7 @@ const SecurityTeamService = () => {
       </section>
 
       {/* Testimonial section */}
-      <TestimonialSection 
-        testimonials={serviceTestimonials} 
-        title="What Our Clients Say" 
-        description="Read how we've helped companies like yours build world-class security programs" 
-        variant="featured" 
-        showRatings={true} 
-        bgColor="bg-white" 
-      />
+      <TestimonialSection testimonials={serviceTestimonials} title="What Our Clients Say" description="Read how we've helped companies like yours build world-class security programs" variant="featured" showRatings={true} bgColor="bg-white" />
 
       {/* Contact Form */}
       <section className="py-16 bg-gray-50" id="contact">
@@ -363,9 +323,7 @@ const SecurityTeamService = () => {
       {/* FAQ Section with sticky CTA */}
       <section className="py-16 bg-white relative">
         <div className="sticky bottom-4 w-full z-10 flex justify-center pointer-events-none">
-          <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green shadow-lg pointer-events-auto">
-            Schedule a Security Assessment
-          </Button>
+          
         </div>
         
         <Container>
@@ -375,38 +333,28 @@ const SecurityTeamService = () => {
           </div>
           
           <div className="max-w-3xl mx-auto space-y-6">
-            {[
-              {
-                question: "How quickly can we achieve compliance with your service?",
-                answer: "Most clients achieve SOC 2 Type 1 within 60-90 days and ISO 27001 certification within 4-6 months. This is significantly faster than the typical 9-12 month timeline for companies building in-house programs."
-              },
-              {
-                question: "Do we need to hire any internal security staff?",
-                answer: "No, our service is designed to be comprehensive. We provide all necessary security expertise, from strategic leadership (vCISO) to hands-on implementation. You'll need to assign an internal point of contact, but they typically spend less than 5 hours per week coordinating with our team."
-              },
-              {
-                question: "How does pricing work?",
-                answer: "We offer transparent, flat-rate monthly pricing based on your company size and specific compliance requirements. There are no hidden fees or surprise costs. Compared to hiring a minimal in-house team (CISO, security engineer, compliance manager), our service typically saves 60-70% annually."
-              },
-              {
-                question: "What happens during a security emergency?",
-                answer: "Your service includes incident response support. Our team is available 24/7 for security emergencies through our dedicated incident hotline. We work with you to contain, investigate, and remediate security incidents, as well as manage any necessary communications."
-              },
-              {
-                question: "Can you support multiple compliance frameworks simultaneously?",
-                answer: "Yes, our methodology is designed to efficiently achieve multiple certifications with shared controls and evidence. Most clients pursue SOC 2 and ISO 27001 simultaneously, with GDPR, HIPAA, or other frameworks layered on as needed."
-              }
-            ].map((faq, index) => (
-              <div key={index} className="border-b border-gray-200 pb-6">
+            {[{
+            question: "How quickly can we achieve compliance with your service?",
+            answer: "Most clients achieve SOC 2 Type 1 within 60-90 days and ISO 27001 certification within 4-6 months. This is significantly faster than the typical 9-12 month timeline for companies building in-house programs."
+          }, {
+            question: "Do we need to hire any internal security staff?",
+            answer: "No, our service is designed to be comprehensive. We provide all necessary security expertise, from strategic leadership (vCISO) to hands-on implementation. You'll need to assign an internal point of contact, but they typically spend less than 5 hours per week coordinating with our team."
+          }, {
+            question: "How does pricing work?",
+            answer: "We offer transparent, flat-rate monthly pricing based on your company size and specific compliance requirements. There are no hidden fees or surprise costs. Compared to hiring a minimal in-house team (CISO, security engineer, compliance manager), our service typically saves 60-70% annually."
+          }, {
+            question: "What happens during a security emergency?",
+            answer: "Your service includes incident response support. Our team is available 24/7 for security emergencies through our dedicated incident hotline. We work with you to contain, investigate, and remediate security incidents, as well as manage any necessary communications."
+          }, {
+            question: "Can you support multiple compliance frameworks simultaneously?",
+            answer: "Yes, our methodology is designed to efficiently achieve multiple certifications with shared controls and evidence. Most clients pursue SOC 2 and ISO 27001 simultaneously, with GDPR, HIPAA, or other frameworks layered on as needed."
+          }].map((faq, index) => <div key={index} className="border-b border-gray-200 pb-6">
                 <h3 className="text-xl font-bold mb-3">{faq.question}</h3>
                 <p className="text-gray-700">{faq.answer}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </Container>
       </section>
-    </ServiceLayout>
-  );
+    </ServiceLayout>;
 };
-
 export default SecurityTeamService;
