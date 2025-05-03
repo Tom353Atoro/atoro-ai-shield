@@ -11,6 +11,7 @@ import DataPrivacy from "./pages/DataPrivacy";
 import AIGovernance from "./pages/AIGovernance";
 import SecurityTeamService from "./pages/SecurityTeamService";
 import Testimonials from "./pages/Testimonials";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/services/ai-governance" element={<AIGovernance />} />
           <Route path="/services/security-team-aas" element={<SecurityTeamService />} />
           <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

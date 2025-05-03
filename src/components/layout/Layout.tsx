@@ -14,7 +14,7 @@ const Layout: React.FC<LayoutProps> = ({ children, withoutFooter = false }) => {
   const isHomePage = location.pathname === '/';
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background">
       <Navbar />
       <main className="flex-grow">
         {children}
