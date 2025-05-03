@@ -35,17 +35,35 @@ const Footer = () => {
               </ul>
             </div>
             
-            {/* Column 3: Resources */}
+            {/* Column 3: Resources - Updated with correct links */}
             <div className="space-y-4">
               <h3 className="font-bold text-lg">Resources</h3>
               <ul className="space-y-2">
-                {['Blog', 'Whitepapers', 'Webinars', 'Case Studies'].map((item) => (
-                  <li key={item}>
-                    <Link to={`/resources/${item.toLowerCase().replace(/\s+/g, '-')}`} className="text-gray-300 hover:text-white transition-colors">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
+                <li>
+                  <Link to="/blog" className="text-gray-300 hover:text-white transition-colors">
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/resources/whitepapers" className="text-gray-300 hover:text-white transition-colors">
+                    Whitepapers
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/resources/webinars" className="text-gray-300 hover:text-white transition-colors">
+                    Webinars
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/resources/tools-templates" className="text-gray-300 hover:text-white transition-colors">
+                    Tools & Templates
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/resources/case-studies" className="text-gray-300 hover:text-white transition-colors">
+                    Case Studies
+                  </Link>
+                </li>
               </ul>
             </div>
             

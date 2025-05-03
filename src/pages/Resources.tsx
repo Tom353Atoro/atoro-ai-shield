@@ -5,97 +5,97 @@ import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/Container';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ShieldCheck, LockKeyhole, Brain, FileText, FileCheck, Download, BookOpen } from 'lucide-react';
+import { ShieldCheck, LockKeyhole, Brain, FileText, FileCheck, Download, BookOpen, Video } from 'lucide-react';
 
 const Resources = () => {
   // Sample resources - in a real app, these would come from a CMS or API
   const securityResources = [
     {
       id: 1,
-      title: 'SOC 2 Readiness Assessment',
-      type: 'Checklist',
-      description: 'A comprehensive checklist to evaluate your readiness for SOC 2 certification.',
+      title: "SOC 2 Readiness Assessment",
+      type: "Checklist",
+      description: "A comprehensive checklist to evaluate your readiness for SOC 2 certification.",
       icon: FileCheck,
-      color: 'bg-blue-50 text-blue-600',
-      link: '/resources/security/soc2-readiness-checklist',
+      color: "bg-blue-50 text-blue-600",
+      link: "/resources/tools-templates", // Updated link
     },
     {
       id: 2,
-      title: 'Incident Response Plan Template',
-      type: 'Template',
-      description: 'A customizable template for creating an effective security incident response plan.',
+      title: "Incident Response Plan Template",
+      type: "Template",
+      description: "A customizable template for creating an effective security incident response plan.",
       icon: FileText,
-      color: 'bg-blue-50 text-blue-600',
-      link: '/resources/security/incident-response-template',
+      color: "bg-blue-50 text-blue-600",
+      link: "/resources/tools-templates", // Updated link
     },
     {
       id: 3,
-      title: 'Security Controls Guide for SaaS Startups',
-      type: 'Guide',
-      description: 'Essential security controls every SaaS startup should implement from day one.',
+      title: "Security Controls Guide for SaaS Startups",
+      type: "Guide",
+      description: "Essential security controls every SaaS startup should implement from day one.",
       icon: BookOpen,
-      color: 'bg-blue-50 text-blue-600',
-      link: '/resources/security/saas-security-controls-guide',
+      color: "bg-blue-50 text-blue-600",
+      link: "/resources/whitepapers", // Updated link
     },
   ];
 
   const privacyResources = [
     {
       id: 4,
-      title: 'Data Processing Agreement Template',
-      type: 'Template',
-      description: 'GDPR-compliant DPA template for processing customer data.',
+      title: "Data Processing Agreement Template",
+      type: "Template",
+      description: "GDPR-compliant DPA template for processing customer data.",
       icon: FileText, 
-      color: 'bg-green-50 text-green-600',
-      link: '/resources/privacy/dpa-template',
+      color: "bg-green-50 text-green-600",
+      link: "/resources/tools-templates", // Updated link
     },
     {
       id: 5,
-      title: 'GDPR Readiness Assessment',
-      type: 'Assessment',
-      description: 'Evaluate your organization\'s compliance with GDPR requirements.',
+      title: "GDPR Readiness Assessment",
+      type: "Assessment",
+      description: "Evaluate your organization's compliance with GDPR requirements.",
       icon: FileCheck,
-      color: 'bg-green-50 text-green-600',
-      link: '/resources/privacy/gdpr-assessment',
+      color: "bg-green-50 text-green-600",
+      link: "/resources/tools-templates", // Updated link
     },
     {
       id: 6,
-      title: 'Privacy Policy Generator',
-      type: 'Tool',
-      description: 'Create a customized privacy policy for your website or application.',
+      title: "Privacy Policy Generator",
+      type: "Tool",
+      description: "Create a customized privacy policy for your website or application.",
       icon: Download,
-      color: 'bg-green-50 text-green-600',
-      link: '/resources/privacy/policy-generator',
+      color: "bg-green-50 text-green-600",
+      link: "/resources/tools-templates", // Updated link
     },
   ];
 
   const aiResources = [
     {
       id: 7,
-      title: 'AI Risk Assessment Framework',
-      type: 'Framework',
-      description: 'A structured approach to identify and mitigate risks in AI systems.',
+      title: "AI Risk Assessment Framework",
+      type: "Framework",
+      description: "A structured approach to identify and mitigate risks in AI systems.",
       icon: FileCheck,
-      color: 'bg-teal-50 text-teal-600',
-      link: '/resources/ai-governance/risk-assessment-framework',
+      color: "bg-teal-50 text-teal-600",
+      link: "/resources/tools-templates", // Updated link
     },
     {
       id: 8,
-      title: 'AI Ethics Guidelines',
-      type: 'Guidelines',
-      description: 'Ethical considerations and best practices for AI development.',
+      title: "AI Ethics Guidelines",
+      type: "Guidelines",
+      description: "Ethical considerations and best practices for AI development.",
       icon: BookOpen,
-      color: 'bg-teal-50 text-teal-600',
-      link: '/resources/ai-governance/ethics-guidelines',
+      color: "bg-teal-50 text-teal-600",
+      link: "/resources/whitepapers", // Updated link
     },
     {
       id: 9,
-      title: 'ISO 42001 Implementation Guide',
-      type: 'Guide',
-      description: 'Step-by-step guide to implementing ISO 42001 AI management system.',
+      title: "ISO 42001 Implementation Guide",
+      type: "Guide",
+      description: "Step-by-step guide to implementing ISO 42001 AI management system.",
       icon: FileText,
-      color: 'bg-teal-50 text-teal-600',
-      link: '/resources/ai-governance/iso-42001-guide',
+      color: "bg-teal-50 text-teal-600",
+      link: "/resources/whitepapers", // Updated link
     },
   ];
 
@@ -153,15 +153,30 @@ const Resources = () => {
             <p className="text-lg text-gray-700 mb-8">
               Free tools, templates, checklists, and guides to strengthen your security, privacy, and AI governance programs.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="bg-atoro-teal hover:bg-atoro-teal/90" asChild>
-                <a href="#security">Security Resources</a>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
+              <Button size="lg" className="w-full bg-atoro-teal hover:bg-atoro-teal/90" asChild>
+                <Link to="/resources/whitepapers" className="flex items-center justify-center gap-2">
+                  <FileText className="h-5 w-5" />
+                  <span>Whitepapers</span>
+                </Link>
               </Button>
-              <Button size="lg" className="bg-atoro-green hover:bg-atoro-green/90 text-atoro-teal" asChild>
-                <a href="#privacy">Privacy Resources</a>
+              <Button size="lg" className="w-full bg-atoro-blue hover:bg-atoro-blue/90" asChild>
+                <Link to="/resources/webinars" className="flex items-center justify-center gap-2">
+                  <Video className="h-5 w-5" />
+                  <span>Webinars</span>
+                </Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-atoro-teal text-atoro-teal hover:bg-atoro-teal/10" asChild>
-                <a href="#ai">AI Governance Resources</a>
+              <Button size="lg" className="w-full bg-atoro-green hover:bg-atoro-green/90" asChild>
+                <Link to="/resources/tools-templates" className="flex items-center justify-center gap-2">
+                  <Download className="h-5 w-5" />
+                  <span>Tools & Templates</span>
+                </Link>
+              </Button>
+              <Button size="lg" className="w-full bg-gray-800 hover:bg-gray-700" asChild>
+                <Link to="/resources/case-studies" className="flex items-center justify-center gap-2">
+                  <BookOpen className="h-5 w-5" />
+                  <span>Case Studies</span>
+                </Link>
               </Button>
             </div>
           </div>
