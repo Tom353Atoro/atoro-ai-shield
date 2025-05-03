@@ -197,7 +197,7 @@ const SecurityTeamService = () => {
         </Container>
       </section>
 
-      {/* Interactive Graphic */}
+      {/* Interactive Graphic - Fixed the methodology section with proper image container */}
       <section className="py-16 bg-white overflow-hidden">
         <Container>
           <div className="text-center mb-12">
@@ -208,8 +208,10 @@ const SecurityTeamService = () => {
             </p>
           </div>
           
-          <div className="mt-12">
-            <ServicePillars />
+          <div className="max-w-5xl mx-auto mt-12 relative">
+            <div className="bg-white p-4 rounded-lg shadow-lg">
+              <ServicePillars />
+            </div>
           </div>
         </Container>
       </section>
