@@ -12,7 +12,6 @@ import ContactForm from '@/components/services/ContactForm';
 import TeamMemberCard from '@/components/services/TeamMemberCard';
 import ServicePillars from '@/components/services/ServicePillars';
 import LogoBanner from '@/components/home/LogoBanner';
-
 const SecurityTeamService = () => {
   // Service-specific testimonials
   const serviceTestimonials = [{
@@ -109,7 +108,7 @@ const SecurityTeamService = () => {
         <Container>
           <div className="grid md:grid-cols-2 gap-8 items-center relative z-10">
             <div>
-              <Badge className="mb-3 bg-atoro-green text-atoro-teal hover:bg-atoro-light-green">Featured Service</Badge>
+              
               <h1 className="mb-4 text-3xl md:text-4xl lg:text-5xl leading-tight">
                 Your Complete <span className="text-atoro-green">Virtual Security Department</span>
               </h1>
@@ -121,9 +120,7 @@ const SecurityTeamService = () => {
                 <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green">
                   Schedule a Security Assessment
                 </Button>
-                <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-                  View Service Details
-                </Button>
+                
               </div>
             </div>
             <div className="hidden md:block">
@@ -263,15 +260,7 @@ const SecurityTeamService = () => {
       </section>
 
       {/* Certification Logos Section */}
-      <section className="py-12 bg-gray-50">
-        <Container>
-          <div className="text-center mb-8">
-            <Badge className="mb-2">Compliance Expertise</Badge>
-            <h2 className="text-2xl font-semibold text-gray-700">Frameworks We Support</h2>
-          </div>
-          <CertificationLogos />
-        </Container>
-      </section>
+      
 
       {/* Testimonial section */}
       <TestimonialSection testimonials={serviceTestimonials} title="What Our Clients Say" description="Read how we've helped companies like yours build world-class security programs" variant="featured" showRatings={true} bgColor="bg-white" />
