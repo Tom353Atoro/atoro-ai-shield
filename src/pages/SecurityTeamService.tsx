@@ -12,6 +12,7 @@ import ContactForm from '@/components/services/ContactForm';
 import TeamMemberCard from '@/components/services/TeamMemberCard';
 import ServicePillars from '@/components/services/ServicePillars';
 import LogoBanner from '@/components/home/LogoBanner';
+
 const SecurityTeamService = () => {
   // Service-specific testimonials
   const serviceTestimonials = [{
@@ -98,39 +99,46 @@ const SecurityTeamService = () => {
     icon: <Lock className="h-12 w-12 text-atoro-teal p-2 bg-atoro-teal/10 rounded-lg" />
   }];
   return <ServiceLayout>
-      {/* Hero Section */}
-      <section className="pt-16 pb-12 bg-gradient-to-br from-atoro-dark-teal to-black text-white relative overflow-hidden">
-        {/* Background pattern for visibility */}
-        <div className="absolute inset-0 opacity-20 z-0">
-          <div className="absolute inset-0 bg-grid-white/10"></div>
-        </div>
+      {/* Hero Section - Improved styling */}
+      <section className="pt-20 pb-16 bg-gradient-to-br from-atoro-dark-teal to-black text-white relative overflow-hidden">
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-10 z-0 bg-hero-pattern"></div>
         
         <Container>
-          <div className="grid md:grid-cols-2 gap-8 items-center relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
             <div>
-              
-              <h1 className="mb-4 text-3xl md:text-4xl lg:text-5xl leading-tight">
+              <Badge className="mb-4 bg-atoro-green/20 text-atoro-green hover:bg-atoro-green/30">Virtual Security Team</Badge>
+              <h1 className="mb-6 text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
                 Your Complete <span className="text-atoro-green">Virtual Security Department</span>
               </h1>
-              <p className="text-lg mb-6 opacity-90">
+              <p className="text-lg mb-8 opacity-90 leading-relaxed">
                 Get enterprise-grade security and compliance without the overhead of an in-house team. 
                 Our experts become an extension of your organization, handling everything from daily security operations to compliance certifications.
               </p>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-4">
                 <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green">
                   Schedule a Security Assessment
                 </Button>
-                
+                <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+                  Learn More
+                </Button>
               </div>
             </div>
             <div className="hidden md:block">
-              <img alt="Security Team Service" className="object-cover w-full rounded-lg shadow-lg" src="/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg" />
+              <div className="relative">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-atoro-green to-atoro-blue opacity-30 blur-sm rounded-lg"></div>
+                <img 
+                  alt="Security Team Service" 
+                  className="relative w-full rounded-lg shadow-lg object-cover max-h-[400px]" 
+                  src="/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg" 
+                />
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* Client Logo Section - Updated to use LogoBanner from homepage */}
+      {/* Client Logo Section - Using LogoBanner from homepage */}
       <section className="py-12 bg-gray-50">
         <LogoBanner />
       </section>
@@ -259,8 +267,14 @@ const SecurityTeamService = () => {
         </Container>
       </section>
 
-      {/* Certification Logos Section */}
-      
+      {/* Certification Logos Section - Added back */}
+      <section className="py-16 bg-white">
+        <CertificationLogos 
+          title="Industry-Standard Certifications" 
+          description="Our security practices and services are backed by industry-recognized certifications."
+          className="bg-white" 
+        />
+      </section>
 
       {/* Testimonial section */}
       <TestimonialSection testimonials={serviceTestimonials} title="What Our Clients Say" description="Read how we've helped companies like yours build world-class security programs" variant="featured" showRatings={true} bgColor="bg-white" />

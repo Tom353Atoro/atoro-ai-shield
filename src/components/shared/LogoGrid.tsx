@@ -1,27 +1,57 @@
+
 import React from 'react';
-const LogoGrid: React.FC = () => {
-  // Placeholder logos, replace with actual client logos
-  const logos = [{
-    id: 1,
-    src: "/lovable-uploads/5c1f26c2-fb1a-41c2-9088-86b87a45c090.png",
-    alt: "Client Logo 1"
-  }, {
-    id: 2,
-    src: "/lovable-uploads/92f8da33-0880-48be-815f-a45d074582db.png",
-    alt: "Client Logo 2"
-  }, {
-    id: 3,
-    src: "/lovable-uploads/4d060603-ad02-4190-9beb-cdb340b18bbc.png",
-    alt: "Client Logo 3"
-  }, {
-    id: 4,
-    src: "/lovable-uploads/67e0fd6c-3db8-4cd6-a32b-c0841aa5535e.png",
-    alt: "Client Logo 4"
-  }, {
-    id: 5,
-    src: "/lovable-uploads/9b3556f3-0651-4ed7-b0d6-42ede4d99feb.png",
-    alt: "Client Logo 5"
-  }];
-  return;
+import { Container } from '@/components/ui/Container';
+
+interface LogoItem {
+  id: string | number;
+  name?: string;
+  src: string;
+  imagePath?: string;
+  alt?: string;
+  width?: number;
+}
+
+interface LogoGridProps {
+  logos: LogoItem[];
+  title?: string;
+  description?: string;
+  className?: string;
+}
+
+const LogoGrid: React.FC<LogoGridProps> = ({
+  logos,
+  title = "Trusted Certifications",
+  description,
+  className = "",
+}) => {
+  return (
+    <section className={`py-12 ${className}`}>
+      <Container>
+        <div className="text-center mb-8">
+          {title && <h2 className="text-2xl md:text-3xl font-bold mb-4">{title}</h2>}
+          {description && <p className="text-gray-600 max-w-3xl mx-auto">{description}</p>}
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-center justify-items-center">
+          {logos.map((logo) => (
+            <div 
+              key={logo.id} 
+              className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+            >
+              <img 
+                src={logo.src || logo.imagePath} 
+                alt={logo.alt || `${logo.name || 'Logo'}`}
+                className="max-h-16 max-w-full object-contain"
+                style={{ 
+                  width: logo.width ? `${logo.width}px` : 'auto',
+                }}
+              />
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
 };
+
 export default LogoGrid;
