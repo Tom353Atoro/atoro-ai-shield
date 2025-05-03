@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Container } from '@/components/ui/Container';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 interface LogoItem {
   id: string | number;
@@ -32,20 +33,23 @@ const LogoGrid: React.FC<LogoGridProps> = ({
           {description && <p className="text-gray-600 max-w-3xl mx-auto">{description}</p>}
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-center justify-items-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
           {logos.map((logo) => (
             <div 
               key={logo.id} 
-              className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+              className="flex items-center justify-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow w-full"
             >
-              <img 
-                src={logo.src || logo.imagePath} 
-                alt={logo.alt || `${logo.name || 'Logo'}`}
-                className="max-h-16 max-w-full object-contain"
-                style={{ 
-                  width: logo.width ? `${logo.width}px` : 'auto',
-                }}
-              />
+              <div className="w-full max-w-[220px] mx-auto">
+                <AspectRatio ratio={3/2} className="flex items-center justify-center">
+                  <img 
+                    src={logo.src || logo.imagePath} 
+                    alt={logo.alt || `${logo.name || 'Logo'}`}
+                    className="max-h-16 object-contain"
+                    width={logo.width || 220}
+                    height={80}
+                  />
+                </AspectRatio>
+              </div>
             </div>
           ))}
         </div>
