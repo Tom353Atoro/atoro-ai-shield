@@ -7,11 +7,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check, DollarSign, Clock, Users, Shield, MessageSquare, FileCheck, Bug, Lock } from 'lucide-react';
 import TestimonialSection from '@/components/shared/TestimonialSection';
-import LogoGrid from '@/components/shared/LogoGrid';
 import CertificationLogos from '@/components/shared/CertificationLogos';
 import ContactForm from '@/components/services/ContactForm';
 import TeamMemberCard from '@/components/services/TeamMemberCard';
 import ServicePillars from '@/components/services/ServicePillars';
+import LogoBanner from '@/components/home/LogoBanner';
+
 const SecurityTeamService = () => {
   // Service-specific testimonials
   const serviceTestimonials = [{
@@ -132,15 +133,9 @@ const SecurityTeamService = () => {
         </Container>
       </section>
 
-      {/* Client Logo Section */}
+      {/* Client Logo Section - Updated to use LogoBanner from homepage */}
       <section className="py-12 bg-gray-50">
-        <Container>
-          <div className="text-center mb-8">
-            <Badge className="mb-2">Trusted By</Badge>
-            <h2 className="text-2xl font-semibold text-gray-700">Industry Leaders Rely on Our Security Team</h2>
-          </div>
-          <LogoGrid />
-        </Container>
+        <LogoBanner />
       </section>
 
       {/* Service Description */}
