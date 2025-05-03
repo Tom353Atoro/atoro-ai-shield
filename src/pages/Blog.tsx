@@ -82,7 +82,7 @@ const Blog = () => {
     },
     {
       id: 8,
-      title: 'Implementing ISO 42001: An Early Adopter's Guide',
+      title: 'Implementing ISO 42001: An Early Adopter\'s Guide',
       excerpt: 'Practical steps for implementing the new AI management system standard in your organization.',
       category: 'AI Governance',
       date: 'May 3, 2025',
