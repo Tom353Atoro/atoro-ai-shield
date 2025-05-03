@@ -1,90 +1,28 @@
 
-import React, { useState } from 'react';
-import { cn } from '@/lib/utils';
-import { Skeleton } from '@/components/ui/skeleton';
-import { useIsMobile } from '@/hooks/use-mobile';
+import React from 'react';
 
-// Define the type for each logo item
-interface LogoItem {
-  id: string | number;
-  name: string;
-  imagePath: string;
-  alt?: string;
-  width?: number;
-}
-
-// Props for the LogoGrid component
-interface LogoGridProps {
-  logos: LogoItem[];
-  title?: string;
-  description?: string;
-  className?: string;
-}
-
-/**
- * LogoGrid Component
- * Displays a responsive grid of logos
- * 
- * @param logos - Array of logo objects with id, name, and image path
- * @param title - Optional title for the logo section
- * @param description - Optional description text
- * @param className - Optional additional CSS classes
- */
-const LogoGrid: React.FC<LogoGridProps> = ({
-  logos,
-  title,
-  description,
-  className = ''
-}) => {
-  const [loadedImages, setLoadedImages] = useState<{[key: string]: boolean}>({});
-  const isMobile = useIsMobile();
-
-  const handleImageLoad = (id: string | number) => {
-    setLoadedImages(prev => ({
-      ...prev,
-      [id.toString()]: true
-    }));
-  };
+const LogoGrid: React.FC = () => {
+  // Placeholder logos, replace with actual client logos
+  const logos = [
+    { id: 1, src: "/lovable-uploads/5c1f26c2-fb1a-41c2-9088-86b87a45c090.png", alt: "Client Logo 1" },
+    { id: 2, src: "/lovable-uploads/92f8da33-0880-48be-815f-a45d074582db.png", alt: "Client Logo 2" },
+    { id: 3, src: "/lovable-uploads/4d060603-ad02-4190-9beb-cdb340b18bbc.png", alt: "Client Logo 3" },
+    { id: 4, src: "/lovable-uploads/67e0fd6c-3db8-4cd6-a32b-c0841aa5535e.png", alt: "Client Logo 4" },
+    { id: 5, src: "/lovable-uploads/9b3556f3-0651-4ed7-b0d6-42ede4d99feb.png", alt: "Client Logo 5" }
+  ];
 
   return (
-    <section className={cn('py-12', className)}>
-      <div className="container mx-auto px-4">
-        {/* Title and description */}
-        {(title || description) && (
-          <div className="text-center mb-10">
-            {title && <h2 className="text-3xl font-bold mb-4">{title}</h2>}
-            {description && <p className="text-lg text-gray-600 max-w-3xl mx-auto">{description}</p>}
-          </div>
-        )}
-        
-        {/* Logo grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {logos.map((logo) => (
-            <div 
-              key={logo.id} 
-              className="flex items-center justify-center h-40 bg-white p-8 rounded-lg border border-gray-100 shadow-sm"
-            >
-              {!loadedImages[logo.id.toString()] && (
-                <Skeleton className="w-full h-24 rounded-md" />
-              )}
-              <img
-                src={logo.imagePath}
-                alt={logo.alt || `${logo.name} logo`}
-                className={cn(
-                  "object-contain transition-opacity duration-300",
-                  loadedImages[logo.id.toString()] ? "opacity-100" : "opacity-0"
-                )}
-                style={{ 
-                  width: logo.width ? `${isMobile ? logo.width * 0.8 : logo.width * 1.5}px` : 'auto',
-                  maxHeight: isMobile ? '80px' : '110px'
-                }}
-                onLoad={() => handleImageLoad(logo.id)}
-              />
-            </div>
-          ))}
+    <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+      {logos.map((logo) => (
+        <div key={logo.id} className="flex items-center justify-center">
+          <img 
+            src={logo.src} 
+            alt={logo.alt}
+            className="h-10 md:h-12 opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+          />
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
   );
 };
 
