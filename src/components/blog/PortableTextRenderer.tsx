@@ -1,10 +1,10 @@
 
 import React from 'react';
-import { PortableText } from '@portabletext/react';
+import { PortableText, PortableTextReactComponents } from '@portabletext/react';
 import { urlFor } from '@/lib/sanity';
 
 // Define custom components for the PortableText renderer
-const components = {
+const components: Partial<PortableTextReactComponents> = {
   types: {
     image: ({ value }: { value: any }) => {
       return (
@@ -31,11 +31,11 @@ const components = {
     },
   },
   marks: {
-    link: ({ children, value }: { children: React.ReactNode; value: any }) => {
-      const rel = value.href.startsWith('/') ? undefined : 'noreferrer noopener';
+    link: ({ children, value, ...rest }: any) => {
+      const rel = !value?.href?.startsWith('/') ? 'noreferrer noopener' : undefined;
       return (
         <a 
-          href={value.href} 
+          href={value?.href} 
           rel={rel} 
           className="text-atoro-blue hover:text-atoro-teal underline"
         >
