@@ -6,13 +6,14 @@ import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/Container';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { ShieldCheck, LockKeyhole, Brain, Bug } from 'lucide-react';
+import { ShieldCheck, LockKeyhole, Brain, Bug, AlertTriangle, RefreshCw } from 'lucide-react';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import { getAllBlogPosts, getBlogCategories, getBlogPostsByCategory, BlogPost } from '@/lib/api/blogService';
 import { urlFor, checkSanityConnection } from '@/lib/sanity';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,11 +22,13 @@ const Blog = () => {
     checked: false,
     connected: false
   });
+  const [isRetrying, setIsRetrying] = useState(false);
   const postsPerPage = 6;
 
   // Check Sanity connection on component mount
   useEffect(() => {
     const checkConnection = async () => {
+      setIsRetrying(true);
       const result = await checkSanityConnection();
       setConnectionStatus({
         checked: true,
@@ -34,8 +37,12 @@ const Blog = () => {
       });
       
       if (!result.success) {
-        toast.error("Could not connect to Sanity. Check console for details.");
+        toast.error("Could not connect to Sanity", {
+          description: "Please check your project configuration and try again.",
+          duration: 5000,
+        });
       }
+      setIsRetrying(false);
     };
     
     checkConnection();
@@ -45,22 +52,26 @@ const Blog = () => {
   const { 
     data: categories = [], 
     isLoading: categoriesLoading,
-    error: categoriesError
+    error: categoriesError,
+    refetch: refetchCategories
   } = useQuery({
     queryKey: ['blogCategories'],
     queryFn: getBlogCategories,
+    retry: 2,
+    retryDelay: 1000,
+    enabled: connectionStatus.connected || !connectionStatus.checked
   });
 
   // Success handler for categories
   useEffect(() => {
     if (categories.length > 0) {
       console.log("Categories loaded:", categories);
-    } else if (!categoriesLoading && categories.length === 0) {
+    } else if (!categoriesLoading && categories.length === 0 && connectionStatus.connected) {
       toast.info("No blog categories found in Sanity.", {
         description: "Make sure you have created blog categories in your Sanity studio."
       });
     }
-  }, [categories, categoriesLoading]);
+  }, [categories, categoriesLoading, connectionStatus.connected]);
 
   // Error handler for categories
   useEffect(() => {
@@ -74,12 +85,16 @@ const Blog = () => {
   const { 
     data: blogPosts = [], 
     isLoading: postsLoading,
-    error: postsError
+    error: postsError,
+    refetch: refetchPosts
   } = useQuery({
     queryKey: ['blogPosts', currentCategory],
     queryFn: () => currentCategory === "all" 
       ? getAllBlogPosts() 
       : getBlogPostsByCategory(currentCategory),
+    retry: 2,
+    retryDelay: 1000,
+    enabled: connectionStatus.connected || !connectionStatus.checked
   });
 
   // Success handler for posts
@@ -87,11 +102,11 @@ const Blog = () => {
     if (!postsLoading) {
       console.log(`Posts loaded for category "${currentCategory}":`, blogPosts);
       // If no posts are found, we'll show a message
-      if (blogPosts.length === 0) {
+      if (blogPosts.length === 0 && connectionStatus.connected) {
         toast.info(`No posts found for ${currentCategory === "all" ? "any category" : "this category"}.`);
       }
     }
-  }, [blogPosts, postsLoading, currentCategory]);
+  }, [blogPosts, postsLoading, currentCategory, connectionStatus.connected]);
 
   // Error handler for posts
   useEffect(() => {
@@ -101,13 +116,32 @@ const Blog = () => {
     }
   }, [postsError]);
 
+  const handleRetry = async () => {
+    setIsRetrying(true);
+    const result = await checkSanityConnection();
+    setConnectionStatus({
+      checked: true,
+      connected: result.success,
+      error: result.success ? undefined : result.error
+    });
+    
+    if (result.success) {
+      toast.success("Connection to Sanity restored!");
+      refetchCategories();
+      refetchPosts();
+    } else {
+      toast.error("Still unable to connect to Sanity");
+    }
+    setIsRetrying(false);
+  };
+
   // Calculate pagination
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = blogPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(blogPosts.length / postsPerPage);
 
-  const isLoading = categoriesLoading || postsLoading;
+  const isLoading = categoriesLoading || postsLoading || isRetrying;
   const hasError = categoriesError || postsError;
 
   const getCategoryIcon = (categoryName: string) => {
@@ -168,21 +202,44 @@ const Blog = () => {
 
   // Render connection status debugging UI if there are issues
   const renderConnectionStatus = () => {
-    if (!connectionStatus.checked) {
+    if (!connectionStatus.checked || isRetrying) {
       return <div className="text-center py-4">Checking Sanity connection...</div>;
     }
 
     if (!connectionStatus.connected) {
       return (
-        <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
-          <h3 className="text-red-800 font-medium mb-2">Sanity Connection Error</h3>
-          <p className="text-red-700 mb-3">
-            Could not connect to your Sanity project. Please check your project configuration.
-          </p>
-          <Button variant="outline" onClick={() => window.location.reload()}>
-            Try Again
-          </Button>
-        </div>
+        <Alert variant="destructive" className="mb-6">
+          <AlertTriangle className="h-5 w-5" />
+          <AlertTitle>Sanity Connection Error</AlertTitle>
+          <AlertDescription>
+            <p className="mb-3">
+              Could not connect to your Sanity project. Please check your project configuration.
+            </p>
+            <div className="space-y-2">
+              <p><strong>Project ID:</strong> 6fq80c4a</p>
+              <p><strong>Dataset:</strong> production</p>
+              <p><strong>API Version:</strong> 2023-05-03</p>
+            </div>
+            <Button 
+              variant="outline" 
+              onClick={handleRetry} 
+              className="mt-4"
+              disabled={isRetrying}
+            >
+              {isRetrying ? (
+                <>
+                  <RefreshCw className="mr-2 h-4 w-4 animate-spin" />
+                  Connecting...
+                </>
+              ) : (
+                <>
+                  <RefreshCw className="mr-2 h-4 w-4" />
+                  Try Again
+                </>
+              )}
+            </Button>
+          </AlertDescription>
+        </Alert>
       );
     }
 
@@ -201,7 +258,12 @@ const Blog = () => {
             <p className="text-lg text-gray-700 mb-4">
               Stay informed with the latest trends, best practices, and expert analysis in security, privacy, and AI governance.
             </p>
-            {!isLoading && blogPosts.length === 0 && (
+            {!isLoading && !connectionStatus.connected && (
+              <p className="text-amber-600 mt-4">
+                Unable to connect to Sanity content management system. Please check your configuration.
+              </p>
+            )}
+            {!isLoading && connectionStatus.connected && blogPosts.length === 0 && (
               <p className="text-amber-600 mt-4">
                 No blog posts found. Please create content in your Sanity studio.
               </p>
@@ -215,13 +277,14 @@ const Blog = () => {
         <Container>
           {renderConnectionStatus()}
 
-          {hasError && (
-            <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
-              <h3 className="text-red-800 font-medium">Error Loading Blog Content</h3>
-              <p className="text-red-700">
+          {hasError && connectionStatus.connected && (
+            <Alert variant="destructive" className="mb-6">
+              <AlertTriangle className="h-5 w-5" />
+              <AlertTitle>Error Loading Blog Content</AlertTitle>
+              <AlertDescription>
                 There was a problem loading blog content from Sanity. Please check your console for more details.
-              </p>
-            </div>
+              </AlertDescription>
+            </Alert>
           )}
 
           <Tabs value={currentCategory} onValueChange={setCurrentCategory} className="mb-12">
@@ -255,7 +318,7 @@ const Blog = () => {
                     </Card>
                   ))}
                 </div>
-              ) : currentPosts.length > 0 ? (
+              ) : connectionStatus.connected && currentPosts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {currentPosts.map(renderBlogCard)}
                 </div>
@@ -263,7 +326,9 @@ const Blog = () => {
                 <div className="text-center py-12">
                   <h3 className="text-xl font-bold mb-2">No posts found</h3>
                   <p className="text-gray-600">
-                    There are no blog posts available for this category at the moment.
+                    {connectionStatus.connected ? 
+                      "There are no blog posts available for this category at the moment." : 
+                      "Unable to connect to Sanity. Please check your configuration."}
                   </p>
                 </div>
               )}

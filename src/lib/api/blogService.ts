@@ -1,5 +1,5 @@
 
-import { client } from '../sanity';
+import { client, safeQuery } from '../sanity';
 
 // Types for our blog posts
 export interface BlogPost {
@@ -28,7 +28,7 @@ export interface BlogPostDetail extends BlogPost {
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
   try {
     console.log("Fetching all blog posts...");
-    const posts = await client.fetch(`
+    const result = await safeQuery(`
       *[_type == "blogPost"] | order(publishedAt desc) {
         _id,
         title,
@@ -39,11 +39,17 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
         "category": categories[0]->{title, _id}
       }
     `);
-    console.log(`Found ${posts.length} blog posts`);
-    return posts;
+    
+    if (!result.success) {
+      console.error("Error in getAllBlogPosts:", result.error);
+      return [];
+    }
+    
+    console.log(`Found ${result.data.length} blog posts`);
+    return result.data;
   } catch (error) {
     console.error("Error fetching all blog posts:", error);
-    throw error;
+    return [];
   }
 }
 
@@ -51,7 +57,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
 export async function getBlogPostsByCategory(categoryId: string): Promise<BlogPost[]> {
   try {
     console.log(`Fetching blog posts for category ID: ${categoryId}`);
-    const posts = await client.fetch(`
+    const result = await safeQuery(`
       *[_type == "blogPost" && $categoryId in categories[]._ref] | order(publishedAt desc) {
         _id,
         title,
@@ -62,19 +68,25 @@ export async function getBlogPostsByCategory(categoryId: string): Promise<BlogPo
         "category": categories[0]->{title, _id}
       }
     `, { categoryId });
-    console.log(`Found ${posts.length} blog posts for category ID: ${categoryId}`);
-    return posts;
+    
+    if (!result.success) {
+      console.error(`Error in getBlogPostsByCategory for ID: ${categoryId}`, result.error);
+      return [];
+    }
+    
+    console.log(`Found ${result.data.length} blog posts for category ID: ${categoryId}`);
+    return result.data;
   } catch (error) {
     console.error(`Error fetching blog posts for category ID: ${categoryId}`, error);
-    throw error;
+    return [];
   }
 }
 
 // Get a single blog post by slug
-export async function getBlogPostBySlug(slug: string): Promise<BlogPostDetail> {
+export async function getBlogPostBySlug(slug: string): Promise<BlogPostDetail | null> {
   try {
     console.log(`Fetching blog post with slug: ${slug}`);
-    const result = await client.fetch(`
+    const result = await safeQuery(`
       *[_type == "blogPost" && slug.current == $slug][0] {
         _id,
         title,
@@ -88,14 +100,20 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPostDetail> {
       }
     `, { slug });
     
-    if (!result) {
-      throw new Error(`Blog post with slug "${slug}" not found`);
+    if (!result.success) {
+      console.error(`Error in getBlogPostBySlug for slug: ${slug}`, result.error);
+      return null;
     }
     
-    return result;
+    if (!result.data) {
+      console.log(`Blog post with slug "${slug}" not found`);
+      return null;
+    }
+    
+    return result.data;
   } catch (error) {
     console.error(`Error fetching blog post with slug: ${slug}`, error);
-    throw error;
+    return null;
   }
 }
 
@@ -103,7 +121,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPostDetail> {
 export async function getRecentBlogPosts(limit: number = 3): Promise<BlogPost[]> {
   try {
     console.log(`Fetching ${limit} recent blog posts...`);
-    const posts = await client.fetch(`
+    const result = await safeQuery(`
       *[_type == "blogPost"] | order(publishedAt desc)[0...$limit] {
         _id,
         title,
@@ -114,11 +132,17 @@ export async function getRecentBlogPosts(limit: number = 3): Promise<BlogPost[]>
         "category": categories[0]->{title, _id}
       }
     `, { limit: limit - 1 });
-    console.log(`Found ${posts.length} recent blog posts`);
-    return posts;
+    
+    if (!result.success) {
+      console.error("Error in getRecentBlogPosts:", result.error);
+      return [];
+    }
+    
+    console.log(`Found ${result.data.length} recent blog posts`);
+    return result.data;
   } catch (error) {
     console.error("Error fetching recent blog posts:", error);
-    throw error;
+    return [];
   }
 }
 
@@ -126,17 +150,23 @@ export async function getRecentBlogPosts(limit: number = 3): Promise<BlogPost[]>
 export async function getBlogCategories() {
   try {
     console.log("Fetching all blog categories...");
-    const categories = await client.fetch(`
+    const result = await safeQuery(`
       *[_type == "category"] {
         _id,
         title,
         description
       }
     `);
-    console.log(`Found ${categories.length} blog categories:`, categories);
-    return categories;
+    
+    if (!result.success) {
+      console.error("Error in getBlogCategories:", result.error);
+      return [];
+    }
+    
+    console.log(`Found ${result.data.length} blog categories:`, result.data);
+    return result.data;
   } catch (error) {
     console.error("Error fetching blog categories:", error);
-    throw error;
+    return [];
   }
 }
