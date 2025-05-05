@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -48,20 +49,26 @@ const Blog = () => {
   } = useQuery({
     queryKey: ['blogCategories'],
     queryFn: getBlogCategories,
-    onSuccess: (data) => {
-      console.log("Categories loaded:", data);
-      // If no categories are found, we'll show a message
-      if (data.length === 0) {
-        toast.info("No blog categories found in Sanity.", {
-          description: "Make sure you have created blog categories in your Sanity studio."
-        });
-      }
-    },
-    onError: (error) => {
-      console.error("Error fetching categories:", error);
+  });
+
+  // Success handler for categories
+  useEffect(() => {
+    if (categories.length > 0) {
+      console.log("Categories loaded:", categories);
+    } else if (!categoriesLoading && categories.length === 0) {
+      toast.info("No blog categories found in Sanity.", {
+        description: "Make sure you have created blog categories in your Sanity studio."
+      });
+    }
+  }, [categories, categoriesLoading]);
+
+  // Error handler for categories
+  useEffect(() => {
+    if (categoriesError) {
+      console.error("Error fetching categories:", categoriesError);
       toast.error("Failed to load blog categories");
     }
-  });
+  }, [categoriesError]);
 
   // Fetch blog posts based on selected category
   const { 
@@ -73,18 +80,26 @@ const Blog = () => {
     queryFn: () => currentCategory === "all" 
       ? getAllBlogPosts() 
       : getBlogPostsByCategory(currentCategory),
-    onSuccess: (data) => {
-      console.log(`Posts loaded for category "${currentCategory}":`, data);
+  });
+
+  // Success handler for posts
+  useEffect(() => {
+    if (!postsLoading) {
+      console.log(`Posts loaded for category "${currentCategory}":`, blogPosts);
       // If no posts are found, we'll show a message
-      if (data.length === 0) {
+      if (blogPosts.length === 0) {
         toast.info(`No posts found for ${currentCategory === "all" ? "any category" : "this category"}.`);
       }
-    },
-    onError: (error) => {
-      console.error("Error fetching posts:", error);
+    }
+  }, [blogPosts, postsLoading, currentCategory]);
+
+  // Error handler for posts
+  useEffect(() => {
+    if (postsError) {
+      console.error("Error fetching posts:", postsError);
       toast.error("Failed to load blog posts");
     }
-  });
+  }, [postsError]);
 
   // Calculate pagination
   const indexOfLastPost = currentPage * postsPerPage;

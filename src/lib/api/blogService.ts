@@ -36,7 +36,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
         excerpt,
         mainImage,
         publishedAt,
-        'category': category->{title, _id}
+        "category": categories[0]->{title, _id}
       }
     `);
     console.log(`Found ${posts.length} blog posts`);
@@ -52,14 +52,14 @@ export async function getBlogPostsByCategory(categoryId: string): Promise<BlogPo
   try {
     console.log(`Fetching blog posts for category ID: ${categoryId}`);
     const posts = await client.fetch(`
-      *[_type == "blogPost" && category._ref == $categoryId] | order(publishedAt desc) {
+      *[_type == "blogPost" && $categoryId in categories[]._ref] | order(publishedAt desc) {
         _id,
         title,
         slug,
         excerpt,
         mainImage,
         publishedAt,
-        'category': category->{title, _id}
+        "category": categories[0]->{title, _id}
       }
     `, { categoryId });
     console.log(`Found ${posts.length} blog posts for category ID: ${categoryId}`);
@@ -83,8 +83,8 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPostDetail> {
         mainImage,
         body,
         publishedAt,
-        'category': category->{title, _id},
-        'author': author->{name, image}
+        "category": categories[0]->{title, _id},
+        "author": author->{name, image}
       }
     `, { slug });
     
@@ -111,7 +111,7 @@ export async function getRecentBlogPosts(limit: number = 3): Promise<BlogPost[]>
         excerpt,
         mainImage,
         publishedAt,
-        'category': category->{title, _id}
+        "category": categories[0]->{title, _id}
       }
     `, { limit: limit - 1 });
     console.log(`Found ${posts.length} recent blog posts`);
@@ -127,9 +127,10 @@ export async function getBlogCategories() {
   try {
     console.log("Fetching all blog categories...");
     const categories = await client.fetch(`
-      *[_type == "blogCategory"] {
+      *[_type == "category"] {
         _id,
-        title
+        title,
+        description
       }
     `);
     console.log(`Found ${categories.length} blog categories:`, categories);

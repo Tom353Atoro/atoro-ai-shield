@@ -22,8 +22,8 @@ export const urlFor = (source: SanityImageSource) => {
 // Helper function to check if Sanity connection is working
 export const checkSanityConnection = async () => {
   try {
-    // This query just fetches a single document to test the connection
-    const result = await client.fetch(`*[_type == "blogCategory"][0]`);
+    // This query just fetches a single category to test the connection
+    const result = await client.fetch(`*[_type == "category"][0]`);
     return { success: true, data: result };
   } catch (error) {
     console.error("Sanity connection error:", error);
