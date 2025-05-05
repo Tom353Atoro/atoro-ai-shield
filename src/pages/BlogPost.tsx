@@ -9,6 +9,7 @@ import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ArrowLeft } from 'lucide-react';
+import PortableTextRenderer from '@/components/blog/PortableTextRenderer';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -147,16 +148,15 @@ const BlogPost = () => {
 
         {/* Content */}
         <Container className="py-12">
-          <div className="max-w-3xl mx-auto prose prose-lg">
-            {/* For now, render the excerpt as a placeholder */}
-            {/* In a real implementation, you would use a Portable Text renderer for post.body */}
-            <p className="lead">{post.excerpt}</p>
-            
-            <p className="text-gray-600">
-              This is placeholder content. In a real implementation, you would render the full content of the blog post 
-              from the Sanity Portable Text format. You'll need to install and use the @portabletext/react package to 
-              properly render the structured content from Sanity.
-            </p>
+          <div className="max-w-3xl mx-auto">
+            {/* Instead of placeholder content, we now render the actual blog post content */}
+            {post.body ? (
+              <PortableTextRenderer content={post.body} />
+            ) : (
+              <p className="text-gray-600">
+                This post has no content.
+              </p>
+            )}
           </div>
         </Container>
       </article>

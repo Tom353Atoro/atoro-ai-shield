@@ -29,7 +29,7 @@ export interface Tool extends Resource {
   fileType: string;
   fileSize: string;
   downloadFile: any; // Sanity file
-  category: string;
+  // Fixed type error: Changed 'category' from string to match Resource interface
 }
 
 export interface Webinar extends Resource {
