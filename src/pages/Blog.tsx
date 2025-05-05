@@ -1,140 +1,89 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/Container';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { ShieldCheck, LockKeyhole, Brain } from 'lucide-react';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
+import { getAllBlogPosts, getBlogCategories, getBlogPostsByCategory, BlogPost } from '@/lib/api/blogService';
+import { urlFor } from '@/lib/sanity';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const Blog = () => {
-  // Sample blog posts - in a real app, these would come from a CMS or API
-  const securityPosts = [
-    {
-      id: 1,
-      title: 'SOC 2 Compliance: A Step-by-Step Guide',
-      excerpt: 'Learn how to prepare for and successfully achieve SOC 2 compliance for your SaaS product.',
-      category: 'Security',
-      date: 'May 12, 2025',
-      image: '/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg',
-      slug: '/blog/security/soc2-compliance-guide',
-    },
-    {
-      id: 2,
-      title: 'Cloud Security Best Practices for Startups',
-      excerpt: 'Essential security controls every startup should implement to protect their cloud infrastructure.',
-      category: 'Security',
-      date: 'May 5, 2025',
-      image: '/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg',
-      slug: '/blog/security/cloud-security-startups',
-    },
-    {
-      id: 3,
-      title: 'How to Conduct an Effective Security Risk Assessment',
-      excerpt: 'A comprehensive approach to identifying and mitigating security risks in your organization.',
-      category: 'Security',
-      date: 'Apr 28, 2025',
-      image: '/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg',
-      slug: '/blog/security/security-risk-assessment',
-    },
-  ];
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentCategory, setCurrentCategory] = useState<string>("all");
+  const postsPerPage = 6;
 
-  const privacyPosts = [
-    {
-      id: 4,
-      title: 'GDPR Fines Hit Record High: 5 Lessons for SaaS Companies',
-      excerpt: 'Analyzing recent enforcement actions and extracting practical takeaways for growing tech companies.',
-      category: 'Privacy',
-      date: 'May 10, 2025',
-      image: '/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg',
-      slug: '/blog/privacy/gdpr-fines-lessons',
-    },
-    {
-      id: 5,
-      title: 'Building a Privacy-First Culture in Your Organization',
-      excerpt: 'How to embed privacy considerations into your company DNA from day one.',
-      category: 'Privacy',
-      date: 'May 2, 2025',
-      image: '/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg',
-      slug: '/blog/privacy/privacy-first-culture',
-    },
-    {
-      id: 6,
-      title: 'Data Mapping for Privacy Compliance: A Practical Guide',
-      excerpt: 'Step-by-step approach to creating comprehensive data maps that satisfy regulatory requirements.',
-      category: 'Privacy',
-      date: 'Apr 25, 2025',
-      image: '/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg',
-      slug: '/blog/privacy/data-mapping-guide',
-    },
-  ];
+  // Fetch all blog categories
+  const { data: categories = [] } = useQuery({
+    queryKey: ['blogCategories'],
+    queryFn: getBlogCategories
+  });
 
-  const aiGovernancePosts = [
-    {
-      id: 7,
-      title: 'The Future of AI Security Compliance',
-      excerpt: 'What SaaS founders need to know about navigating the evolving landscape of AI regulations.',
-      category: 'AI Governance',
-      date: 'May 8, 2025',
-      image: '/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg',
-      slug: '/blog/ai-governance/ai-security-compliance',
-    },
-    {
-      id: 8,
-      title: 'Implementing ISO 42001: An Early Adopter\'s Guide',
-      excerpt: 'Practical steps for implementing the new AI management system standard in your organization.',
-      category: 'AI Governance',
-      date: 'May 3, 2025',
-      image: '/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg',
-      slug: '/blog/ai-governance/iso-42001-guide',
-    },
-    {
-      id: 9,
-      title: 'Ethical AI Development: Frameworks and Best Practices',
-      excerpt: 'How to ensure your AI solutions are developed with ethical considerations at their core.',
-      category: 'AI Governance',
-      date: 'Apr 20, 2025',
-      image: '/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg',
-      slug: '/blog/ai-governance/ethical-ai-development',
-    },
-  ];
+  // Fetch blog posts based on selected category
+  const { data: blogPosts = [], isLoading } = useQuery({
+    queryKey: ['blogPosts', currentCategory],
+    queryFn: () => currentCategory === "all" 
+      ? getAllBlogPosts() 
+      : getBlogPostsByCategory(currentCategory),
+  });
 
-  const renderBlogCard = (post: any) => {
-    const getCategoryIcon = () => {
-      switch (post.category) {
-        case 'Security':
-          return <ShieldCheck className="text-atoro-blue" />;
-        case 'Privacy':
-          return <LockKeyhole className="text-atoro-green" />;
-        case 'AI Governance':
-          return <Brain className="text-atoro-teal" />;
-        default:
-          return null;
-      }
-    };
+  // Calculate pagination
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = blogPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(blogPosts.length / postsPerPage);
 
+  const getCategoryIcon = (categoryName: string) => {
+    switch (categoryName.toLowerCase()) {
+      case 'security':
+        return <ShieldCheck className="text-atoro-blue" />;
+      case 'privacy':
+        return <LockKeyhole className="text-atoro-green" />;
+      case 'ai governance':
+        return <Brain className="text-atoro-teal" />;
+      default:
+        return null;
+    }
+  };
+
+  const renderBlogCard = (post: BlogPost) => {
     return (
-      <Card key={post.id} className="overflow-hidden transition-all duration-300 hover:shadow-lg h-full flex flex-col">
+      <Card key={post._id} className="overflow-hidden transition-all duration-300 hover:shadow-lg h-full flex flex-col">
         <div className="relative h-48 overflow-hidden">
-          <img 
-            src={post.image} 
-            alt={post.title} 
-            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" 
-          />
+          {post.mainImage ? (
+            <img 
+              src={urlFor(post.mainImage).width(400).height(200).url()} 
+              alt={post.title} 
+              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" 
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+              No image
+            </div>
+          )}
           <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1 text-sm font-medium">
-            {getCategoryIcon()}
-            {post.category}
+            {getCategoryIcon(post.category?.title || '')}
+            {post.category?.title || 'Uncategorized'}
           </div>
         </div>
         <CardContent className="pt-6 flex-grow">
-          <div className="text-sm text-gray-500 mb-2">{post.date}</div>
+          <div className="text-sm text-gray-500 mb-2">
+            {new Date(post.publishedAt).toLocaleDateString('en-US', { 
+              year: 'numeric', 
+              month: 'long', 
+              day: 'numeric'
+            })}
+          </div>
           <h3 className="text-xl font-bold mb-2 line-clamp-2">{post.title}</h3>
           <p className="text-gray-600 line-clamp-3">{post.excerpt}</p>
         </CardContent>
         <CardFooter className="pt-0">
           <Link 
-            to={post.slug} 
+            to={`/blog/${post.slug.current}`} 
             className="text-atoro-teal font-medium hover:text-atoro-blue flex items-center gap-1"
           >
             Read more →
@@ -163,64 +112,83 @@ const Blog = () => {
       {/* Blog Posts Section */}
       <section className="py-16">
         <Container>
-          <Tabs defaultValue="all" className="mb-12">
+          <Tabs value={currentCategory} onValueChange={setCurrentCategory} className="mb-12">
             <div className="flex justify-center">
               <TabsList className="grid grid-cols-4 w-fit">
                 <TabsTrigger value="all">All Topics</TabsTrigger>
-                <TabsTrigger value="security">Security</TabsTrigger>
-                <TabsTrigger value="privacy">Privacy</TabsTrigger>
-                <TabsTrigger value="ai">AI Governance</TabsTrigger>
+                {categories.map((category: any) => (
+                  <TabsTrigger key={category._id} value={category._id}>{category.title}</TabsTrigger>
+                ))}
               </TabsList>
             </div>
 
-            <TabsContent value="all" className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {[...securityPosts, ...privacyPosts, ...aiGovernancePosts]
-                  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-                  .slice(0, 6)
-                  .map(renderBlogCard)}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="security" className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {securityPosts.map(renderBlogCard)}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="privacy" className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {privacyPosts.map(renderBlogCard)}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="ai" className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {aiGovernancePosts.map(renderBlogCard)}
-              </div>
+            <TabsContent value={currentCategory} className="mt-8">
+              {isLoading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {Array(6).fill(0).map((_, i) => (
+                    <Card key={i} className="overflow-hidden">
+                      <div className="h-48">
+                        <Skeleton className="h-full w-full" />
+                      </div>
+                      <CardContent className="pt-6">
+                        <Skeleton className="h-4 w-1/3 mb-2" />
+                        <Skeleton className="h-6 w-full mb-2" />
+                        <Skeleton className="h-4 w-full mb-1" />
+                        <Skeleton className="h-4 w-full mb-1" />
+                        <Skeleton className="h-4 w-2/3" />
+                      </CardContent>
+                      <CardFooter className="pt-0">
+                        <Skeleton className="h-4 w-24" />
+                      </CardFooter>
+                    </Card>
+                  ))}
+                </div>
+              ) : currentPosts.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {currentPosts.map(renderBlogCard)}
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <h3 className="text-xl font-bold mb-2">No posts found</h3>
+                  <p className="text-gray-600">
+                    There are no blog posts available for this category at the moment.
+                  </p>
+                </div>
+              )}
             </TabsContent>
           </Tabs>
 
           {/* Pagination */}
-          <Pagination className="mt-12">
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious href="#" />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#" isActive>1</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">2</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">3</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext href="#" />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+          {totalPages > 1 && (
+            <Pagination className="mt-12">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious 
+                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                    className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                  />
+                </PaginationItem>
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <PaginationItem key={page}>
+                    <PaginationLink 
+                      onClick={() => setCurrentPage(page)}
+                      isActive={currentPage === page}
+                    >
+                      {page}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+
+                <PaginationItem>
+                  <PaginationNext 
+                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                    className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          )}
         </Container>
       </section>
     </Layout>
