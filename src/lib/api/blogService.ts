@@ -26,74 +26,116 @@ export interface BlogPostDetail extends BlogPost {
 
 // Get all blog posts with basic information
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
-  return client.fetch(`
-    *[_type == "blogPost"] | order(publishedAt desc) {
-      _id,
-      title,
-      slug,
-      excerpt,
-      mainImage,
-      publishedAt,
-      'category': category->{title, _id}
-    }
-  `);
+  try {
+    console.log("Fetching all blog posts...");
+    const posts = await client.fetch(`
+      *[_type == "blogPost"] | order(publishedAt desc) {
+        _id,
+        title,
+        slug,
+        excerpt,
+        mainImage,
+        publishedAt,
+        'category': category->{title, _id}
+      }
+    `);
+    console.log(`Found ${posts.length} blog posts`);
+    return posts;
+  } catch (error) {
+    console.error("Error fetching all blog posts:", error);
+    throw error;
+  }
 }
 
 // Get blog posts by category
 export async function getBlogPostsByCategory(categoryId: string): Promise<BlogPost[]> {
-  return client.fetch(`
-    *[_type == "blogPost" && category._ref == $categoryId] | order(publishedAt desc) {
-      _id,
-      title,
-      slug,
-      excerpt,
-      mainImage,
-      publishedAt,
-      'category': category->{title, _id}
-    }
-  `, { categoryId });
+  try {
+    console.log(`Fetching blog posts for category ID: ${categoryId}`);
+    const posts = await client.fetch(`
+      *[_type == "blogPost" && category._ref == $categoryId] | order(publishedAt desc) {
+        _id,
+        title,
+        slug,
+        excerpt,
+        mainImage,
+        publishedAt,
+        'category': category->{title, _id}
+      }
+    `, { categoryId });
+    console.log(`Found ${posts.length} blog posts for category ID: ${categoryId}`);
+    return posts;
+  } catch (error) {
+    console.error(`Error fetching blog posts for category ID: ${categoryId}`, error);
+    throw error;
+  }
 }
 
 // Get a single blog post by slug
 export async function getBlogPostBySlug(slug: string): Promise<BlogPostDetail> {
-  const result = await client.fetch(`
-    *[_type == "blogPost" && slug.current == $slug][0] {
-      _id,
-      title,
-      slug,
-      excerpt,
-      mainImage,
-      body,
-      publishedAt,
-      'category': category->{title, _id},
-      'author': author->{name, image}
+  try {
+    console.log(`Fetching blog post with slug: ${slug}`);
+    const result = await client.fetch(`
+      *[_type == "blogPost" && slug.current == $slug][0] {
+        _id,
+        title,
+        slug,
+        excerpt,
+        mainImage,
+        body,
+        publishedAt,
+        'category': category->{title, _id},
+        'author': author->{name, image}
+      }
+    `, { slug });
+    
+    if (!result) {
+      throw new Error(`Blog post with slug "${slug}" not found`);
     }
-  `, { slug });
-  
-  return result;
+    
+    return result;
+  } catch (error) {
+    console.error(`Error fetching blog post with slug: ${slug}`, error);
+    throw error;
+  }
 }
 
 // Get recent blog posts for homepage
 export async function getRecentBlogPosts(limit: number = 3): Promise<BlogPost[]> {
-  return client.fetch(`
-    *[_type == "blogPost"] | order(publishedAt desc)[0...$limit] {
-      _id,
-      title,
-      slug,
-      excerpt,
-      mainImage,
-      publishedAt,
-      'category': category->{title, _id}
-    }
-  `, { limit: limit - 1 });
+  try {
+    console.log(`Fetching ${limit} recent blog posts...`);
+    const posts = await client.fetch(`
+      *[_type == "blogPost"] | order(publishedAt desc)[0...$limit] {
+        _id,
+        title,
+        slug,
+        excerpt,
+        mainImage,
+        publishedAt,
+        'category': category->{title, _id}
+      }
+    `, { limit: limit - 1 });
+    console.log(`Found ${posts.length} recent blog posts`);
+    return posts;
+  } catch (error) {
+    console.error("Error fetching recent blog posts:", error);
+    throw error;
+  }
 }
 
 // Get blog categories
 export async function getBlogCategories() {
-  return client.fetch(`
-    *[_type == "blogCategory"] {
-      _id,
-      title
-    }
-  `);
+  try {
+    console.log("Fetching all blog categories...");
+    const categories = await client.fetch(`
+      *[_type == "blogCategory"] {
+        _id,
+        title
+      }
+    `);
+    console.log(`Found ${categories.length} blog categories:`, categories);
+    return categories;
+  } catch (error) {
+    console.error("Error fetching blog categories:", error);
+    throw error;
+  }
 }

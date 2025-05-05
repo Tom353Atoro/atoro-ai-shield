@@ -1,34 +1,89 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/Container';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { ShieldCheck, LockKeyhole, Brain } from 'lucide-react';
+import { ShieldCheck, LockKeyhole, Brain, Bug } from 'lucide-react';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import { getAllBlogPosts, getBlogCategories, getBlogPostsByCategory, BlogPost } from '@/lib/api/blogService';
-import { urlFor } from '@/lib/sanity';
+import { urlFor, checkSanityConnection } from '@/lib/sanity';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentCategory, setCurrentCategory] = useState<string>("all");
+  const [connectionStatus, setConnectionStatus] = useState<{ checked: boolean, connected: boolean, error?: any }>({
+    checked: false,
+    connected: false
+  });
   const postsPerPage = 6;
 
+  // Check Sanity connection on component mount
+  useEffect(() => {
+    const checkConnection = async () => {
+      const result = await checkSanityConnection();
+      setConnectionStatus({
+        checked: true,
+        connected: result.success,
+        error: result.success ? undefined : result.error
+      });
+      
+      if (!result.success) {
+        toast.error("Could not connect to Sanity. Check console for details.");
+      }
+    };
+    
+    checkConnection();
+  }, []);
+
   // Fetch all blog categories
-  const { data: categories = [] } = useQuery({
+  const { 
+    data: categories = [], 
+    isLoading: categoriesLoading,
+    error: categoriesError
+  } = useQuery({
     queryKey: ['blogCategories'],
-    queryFn: getBlogCategories
+    queryFn: getBlogCategories,
+    onSuccess: (data) => {
+      console.log("Categories loaded:", data);
+      // If no categories are found, we'll show a message
+      if (data.length === 0) {
+        toast.info("No blog categories found in Sanity.", {
+          description: "Make sure you have created blog categories in your Sanity studio."
+        });
+      }
+    },
+    onError: (error) => {
+      console.error("Error fetching categories:", error);
+      toast.error("Failed to load blog categories");
+    }
   });
 
   // Fetch blog posts based on selected category
-  const { data: blogPosts = [], isLoading } = useQuery({
+  const { 
+    data: blogPosts = [], 
+    isLoading: postsLoading,
+    error: postsError
+  } = useQuery({
     queryKey: ['blogPosts', currentCategory],
     queryFn: () => currentCategory === "all" 
       ? getAllBlogPosts() 
       : getBlogPostsByCategory(currentCategory),
+    onSuccess: (data) => {
+      console.log(`Posts loaded for category "${currentCategory}":`, data);
+      // If no posts are found, we'll show a message
+      if (data.length === 0) {
+        toast.info(`No posts found for ${currentCategory === "all" ? "any category" : "this category"}.`);
+      }
+    },
+    onError: (error) => {
+      console.error("Error fetching posts:", error);
+      toast.error("Failed to load blog posts");
+    }
   });
 
   // Calculate pagination
@@ -37,8 +92,11 @@ const Blog = () => {
   const currentPosts = blogPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(blogPosts.length / postsPerPage);
 
+  const isLoading = categoriesLoading || postsLoading;
+  const hasError = categoriesError || postsError;
+
   const getCategoryIcon = (categoryName: string) => {
-    switch (categoryName.toLowerCase()) {
+    switch (categoryName?.toLowerCase()) {
       case 'security':
         return <ShieldCheck className="text-atoro-blue" />;
       case 'privacy':
@@ -46,7 +104,7 @@ const Blog = () => {
       case 'ai governance':
         return <Brain className="text-atoro-teal" />;
       default:
-        return null;
+        return <Bug className="text-gray-500" />;
     }
   };
 
@@ -93,6 +151,29 @@ const Blog = () => {
     );
   };
 
+  // Render connection status debugging UI if there are issues
+  const renderConnectionStatus = () => {
+    if (!connectionStatus.checked) {
+      return <div className="text-center py-4">Checking Sanity connection...</div>;
+    }
+
+    if (!connectionStatus.connected) {
+      return (
+        <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+          <h3 className="text-red-800 font-medium mb-2">Sanity Connection Error</h3>
+          <p className="text-red-700 mb-3">
+            Could not connect to your Sanity project. Please check your project configuration.
+          </p>
+          <Button variant="outline" onClick={() => window.location.reload()}>
+            Try Again
+          </Button>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -102,9 +183,14 @@ const Blog = () => {
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               Insights & Expertise
             </h1>
-            <p className="text-lg text-gray-700 mb-8">
+            <p className="text-lg text-gray-700 mb-4">
               Stay informed with the latest trends, best practices, and expert analysis in security, privacy, and AI governance.
             </p>
+            {!isLoading && blogPosts.length === 0 && (
+              <p className="text-amber-600 mt-4">
+                No blog posts found. Please create content in your Sanity studio.
+              </p>
+            )}
           </div>
         </Container>
       </section>
@@ -112,9 +198,20 @@ const Blog = () => {
       {/* Blog Posts Section */}
       <section className="py-16">
         <Container>
+          {renderConnectionStatus()}
+
+          {hasError && (
+            <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+              <h3 className="text-red-800 font-medium">Error Loading Blog Content</h3>
+              <p className="text-red-700">
+                There was a problem loading blog content from Sanity. Please check your console for more details.
+              </p>
+            </div>
+          )}
+
           <Tabs value={currentCategory} onValueChange={setCurrentCategory} className="mb-12">
             <div className="flex justify-center">
-              <TabsList className="grid grid-cols-4 w-fit">
+              <TabsList className="grid grid-cols-auto-fit-md w-fit">
                 <TabsTrigger value="all">All Topics</TabsTrigger>
                 {categories.map((category: any) => (
                   <TabsTrigger key={category._id} value={category._id}>{category.title}</TabsTrigger>
