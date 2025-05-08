@@ -14,6 +14,8 @@ import Testimonials from "./pages/Testimonials";
 import Contact from "./pages/Contact";
 import StaticBlog from "./pages/StaticBlog";
 import StaticBlogPost from "./pages/StaticBlogPost";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import Resources from "./pages/Resources";
 import Webinars from "./pages/resources/Webinars";
 import Whitepapers from "./pages/resources/Whitepapers";
@@ -38,6 +40,8 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<StaticBlog />} />
           <Route path="/blog/:slug" element={<StaticBlogPost />} />
+          <Route path="/dynamic-blog" element={<Blog />} />
+          <Route path="/dynamic-blog/:slug" element={<BlogPost />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/resources/webinars" element={<Webinars />} />
           <Route path="/resources/whitepapers" element={<Whitepapers />} />
