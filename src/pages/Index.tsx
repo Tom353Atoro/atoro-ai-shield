@@ -1,37 +1,28 @@
 
 import React from 'react';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
+import Layout from '@/components/layout/Layout';
 import Hero from '@/components/home/Hero';
+import AboutAtoro from '@/components/home/AboutAtoro';
 import PillarsSection from '@/components/home/PillarsSection';
 import FlagshipService from '@/components/home/FlagshipService';
-import Partners from '@/components/home/Partners';
-import AboutAtoro from '@/components/home/AboutAtoro';
-import ThoughtLeadership from '@/components/home/ThoughtLeadership';
 import Testimonials from '@/components/home/Testimonials';
-import Newsletter from '@/components/home/Newsletter';
-import CertificationLogos from '@/components/shared/CertificationLogos';
 import LogoBanner from '@/components/home/LogoBanner';
+import Partners from '@/components/home/Partners';
+import StaticThoughtLeadership from '@/components/home/StaticThoughtLeadership';
+import Newsletter from '@/components/home/Newsletter';
 
-const Index = () => {
+export default function Index() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-grow">
-        <Hero />
-        <LogoBanner />
-        <PillarsSection />
-        <FlagshipService />
-        <Partners />
-        <AboutAtoro />
-        <CertificationLogos />
-        <ThoughtLeadership />
-        <Testimonials />
-        <Newsletter />
-      </main>
-      <Footer />
-    </div>
+    <Layout>
+      <Hero />
+      <AboutAtoro />
+      <LogoBanner />
+      <PillarsSection />
+      <Partners />
+      <FlagshipService />
+      <Testimonials />
+      <StaticThoughtLeadership />
+      <Newsletter />
+    </Layout>
   );
-};
-
-export default Index;
+}

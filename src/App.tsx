@@ -12,8 +12,8 @@ import AIGovernance from "./pages/AIGovernance";
 import SecurityTeamService from "./pages/SecurityTeamService";
 import Testimonials from "./pages/Testimonials";
 import Contact from "./pages/Contact";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
+import StaticBlog from "./pages/StaticBlog";
+import StaticBlogPost from "./pages/StaticBlogPost";
 import Resources from "./pages/Resources";
 import Webinars from "./pages/resources/Webinars";
 import Whitepapers from "./pages/resources/Whitepapers";
@@ -36,8 +36,8 @@ const App = () => (
           <Route path="/services/security-team-aas" element={<SecurityTeamService />} />
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/blog" element={<StaticBlog />} />
+          <Route path="/blog/:slug" element={<StaticBlogPost />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/resources/webinars" element={<Webinars />} />
           <Route path="/resources/whitepapers" element={<Whitepapers />} />
