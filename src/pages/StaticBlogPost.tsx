@@ -7,7 +7,6 @@ import Layout from '@/components/layout/Layout';
 import { ArrowLeft, Brain, ShieldCheck, LockKeyhole } from 'lucide-react';
 import { getPostBySlug } from '@/lib/data/staticBlogData';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Helmet } from 'react-helmet';
 
 const StaticBlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -56,19 +55,6 @@ const StaticBlogPost = () => {
 
   return (
     <Layout>
-      <Helmet>
-        <title>{post.title} | Atoro</title>
-        <meta name="description" content={post.excerpt} />
-        <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={post.excerpt} />
-        {post.imageUrl && <meta property="og:image" content={post.imageUrl} />}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post.title} />
-        <meta name="twitter:description" content={post.excerpt} />
-        {post.imageUrl && <meta name="twitter:image" content={post.imageUrl} />}
-        <meta name="keywords" content={`${primaryCategory}, Atoro, SaaS, security, compliance, ${primaryCategory?.toLowerCase() === 'ai governance' ? 'EU AI Act, ISO 42001, AI regulation' : ''}`} />
-      </Helmet>
-      
       <article>
         {/* Hero Section */}
         <section className="pt-16 pb-12 bg-gradient-to-r from-atoro-teal/10 to-atoro-blue/10">
