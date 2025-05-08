@@ -87,6 +87,9 @@ const BlogPost = () => {
     day: 'numeric'
   });
 
+  // Get the primary category if available
+  const primaryCategory = post.categories && post.categories.length > 0 ? post.categories[0] : null;
+
   return (
     <Layout>
       <article>
@@ -103,7 +106,7 @@ const BlogPost = () => {
               
               <div className="mb-4">
                 <span className="inline-block bg-atoro-teal/10 text-atoro-teal rounded-full px-3 py-1 text-sm font-medium">
-                  {post.category?.title || 'Uncategorized'}
+                  {primaryCategory?.title || 'Uncategorized'}
                 </span>
               </div>
               

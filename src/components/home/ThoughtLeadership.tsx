@@ -67,7 +67,9 @@ const ThoughtLeadership = () => {
                   )}
                 </div>
                 <div className="mb-2">
-                  <span className="text-sm font-medium text-atoro-purple">{post.category?.title || 'Uncategorized'}</span>
+                  <span className="text-sm font-medium text-atoro-purple">
+                    {post.categories && post.categories.length > 0 ? post.categories[0].title : 'Uncategorized'}
+                  </span>
                   <span className="text-sm text-gray-500 mx-2">•</span>
                   <span className="text-sm text-gray-500">
                     {new Date(post.publishedAt).toLocaleDateString('en-US', { 
