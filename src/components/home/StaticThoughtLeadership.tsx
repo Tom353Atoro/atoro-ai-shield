@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';
 import { ArrowRight } from 'lucide-react';
 import { blogPosts } from '@/lib/data/staticBlogData';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const StaticThoughtLeadership = () => {
   // Get the 3 most recent posts for display
@@ -48,11 +49,15 @@ const StaticThoughtLeadership = () => {
                   </div>
                 )}
               </div>
-              <div className="mb-2">
-                <span className="text-sm font-medium text-atoro-purple">
-                  {post.categories && post.categories.length > 0 ? post.categories[0] : 'Uncategorized'}
-                </span>
-                <span className="text-sm text-gray-500 mx-2">•</span>
+              <div className="flex items-center gap-2 mb-2">
+                {post.author.imageUrl && (
+                  <Avatar className="h-6 w-6">
+                    <AvatarImage src={post.author.imageUrl} alt={post.author.name} />
+                    <AvatarFallback>{post.author.name.substring(0, 2)}</AvatarFallback>
+                  </Avatar>
+                )}
+                <span className="text-sm font-medium">{post.author.name}</span>
+                <span className="text-sm text-gray-500 mx-1">•</span>
                 <span className="text-sm text-gray-500">
                   {new Date(post.publishedAt).toLocaleDateString('en-US', { 
                     year: 'numeric', 

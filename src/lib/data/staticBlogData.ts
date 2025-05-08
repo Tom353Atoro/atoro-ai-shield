@@ -23,8 +23,8 @@ export const blogPosts: StaticBlogPost[] = [
     excerpt: "An authoritative guide to enterprise cybersecurity standards and compliance frameworks, including ISO 27001, SOC 2, and penetration testing methodologies.",
     categories: ["Security"],
     author: {
-      name: "Jane Smith",
-      imageUrl: "/lovable-uploads/67e0fd6c-3db8-4cd6-a32b-c0841aa5535e.png"
+      name: "Tom McNamara",
+      imageUrl: "/lovable-uploads/d4900a62-2285-4670-9d81-bf1935f853fe.png"
     },
     imageUrl: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     content: `
@@ -65,8 +65,8 @@ export const blogPosts: StaticBlogPost[] = [
     excerpt: "A comprehensive overview of privacy regulations affecting SaaS companies in 2025, including GDPR, CCPA, and emerging global standards.",
     categories: ["Privacy"],
     author: {
-      name: "Michael Johnson",
-      imageUrl: "/lovable-uploads/81d0cbb3-5fd3-4565-a7d0-df73812e5490.png"
+      name: "Tom McNamara",
+      imageUrl: "/lovable-uploads/d4900a62-2285-4670-9d81-bf1935f853fe.png"
     },
     imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     content: `
@@ -98,8 +98,8 @@ export const blogPosts: StaticBlogPost[] = [
     excerpt: "How to develop and implement an effective AI governance framework that ensures ethical use of artificial intelligence while driving innovation.",
     categories: ["AI Governance"],
     author: {
-      name: "Sarah Williams",
-      imageUrl: "/lovable-uploads/92f8da33-0880-48be-815f-a45d074582db.png"
+      name: "Tom McNamara",
+      imageUrl: "/lovable-uploads/d4900a62-2285-4670-9d81-bf1935f853fe.png"
     },
     imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     content: `
@@ -142,4 +142,3 @@ export function getPostsByCategory(category: string): StaticBlogPost[] {
   }
   return blogPosts.filter(post => post.categories.includes(category));
 }
-

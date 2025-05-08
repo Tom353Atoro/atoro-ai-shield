@@ -6,6 +6,7 @@ import { Container } from '@/components/ui/Container';
 import Layout from '@/components/layout/Layout';
 import { ArrowLeft } from 'lucide-react';
 import { getPostBySlug } from '@/lib/data/staticBlogData';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const StaticBlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -62,13 +63,12 @@ const StaticBlogPost = () => {
                 {post.author && (
                   <div className="flex items-center gap-2">
                     {post.author.imageUrl && (
-                      <img 
-                        src={post.author.imageUrl} 
-                        alt={post.author.name} 
-                        className="w-8 h-8 rounded-full"
-                      />
+                      <Avatar>
+                        <AvatarImage src={post.author.imageUrl} alt={post.author.name} />
+                        <AvatarFallback>{post.author.name.substring(0, 2)}</AvatarFallback>
+                      </Avatar>
                     )}
-                    <span>{post.author.name}</span>
+                    <span className="font-medium">{post.author.name}</span>
                   </div>
                 )}
                 <span>•</span>

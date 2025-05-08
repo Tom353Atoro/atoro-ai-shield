@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ShieldCheck, LockKeyhole, Brain, Bug } from 'lucide-react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { StaticBlogPost } from '@/lib/data/staticBlogData';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 interface StaticBlogCardProps {
   post: StaticBlogPost;
@@ -48,12 +49,23 @@ const StaticBlogCard: React.FC<StaticBlogCardProps> = ({ post }) => {
         </div>
       </div>
       <CardContent className="pt-6 flex-grow">
-        <div className="text-sm text-gray-500 mb-2">
-          {new Date(post.publishedAt).toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric'
-          })}
+        <div className="flex items-center gap-2 mb-3">
+          {post.author.imageUrl && (
+            <Avatar className="h-8 w-8">
+              <AvatarImage src={post.author.imageUrl} alt={post.author.name} />
+              <AvatarFallback>{post.author.name.substring(0, 2)}</AvatarFallback>
+            </Avatar>
+          )}
+          <div className="flex flex-col">
+            <span className="text-sm font-medium">{post.author.name}</span>
+            <span className="text-xs text-gray-500">
+              {new Date(post.publishedAt).toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric'
+              })}
+            </span>
+          </div>
         </div>
         <h3 className="text-xl font-bold mb-2 line-clamp-2">{post.title}</h3>
         <p className="text-gray-600 line-clamp-3">{post.excerpt}</p>
