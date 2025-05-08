@@ -8,7 +8,7 @@ export const client = createClient({
   projectId: '6fq80c4a', // Your Sanity project ID
   dataset: 'production',
   useCdn: false, // Set to false to bypass CDN for more reliable connections
-  apiVersion: '2025-05-08', // Updated to match your specified API version
+  apiVersion: '2023-05-08', // Downgraded API version as a test
   // No token needed for public read access
 });
 
@@ -16,6 +16,9 @@ export const client = createClient({
 const builder = imageUrlBuilder(client);
 
 export const urlFor = (source: SanityImageSource) => {
+  if (!source) return {
+    url: () => 'https://placehold.co/600x400?text=No+Image'
+  };
   return builder.image(source);
 };
 
@@ -24,7 +27,7 @@ export const checkSanityConnection = async () => {
   try {
     console.log("Testing Sanity connection with simple query...");
     // This query just fetches a single document to test the connection
-    const result = await client.fetch(`*[_type in ["category", "blogPost"]][0]`);
+    const result = await client.fetch(`*[_id == "_.settings" || _type == "category" || _type == "blogPost"][0]`);
     console.log("Sanity connection successful:", result);
     return { success: true, data: result };
   } catch (error: any) {
@@ -34,7 +37,7 @@ export const checkSanityConnection = async () => {
       message: "Could not connect to Sanity. Please check your project configuration.",
       projectId: '6fq80c4a',
       dataset: 'production',
-      apiVersion: '2025-05-08',
+      apiVersion: '2023-05-08', // Updated with downgraded version
       errorMessage: error?.message || "Unknown error",
       statusCode: error?.statusCode || "Unknown",
       error
