@@ -7,6 +7,8 @@ import { urlFor } from '@/lib/sanity';
 const components: Partial<PortableTextReactComponents> = {
   types: {
     image: ({ value }: { value: any }) => {
+      if (!value) return null;
+      
       return (
         <div className="my-8">
           <img
@@ -23,6 +25,8 @@ const components: Partial<PortableTextReactComponents> = {
       );
     },
     code: ({ value }: { value: any }) => {
+      if (!value || !value.code) return null;
+      
       return (
         <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg my-4 overflow-x-auto">
           <code>{value.code}</code>
@@ -31,11 +35,13 @@ const components: Partial<PortableTextReactComponents> = {
     },
   },
   marks: {
-    link: ({ children, value, ...rest }: any) => {
-      const rel = !value?.href?.startsWith('/') ? 'noreferrer noopener' : undefined;
+    link: ({ children, value }: any) => {
+      const href = value?.href || '#';
+      const rel = !href.startsWith('/') ? 'noreferrer noopener' : undefined;
+      
       return (
         <a 
-          href={value?.href} 
+          href={href} 
           rel={rel} 
           className="text-atoro-blue hover:text-atoro-teal underline"
         >
@@ -45,22 +51,22 @@ const components: Partial<PortableTextReactComponents> = {
     },
   },
   block: {
-    h1: ({ children, value }: any) => <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>,
-    h2: ({ children, value }: any) => <h2 className="text-2xl font-bold mt-8 mb-4">{children}</h2>,
-    h3: ({ children, value }: any) => <h3 className="text-xl font-bold mt-6 mb-3">{children}</h3>,
-    h4: ({ children, value }: any) => <h4 className="text-lg font-bold mt-6 mb-2">{children}</h4>,
-    normal: ({ children, value }: any) => <p className="mb-4 leading-relaxed">{children}</p>,
-    blockquote: ({ children, value }: any) => (
+    h1: ({ children }: any) => <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>,
+    h2: ({ children }: any) => <h2 className="text-2xl font-bold mt-8 mb-4">{children}</h2>,
+    h3: ({ children }: any) => <h3 className="text-xl font-bold mt-6 mb-3">{children}</h3>,
+    h4: ({ children }: any) => <h4 className="text-lg font-bold mt-6 mb-2">{children}</h4>,
+    normal: ({ children }: any) => <p className="mb-4 leading-relaxed">{children}</p>,
+    blockquote: ({ children }: any) => (
       <blockquote className="border-l-4 border-atoro-teal pl-4 italic my-6">{children}</blockquote>
     ),
   },
   list: {
-    bullet: ({ children, value }: any) => <ul className="list-disc pl-6 mb-4">{children}</ul>,
-    number: ({ children, value }: any) => <ol className="list-decimal pl-6 mb-4">{children}</ol>,
+    bullet: ({ children }: any) => <ul className="list-disc pl-6 mb-4">{children}</ul>,
+    number: ({ children }: any) => <ol className="list-decimal pl-6 mb-4">{children}</ol>,
   },
   listItem: {
-    bullet: ({ children, value }: any) => <li className="mb-1">{children}</li>,
-    number: ({ children, value }: any) => <li className="mb-1">{children}</li>,
+    bullet: ({ children }: any) => <li className="mb-1">{children}</li>,
+    number: ({ children }: any) => <li className="mb-1">{children}</li>,
   },
 };
 
@@ -70,7 +76,20 @@ interface PortableTextRendererProps {
 
 const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ content }) => {
   if (!content) {
-    return null;
+    return (
+      <div className="text-gray-500 italic">
+        No content available for this post.
+      </div>
+    );
+  }
+
+  if (!Array.isArray(content)) {
+    console.error("Expected content to be an array but received:", typeof content);
+    return (
+      <div className="text-red-500">
+        Error: Content format is invalid. Please check the console for details.
+      </div>
+    );
   }
 
   return (

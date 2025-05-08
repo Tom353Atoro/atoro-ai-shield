@@ -11,8 +11,13 @@ interface BlogCardProps {
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
-  const getCategoryIcon = (categoryName: string) => {
-    switch (categoryName?.toLowerCase()) {
+  // Get the first category (if any)
+  const primaryCategory = post.categories && post.categories.length > 0 ? post.categories[0] : null;
+  
+  const getCategoryIcon = (categoryName: string | undefined) => {
+    if (!categoryName) return <Bug className="text-gray-500" />;
+    
+    switch (categoryName.toLowerCase()) {
       case 'security':
         return <ShieldCheck className="text-atoro-blue" />;
       case 'privacy':
@@ -39,8 +44,8 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           </div>
         )}
         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1 text-sm font-medium">
-          {getCategoryIcon(post.category?.title || '')}
-          {post.category?.title || 'Uncategorized'}
+          {getCategoryIcon(primaryCategory?.title)}
+          {primaryCategory?.title || 'Uncategorized'}
         </div>
       </div>
       <CardContent className="pt-6 flex-grow">

@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/Container';
 import { toast } from 'sonner';
-import { getAllBlogPosts, getBlogCategories, getBlogPostsByCategory } from '@/lib/api/blogService';
+import { getAllBlogPosts, getBlogCategories, getBlogPostsByCategory, testSanityConnection } from '@/lib/api/blogService';
 import { checkSanityConnection } from '@/lib/sanity';
 
 // Import the new components
@@ -40,6 +40,18 @@ const Blog = () => {
           description: "Please check your project configuration and try again.",
           duration: 5000,
         });
+      } else {
+        // If connected, run a test query to verify data structure
+        const testResult = await testSanityConnection();
+        if (!testResult.success) {
+          toast.warning("Connected to Sanity, but no content found", {
+            description: "Please verify that you have content in your Sanity studio.",
+            duration: 5000,
+          });
+        } else {
+          console.log("Found content types:", testResult.types);
+          toast.success("Successfully connected to Sanity");
+        }
       }
       setIsRetrying(false);
     };
@@ -126,6 +138,9 @@ const Blog = () => {
     
     if (result.success) {
       toast.success("Connection to Sanity restored!");
+      // Also run test query to verify data structure
+      const testResult = await testSanityConnection();
+      console.log("Test result:", testResult);
       refetchCategories();
       refetchPosts();
     } else {
