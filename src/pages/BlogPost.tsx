@@ -117,7 +117,7 @@ const BlogPost = () => {
                   <div className="flex items-center gap-2">
                     {post.author.image && (
                       <img 
-                        src={urlFor(post.author.image).width(40).height(40).url()} 
+                        src={urlFor(post.author.image).url()} 
                         alt={post.author.name} 
                         className="w-8 h-8 rounded-full"
                       />
@@ -139,7 +139,7 @@ const BlogPost = () => {
               <div className="max-w-4xl mx-auto">
                 <div className="rounded-lg overflow-hidden">
                   <img 
-                    src={urlFor(post.mainImage).width(1200).height(600).url()} 
+                    src={urlFor(post.mainImage).url()} 
                     alt={post.title} 
                     className="w-full"
                   />

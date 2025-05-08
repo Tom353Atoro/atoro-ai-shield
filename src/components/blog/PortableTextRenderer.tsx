@@ -12,7 +12,7 @@ const components: Partial<PortableTextReactComponents> = {
       return (
         <div className="my-8">
           <img
-            src={urlFor(value).width(800).url()}
+            src={urlFor(value).url()}
             alt={value.alt || 'Blog image'}
             className="rounded-lg mx-auto"
           />

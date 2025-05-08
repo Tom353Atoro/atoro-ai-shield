@@ -39,18 +39,20 @@ const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
             <p><strong>API Version:</strong> 2023-05-08 (downgraded from 2025-05-08 as a test)</p>
           </div>
           
-          <Alert variant="outline" className="mb-4">
-            <Info className="h-4 w-4" />
-            <AlertDescription className="text-sm">
-              <strong>Troubleshooting tips:</strong>
-              <ul className="list-disc pl-5 mt-2">
-                <li>Verify that your Sanity project is active and accessible</li>
-                <li>Check if CORS origins are properly configured in Sanity</li>
-                <li>Try using an older API version (currently testing with 2023-05-08)</li>
-                <li>Confirm that your dataset contains content</li>
-              </ul>
-            </AlertDescription>
-          </Alert>
+          <div className="border border-gray-300 rounded-md p-4 mb-4 bg-gray-50">
+            <div className="flex items-start">
+              <Info className="h-4 w-4 mt-0.5 mr-2 text-blue-500" />
+              <div className="text-sm">
+                <strong>Troubleshooting tips:</strong>
+                <ul className="list-disc pl-5 mt-2">
+                  <li>Verify that your Sanity project is active and accessible</li>
+                  <li>Check if CORS origins are properly configured in Sanity</li>
+                  <li>Try using an older API version (currently testing with 2023-05-08)</li>
+                  <li>Confirm that your dataset contains content</li>
+                </ul>
+              </div>
+            </div>
+          </div>
           
           <Button 
             variant="outline" 

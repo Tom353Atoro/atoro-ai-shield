@@ -15,10 +15,16 @@ export const client = createClient({
 // Setup image URL builder
 const builder = imageUrlBuilder(client);
 
+// Improved urlFor function with better TypeScript support
 export const urlFor = (source: SanityImageSource) => {
-  if (!source) return {
-    url: () => 'https://placehold.co/600x400?text=No+Image'
-  };
+  if (!source) {
+    const fallbackImageUrl = 'https://placehold.co/600x400?text=No+Image';
+    return {
+      width: () => ({ height: () => ({ url: () => fallbackImageUrl }) }),
+      height: () => ({ url: () => fallbackImageUrl }),
+      url: () => fallbackImageUrl
+    };
+  }
   return builder.image(source);
 };
 

@@ -78,9 +78,9 @@ const ThoughtLeadership = () => {
         </div>
 
         {showFallbackMessage && (
-          <Alert variant="warning" className="mb-8">
-            <AlertTriangle className="h-5 w-5" />
-            <AlertDescription>
+          <Alert className="mb-8 border-amber-200 bg-amber-50">
+            <AlertTriangle className="h-5 w-5 text-amber-600" />
+            <AlertDescription className="text-amber-800">
               We're currently experiencing difficulties connecting to our content system. 
               The articles below are examples of our typical content.
             </AlertDescription>
@@ -110,7 +110,7 @@ const ThoughtLeadership = () => {
                 <div className="h-48 rounded-lg bg-gray-100 mb-4 overflow-hidden">
                   {post.mainImage ? (
                     <img
-                      src={urlFor(post.mainImage).width(400).height(200).url()}
+                      src={urlFor(post.mainImage).url()}
                       alt={post.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />

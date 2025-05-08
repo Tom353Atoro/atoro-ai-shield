@@ -34,7 +34,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
       <div className="relative h-48 overflow-hidden">
         {post.mainImage ? (
           <img 
-            src={urlFor(post.mainImage).width(400).height(200).url()} 
+            src={urlFor(post.mainImage).url()} 
             alt={post.title} 
             className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" 
           />
