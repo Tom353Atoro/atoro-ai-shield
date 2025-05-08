@@ -35,7 +35,7 @@ const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
           <div className="space-y-2">
             <p><strong>Project ID:</strong> 6fq80c4a</p>
             <p><strong>Dataset:</strong> production</p>
-            <p><strong>API Version:</strong> 2023-05-03</p>
+            <p><strong>API Version:</strong> 2025-05-08</p>
           </div>
           <Button 
             variant="outline" 

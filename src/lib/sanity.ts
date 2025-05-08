@@ -8,7 +8,7 @@ export const client = createClient({
   projectId: '6fq80c4a', // Your Sanity project ID
   dataset: 'production',
   useCdn: false, // Set to false to bypass CDN for more reliable connections
-  apiVersion: '2025-05-08', // Updated to the newer API version
+  apiVersion: '2025-05-08', // Updated to match your specified API version
   // No token needed for public read access
 });
 
@@ -33,7 +33,7 @@ export const checkSanityConnection = async () => {
       message: "Could not connect to Sanity. Please check your project configuration.",
       projectId: '6fq80c4a',
       dataset: 'production',
-      apiVersion: '2023-05-03',
+      apiVersion: '2025-05-08',
       error
     };
     console.error("Sanity connection details:", errorDetails);
