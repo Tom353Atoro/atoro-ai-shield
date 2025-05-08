@@ -8,7 +8,7 @@ export const client = createClient({
   projectId: '6fq80c4a', // Your Sanity project ID
   dataset: 'production',
   useCdn: false, // Set to false to bypass CDN for more reliable connections
-  apiVersion: '2023-05-03', // Use a current API version
+  apiVersion: '2025-05-08', // Updated to the newer API version
   // No token needed for public read access
 });
 
