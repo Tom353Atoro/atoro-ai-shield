@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Brain } from 'lucide-react';
 import { blogPosts } from '@/lib/data/staticBlogData';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
@@ -15,7 +15,7 @@ const StaticThoughtLeadership = () => {
       <Container>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">
           <div>
-            <h2 className="mb-2">Latest Insights</h2>
+            <h2 className="text-2xl font-bold mb-2">Latest Insights</h2>
             <p className="text-lg text-gray-700">
               Expert perspectives on security, privacy, and AI governance.
             </p>
