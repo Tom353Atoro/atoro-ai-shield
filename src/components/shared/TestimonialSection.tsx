@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Star, StarHalf, StarOff } from 'lucide-react';
+import { Star, StarHalf, StarOff, MessageCircle } from 'lucide-react';
 
 export type Testimonial = {
   quote: string;
@@ -79,36 +79,39 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
   const TestimonialCard = ({ testimonial, className }: { testimonial: Testimonial; className?: string }) => (
     <Card className={cn(
       "bg-white p-6 rounded-2xl shadow-sm border border-gray-100 h-full",
-      "transition-all duration-300 hover:shadow-md",
+      "transition-all duration-300 hover:shadow-md hover:border-atoro-blue/20",
       className
     )}>
-      <CardHeader className="pb-2 pt-2">
+      <CardHeader className="pb-2 pt-2 relative">
         {showRatings && testimonial.rating && (
           <div className="mb-2">{renderStarRating(testimonial.rating)}</div>
         )}
-        {/* Quote mark */}
-        <div className="text-6xl font-serif text-atoro-blue/10 absolute top-4 left-4">"</div>
+        <div className="absolute top-4 right-2">
+          <MessageCircle className="w-8 h-8 text-atoro-purple/10" />
+        </div>
       </CardHeader>
       
       <CardContent>
-        <p className="text-gray-700 relative z-10">
-          {testimonial.quote}
+        <p className="text-gray-700 relative z-10 italic">
+          "{testimonial.quote}"
         </p>
       </CardContent>
       
       <CardFooter className="flex items-center gap-3 pt-4 mt-auto">
         {showAvatars && (
-          <Avatar className="h-10 w-10 border border-gray-200">
-            {testimonial.avatarSrc && <AvatarImage src={testimonial.avatarSrc} alt={testimonial.author} />}
-            <AvatarFallback className="bg-atoro-blue/10 text-atoro-teal">
-              {getInitials(testimonial.author)}
-            </AvatarFallback>
+          <Avatar className="h-14 w-14 border border-gray-200 ring-2 ring-atoro-blue/10">
+            {testimonial.avatarSrc ? 
+              <AvatarImage src={testimonial.avatarSrc} alt={testimonial.author} className="object-cover" /> : 
+              <AvatarFallback className="bg-atoro-blue/10 text-atoro-teal">
+                {getInitials(testimonial.author)}
+              </AvatarFallback>
+            }
           </Avatar>
         )}
         
         <div className="flex flex-col">
-          <div className="font-medium">{testimonial.author}</div>
-          <div className="text-sm text-gray-500">
+          <div className="font-medium text-base">{testimonial.author}</div>
+          <div className="text-sm text-gray-600">
             {testimonial.title}
             {testimonial.company && `, ${testimonial.company}`}
           </div>
@@ -118,17 +121,30 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
   );
 
   // Render Grid Layout
-  const GridLayout = () => (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {testimonials.map((testimonial, index) => (
-        <TestimonialCard 
-          key={`${testimonial.author}-${index}`} 
-          testimonial={testimonial} 
-          className={cn("animate-fade-in", { "delay-100": index === 1, "delay-200": index === 2 }, cardClassName)}
-        />
-      ))}
-    </div>
-  );
+  const GridLayout = () => {
+    // Display 4 testimonials in a 2x2 grid on larger screens, stack on mobile
+    const displayTestimonials = testimonials.slice(0, 4);
+    
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {displayTestimonials.map((testimonial, index) => (
+          <TestimonialCard 
+            key={`${testimonial.author}-${index}`} 
+            testimonial={testimonial} 
+            className={cn(
+              "animate-fade-in", 
+              { 
+                "delay-100": index === 1, 
+                "delay-200": index === 2,
+                "delay-300": index === 3  
+              }, 
+              cardClassName
+            )}
+          />
+        ))}
+      </div>
+    );
+  };
 
   // Render Carousel Layout
   const CarouselLayout = () => (
@@ -149,26 +165,32 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
     </div>
   );
 
-  // Render Featured Layout (one main testimonial, two smaller ones)
+  // Render Featured Layout (one main testimonial, others in a grid)
   const FeaturedLayout = () => {
     const [featured, ...rest] = testimonials;
     
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="md:col-span-2 animate-fade-in">
+      <div className="space-y-8">
+        <div className="animate-fade-in">
           <TestimonialCard 
             testimonial={featured} 
-            className={cn("border-atoro-blue/20", cardClassName)} 
+            className={cn("border-atoro-blue/20 shadow-md", cardClassName)} 
           />
         </div>
         
-        {rest.slice(0, 2).map((testimonial, index) => (
-          <TestimonialCard 
-            key={`${testimonial.author}-${index}`} 
-            testimonial={testimonial} 
-            className={cn("animate-fade-in", { "delay-100": index === 0, "delay-200": index === 1 }, cardClassName)}
-          />
-        ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {rest.slice(0, 3).map((testimonial, index) => (
+            <TestimonialCard 
+              key={`${testimonial.author}-${index}`} 
+              testimonial={testimonial} 
+              className={cn(
+                "animate-fade-in", 
+                { "delay-100": index === 0, "delay-200": index === 1, "delay-300": index === 2 }, 
+                cardClassName
+              )}
+            />
+          ))}
+        </div>
       </div>
     );
   };

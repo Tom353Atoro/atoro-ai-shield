@@ -1,8 +1,10 @@
+
 import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Shield, Users, Award } from 'lucide-react';
+
 const AboutAtoro = () => {
   const values = [{
     icon: Shield,
@@ -17,6 +19,7 @@ const AboutAtoro = () => {
     title: 'Excellence',
     description: 'We hold ourselves to the highest standards in everything we deliver.'
   }];
+
   return <section className="py-20 bg-white">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -61,4 +64,5 @@ const AboutAtoro = () => {
       </Container>
     </section>;
 };
+
 export default AboutAtoro;
