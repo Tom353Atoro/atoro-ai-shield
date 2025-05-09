@@ -4,6 +4,7 @@ import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { tokens } from '@/lib/designTokens';
 
 interface ServiceHeroProps {
   title: string;
@@ -34,10 +35,10 @@ const ServiceHero: React.FC<ServiceHeroProps> = ({
   primaryButtonId,
   secondaryButtonText,
   secondaryButtonLink = '#',
-  backgroundColorClass = 'bg-gradient-to-br from-atoro-teal to-black',
+  backgroundColorClass = tokens.gradients.heroDarkTeal,
   imageUrl,
   imageAlt = 'Service illustration',
-  accentTextClassName = 'text-atoro-green',
+  accentTextClassName = tokens.colors.text.green,
   accentText,
   titleClassName = 'mb-4 text-3xl md:text-4xl lg:text-5xl',
   className,
@@ -60,6 +61,7 @@ const ServiceHero: React.FC<ServiceHeroProps> = ({
 
   return (
     <section className={cn(
+      tokens.spacing.section.default,
       "pt-16 pb-8 text-white relative overflow-hidden",
       backgroundColorClass,
       className

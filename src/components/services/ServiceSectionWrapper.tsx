@@ -8,7 +8,7 @@ import { type SectionWrapperProps } from '@/components/shared/SectionWrapper';
 
 // Re-export the SectionWrapper component as ServiceSectionWrapper
 const ServiceSectionWrapper: React.FC<SectionWrapperProps> = (props) => {
-  console.warn('ServiceSectionWrapper is deprecated, use SectionWrapper instead');
+  console.warn('⚠️ ServiceSectionWrapper is deprecated. Please use SectionWrapper from @/components/shared/SectionWrapper instead.');
   return <SectionWrapper {...props} />;
 };
 

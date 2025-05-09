@@ -1,10 +1,11 @@
 
 import React from 'react';
-import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import NeetoCalPopup from '@/components/shared/NeetoCalPopup';
+import SectionWrapper from '@/components/shared/SectionWrapper';
+import { tokens } from '@/lib/designTokens';
 
 interface ServiceCTAProps {
   title: string;
@@ -15,10 +16,6 @@ interface ServiceCTAProps {
   secondaryButtonLink?: string;
   backgroundClass?: string;
   className?: string;
-  contentClassName?: string;
-  titleClassName?: string;
-  descriptionClassName?: string;
-  buttonsClassName?: string;
   primaryButtonClassName?: string;
   secondaryButtonClassName?: string;
   primaryButtonOnClick?: () => void;
@@ -32,55 +29,51 @@ const ServiceCTA: React.FC<ServiceCTAProps> = ({
   primaryButtonId,
   secondaryButtonText,
   secondaryButtonLink,
-  backgroundClass = "bg-gradient-to-br from-atoro-blue/10 to-atoro-green/10",
-  className = "py-12",
-  contentClassName = "text-center max-w-2xl mx-auto",
-  titleClassName = "mb-4",
-  descriptionClassName = "text-gray-700 mb-6",
-  buttonsClassName = "flex flex-col sm:flex-row gap-4 justify-center",
+  backgroundClass = tokens.gradients.ctaLight,
+  className,
   primaryButtonClassName = "bg-atoro-green text-atoro-teal hover:bg-atoro-light-green",
   secondaryButtonClassName = "border-atoro-teal text-atoro-teal hover:bg-atoro-teal/5",
   primaryButtonOnClick,
   secondaryButtonOnClick,
 }) => {
   return (
-    <section className={cn(className, backgroundClass)}>
-      <Container>
-        <div className={contentClassName}>
-          <h2 className={titleClassName}>{title}</h2>
-          <p className={descriptionClassName}>
-            {description}
-          </p>
-          <div className={buttonsClassName}>
-            <Button 
-              size="lg" 
-              className={primaryButtonClassName} 
-              id={primaryButtonId}
-              onClick={primaryButtonOnClick}
-            >
-              {primaryButtonText}
-            </Button>
-            <NeetoCalPopup elementSelector={`#${primaryButtonId}`} />
-            
-            {secondaryButtonText && secondaryButtonLink && (
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className={secondaryButtonClassName} 
-                asChild={!secondaryButtonOnClick}
-                onClick={secondaryButtonOnClick}
-              >
-                {secondaryButtonOnClick ? (
-                  secondaryButtonText
-                ) : (
-                  <Link to={secondaryButtonLink}>{secondaryButtonText}</Link>
-                )}
-              </Button>
+    <SectionWrapper
+      title={title}
+      description={description}
+      className={className}
+      bgColor={backgroundClass}
+      spacingSize="default"
+      containerSize="narrow"
+      centered={true}
+    >
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button 
+          size="lg" 
+          className={primaryButtonClassName} 
+          id={primaryButtonId}
+          onClick={primaryButtonOnClick}
+        >
+          {primaryButtonText}
+        </Button>
+        <NeetoCalPopup elementSelector={`#${primaryButtonId}`} />
+        
+        {secondaryButtonText && secondaryButtonLink && (
+          <Button 
+            size="lg" 
+            variant="outline" 
+            className={secondaryButtonClassName} 
+            asChild={!secondaryButtonOnClick}
+            onClick={secondaryButtonOnClick}
+          >
+            {secondaryButtonOnClick ? (
+              secondaryButtonText
+            ) : (
+              <Link to={secondaryButtonLink}>{secondaryButtonText}</Link>
             )}
-          </div>
-        </div>
-      </Container>
-    </section>
+          </Button>
+        )}
+      </div>
+    </SectionWrapper>
   );
 };
 
