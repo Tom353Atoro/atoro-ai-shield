@@ -2,27 +2,29 @@
 import React from 'react';
 import Layout from '@/components/layout/Layout';
 import Hero from '@/components/home/Hero';
-import AboutAtoro from '@/components/home/AboutAtoro';
+import LogoBanner from '@/components/home/LogoBanner';
 import PillarsSection from '@/components/home/PillarsSection';
 import FlagshipService from '@/components/home/FlagshipService';
-import Testimonials from '@/components/home/Testimonials';
-import LogoBanner from '@/components/home/LogoBanner';
 import Partners from '@/components/home/Partners';
+import AboutAtoro from '@/components/home/AboutAtoro';
 import StaticThoughtLeadership from '@/components/home/StaticThoughtLeadership';
+import Testimonials from '@/components/home/Testimonials';
 import Newsletter from '@/components/home/Newsletter';
 
-export default function Index() {
+const Index = () => {
   return (
     <Layout>
       <Hero />
       <LogoBanner />
       <PillarsSection />
-      <AboutAtoro />
-      <Partners />
       <FlagshipService />
-      <Testimonials />
+      <Partners />
+      <AboutAtoro />
       <StaticThoughtLeadership />
+      <Testimonials />
       <Newsletter />
     </Layout>
   );
-}
+};
+
+export default Index;

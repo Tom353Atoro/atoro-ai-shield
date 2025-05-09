@@ -4,8 +4,8 @@ import { Routes, Route } from 'react-router-dom'
 import Index from './pages/Index';
 import NotFound from './pages/NotFound';
 import Contact from './pages/Contact';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
+import StaticBlog from './pages/StaticBlog';
+import StaticBlogPost from './pages/StaticBlogPost';
 import CyberSecurity from './pages/CyberSecurity';
 import Iso27001Service from './pages/Iso27001Service';
 import DataPrivacy from './pages/DataPrivacy';
@@ -15,8 +15,6 @@ import Soc2 from './pages/Soc2';
 import GDPRCompliance from './pages/GDPRCompliance';
 import ISO27701 from './pages/ISO27701';
 import EURepresentative from './pages/EURepresentative';
-import StaticBlog from './pages/StaticBlog';
-import StaticBlogPost from './pages/StaticBlogPost';
 import Resources from './pages/Resources';
 import SecurityTeamService from './pages/SecurityTeamService';
 
@@ -31,10 +29,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/blog/:slug" element={<BlogPost />} />
-      <Route path="/static-blog" element={<StaticBlog />} />
-      <Route path="/static-blog/:slug" element={<StaticBlogPost />} />
+      <Route path="/blog" element={<StaticBlog />} />
+      <Route path="/blog/:slug" element={<StaticBlogPost />} />
       <Route path="/resources" element={<Resources />} />
       <Route path="/resources/whitepapers" element={<Whitepapers />} />
       <Route path="/resources/tools-templates" element={<ToolsTemplates />} />
