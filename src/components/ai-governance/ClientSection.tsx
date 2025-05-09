@@ -1,12 +1,17 @@
 
 import React from 'react';
 import LogoBanner from '@/components/home/LogoBanner';
+import SectionWrapper from '@/components/shared/SectionWrapper';
 
 const ClientSection = () => {
   return (
-    <section className="py-12 bg-gray-50">
+    <SectionWrapper 
+      className="py-12" 
+      bgColor="bg-gray-50"
+      spacingSize="compact"
+    >
       <LogoBanner />
-    </section>
+    </SectionWrapper>
   );
 };
 

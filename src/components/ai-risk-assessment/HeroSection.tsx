@@ -7,7 +7,7 @@ const HeroSection = () => {
   return (
     <ServiceHeroSection
       title="AI Risk Assessment"
-      subtitle="Comprehensive evaluation of your AI systems for potential ethical, legal, and operational risks with actionable remediation plans."
+      description="Comprehensive evaluation of your AI systems for potential ethical, legal, and operational risks with actionable remediation plans."
       primaryButtonText="Schedule Assessment"
       primaryButtonLink="#contact"
       secondaryButtonText="Learn About ISO 42001"
