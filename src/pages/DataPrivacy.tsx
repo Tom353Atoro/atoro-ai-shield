@@ -2,7 +2,6 @@
 import React from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
 import TestimonialSection from '@/components/shared/TestimonialSection';
-import LogoBanner from '@/components/home/LogoBanner';
 
 // Import refactored components
 import HeroSection from '@/components/data-privacy/HeroSection';
@@ -39,11 +38,6 @@ const DataPrivacy = () => {
     <ServiceLayout>
       {/* Hero Section */}
       <HeroSection />
-      
-      {/* Client Logo Section */}
-      <section className="py-12 bg-gray-50">
-        <LogoBanner />
-      </section>
 
       {/* Services Section */}
       <ServicesSection />

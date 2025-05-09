@@ -6,7 +6,6 @@ import HeroSection from '@/components/ai-governance/HeroSection';
 import ServicesSection from '@/components/ai-governance/ServicesSection';
 import FeaturedServiceSection from '@/components/ai-governance/FeaturedServiceSection';
 import CTASection from '@/components/ai-governance/CTASection';
-import LogoBanner from '@/components/home/LogoBanner';
 
 const AIGovernance = () => {
   // AI-specific testimonials
@@ -36,11 +35,6 @@ const AIGovernance = () => {
     <ServiceLayout>
       {/* Hero Section */}
       <HeroSection />
-
-      {/* Client Logo Section */}
-      <section className="py-12 bg-gray-50">
-        <LogoBanner />
-      </section>
 
       {/* Services Section - Three Cards */}
       <ServicesSection />
