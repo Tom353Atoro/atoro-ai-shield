@@ -1,8 +1,7 @@
-
 import React, { useEffect, useState } from 'react';
 import { Container } from '@/components/ui/Container';
 import { cn } from '@/lib/utils';
-import { useEmblaCarousel } from 'embla-carousel-react';
+import * as EmblaCarousel from "embla-carousel-react";
 import TestimonialCard from './testimonials/TestimonialCard';
 import GridLayout from './testimonials/GridLayout';
 import CarouselLayout from './testimonials/CarouselLayout';
@@ -49,7 +48,7 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
   autoScrollInterval = 5000, // Default to 5 seconds
 }) => {
   // For auto-scrolling functionality
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [emblaRef, emblaApi] = EmblaCarousel.emblaCarouselReact({ loop: true });
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Auto-scrolling effect

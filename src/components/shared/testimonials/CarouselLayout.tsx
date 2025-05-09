@@ -3,7 +3,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import TestimonialCard from './TestimonialCard';
 import { Testimonial } from '../TestimonialSection';
-import { useEmblaCarousel } from 'embla-carousel-react';
+import * as EmblaCarousel from "embla-carousel-react";
 import { CarouselContent, CarouselItem } from '@/components/ui/carousel';
 
 interface CarouselLayoutProps {
