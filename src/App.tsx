@@ -17,6 +17,8 @@ import ISO27701 from './pages/ISO27701';
 import EURepresentative from './pages/EURepresentative';
 import Resources from './pages/Resources';
 import SecurityTeamService from './pages/SecurityTeamService';
+import ISO42001 from './pages/ISO42001';
+import AIRiskAssessment from './pages/AIRiskAssessment';
 
 // Resource pages
 import Whitepapers from './pages/resources/Whitepapers';
@@ -41,6 +43,8 @@ function App() {
       <Route path="/services/security-team" element={<SecurityTeamService />} />
       <Route path="/services/data-privacy" element={<DataPrivacy />} />
       <Route path="/services/ai-governance" element={<AIGovernance />} />
+      <Route path="/services/ai-governance/iso-42001" element={<ISO42001 />} />
+      <Route path="/services/ai-governance/risk-assessment" element={<AIRiskAssessment />} />
       <Route path="/services/penetration-testing" element={<PenetrationTesting />} />
       <Route path="/services/soc2" element={<Soc2 />} />
       <Route path="/services/data-privacy/gdpr-compliance" element={<GDPRCompliance />} />
