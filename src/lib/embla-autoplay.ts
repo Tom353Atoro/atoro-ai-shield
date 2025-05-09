@@ -10,23 +10,24 @@ export type AutoplayOptionsType = {
 }
 
 export type AutoplayType = {
-  options?: AutoplayOptionsType
+  options: AutoplayOptionsType
   play: () => void
   stop: () => void
   reset: () => void
   isPlaying: () => boolean
 }
 
-export function autoplayPlugin(
-  options: AutoplayOptionsType = {}
-): () => AutoplayType {
-  const {
-    delay = 4000,
-    playOnInit = true,
-    stopOnInteraction = true,
-    stopOnMouseEnter = true,
-    stopOnTouch = true,
-  } = options
+export const autoplayPlugin = (
+  userOptions: AutoplayOptionsType = {}
+): ((emblaApi: UseEmblaCarouselType[1]) => AutoplayType) => {
+  const options: AutoplayOptionsType = {
+    delay: 4000,
+    playOnInit: true,
+    stopOnInteraction: true,
+    stopOnMouseEnter: true,
+    stopOnTouch: true,
+    ...userOptions
+  }
 
   return (emblaApi: UseEmblaCarouselType[1]): AutoplayType => {
     let timer = 0
@@ -68,13 +69,13 @@ export function autoplayPlugin(
           emblaApi.scrollTo(0)
         }
         startTimer()
-      }, delay)
+      }, options.delay || 4000)
     }
 
     function init(): void {
-      if (playOnInit) play()
+      if (options.playOnInit) play()
 
-      if (stopOnInteraction) {
+      if (options.stopOnInteraction) {
         emblaApi?.on("pointerDown", stop)
       }
 
@@ -84,21 +85,21 @@ export function autoplayPlugin(
     function setupAutoplayHandlers(container: HTMLElement | null): void {
       if (!container) return
 
-      if (stopOnMouseEnter) {
+      if (options.stopOnMouseEnter) {
         container.addEventListener("mouseenter", () => {
           stop()
         })
         container.addEventListener("mouseleave", () => {
-          if (playOnInit) play()
+          if (options.playOnInit) play()
         })
       }
 
-      if (stopOnTouch) {
+      if (options.stopOnTouch) {
         container.addEventListener("touchstart", () => {
           stop()
         }, { passive: true })
         container.addEventListener("touchend", () => {
-          if (playOnInit) play()
+          if (options.playOnInit) play()
         })
       }
     }

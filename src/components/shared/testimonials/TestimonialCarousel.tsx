@@ -44,16 +44,20 @@ const TestimonialCarousel = ({
   const [api, setApi] = React.useState<any>(null)
   const [currentIndex, setCurrentIndex] = React.useState(0)
   
-  const autoplay = React.useMemo(
-    () =>
-      autoplayPlugin({
-        delay: autoplayDelay,
-        playOnInit: true,
-        stopOnInteraction: true,
-        stopOnMouseEnter: true,
-        stopOnTouch: true,
-      }),
+  const autoplayOptions = React.useMemo(
+    () => ({
+      delay: autoplayDelay,
+      playOnInit: true,
+      stopOnInteraction: true,
+      stopOnMouseEnter: true,
+      stopOnTouch: true,
+    }),
     [autoplayDelay]
+  )
+  
+  const autoplay = React.useMemo(
+    () => autoplayPlugin(autoplayOptions),
+    [autoplayOptions]
   )
   
   const [carouselRef] = useEmblaCarousel(
