@@ -11,7 +11,7 @@ import {
   CarouselPrevious 
 } from "@/components/ui/carousel"
 import { MessageCircle, Circle } from "lucide-react"
-import useEmblaCarousel from "embla-carousel-react"
+import useEmblaCarousel, { EmblaPluginType } from "embla-carousel-react"
 import { autoplayPlugin } from "@/lib/embla-autoplay"
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
 import { format } from "date-fns"
@@ -56,7 +56,7 @@ const TestimonialCarousel = ({
   )
   
   const autoplay = React.useMemo(
-    () => autoplayPlugin(autoplayOptions),
+    () => autoplayPlugin(autoplayOptions) as EmblaPluginType,
     [autoplayOptions]
   )
   

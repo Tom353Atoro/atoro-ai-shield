@@ -1,5 +1,5 @@
 
-import type { UseEmblaCarouselType } from "embla-carousel-react"
+import type { EmblaCarouselType, EmblaPluginType } from "embla-carousel"
 
 export type AutoplayOptionsType = {
   delay?: number
@@ -19,7 +19,7 @@ export type AutoplayType = {
 
 export const autoplayPlugin = (
   userOptions: AutoplayOptionsType = {}
-): ((emblaApi: UseEmblaCarouselType[1]) => AutoplayType) => {
+): EmblaPluginType => {
   const options: AutoplayOptionsType = {
     delay: 4000,
     playOnInit: true,
@@ -29,7 +29,7 @@ export const autoplayPlugin = (
     ...userOptions
   }
 
-  return (emblaApi: UseEmblaCarouselType[1]): AutoplayType => {
+  const plugin: EmblaPluginType = (emblaApi) => {
     let timer = 0
     let isPlaying = false
 
@@ -119,6 +119,14 @@ export const autoplayPlugin = (
       stop,
       reset,
       isPlaying: () => isPlaying,
+      // Add the name property to make it a valid EmblaPluginType
+      name: 'autoplay'
     }
   }
+
+  // Add required properties to make it a valid plugin
+  plugin.name = 'autoplay'
+  plugin.options = options
+
+  return plugin
 }

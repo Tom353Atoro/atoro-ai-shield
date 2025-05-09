@@ -10,6 +10,7 @@ import CyberSecurity from "./pages/CyberSecurity";
 import DataPrivacy from "./pages/DataPrivacy";
 import AIGovernance from "./pages/AIGovernance";
 import SecurityTeamService from "./pages/SecurityTeamService";
+import Iso27001Service from "./pages/Iso27001Service";
 import Testimonials from "./pages/Testimonials";
 import TestimonialCarouselDemo from "./pages/TestimonialCarouselDemo";
 import Contact from "./pages/Contact";
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/services/data-privacy" element={<DataPrivacy />} />
           <Route path="/services/ai-governance" element={<AIGovernance />} />
           <Route path="/services/security-team-aas" element={<SecurityTeamService />} />
+          <Route path="/services/iso-27001" element={<Iso27001Service />} />
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/testimonial-carousel-demo" element={<TestimonialCarouselDemo />} />
           <Route path="/contact" element={<Contact />} />
