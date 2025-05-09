@@ -1,66 +1,44 @@
 
 import React from 'react';
-import ServiceLayout from '@/components/layout/ServiceLayout';
-import TestimonialSection from '@/components/shared/TestimonialSection';
-
-// Import refactored components
-import HeroSection from '@/components/data-privacy/HeroSection';
-import ServicesSection from '@/components/data-privacy/ServicesSection';
+import Layout from '@/components/layout/Layout';
+import ServiceHero from '@/components/services/ServiceHero';
+import ServiceCTA from '@/components/services/ServiceCTA';
 import FeaturedServiceSection from '@/components/data-privacy/FeaturedServiceSection';
+import ServicesSection from '@/components/data-privacy/ServicesSection';
 import ProcessSection from '@/components/data-privacy/ProcessSection';
-import CTASection from '@/components/data-privacy/CTASection';
 
 const DataPrivacy = () => {
-  // Privacy-specific testimonials
-  const privacyTestimonials = [
-    {
-      quote: "Atoro's vDPO service transformed our approach to data privacy. They helped us navigate complex regulations while maintaining our development velocity.",
-      author: "Emma Richardson",
-      title: "CTO",
-      company: "DataFocus",
-      rating: 5
-    }, {
-      quote: "Working with Atoro gave us the privacy expertise we needed without hiring a full-time DPO. Their team handled GDPR compliance end-to-end, saving us countless hours.",
-      author: "Daniel Chen",
-      title: "CEO",
-      company: "UserFirst",
-      rating: 4.5
-    }, {
-      quote: "The documentation and processes Atoro implemented for our privacy program impressed even our most demanding enterprise clients during security reviews.",
-      author: "Sophie Martinez",
-      title: "COO",
-      company: "CloudPrivacy",
-      rating: 5
-    }
-  ];
-  
   return (
-    <ServiceLayout>
-      {/* Hero Section */}
-      <HeroSection />
-
-      {/* Services Section */}
-      <ServicesSection />
-
-      {/* Virtual DPO as a Service - Featured Service */}
-      <FeaturedServiceSection />
-
-      {/* Customer Testimonials - Privacy specific */}
-      <TestimonialSection 
-        testimonials={privacyTestimonials} 
-        title="What Our Privacy Clients Say" 
-        description="Read how we've helped companies like yours strengthen their privacy posture." 
-        variant="featured" 
-        showRatings={true} 
-        bgColor="bg-white" 
+    <Layout>
+      {/* Using our unified ServiceHero component */}
+      <ServiceHero 
+        accentText="Privacy by Design"
+        title="Not Afterthought"
+        subtitle="Turn complex privacy regulations into a competitive advantage. Our data privacy solutions handle compliance while you focus on building your product."
+        primaryButtonText="Request Privacy Assessment"
+        primaryButtonLink="#contact"
+        imageUrl="/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg"
       />
-
+      
       {/* Process Section */}
       <ProcessSection />
-
-      {/* CTA Section */}
-      <CTASection />
-    </ServiceLayout>
+      
+      {/* Featured Service Section */}
+      <FeaturedServiceSection />
+      
+      {/* Services Section */}
+      <ServicesSection />
+      
+      {/* Using our unified ServiceCTA component */}
+      <ServiceCTA 
+        title="Turn Privacy into a Competitive Advantage"
+        description="With Atoro handling your data privacy, you can reassure customers and regulators alike – all while keeping your focus on building a great product."
+        primaryButtonText="Book a Free Consultation"
+        primaryButtonId="privacy-consultation-btn"
+        secondaryButtonText="Get a Free Privacy Checklist"
+        secondaryButtonLink="/resources/privacy-assessment"
+      />
+    </Layout>
   );
 };
 
