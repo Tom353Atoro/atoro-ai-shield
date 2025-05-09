@@ -9,6 +9,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { spacing } from '@/lib/designSystem';
 import { Separator } from '@/components/ui/separator';
 import SectionWrapper from '@/components/shared/SectionWrapper';
+import ServiceCTASection from '@/components/shared/ServiceCTASection';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 const StyleGuide = () => {
   return (
@@ -22,6 +24,7 @@ const StyleGuide = () => {
           <TabsTrigger value="components">Components</TabsTrigger>
           <TabsTrigger value="spacing">Spacing</TabsTrigger>
           <TabsTrigger value="patterns">Component Patterns</TabsTrigger>
+          <TabsTrigger value="usage">Usage Guidelines</TabsTrigger>
         </TabsList>
         
         <TabsContent value="colors">
@@ -123,6 +126,33 @@ const StyleGuide = () => {
               <h4 className="mb-2 font-semibold">Colored Card</h4>
               <p className="text-gray-600">Card with a light green background.</p>
             </Card>
+          </div>
+          
+          <h3 className="mt-8 mb-4 text-xl font-semibold">Avatar</h3>
+          <div className="flex flex-wrap gap-4 mb-8 p-4 border rounded-lg">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-full bg-atoro-teal/20 flex items-center justify-center text-atoro-teal font-medium">AT</div>
+              <div className="w-12 h-12 rounded-full bg-atoro-green/20 flex items-center justify-center text-atoro-green font-medium">JD</div>
+              <div className="w-12 h-12 rounded-full bg-atoro-blue/20 flex items-center justify-center text-atoro-blue font-medium">SB</div>
+            </div>
+          </div>
+          
+          <h3 className="mt-8 mb-4 text-xl font-semibold">Aspect Ratio</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div className="border rounded-lg overflow-hidden">
+              <AspectRatio ratio={16/9}>
+                <div className="h-full w-full bg-atoro-teal/10 flex items-center justify-center">
+                  16:9 Ratio
+                </div>
+              </AspectRatio>
+            </div>
+            <div className="border rounded-lg overflow-hidden">
+              <AspectRatio ratio={4/3}>
+                <div className="h-full w-full bg-atoro-green/10 flex items-center justify-center">
+                  4:3 Ratio
+                </div>
+              </AspectRatio>
+            </div>
           </div>
         </TabsContent>
         
@@ -235,22 +265,30 @@ const StyleGuide = () => {
           
           <h3 className="mb-4 text-xl font-semibold">CTA Patterns</h3>
           <div className="mb-8 border rounded-lg overflow-hidden">
-            <div className="py-12 bg-gradient-to-br from-atoro-blue/10 to-atoro-green/10">
-              <div className="max-w-2xl mx-auto text-center px-4">
-                <h2 className="mb-4">Example CTA Title</h2>
-                <p className="text-gray-700 mb-6">
-                  This is a standardized CTA section pattern used throughout the site.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green">
-                    Primary Action
-                  </Button>
-                  <Button size="lg" variant="outline" className="border-atoro-teal text-atoro-teal hover:bg-atoro-teal/5">
-                    Secondary Action
-                  </Button>
+            <ServiceCTASection 
+              title="Example CTA Title"
+              description="This is a standardized CTA section pattern used throughout the site."
+              primaryButtonText="Primary Action"
+              secondaryButtonText="Secondary Action"
+              secondaryButtonLink="#"
+              className="py-8"
+            />
+          </div>
+          
+          <h3 className="mb-4 text-xl font-semibold">Hero Patterns</h3>
+          <div className="mb-8 p-4 border rounded-lg">
+            <div className="p-6 bg-gradient-to-br from-atoro-teal to-atoro-dark-teal rounded-lg text-white">
+              <div className="max-w-xl">
+                <Badge className="mb-3 bg-white/10 text-white">Service Category</Badge>
+                <h1 className="mb-3 text-2xl font-bold">Service Hero Title</h1>
+                <p className="mb-4">A brief description of the service that explains the value proposition in 2-3 sentences.</p>
+                <div className="flex flex-wrap gap-3">
+                  <Button size="sm" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green">Primary Action</Button>
+                  <Button size="sm" variant="outline" className="border-white text-white hover:bg-white/10">Secondary Action</Button>
                 </div>
               </div>
             </div>
+            <p className="mt-3 text-sm text-gray-500">Standard hero pattern for service pages</p>
           </div>
           
           <h3 className="mb-4 text-xl font-semibold">Layout Grid Patterns</h3>
@@ -263,6 +301,54 @@ const StyleGuide = () => {
               ))}
             </div>
             <p className="mt-3 text-sm text-gray-500">Standard 3-column responsive grid pattern</p>
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="usage">
+          <h2 className="mb-6 text-2xl font-semibold">Component Usage Guidelines</h2>
+          
+          <div className="prose max-w-none">
+            <h3>Component Hierarchy</h3>
+            <p>We follow a layered approach to component organization:</p>
+            <ol>
+              <li><strong>Base Components:</strong> Fundamental UI elements (buttons, inputs)</li>
+              <li><strong>Compound Components:</strong> Combinations of base components (cards, forms)</li>
+              <li><strong>Section Components:</strong> Page sections with specific layouts and purposes</li>
+              <li><strong>Layout Components:</strong> Control the overall page structure</li>
+              <li><strong>Page Components:</strong> Full pages assembled from sections</li>
+            </ol>
+            
+            <h3>When to Use Different Component Types</h3>
+            
+            <h4>Use SectionWrapper when:</h4>
+            <ul>
+              <li>You need a consistent section layout with title, description, and optional badge</li>
+              <li>You want to maintain consistent spacing between sections</li>
+              <li>You need to control background colors, spacing sizes, and container widths</li>
+            </ul>
+            
+            <h4>Use ServiceCTASection when:</h4>
+            <ul>
+              <li>You need a call-to-action section with consistent styling</li>
+              <li>You want to include primary and secondary buttons with consistent behavior</li>
+              <li>You need integration with tools like NeetoCal for appointment scheduling</li>
+            </ul>
+            
+            <h4>Use ServiceHeroSection when:</h4>
+            <ul>
+              <li>You need a consistent hero section for service pages</li>
+              <li>You want to maintain consistent styling and behavior across service pages</li>
+              <li>You need to control gradient backgrounds, button styling, and optional imagery</li>
+            </ul>
+            
+            <h3>Component Creation Guidelines</h3>
+            <ul>
+              <li><strong>Props Interface:</strong> Always define and export a props interface for each component</li>
+              <li><strong>Default Props:</strong> Provide sensible defaults for optional props</li>
+              <li><strong>Design Tokens:</strong> Use tokens from designTokens.ts for styling consistency</li>
+              <li><strong>Responsive Design:</strong> All components should be responsive by default</li>
+              <li><strong>Accessibility:</strong> Ensure all components are accessible (proper roles, labels, etc.)</li>
+            </ul>
           </div>
         </TabsContent>
       </Tabs>

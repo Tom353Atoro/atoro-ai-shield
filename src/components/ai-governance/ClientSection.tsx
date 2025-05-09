@@ -1,17 +1,13 @@
 
 import React from 'react';
-import LogoBanner from '@/components/home/LogoBanner';
-import SectionWrapper from '@/components/shared/SectionWrapper';
+import SharedClientSection from '@/components/shared/ClientSection';
 
 const ClientSection = () => {
   return (
-    <SectionWrapper 
-      className="py-12" 
-      bgColor="bg-gray-50"
-      spacingSize="compact"
-    >
-      <LogoBanner />
-    </SectionWrapper>
+    <SharedClientSection 
+      title="Trusted by AI Innovators"
+      description="Leading companies trust Atoro for responsible AI governance and compliance."
+    />
   );
 };
 

@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { spacing } from '@/lib/designSystem';
 
-interface SectionWrapperProps {
+export interface SectionWrapperProps {
   children: ReactNode;
   title?: string;
   description?: string;
