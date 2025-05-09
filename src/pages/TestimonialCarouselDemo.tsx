@@ -45,15 +45,16 @@ const TestimonialCarouselDemo = () => {
       <section className="py-20 bg-gray-50">
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="mb-4">Auto-rotating Testimonial Carousel</h2>
+            <h2 className="mb-4">Testimonial Cards</h2>
             <p className="text-lg text-gray-700">
-              This carousel automatically rotates, pauses on hover/touch, and lazy loads images.
-              It includes navigation indicators and displays testimonials with avatar, quote, name, role, and date.
+              Simple testimonial cards displaying client feedback.
             </p>
           </div>
           
-          <div className="max-w-4xl mx-auto">
-            <TestimonialCarousel testimonials={testimonials} autoplayDelay={5000} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {testimonials.map((testimonial, index) => (
+              <TestimonialCarousel key={index} testimonials={[testimonial]} />
+            ))}
           </div>
         </Container>
       </section>

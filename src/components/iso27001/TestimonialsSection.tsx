@@ -41,7 +41,11 @@ const TestimonialsSection = () => {
           </p>
         </div>
         
-        <TestimonialCarousel testimonials={testimonials} />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {testimonials.map((testimonial, index) => (
+            <TestimonialCarousel key={index} testimonials={[testimonial]} />
+          ))}
+        </div>
       </Container>
     </section>
   );
