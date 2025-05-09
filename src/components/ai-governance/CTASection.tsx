@@ -3,6 +3,7 @@ import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import NeetoCalPopup from '@/components/shared/NeetoCalPopup';
 
 const CTASection = () => {
   return (
@@ -15,9 +16,11 @@ const CTASection = () => {
             systems are ethical, transparent, and compliant.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green" asChild>
-              <Link to="/contact">Schedule a Consultation</Link>
+            <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green" id="ai-consultation-btn">
+              Schedule a Consultation
             </Button>
+            <NeetoCalPopup elementSelector="#ai-consultation-btn" />
+            
             <Button size="lg" variant="outline" className="border-atoro-teal text-atoro-teal hover:bg-atoro-teal/5" asChild>
               <Link to="/resources/ai-governance">Download AI Governance Guide</Link>
             </Button>

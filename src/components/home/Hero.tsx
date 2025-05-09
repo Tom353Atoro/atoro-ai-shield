@@ -8,6 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Plus, X } from 'lucide-react';
+import NeetoCalPopup from '@/components/shared/NeetoCalPopup';
 
 const cyclingWords = ["Cybersecurity", "Privacy", "AI Governance"];
 const defaultClientLogos = [{
@@ -102,14 +103,15 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button size="lg" asChild>
-              <Link to="/contact">Book a Call</Link>
+            <Button size="lg" id="hero-book-call-btn">
+              Book a Call
             </Button>
             
             <Button size="lg" variant="outline" asChild>
               <Link to="/services">Explore Services</Link>
             </Button>
           </div>
+          <NeetoCalPopup elementSelector="#hero-book-call-btn" />
         </div>
       </Container>
     </section>;

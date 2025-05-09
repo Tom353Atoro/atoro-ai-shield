@@ -3,6 +3,7 @@ import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import NeetoCalPopup from '@/components/shared/NeetoCalPopup';
 
 const ServiceDescription = () => {
   return (
@@ -27,9 +28,10 @@ const ServiceDescription = () => {
           </div>
           
           <div className="mt-10 text-center">
-            <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green">
+            <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green" id="security-consult-btn">
               Book Your Security Consultation
             </Button>
+            <NeetoCalPopup elementSelector="#security-consult-btn" />
             <p className="mt-2 text-sm text-gray-500">Limited availability for Q2 onboarding</p>
           </div>
         </div>

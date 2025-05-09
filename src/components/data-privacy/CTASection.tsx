@@ -3,6 +3,7 @@ import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import NeetoCalPopup from '@/components/shared/NeetoCalPopup';
 
 const CTASection = () => {
   return (
@@ -15,9 +16,11 @@ const CTASection = () => {
             your focus on building a great product. Schedule a call today to discuss your specific challenges.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green" asChild>
-              <Link to="/contact">Book a Free Consultation</Link>
+            <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green" id="privacy-consultation-btn">
+              Book a Free Consultation
             </Button>
+            <NeetoCalPopup elementSelector="#privacy-consultation-btn" />
+            
             <Button size="lg" variant="outline" className="border-atoro-teal text-atoro-teal hover:bg-atoro-teal/5" asChild>
               <Link to="/resources/privacy-assessment">Get a Free Privacy Checklist</Link>
             </Button>
