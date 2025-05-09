@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { 
   Carousel, 
   CarouselContent, 
@@ -9,7 +9,6 @@ import {
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
-import type { CarouselApi } from "@/components/ui/carousel";
 
 // Define the type for each logo item
 interface LogoItem {
@@ -55,8 +54,8 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
   showControls = true,
   speed = 300
 }) => {
-  const [api, setApi] = useState<CarouselApi>();
   const [loaded, setLoaded] = useState<{[key: string]: boolean}>({});
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   // Handle image load events
   const handleImageLoad = (id: string | number) => {
@@ -65,14 +64,26 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
 
   // Set up auto-scroll functionality
   useEffect(() => {
-    if (!api || !autoScroll) return;
+    if (!carouselRef.current || !autoScroll) return;
     
     const interval = setInterval(() => {
-      api.scrollNext();
+      const scrollAmount = 200; // Adjust based on your item width
+      if (carouselRef.current) {
+        const scrollContainer = carouselRef.current.querySelector('.carousel-content');
+        if (scrollContainer) {
+          scrollContainer.scrollLeft += scrollAmount;
+          
+          // Reset to beginning when reached the end
+          const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+          if (scrollContainer.scrollLeft >= maxScroll - 10) {
+            scrollContainer.scrollLeft = 0;
+          }
+        }
+      }
     }, scrollInterval);
     
     return () => clearInterval(interval);
-  }, [api, autoScroll, scrollInterval]);
+  }, [autoScroll, scrollInterval]);
 
   const carouselOptions = {
     align: "start" as const, // Use 'as const' to specify this is a literal type
@@ -94,11 +105,10 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
         
         {/* Logo carousel */}
         <Carousel 
-          setApi={setApi}
+          ref={carouselRef}
           className="w-full"
-          opts={carouselOptions}
         >
-          <CarouselContent className="-ml-4">
+          <CarouselContent className="-ml-4 carousel-content">
             {logos.map((logo) => (
               <CarouselItem 
                 key={logo.id} 

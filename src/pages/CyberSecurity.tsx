@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
 import { Container } from '@/components/ui/Container';
@@ -7,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Shield, FileSearch, Lock, ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TestimonialSection from '@/components/shared/TestimonialSection';
+import LogoBanner from '@/components/home/LogoBanner';
 
 const CyberSecurity = () => {
   // Security-specific testimonials
@@ -63,6 +65,11 @@ const CyberSecurity = () => {
             </div>
           </div>
         </Container>
+      </section>
+
+      {/* Client Logo Section */}
+      <section className="py-12 bg-gray-50">
+        <LogoBanner />
       </section>
 
       {/* Services Section - More compact */}
