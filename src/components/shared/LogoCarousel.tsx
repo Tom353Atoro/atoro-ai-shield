@@ -93,9 +93,8 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
         
         {/* Logo carousel */}
         <Carousel 
-          setApi={setApi}
           className="w-full"
-          opts={carouselOptions}
+          // Removed setApi prop here to fix the build error
         >
           <CarouselContent className="-ml-4">
             {logos.map((logo) => (

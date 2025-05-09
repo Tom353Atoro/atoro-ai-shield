@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
 import { Container } from '@/components/ui/Container';
@@ -88,7 +87,7 @@ const CyberSecurity = () => {
               icon: <FileSearch className="text-atoro-green" />,
               title: "ISO 27001 Implementation",
               description: "Structured approach to implementing the ISO 27001 framework for information security.",
-              link: "/services/cyber-security/iso-27001"
+              link: "/services/iso-27001"
             }, {
               icon: <Lock className="text-atoro-green" />,
               title: "SOC 2 Readiness",
