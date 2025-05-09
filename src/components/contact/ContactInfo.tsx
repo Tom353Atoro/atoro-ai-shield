@@ -31,7 +31,7 @@ const ContactInfo = () => {
           </div>
           <div>
             <h3 className="font-semibold">Phone</h3>
-            <a href="tel:0035315759340" className="text-gray-600 hover:text-atoro-blue">Ireland (00353) 01 575 9340</a>
+            <a href="tel:+35315759340" className="text-gray-600 hover:text-atoro-blue">+353 1 575 9340</a>
           </div>
         </div>
       </div>
@@ -49,21 +49,6 @@ const ContactInfo = () => {
             <span className="sr-only">LinkedIn</span>
           </a>
         </div>
-      </div>
-      
-      <div className="mt-8 p-5 bg-atoro-green/10 rounded-lg border border-atoro-green/20">
-        <h3 className="font-semibold text-atoro-teal mb-2">Need Immediate Assistance?</h3>
-        <p className="text-sm mb-3">
-          For urgent security incidents or time-sensitive inquiries, you can reach our response team.
-        </p>
-        <Button 
-          variant="outline" 
-          className="border-atoro-teal text-atoro-teal hover:bg-atoro-teal hover:text-white"
-          onClick={() => window.location.href = 'tel:0035315759340'}
-        >
-          <Phone className="h-4 w-4 mr-2" />
-          Call Support
-        </Button>
       </div>
     </div>
   );
