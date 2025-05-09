@@ -45,10 +45,11 @@ const FlagshipService = () => {
           
           <div className="relative">
             <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-atoro-blue/20 to-atoro-purple/20 overflow-hidden relative">
-              {/* This would be replaced with an actual image */}
-              <div className="absolute inset-0 flex items-center justify-center text-gray-500">
-                Security Team Illustration
-              </div>
+              <img 
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200" 
+                alt="Modern tech team collaborating on security solutions"
+                className="w-full h-full object-cover"
+              />
             </div>
             
             {/* Decorative elements */}
