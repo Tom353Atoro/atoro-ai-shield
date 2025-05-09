@@ -1,8 +1,6 @@
 
-import { useState } from 'react'
 import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Routes, Route } from 'react-router-dom'
 import { Toaster } from '@/components/ui/toaster'
 import Index from '@/pages/Index'
 import Contact from '@/pages/Contact'
@@ -33,43 +31,39 @@ import TestimonialCarouselDemo from '@/pages/TestimonialCarouselDemo'
 import DesignSystem from '@/pages/DesignSystem'
 
 function App() {
-  const [queryClient] = useState(() => new QueryClient())
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/blog" element={<StaticBlog />} />
-          <Route path="/blog/:slug" element={<StaticBlogPost />} />
-          <Route path="/dynamic-blog" element={<Blog />} />
-          <Route path="/dynamic-blog/:slug" element={<BlogPost />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/resources/whitepapers" element={<Whitepapers />} />
-          <Route path="/resources/case-studies" element={<CaseStudies />} />
-          <Route path="/resources/tools-templates" element={<ToolsTemplates />} />
-          <Route path="/resources/webinars" element={<Webinars />} />
-          <Route path="/services/cyber-security" element={<CyberSecurity />} />
-          <Route path="/services/iso-27001" element={<Iso27001Service />} />
-          <Route path="/services/iso-27701" element={<ISO27701 />} />
-          <Route path="/services/cyber-security/penetration-testing" element={<PenetrationTesting />} />
-          <Route path="/services/cyber-security/soc2" element={<Soc2 />} />
-          <Route path="/services/data-privacy" element={<DataPrivacy />} />
-          <Route path="/services/data-privacy/gdpr-compliance" element={<GDPRCompliance />} />
-          <Route path="/services/data-privacy/eu-representative" element={<EURepresentative />} />
-          <Route path="/services/ai-governance" element={<AIGovernance />} />
-          <Route path="/services/ai-governance/iso-42001" element={<ISO42001 />} />
-          <Route path="/services/ai-governance/ai-risk-assessment" element={<AIRiskAssessment />} />
-          <Route path="/services/security-team-aas" element={<SecurityTeamService />} />
-          <Route path="/testimonials" element={<Testimonials />} />
-          <Route path="/testimonial-demo" element={<TestimonialCarouselDemo />} />
-          <Route path="/design-system" element={<DesignSystem />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+    <>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/blog" element={<StaticBlog />} />
+        <Route path="/blog/:slug" element={<StaticBlogPost />} />
+        <Route path="/dynamic-blog" element={<Blog />} />
+        <Route path="/dynamic-blog/:slug" element={<BlogPost />} />
+        <Route path="/resources" element={<Resources />} />
+        <Route path="/resources/whitepapers" element={<Whitepapers />} />
+        <Route path="/resources/case-studies" element={<CaseStudies />} />
+        <Route path="/resources/tools-templates" element={<ToolsTemplates />} />
+        <Route path="/resources/webinars" element={<Webinars />} />
+        <Route path="/services/cyber-security" element={<CyberSecurity />} />
+        <Route path="/services/iso-27001" element={<Iso27001Service />} />
+        <Route path="/services/iso-27701" element={<ISO27701 />} />
+        <Route path="/services/cyber-security/penetration-testing" element={<PenetrationTesting />} />
+        <Route path="/services/cyber-security/soc2" element={<Soc2 />} />
+        <Route path="/services/data-privacy" element={<DataPrivacy />} />
+        <Route path="/services/data-privacy/gdpr-compliance" element={<GDPRCompliance />} />
+        <Route path="/services/data-privacy/eu-representative" element={<EURepresentative />} />
+        <Route path="/services/ai-governance" element={<AIGovernance />} />
+        <Route path="/services/ai-governance/iso-42001" element={<ISO42001 />} />
+        <Route path="/services/ai-governance/ai-risk-assessment" element={<AIRiskAssessment />} />
+        <Route path="/services/security-team-aas" element={<SecurityTeamService />} />
+        <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/testimonial-demo" element={<TestimonialCarouselDemo />} />
+        <Route path="/design-system" element={<DesignSystem />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
       <Toaster />
-    </QueryClientProvider>
+    </>
   )
 }
 
