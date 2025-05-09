@@ -54,37 +54,12 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
   showControls = true,
   speed = 300
 }) => {
-  const carouselRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState<{[key: string]: boolean}>({});
-  const [currentSlide, setCurrentSlide] = useState(0);
 
   // Handle image load events
   const handleImageLoad = (id: string | number) => {
     setLoaded(prev => ({ ...prev, [id.toString()]: true }));
   };
-
-  // Manual navigation functions
-  const scrollNext = () => {
-    if (!carouselRef.current) return;
-    const content = carouselRef.current.querySelector('div > div') as HTMLDivElement;
-    if (content) {
-      const slideWidth = content.children[0]?.clientWidth || 0;
-      const newPosition = ((currentSlide + 1) % logos.length) * slideWidth;
-      content.scrollTo({ left: newPosition, behavior: 'smooth' });
-      setCurrentSlide((currentSlide + 1) % logos.length);
-    }
-  };
-
-  // Set up auto-scroll functionality
-  useEffect(() => {
-    if (!autoScroll) return;
-    
-    const interval = setInterval(() => {
-      scrollNext();
-    }, scrollInterval);
-    
-    return () => clearInterval(interval);
-  }, [autoScroll, scrollInterval, currentSlide, logos.length]);
 
   return (
     <section className={cn('py-10', className)}>
@@ -98,10 +73,7 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
         )}
         
         {/* Logo carousel */}
-        <Carousel 
-          ref={carouselRef}
-          className="w-full"
-        >
+        <Carousel className="w-full">
           <CarouselContent className="-ml-4">
             {logos.map((logo) => (
               <CarouselItem 
