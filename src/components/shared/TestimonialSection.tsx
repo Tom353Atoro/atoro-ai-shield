@@ -1,11 +1,12 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Star, StarHalf, StarOff, MessageCircle } from 'lucide-react';
+import { useEmblaCarousel } from 'embla-carousel-react';
 
 export type Testimonial = {
   quote: string;
@@ -15,6 +16,7 @@ export type Testimonial = {
   avatarSrc?: string;
   companyLogoSrc?: string;
   rating?: number; // out of 5
+  date?: string; // Optional date field
 };
 
 export type TestimonialVariant = 'grid' | 'carousel' | 'featured';
@@ -30,6 +32,7 @@ export interface TestimonialSectionProps {
   showAvatars?: boolean;
   bgColor?: string;
   sectionId?: string;
+  autoScrollInterval?: number; // Time in ms between auto-scrolling
 }
 
 const TestimonialSection: React.FC<TestimonialSectionProps> = ({
@@ -43,7 +46,32 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
   showAvatars = true,
   bgColor = 'bg-gray-50',
   sectionId,
+  autoScrollInterval = 5000, // Default to 5 seconds
 }) => {
+  // For auto-scrolling functionality
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Auto-scrolling effect
+  useEffect(() => {
+    if (!emblaApi || variant !== 'carousel') return;
+    
+    const interval = setInterval(() => {
+      emblaApi.scrollNext();
+    }, autoScrollInterval);
+
+    // Update current index on scroll
+    const onSelect = () => {
+      setCurrentIndex(emblaApi.selectedScrollSnap());
+    };
+    emblaApi.on('select', onSelect);
+
+    return () => {
+      clearInterval(interval);
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi, autoScrollInterval, variant]);
+
   // Function to get initials from name
   const getInitials = (name: string) => {
     return name
@@ -92,7 +120,7 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
       </CardHeader>
       
       <CardContent>
-        <p className="text-gray-700 relative z-10 italic">
+        <p className="text-gray-700 relative z-10 italic text-lg md:text-xl">
           "{testimonial.quote}"
         </p>
       </CardContent>
@@ -110,11 +138,14 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
         )}
         
         <div className="flex flex-col">
-          <div className="font-medium text-base">{testimonial.author}</div>
+          <div className="font-medium text-base text-atoro-blue">{testimonial.author}</div>
           <div className="text-sm text-gray-600">
             {testimonial.title}
             {testimonial.company && `, ${testimonial.company}`}
           </div>
+          {testimonial.date && (
+            <div className="text-xs text-gray-500 mt-1">{testimonial.date}</div>
+          )}
         </div>
       </CardFooter>
     </Card>
@@ -146,24 +177,40 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
     );
   };
 
-  // Render Carousel Layout
-  const CarouselLayout = () => (
-    <div className="relative">
-      <Carousel className="w-full">
-        <CarouselContent>
-          {testimonials.map((testimonial, index) => (
-            <CarouselItem key={`${testimonial.author}-${index}`} className="md:basis-1/2 lg:basis-1/3">
-              <TestimonialCard testimonial={testimonial} className={cardClassName} />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <div className="hidden md:block">
-          <CarouselPrevious />
-          <CarouselNext />
+  // Render Carousel Layout with auto-scrolling
+  const CarouselLayout = () => {
+    return (
+      <div className="relative">
+        <div className="mb-8 max-w-4xl mx-auto" ref={emblaRef}>
+          <CarouselContent>
+            {testimonials.map((testimonial, index) => (
+              <CarouselItem key={`${testimonial.author}-${index}`} className="basis-full">
+                <TestimonialCard 
+                  testimonial={testimonial} 
+                  className={cn(cardClassName, "mx-auto max-w-3xl")} 
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
         </div>
-      </Carousel>
-    </div>
-  );
+        
+        {/* Custom indicators */}
+        <div className="flex justify-center gap-3 mt-8">
+          {testimonials.map((_, index) => (
+            <button
+              key={`indicator-${index}`}
+              className={cn(
+                "w-3 h-3 rounded-full transition-all duration-300",
+                currentIndex === index ? "bg-atoro-blue scale-110" : "bg-gray-300"
+              )}
+              onClick={() => emblaApi?.scrollTo(index)}
+              aria-label={`Go to testimonial ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   // Render Featured Layout (one main testimonial, others in a grid)
   const FeaturedLayout = () => {
