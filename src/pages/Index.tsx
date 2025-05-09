@@ -15,9 +15,9 @@ export default function Index() {
   return (
     <Layout>
       <Hero />
-      <AboutAtoro />
       <LogoBanner />
       <PillarsSection />
+      <AboutAtoro />
       <Partners />
       <FlagshipService />
       <Testimonials />
