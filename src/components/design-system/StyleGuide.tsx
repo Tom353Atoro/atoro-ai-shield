@@ -6,6 +6,9 @@ import { tokens } from '@/lib/designTokens';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { spacing } from '@/lib/designSystem';
+import { Separator } from '@/components/ui/separator';
+import SectionWrapper from '@/components/shared/SectionWrapper';
 
 const StyleGuide = () => {
   return (
@@ -18,6 +21,7 @@ const StyleGuide = () => {
           <TabsTrigger value="typography">Typography</TabsTrigger>
           <TabsTrigger value="components">Components</TabsTrigger>
           <TabsTrigger value="spacing">Spacing</TabsTrigger>
+          <TabsTrigger value="patterns">Component Patterns</TabsTrigger>
         </TabsList>
         
         <TabsContent value="colors">
@@ -131,38 +135,152 @@ const StyleGuide = () => {
               <div className="h-16 bg-gray-100 flex items-center justify-center">
                 <span className="text-sm font-medium">py-8 (Minimal)</span>
               </div>
+              <p className="mt-2 text-sm text-gray-500">spacing.section.minimal</p>
             </div>
             
             <div className="p-4 border rounded-lg">
               <div className="h-20 bg-gray-100 flex items-center justify-center">
                 <span className="text-sm font-medium">py-12 (Compact)</span>
               </div>
+              <p className="mt-2 text-sm text-gray-500">spacing.section.compact</p>
             </div>
             
             <div className="p-4 border rounded-lg">
               <div className="h-24 bg-gray-100 flex items-center justify-center">
                 <span className="text-sm font-medium">py-16 (Default)</span>
               </div>
+              <p className="mt-2 text-sm text-gray-500">spacing.section.default</p>
             </div>
             
             <div className="p-4 border rounded-lg">
               <div className="h-28 bg-gray-100 flex items-center justify-center">
                 <span className="text-sm font-medium">py-20 (Spacious)</span>
               </div>
+              <p className="mt-2 text-sm text-gray-500">spacing.section.spacious</p>
             </div>
           </div>
           
           <h3 className="mt-8 mb-4 text-xl font-semibold">Stack Spacing</h3>
-          <div className="p-4 border rounded-lg">
-            <div className="space-y-4 bg-gray-100 p-4">
-              <div className="h-8 bg-gray-200 flex items-center justify-center">Item 1</div>
-              <div className="h-8 bg-gray-200 flex items-center justify-center">Item 2</div>
-              <div className="h-8 bg-gray-200 flex items-center justify-center">Item 3</div>
+          <div className="space-y-4">
+            <div className="p-4 border rounded-lg">
+              <div className="space-y-4 bg-gray-100 p-4">
+                <div className="h-8 bg-gray-200 flex items-center justify-center">Item 1</div>
+                <div className="h-8 bg-gray-200 flex items-center justify-center">Item 2</div>
+                <div className="h-8 bg-gray-200 flex items-center justify-center">Item 3</div>
+              </div>
+              <p className="mt-2 text-sm text-gray-500">spacing.stack.tight</p>
             </div>
-            <p className="mt-2 text-sm text-gray-500">space-y-4 (Tight)</p>
+            
+            <div className="p-4 border rounded-lg">
+              <div className="space-y-6 bg-gray-100 p-4">
+                <div className="h-8 bg-gray-200 flex items-center justify-center">Item 1</div>
+                <div className="h-8 bg-gray-200 flex items-center justify-center">Item 2</div>
+                <div className="h-8 bg-gray-200 flex items-center justify-center">Item 3</div>
+              </div>
+              <p className="mt-2 text-sm text-gray-500">spacing.stack.default</p>
+            </div>
+            
+            <div className="p-4 border rounded-lg">
+              <div className="space-y-8 bg-gray-100 p-4">
+                <div className="h-8 bg-gray-200 flex items-center justify-center">Item 1</div>
+                <div className="h-8 bg-gray-200 flex items-center justify-center">Item 2</div>
+                <div className="h-8 bg-gray-200 flex items-center justify-center">Item 3</div>
+              </div>
+              <p className="mt-2 text-sm text-gray-500">spacing.stack.loose</p>
+            </div>
+          </div>
+          
+          <h3 className="mt-8 mb-4 text-xl font-semibold">Container Sizes</h3>
+          <div className="space-y-4">
+            <div className="p-4 border rounded-lg">
+              <div className="max-w-4xl mx-auto bg-gray-100 p-4 text-center">
+                Narrow Container
+              </div>
+              <p className="mt-2 text-sm text-gray-500">spacing.container.narrow</p>
+            </div>
+            
+            <div className="p-4 border rounded-lg">
+              <div className="max-w-6xl mx-auto bg-gray-100 p-4 text-center">
+                Default Container
+              </div>
+              <p className="mt-2 text-sm text-gray-500">spacing.container.default</p>
+            </div>
+            
+            <div className="p-4 border rounded-lg">
+              <div className="max-w-7xl mx-auto bg-gray-100 p-4 text-center">
+                Wide Container
+              </div>
+              <p className="mt-2 text-sm text-gray-500">spacing.container.wide</p>
+            </div>
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="patterns">
+          <h2 className="mb-6 text-2xl font-semibold">Component Patterns</h2>
+          
+          <h3 className="mb-4 text-xl font-semibold">Service Section Wrapper</h3>
+          <div className="mb-8 border rounded-lg overflow-hidden">
+            <SectionWrapper 
+              title="Example Section Title" 
+              description="This is a standardized section wrapper that maintains consistent spacing and layout."
+              badgeText="Example Badge"
+              spacingSize="compact"
+              className="bg-gray-50"
+            >
+              <div className="h-40 bg-gray-100 flex items-center justify-center border rounded">
+                Section Content
+              </div>
+            </SectionWrapper>
+          </div>
+          
+          <h3 className="mb-4 text-xl font-semibold">CTA Patterns</h3>
+          <div className="mb-8 border rounded-lg overflow-hidden">
+            <div className="py-12 bg-gradient-to-br from-atoro-blue/10 to-atoro-green/10">
+              <div className="max-w-2xl mx-auto text-center px-4">
+                <h2 className="mb-4">Example CTA Title</h2>
+                <p className="text-gray-700 mb-6">
+                  This is a standardized CTA section pattern used throughout the site.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green">
+                    Primary Action
+                  </Button>
+                  <Button size="lg" variant="outline" className="border-atoro-teal text-atoro-teal hover:bg-atoro-teal/5">
+                    Secondary Action
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <h3 className="mb-4 text-xl font-semibold">Layout Grid Patterns</h3>
+          <div className="mb-8 p-4 border rounded-lg">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1, 2, 3, 4, 5, 6].map((item) => (
+                <div key={item} className="h-24 bg-gray-100 flex items-center justify-center rounded border">
+                  Grid Item {item}
+                </div>
+              ))}
+            </div>
+            <p className="mt-3 text-sm text-gray-500">Standard 3-column responsive grid pattern</p>
           </div>
         </TabsContent>
       </Tabs>
+      
+      <Separator className="my-10" />
+      
+      <div className="prose max-w-none">
+        <h2>Component Implementation Guidelines</h2>
+        <ul>
+          <li><strong>Component Hierarchy:</strong> Follow our layered approach from UI elements to page components</li>
+          <li><strong>Naming Conventions:</strong> Use PascalCase for components and descriptive names</li>
+          <li><strong>File Organization:</strong> Group components by feature or purpose</li>
+          <li><strong>Props Interface:</strong> Always define and export a props interface for each component</li>
+          <li><strong>Default Props:</strong> Provide sensible defaults for optional props</li>
+          <li><strong>Design Tokens:</strong> Use tokens from designTokens.ts for styling consistency</li>
+          <li><strong>Responsive Design:</strong> All components should be responsive by default</li>
+        </ul>
+      </div>
     </Container>
   );
 };
