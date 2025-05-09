@@ -3,7 +3,7 @@ import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { Shield, FileKey, Lock, ArrowRight } from 'lucide-react';
+import { FileKey, Shield, Users, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -27,15 +27,15 @@ const ServicesSection = () => {
             description: "Complete implementation of GDPR requirements tailored to your SaaS business.",
             link: "/services/data-privacy/gdpr-compliance"
           }, {
-            icon: <FileKey className="text-atoro-green" />,
-            title: "Data Mapping",
-            description: "Comprehensive inventory of personal data flows throughout your organization.",
-            link: "/services/data-privacy/data-mapping"
+            icon: <Shield className="text-atoro-green" />,
+            title: "ISO 27701 Implementation",
+            description: "Privacy information management system implementation and certification support.",
+            link: "/services/data-privacy/iso-27701"
           }, {
-            icon: <Lock className="text-atoro-green" />,
-            title: "DPIA & PIAs",
-            description: "Thorough privacy impact assessments to identify and mitigate privacy risks early.",
-            link: "/services/data-privacy/privacy-impact-assessments"
+            icon: <Users className="text-atoro-green" />,
+            title: "EU Representative",
+            description: "Fulfill GDPR Article 27 requirements with our dedicated EU representative services.",
+            link: "/services/data-privacy/eu-representative"
           }].map((service, index) => <Card key={index} className="border border-gray-100 hover:border-atoro-green/30 hover:shadow-md transition-all overflow-hidden group h-full">
               <CardContent className="pt-6">
                 <div className="mb-4 flex justify-center">
