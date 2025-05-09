@@ -1,22 +1,11 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
-
 const FlagshipService = () => {
-  const benefits = [
-    'Enterprise-grade security leadership',
-    'Real-time guidance and support',
-    'Audit-ready compliance documentation',
-    'Integrated cyber, privacy, and AI governance',
-    'Predictable monthly pricing',
-    'Dedicated virtual security department',
-  ];
-
-  return (
-    <section className="py-20 bg-gradient-to-br from-atoro-blue/5 to-atoro-purple/5">
+  const benefits = ['Enterprise-grade security leadership', 'Real-time guidance and support', 'Audit-ready compliance documentation', 'Integrated cyber, privacy, and AI governance', 'Predictable monthly pricing', 'Dedicated virtual security department'];
+  return <section className="py-20 bg-gradient-to-br from-atoro-blue/5 to-atoro-purple/5">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
@@ -30,12 +19,10 @@ const FlagshipService = () => {
             </p>
             
             <ul className="space-y-3 mb-8">
-              {benefits.map((benefit) => (
-                <li key={benefit} className="flex items-start">
+              {benefits.map(benefit => <li key={benefit} className="flex items-start">
                   <Check className="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
                   <span>{benefit}</span>
-                </li>
-              ))}
+                </li>)}
             </ul>
             
             <Button size="lg" asChild>
@@ -45,11 +32,7 @@ const FlagshipService = () => {
           
           <div className="relative">
             <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-atoro-blue/20 to-atoro-purple/20 overflow-hidden relative">
-              <img 
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200" 
-                alt="Modern tech team collaborating on security solutions"
-                className="w-full h-full object-cover"
-              />
+              <img alt="Modern tech team collaborating on security solutions" className="w-full h-full object-cover" src="/lovable-uploads/9f3d1218-65c3-4355-b308-c4b8da789cc6.jpg" />
             </div>
             
             {/* Decorative elements */}
@@ -58,8 +41,6 @@ const FlagshipService = () => {
           </div>
         </div>
       </Container>
-    </section>
-  );
+    </section>;
 };
-
 export default FlagshipService;
