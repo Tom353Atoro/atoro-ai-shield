@@ -11,6 +11,7 @@ import DataPrivacy from "./pages/DataPrivacy";
 import AIGovernance from "./pages/AIGovernance";
 import SecurityTeamService from "./pages/SecurityTeamService";
 import Testimonials from "./pages/Testimonials";
+import TestimonialCarouselDemo from "./pages/TestimonialCarouselDemo";
 import Contact from "./pages/Contact";
 import StaticBlog from "./pages/StaticBlog";
 import StaticBlogPost from "./pages/StaticBlogPost";
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/services/ai-governance" element={<AIGovernance />} />
           <Route path="/services/security-team-aas" element={<SecurityTeamService />} />
           <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/testimonial-carousel-demo" element={<TestimonialCarouselDemo />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<StaticBlog />} />
           <Route path="/blog/:slug" element={<StaticBlogPost />} />
