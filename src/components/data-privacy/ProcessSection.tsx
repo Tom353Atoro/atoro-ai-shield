@@ -2,6 +2,7 @@
 import React from 'react';
 import ServiceSectionWrapper from '@/components/services/ServiceSectionWrapper';
 import ServiceProcessList from '@/components/services/ServiceProcessList';
+import { tokens } from '@/lib/designTokens';
 
 const ProcessSection = () => {
   const processSteps = [
@@ -29,7 +30,7 @@ const ProcessSection = () => {
 
   return (
     <ServiceSectionWrapper
-      className="py-20"
+      className={tokens.spacing.section.xl}
       title="Our Data Privacy Implementation Process"
       description="We take a systematic approach to building your privacy program, ensuring no detail is missed and compliance is achieved efficiently."
       headerClassName="mb-16"
@@ -38,7 +39,8 @@ const ProcessSection = () => {
         steps={processSteps} 
         direction="horizontal"
         variant="numbered"
-        accentColor="text-atoro-teal border-atoro-teal"
+        accentColor={`${tokens.colors.text.teal} ${tokens.colors.border.teal}`}
+        stepGap="md"
       />
     </ServiceSectionWrapper>
   );

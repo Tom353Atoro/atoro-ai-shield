@@ -5,10 +5,11 @@ import ServiceHero from '@/components/services/ServiceHero';
 import ServiceCTA from '@/components/services/ServiceCTA';
 import RiskAssessmentSection from '@/components/ai-governance/RiskAssessmentSection';
 import TestimonialSection from '@/components/shared/TestimonialSection';
-import { Container } from '@/components/ui/Container';
-import { Card, CardContent } from '@/components/ui/card';
-import { FileText, ShieldAlert, Lightbulb } from 'lucide-react';
+import ServiceSectionWrapper from '@/components/services/ServiceSectionWrapper';
+import ServiceFeatureGrid from '@/components/services/ServiceFeatureGrid';
 import ServiceCard from '@/components/services/ServiceCard';
+import { FileText, ShieldAlert, Lightbulb } from 'lucide-react';
+import { tokens } from '@/lib/designTokens';
 
 const testimonials = [
   {
@@ -37,56 +38,52 @@ const AIRiskAssessment = () => {
         primaryButtonLink="#contact"
         secondaryButtonText="Learn About ISO 42001"
         secondaryButtonLink="/services/ai-governance/iso-42001"
-        backgroundColorClass="bg-gradient-to-br from-atoro-blue/90 to-atoro-teal"
+        backgroundColorClass={tokens.gradients.sectionTeal}
       />
 
       {/* Main Assessment Content */}
       <RiskAssessmentSection />
       
       {/* Process Section */}
-      <section className="py-16 bg-gray-50">
-        <Container>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-3">Our Assessment Process</h2>
-            <p className="text-gray-700 max-w-2xl mx-auto">
-              Our structured approach ensures we identify and address all potential risks in your AI systems
-            </p>
-          </div>
-          
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                {
-                  step: 1,
-                  title: "Discovery & Analysis",
-                  description: "We examine your AI systems, data sources, and decision-making processes to identify key risk areas.",
-                  icon: <FileText className="h-6 w-6 text-atoro-blue" />
-                },
-                {
-                  step: 2,
-                  title: "Risk Evaluation",
-                  description: "We assess identified risks against regulatory requirements and industry best practices.",
-                  icon: <ShieldAlert className="h-6 w-6 text-atoro-blue" />
-                },
-                {
-                  step: 3,
-                  title: "Recommendations",
-                  description: "We deliver practical, prioritized recommendations to mitigate risks and improve AI governance.",
-                  icon: <Lightbulb className="h-6 w-6 text-atoro-blue" />
-                }
-              ].map((step) => (
-                <ServiceCard
-                  key={step.step}
-                  title={`${step.step}. ${step.title}`}
-                  description={step.description}
-                  icon={step.icon}
-                  iconContainerClassName="p-3 bg-atoro-blue/10 rounded-lg"
-                />
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
+      <ServiceSectionWrapper
+        title="Our Assessment Process"
+        description="Our structured approach ensures we identify and address all potential risks in your AI systems"
+        className={tokens.spacing.section.lg}
+        bgColor="bg-gray-50"
+      >
+        <div className="max-w-4xl mx-auto">
+          <ServiceFeatureGrid columns={3} gap="md">
+            {[
+              {
+                step: 1,
+                title: "Discovery & Analysis",
+                description: "We examine your AI systems, data sources, and decision-making processes to identify key risk areas.",
+                icon: <FileText className="h-6 w-6 text-atoro-blue" />
+              },
+              {
+                step: 2,
+                title: "Risk Evaluation",
+                description: "We assess identified risks against regulatory requirements and industry best practices.",
+                icon: <ShieldAlert className="h-6 w-6 text-atoro-blue" />
+              },
+              {
+                step: 3,
+                title: "Recommendations",
+                description: "We deliver practical, prioritized recommendations to mitigate risks and improve AI governance.",
+                icon: <Lightbulb className="h-6 w-6 text-atoro-blue" />
+              }
+            ].map((step) => (
+              <ServiceCard
+                key={step.step}
+                title={`${step.step}. ${step.title}`}
+                description={step.description}
+                icon={step.icon}
+                iconContainerClassName="p-3 bg-atoro-blue/10 rounded-lg"
+              />
+            ))}
+          </ServiceFeatureGrid>
+        </div>
+      </ServiceSectionWrapper>
       
       {/* Testimonials Section */}
       <TestimonialSection 
