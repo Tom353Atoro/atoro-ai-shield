@@ -3,12 +3,14 @@ import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 interface ServiceHeroProps {
   title: string;
   subtitle: string;
   primaryButtonText?: string;
   primaryButtonLink?: string;
+  primaryButtonId?: string; // For connecting with NeetoCal or other tools
   secondaryButtonText?: string;
   secondaryButtonLink?: string;
   backgroundColorClass?: string;
@@ -17,6 +19,11 @@ interface ServiceHeroProps {
   accentTextClassName?: string;
   accentText?: string;
   titleClassName?: string;
+  className?: string;
+  contentClassName?: string;
+  imageClassName?: string;
+  primaryButtonOnClick?: () => void;
+  secondaryButtonOnClick?: () => void;
 }
 
 const ServiceHero: React.FC<ServiceHeroProps> = ({
@@ -24,6 +31,7 @@ const ServiceHero: React.FC<ServiceHeroProps> = ({
   subtitle,
   primaryButtonText,
   primaryButtonLink = '#',
+  primaryButtonId,
   secondaryButtonText,
   secondaryButtonLink = '#',
   backgroundColorClass = 'bg-gradient-to-br from-atoro-teal to-black',
@@ -31,7 +39,12 @@ const ServiceHero: React.FC<ServiceHeroProps> = ({
   imageAlt = 'Service illustration',
   accentTextClassName = 'text-atoro-green',
   accentText,
-  titleClassName = 'mb-4 text-3xl md:text-4xl lg:text-5xl'
+  titleClassName = 'mb-4 text-3xl md:text-4xl lg:text-5xl',
+  className,
+  contentClassName,
+  imageClassName,
+  primaryButtonOnClick,
+  secondaryButtonOnClick,
 }) => {
   // Function to add accent color to the first part of the title if accentText is provided
   const renderTitle = () => {
@@ -46,7 +59,11 @@ const ServiceHero: React.FC<ServiceHeroProps> = ({
   };
 
   return (
-    <section className={`pt-16 pb-8 ${backgroundColorClass} text-white relative overflow-hidden`}>
+    <section className={cn(
+      "pt-16 pb-8 text-white relative overflow-hidden",
+      backgroundColorClass,
+      className
+    )}>
       {/* Light overlay pattern for visibility */}
       <div className="absolute inset-0 opacity-20 z-0">
         <div className="absolute inset-0 bg-grid-white/10"></div>
@@ -54,38 +71,54 @@ const ServiceHero: React.FC<ServiceHeroProps> = ({
       
       {/* Hero content */}
       <Container>
-        <div className="grid md:grid-cols-2 gap-8 items-center relative z-10">
+        <div className={cn(
+          "grid md:grid-cols-2 gap-8 items-center relative z-10",
+          contentClassName
+        )}>
           <div>
             {renderTitle()}
             <p className="text-lg mb-6 opacity-90">
               {subtitle}
             </p>
-            <div className="flex flex-wrap gap-3">
-              {primaryButtonText && (
-                <Button 
-                  size="lg" 
-                  className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green"
-                  asChild
-                >
-                  <Link to={primaryButtonLink}>{primaryButtonText}</Link>
-                </Button>
-              )}
-              
-              {secondaryButtonText && (
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="border-white text-white hover:bg-white/10"
-                  asChild
-                >
-                  <Link to={secondaryButtonLink}>{secondaryButtonText}</Link>
-                </Button>
-              )}
-            </div>
+            {(primaryButtonText || secondaryButtonText) && (
+              <div className="flex flex-wrap gap-3">
+                {primaryButtonText && (
+                  <Button 
+                    size="lg" 
+                    className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green"
+                    id={primaryButtonId}
+                    onClick={primaryButtonOnClick}
+                    asChild={!primaryButtonOnClick}
+                  >
+                    {primaryButtonOnClick ? (
+                      primaryButtonText
+                    ) : (
+                      <Link to={primaryButtonLink}>{primaryButtonText}</Link>
+                    )}
+                  </Button>
+                )}
+                
+                {secondaryButtonText && (
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="border-white text-white hover:bg-white/10"
+                    onClick={secondaryButtonOnClick}
+                    asChild={!secondaryButtonOnClick}
+                  >
+                    {secondaryButtonOnClick ? (
+                      secondaryButtonText
+                    ) : (
+                      <Link to={secondaryButtonLink}>{secondaryButtonText}</Link>
+                    )}
+                  </Button>
+                )}
+              </div>
+            )}
           </div>
           
           {imageUrl && (
-            <div className="hidden md:block">
+            <div className={cn("hidden md:block", imageClassName)}>
               <img 
                 alt={imageAlt} 
                 className="object-cover w-full rounded-lg" 

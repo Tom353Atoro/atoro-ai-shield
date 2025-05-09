@@ -3,6 +3,7 @@ import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 import NeetoCalPopup from '@/components/shared/NeetoCalPopup';
 
 interface ServiceCTAProps {
@@ -13,6 +14,15 @@ interface ServiceCTAProps {
   secondaryButtonText?: string;
   secondaryButtonLink?: string;
   backgroundClass?: string;
+  className?: string;
+  contentClassName?: string;
+  titleClassName?: string;
+  descriptionClassName?: string;
+  buttonsClassName?: string;
+  primaryButtonClassName?: string;
+  secondaryButtonClassName?: string;
+  primaryButtonOnClick?: () => void;
+  secondaryButtonOnClick?: () => void;
 }
 
 const ServiceCTA: React.FC<ServiceCTAProps> = ({
@@ -22,21 +32,31 @@ const ServiceCTA: React.FC<ServiceCTAProps> = ({
   primaryButtonId,
   secondaryButtonText,
   secondaryButtonLink,
-  backgroundClass = "bg-gradient-to-br from-atoro-blue/10 to-atoro-green/10"
+  backgroundClass = "bg-gradient-to-br from-atoro-blue/10 to-atoro-green/10",
+  className = "py-12",
+  contentClassName = "text-center max-w-2xl mx-auto",
+  titleClassName = "mb-4",
+  descriptionClassName = "text-gray-700 mb-6",
+  buttonsClassName = "flex flex-col sm:flex-row gap-4 justify-center",
+  primaryButtonClassName = "bg-atoro-green text-atoro-teal hover:bg-atoro-light-green",
+  secondaryButtonClassName = "border-atoro-teal text-atoro-teal hover:bg-atoro-teal/5",
+  primaryButtonOnClick,
+  secondaryButtonOnClick,
 }) => {
   return (
-    <section className={`py-12 ${backgroundClass}`}>
+    <section className={cn(className, backgroundClass)}>
       <Container>
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="mb-4">{title}</h2>
-          <p className="text-gray-700 mb-6">
+        <div className={contentClassName}>
+          <h2 className={titleClassName}>{title}</h2>
+          <p className={descriptionClassName}>
             {description}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className={buttonsClassName}>
             <Button 
               size="lg" 
-              className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green" 
+              className={primaryButtonClassName} 
               id={primaryButtonId}
+              onClick={primaryButtonOnClick}
             >
               {primaryButtonText}
             </Button>
@@ -46,10 +66,15 @@ const ServiceCTA: React.FC<ServiceCTAProps> = ({
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-atoro-teal text-atoro-teal hover:bg-atoro-teal/5" 
-                asChild
+                className={secondaryButtonClassName} 
+                asChild={!secondaryButtonOnClick}
+                onClick={secondaryButtonOnClick}
               >
-                <Link to={secondaryButtonLink}>{secondaryButtonText}</Link>
+                {secondaryButtonOnClick ? (
+                  secondaryButtonText
+                ) : (
+                  <Link to={secondaryButtonLink}>{secondaryButtonText}</Link>
+                )}
               </Button>
             )}
           </div>
