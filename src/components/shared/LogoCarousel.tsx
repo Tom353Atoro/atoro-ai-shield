@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { CarouselApi } from "@/components/ui/carousel";
 
 // Define the type for each logo item
 interface LogoItem {
@@ -54,7 +55,7 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
   showControls = true,
   speed = 300
 }) => {
-  const [api, setApi] = useState<any>(null);
+  const [api, setApi] = useState<CarouselApi>();
   const [loaded, setLoaded] = useState<{[key: string]: boolean}>({});
 
   // Handle image load events
@@ -93,8 +94,9 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
         
         {/* Logo carousel */}
         <Carousel 
+          setApi={setApi}
           className="w-full"
-          // Removed setApi prop here to fix the build error
+          opts={carouselOptions}
         >
           <CarouselContent className="-ml-4">
             {logos.map((logo) => (
