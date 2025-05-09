@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+
+import React from 'react';
 import { Container } from '@/components/ui/Container';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
-import * as EmblaCarousel from "embla-carousel-react";
-import TestimonialCard from './testimonials/TestimonialCard';
-import GridLayout from './testimonials/GridLayout';
-import CarouselLayout from './testimonials/CarouselLayout';
-import FeaturedLayout from './testimonials/FeaturedLayout';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Star, StarHalf, StarOff, MessageCircle } from 'lucide-react';
 
 export type Testimonial = {
   quote: string;
@@ -15,7 +15,6 @@ export type Testimonial = {
   avatarSrc?: string;
   companyLogoSrc?: string;
   rating?: number; // out of 5
-  date?: string; // Optional date field
 };
 
 export type TestimonialVariant = 'grid' | 'carousel' | 'featured';
@@ -31,7 +30,6 @@ export interface TestimonialSectionProps {
   showAvatars?: boolean;
   bgColor?: string;
   sectionId?: string;
-  autoScrollInterval?: number; // Time in ms between auto-scrolling
 }
 
 const TestimonialSection: React.FC<TestimonialSectionProps> = ({
@@ -45,67 +43,168 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
   showAvatars = true,
   bgColor = 'bg-gray-50',
   sectionId,
-  autoScrollInterval = 5000, // Default to 5 seconds
 }) => {
-  // For auto-scrolling functionality
-  const [emblaRef, emblaApi] = EmblaCarousel.emblaCarouselReact({ loop: true });
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // Function to get initials from name
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(part => part[0])
+      .join('')
+      .toUpperCase();
+  };
 
-  // Auto-scrolling effect
-  useEffect(() => {
-    if (!emblaApi || variant !== 'carousel') return;
+  // Function to render star ratings
+  const renderStarRating = (rating: number) => {
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
     
-    const interval = setInterval(() => {
-      emblaApi.scrollNext();
-    }, autoScrollInterval);
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<Star key={`star-${i}`} className="w-4 h-4 text-yellow-500" />);
+    }
+    
+    if (hasHalfStar) {
+      stars.push(<StarHalf key="half-star" className="w-4 h-4 text-yellow-500" />);
+    }
+    
+    const emptyStars = 5 - stars.length;
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(<StarOff key={`empty-${i}`} className="w-4 h-4 text-gray-300" />);
+    }
+    
+    return <div className="flex gap-1">{stars}</div>;
+  };
 
-    // Update current index on scroll
-    const onSelect = () => {
-      setCurrentIndex(emblaApi.selectedScrollSnap());
-    };
-    emblaApi.on('select', onSelect);
+  // Testimonial Card Component
+  const TestimonialCard = ({ testimonial, className }: { testimonial: Testimonial; className?: string }) => (
+    <Card className={cn(
+      "bg-white p-6 rounded-2xl shadow-sm border border-gray-100 h-full",
+      "transition-all duration-300 hover:shadow-md hover:border-atoro-blue/20",
+      className
+    )}>
+      <CardHeader className="pb-2 pt-2 relative">
+        {showRatings && testimonial.rating && (
+          <div className="mb-2">{renderStarRating(testimonial.rating)}</div>
+        )}
+        <div className="absolute top-4 right-2">
+          <MessageCircle className="w-8 h-8 text-atoro-purple/10" />
+        </div>
+      </CardHeader>
+      
+      <CardContent>
+        <p className="text-gray-700 relative z-10 italic">
+          "{testimonial.quote}"
+        </p>
+      </CardContent>
+      
+      <CardFooter className="flex items-center gap-3 pt-4 mt-auto">
+        {showAvatars && (
+          <Avatar className="h-14 w-14 border border-gray-200 ring-2 ring-atoro-blue/10">
+            {testimonial.avatarSrc ? 
+              <AvatarImage src={testimonial.avatarSrc} alt={testimonial.author} className="object-cover" /> : 
+              <AvatarFallback className="bg-atoro-blue/10 text-atoro-teal">
+                {getInitials(testimonial.author)}
+              </AvatarFallback>
+            }
+          </Avatar>
+        )}
+        
+        <div className="flex flex-col">
+          <div className="font-medium text-base">{testimonial.author}</div>
+          <div className="text-sm text-gray-600">
+            {testimonial.title}
+            {testimonial.company && `, ${testimonial.company}`}
+          </div>
+        </div>
+      </CardFooter>
+    </Card>
+  );
 
-    return () => {
-      clearInterval(interval);
-      emblaApi.off('select', onSelect);
-    };
-  }, [emblaApi, autoScrollInterval, variant]);
+  // Render Grid Layout
+  const GridLayout = () => {
+    // Display 4 testimonials in a 2x2 grid on larger screens, stack on mobile
+    const displayTestimonials = testimonials.slice(0, 4);
+    
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {displayTestimonials.map((testimonial, index) => (
+          <TestimonialCard 
+            key={`${testimonial.author}-${index}`} 
+            testimonial={testimonial} 
+            className={cn(
+              "animate-fade-in", 
+              { 
+                "delay-100": index === 1, 
+                "delay-200": index === 2,
+                "delay-300": index === 3  
+              }, 
+              cardClassName
+            )}
+          />
+        ))}
+      </div>
+    );
+  };
+
+  // Render Carousel Layout
+  const CarouselLayout = () => (
+    <div className="relative">
+      <Carousel className="w-full">
+        <CarouselContent>
+          {testimonials.map((testimonial, index) => (
+            <CarouselItem key={`${testimonial.author}-${index}`} className="md:basis-1/2 lg:basis-1/3">
+              <TestimonialCard testimonial={testimonial} className={cardClassName} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <div className="hidden md:block">
+          <CarouselPrevious />
+          <CarouselNext />
+        </div>
+      </Carousel>
+    </div>
+  );
+
+  // Render Featured Layout (one main testimonial, others in a grid)
+  const FeaturedLayout = () => {
+    const [featured, ...rest] = testimonials;
+    
+    return (
+      <div className="space-y-8">
+        <div className="animate-fade-in">
+          <TestimonialCard 
+            testimonial={featured} 
+            className={cn("border-atoro-blue/20 shadow-md", cardClassName)} 
+          />
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {rest.slice(0, 3).map((testimonial, index) => (
+            <TestimonialCard 
+              key={`${testimonial.author}-${index}`} 
+              testimonial={testimonial} 
+              className={cn(
+                "animate-fade-in", 
+                { "delay-100": index === 0, "delay-200": index === 1, "delay-300": index === 2 }, 
+                cardClassName
+              )}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   // Select layout based on variant
   const renderLayout = () => {
     switch (variant) {
       case 'carousel':
-        return (
-          <CarouselLayout 
-            testimonials={testimonials}
-            showRatings={showRatings}
-            showAvatars={showAvatars}
-            cardClassName={cardClassName}
-            emblaRef={emblaRef}
-            emblaApi={emblaApi}
-            currentIndex={currentIndex}
-            setCurrentIndex={setCurrentIndex}
-          />
-        );
+        return <CarouselLayout />;
       case 'featured':
-        return (
-          <FeaturedLayout 
-            testimonials={testimonials}
-            showRatings={showRatings}
-            showAvatars={showAvatars}
-            cardClassName={cardClassName}
-          />
-        );
+        return <FeaturedLayout />;
       case 'grid':
       default:
-        return (
-          <GridLayout 
-            testimonials={testimonials}
-            showRatings={showRatings}
-            showAvatars={showAvatars}
-            cardClassName={cardClassName}
-          />
-        );
+        return <GridLayout />;
     }
   };
 

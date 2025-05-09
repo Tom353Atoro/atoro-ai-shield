@@ -9,8 +9,7 @@ const Testimonials = () => {
       author: "Yass Omar",
       title: "Head of Legal",
       company: "Heidi Health",
-      avatarSrc: "/lovable-uploads/0587c9dd-34df-40fd-98e6-d1e687f36909.png",
-      date: "15 Mar, 2024",
+      avatarSrc: "/lovable-uploads/c3b2775f-5246-4ccc-b27c-85e69efbe307.png",
     },
     {
       quote: "The Atoro team were fantastic to work with - they kept us organised and communicated effectively over Slack, email, and weekly check-ins so that we could meet our target deadline to be GDPR compliant within 12 weeks. They also helped answer direct questions posed by customers during security review processes.",
@@ -18,15 +17,13 @@ const Testimonials = () => {
       title: "CEO",
       company: "Sugarwork",
       avatarSrc: "/lovable-uploads/697c806d-2cfd-402a-8b50-65ceecb5c88c.png",
-      date: "02 Feb, 2024",
     },
     {
       quote: "They are professional, knowledgeable, and responsive. We consistently felt confident in their strong expertise and appreciated their guidance throughout the entire SOC2 certification process.",
       author: "Camil Blanaru",
       title: "CTO",
       company: "Prezly BV",
-      avatarSrc: "/lovable-uploads/c3b2775f-5246-4ccc-b27c-85e69efbe307.png",
-      date: "12 Jan, 2024",
+      avatarSrc: "/lovable-uploads/0587c9dd-34df-40fd-98e6-d1e687f36909.png",
     },
     {
       quote: "Atoro guided us through the entire ISO 27001 certification process with a hands-on approach. Their team were thorough, kept us informed throughout, and ensured we were fully prepared for the certification audit. They are a great and knowledgeable team to work with. Always on time, care about details but also about having a friendly co-working atmosphere.",
@@ -34,7 +31,6 @@ const Testimonials = () => {
       title: "CEO",
       company: "Heartpace",
       avatarSrc: "/lovable-uploads/2ff67c0a-34c5-4cf0-83e9-3dbddc25b5ce.png",
-      date: "05 Dec, 2023",
     },
   ];
 
@@ -43,10 +39,9 @@ const Testimonials = () => {
       testimonials={testimonials}
       title="What Our Clients Say"
       description="Don't just take our word for it. See what our customers have to say about their experience working with Atoro Security."
-      variant="carousel"
+      variant="grid"
       showAvatars={true}
       bgColor="bg-gray-50"
-      autoScrollInterval={6000} // Auto-scroll every 6 seconds
     />
   );
 };
