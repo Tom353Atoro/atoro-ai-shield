@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
@@ -6,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Star, StarHalf, StarOff, MessageCircle } from 'lucide-react';
-import { useEmblaCarousel } from 'embla-carousel-react';
+import * as EmblaCarousel from 'embla-carousel-react';
 
 export type Testimonial = {
   quote: string;
@@ -48,8 +47,8 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
   sectionId,
   autoScrollInterval = 5000, // Default to 5 seconds
 }) => {
-  // For auto-scrolling functionality
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  // For auto-scrolling functionality - updated to use the correct import
+  const [emblaRef, emblaApi] = EmblaCarousel.useEmblaCarousel({ loop: true });
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Auto-scrolling effect
