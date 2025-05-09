@@ -49,7 +49,7 @@ const ContactContent = () => {
       <Container>
         <div className="grid md:grid-cols-2 gap-12">
           <ContactInfo />
-          <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-100" style={{ minHeight: "500px" }}>
+          <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-100" style={{ height: "700px" }}>
             <div style={{ height: "100%", width: "100%" }} id="inline-embed-container">
               {/* NeetoForm will be rendered here */}
             </div>
