@@ -1,3 +1,4 @@
+
 export interface StaticBlogPost {
   id: string;
   title: string;
@@ -7,6 +8,7 @@ export interface StaticBlogPost {
   content: string;
   imageUrl?: string;
   categories: string[];
+  readingTime?: string; // Added this field
   author: {
     name: string;
     imageUrl?: string;
