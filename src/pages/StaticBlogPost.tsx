@@ -53,6 +53,9 @@ const StaticBlogPost = () => {
     }
   };
 
+  // Check if the content starts with a div with flex layout (used for cybersecurity blog)
+  const hasContentWithImage = post.content.trim().startsWith('<div class="flex');
+
   return (
     <Layout>
       <article>
@@ -95,8 +98,8 @@ const StaticBlogPost = () => {
           </Container>
         </section>
 
-        {/* Featured Image */}
-        {post.imageUrl && (
+        {/* Featured Image - Only show if not already included in the content */}
+        {post.imageUrl && !hasContentWithImage && (
           <div className="py-8">
             <Container>
               <div className="max-w-4xl mx-auto">
@@ -122,6 +125,28 @@ const StaticBlogPost = () => {
               <div className="mt-12 p-6 bg-gradient-to-r from-atoro-teal/10 to-atoro-blue/10 rounded-lg">
                 <h3 className="text-xl font-bold mb-2">Need help with AI Governance?</h3>
                 <p className="mb-4">Our team of experts can help you navigate the complexities of AI regulations and implement robust governance frameworks.</p>
+                <Button asChild>
+                  <Link to="/contact">Contact Us Today</Link>
+                </Button>
+              </div>
+            )}
+            
+            {/* CTA for Security posts */}
+            {primaryCategory?.toLowerCase() === 'security' && (
+              <div className="mt-12 p-6 bg-gradient-to-r from-atoro-blue/10 to-atoro-purple/10 rounded-lg">
+                <h3 className="text-xl font-bold mb-2">Need help with Cybersecurity?</h3>
+                <p className="mb-4">Our team can help you implement robust security measures and achieve ISO 27001 or SOC 2 certification.</p>
+                <Button asChild>
+                  <Link to="/contact">Contact Us Today</Link>
+                </Button>
+              </div>
+            )}
+            
+            {/* CTA for Privacy posts */}
+            {primaryCategory?.toLowerCase() === 'privacy' && (
+              <div className="mt-12 p-6 bg-gradient-to-r from-atoro-green/10 to-atoro-teal/10 rounded-lg">
+                <h3 className="text-xl font-bold mb-2">Need help with Privacy Compliance?</h3>
+                <p className="mb-4">Our privacy experts can help you navigate GDPR and other privacy regulations.</p>
                 <Button asChild>
                   <Link to="/contact">Contact Us Today</Link>
                 </Button>
