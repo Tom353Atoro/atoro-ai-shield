@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { 
   Carousel, 
   CarouselContent, 
@@ -9,7 +9,6 @@ import {
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
-import type { CarouselApi } from "@/components/ui/carousel";
 
 // Define the type for each logo item
 interface LogoItem {
@@ -55,31 +54,37 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
   showControls = true,
   speed = 300
 }) => {
-  const [api, setApi] = useState<CarouselApi>();
+  const carouselRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState<{[key: string]: boolean}>({});
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   // Handle image load events
   const handleImageLoad = (id: string | number) => {
     setLoaded(prev => ({ ...prev, [id.toString()]: true }));
   };
 
+  // Manual navigation functions
+  const scrollNext = () => {
+    if (!carouselRef.current) return;
+    const content = carouselRef.current.querySelector('div > div') as HTMLDivElement;
+    if (content) {
+      const slideWidth = content.children[0]?.clientWidth || 0;
+      const newPosition = ((currentSlide + 1) % logos.length) * slideWidth;
+      content.scrollTo({ left: newPosition, behavior: 'smooth' });
+      setCurrentSlide((currentSlide + 1) % logos.length);
+    }
+  };
+
   // Set up auto-scroll functionality
   useEffect(() => {
-    if (!api || !autoScroll) return;
+    if (!autoScroll) return;
     
     const interval = setInterval(() => {
-      api.scrollNext();
+      scrollNext();
     }, scrollInterval);
     
     return () => clearInterval(interval);
-  }, [api, autoScroll, scrollInterval]);
-
-  const carouselOptions = {
-    align: "start" as const, // Use 'as const' to specify this is a literal type
-    loop: true,
-    dragFree: true,
-    speed: speed
-  };
+  }, [autoScroll, scrollInterval, currentSlide, logos.length]);
 
   return (
     <section className={cn('py-10', className)}>
@@ -94,9 +99,8 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
         
         {/* Logo carousel */}
         <Carousel 
-          setApi={setApi}
+          ref={carouselRef}
           className="w-full"
-          opts={carouselOptions}
         >
           <CarouselContent className="-ml-4">
             {logos.map((logo) => (
