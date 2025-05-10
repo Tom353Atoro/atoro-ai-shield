@@ -61,7 +61,7 @@ const ServiceHero: React.FC<ServiceHeroProps> = ({
 
   return (
     <section className={cn(
-      tokens.spacing.section.default,
+      tokens.spacing.section.lg, // Fixed: changed from 'default' to 'lg'
       "pt-16 pb-8 text-white relative overflow-hidden",
       backgroundColorClass,
       className

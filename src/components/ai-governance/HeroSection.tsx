@@ -1,14 +1,16 @@
 
 import React from 'react';
-import ServiceHeroSection from '@/components/services/ServiceHeroSection';
+import UnifiedHero from '@/components/shared/UnifiedHero';
 import { tokens } from '@/lib/designTokens';
 
 const HeroSection = () => {
   return (
-    <ServiceHeroSection
+    <UnifiedHero
+      layout="two-column"
       title="with Confidence"
       highlightText="Innovate"
-      description="ISO 42001 certification support and virtual AI Governance Officer (vAIGO) services that keep your machine-learning features ethical, secure, and compliant."
+      highlightTextClassName={tokens.colors.text.green}
+      subtitle="ISO 42001 certification support and virtual AI Governance Officer (vAIGO) services that keep your machine-learning features ethical, secure, and compliant."
       primaryButtonText="AI Risk Assessment"
       primaryButtonLink="/contact"
       secondaryButtonText="Explore AI Services"

@@ -1,14 +1,14 @@
 
 import React from 'react';
-import ServiceHeroSection from '@/components/services/ServiceHeroSection';
+import UnifiedHero from '@/components/shared/UnifiedHero';
 import { tokens } from '@/lib/designTokens';
 
 const HeroSection = () => {
   return (
-    <ServiceHeroSection
+    <UnifiedHero
+      layout="two-column"
       title="Move Fast with Confidence"
-      highlightText=""
-      description="In the SaaS world, a single security slip-up can break customer trust. Our holistic cyber security solutions help you move quickly without compromising safety."
+      subtitle="In the SaaS world, a single security slip-up can break customer trust. Our holistic cyber security solutions help you move quickly without compromising safety."
       primaryButtonText="Book a Security Assessment"
       primaryButtonLink="/contact"
       backgroundClass={tokens.gradients.heroDarkTeal}

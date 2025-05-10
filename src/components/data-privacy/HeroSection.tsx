@@ -1,14 +1,16 @@
 
 import React from 'react';
-import ServiceHeroSection from '@/components/services/ServiceHeroSection';
+import UnifiedHero from '@/components/shared/UnifiedHero';
 import { tokens } from '@/lib/designTokens';
 
 const HeroSection = () => {
   return (
-    <ServiceHeroSection
+    <UnifiedHero
+      layout="two-column"
       title="Not Afterthought"
       highlightText="Privacy by Design,"
-      description="Turn complex privacy regulations into a competitive advantage. Our data privacy solutions handle compliance while you focus on building your product."
+      highlightTextClassName={tokens.colors.text.green}
+      subtitle="Turn complex privacy regulations into a competitive advantage. Our data privacy solutions handle compliance while you focus on building your product."
       primaryButtonText="Request Privacy Assessment"
       primaryButtonLink="/contact"
       backgroundClass={tokens.gradients.heroDarkTeal}
