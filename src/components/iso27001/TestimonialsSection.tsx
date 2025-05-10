@@ -6,7 +6,7 @@ import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      quote: "Atoro's ISO 27001 implementation service was transformative for our business. Their streamlined approach helped us achieve certification in just 11 weeks, and the process was surprisingly painless.",
+      quote: "Atoro's ISO 27001 implementation service was transformative. Their streamlined approach helped us achieve certification in just 11 weeks.",
       author: "Michael Chen",
       title: "CTO",
       company: "CloudSecure",
@@ -15,7 +15,7 @@ const TestimonialsSection = () => {
       rating: 5
     },
     {
-      quote: "The ISO 27001 certification process with Atoro was incredibly efficient. Their team handled all the complex documentation and helped us implement practical security controls that made sense for our SaaS business.",
+      quote: "The ISO 27001 process with Atoro was incredibly efficient. Their team handled complex documentation and helped implement practical security controls.",
       author: "Sarah Johnson",
       title: "Head of Compliance",
       company: "DataShield",
@@ -24,7 +24,7 @@ const TestimonialsSection = () => {
       rating: 4.5
     },
     {
-      quote: "As a fast-growing startup, we needed to get ISO 27001 certified quickly to close enterprise deals. Atoro delivered a tailored implementation that matched our specific needs and helped us achieve certification on our first attempt.",
+      quote: "As a fast-growing startup, we needed to get ISO 27001 certified quickly. Atoro delivered a tailored implementation that matched our specific needs.",
       author: "David Rodriguez",
       title: "CEO",
       company: "SecureStack",

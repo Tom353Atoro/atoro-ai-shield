@@ -26,6 +26,7 @@ export interface AnimatedTestimonialsProps {
   trustedCompanies?: string[]
   trustedCompaniesTitle?: string
   className?: string
+  showCompanyInCard?: boolean
 }
 
 export function AnimatedTestimonials({
@@ -37,6 +38,7 @@ export function AnimatedTestimonials({
   trustedCompanies = [],
   trustedCompaniesTitle = "Trusted by companies worldwide",
   className,
+  showCompanyInCard = false,
 }: AnimatedTestimonialsProps) {
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -130,7 +132,7 @@ export function AnimatedTestimonials({
           </motion.div>
 
           {/* Right side: Testimonial cards */}
-          <motion.div variants={itemVariants} className="relative h-full mr-0 sm:mr-4 md:mr-10 min-h-[300px] md:min-h-[400px]">
+          <motion.div variants={itemVariants} className="relative min-h-[300px] md:min-h-[400px] mr-0 sm:mr-4 md:mr-10">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={testimonial.id}
@@ -151,9 +153,9 @@ export function AnimatedTestimonials({
                     ))}
                   </div>
 
-                  <div className="relative mb-4 sm:mb-6 flex-1">
+                  <div className="relative mb-4 sm:mb-6 flex-1 overflow-hidden">
                     <Quote className="absolute -top-2 -left-2 h-6 w-6 sm:h-8 sm:w-8 text-primary/20 rotate-180" />
-                    <p className="relative z-10 text-base sm:text-lg font-medium leading-relaxed">{testimonial.content}</p>
+                    <p className="relative z-10 text-base sm:text-lg font-medium leading-relaxed line-clamp-6">{testimonial.content}</p>
                   </div>
 
                   <Separator className="my-3 sm:my-4" />
@@ -166,7 +168,7 @@ export function AnimatedTestimonials({
                     <div>
                       <h3 className="text-sm sm:text-base font-semibold">{testimonial.name}</h3>
                       <p className="text-xs sm:text-sm text-muted-foreground">
-                        {testimonial.role}, {testimonial.company}
+                        {showCompanyInCard ? `${testimonial.role}, ${testimonial.company}` : testimonial.role}
                       </p>
                     </div>
                   </div>

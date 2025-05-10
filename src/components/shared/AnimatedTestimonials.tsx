@@ -51,6 +51,7 @@ interface AnimatedTestimonialsProps {
   bgColor?: string;
   trustedCompanies?: string[];
   trustedCompaniesTitle?: string;
+  showCompanyInCard?: boolean;
 }
 
 const AnimatedTestimonials: React.FC<AnimatedTestimonialsProps> = ({
@@ -62,6 +63,7 @@ const AnimatedTestimonials: React.FC<AnimatedTestimonialsProps> = ({
   bgColor,
   trustedCompanies = [],
   trustedCompaniesTitle = "Trusted by companies worldwide",
+  showCompanyInCard = false,
 }) => {
   // Convert the testimonials to the format expected by the UI component
   const uiTestimonials = testimonials.map((testimonial, index) => {
@@ -85,6 +87,7 @@ const AnimatedTestimonials: React.FC<AnimatedTestimonialsProps> = ({
       className={`${bgColor || ''} ${className || ''}`}
       trustedCompanies={companies.length > 0 ? Array.from(new Set(companies)) : []}
       trustedCompaniesTitle={trustedCompaniesTitle}
+      showCompanyInCard={showCompanyInCard}
     />
   );
 };

@@ -4,14 +4,14 @@ import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
 
 const testimonials = [
   {
-    quote: "The AI risk assessment identified crucial compliance gaps we would have missed. Atoro's methodical approach saved us from potential regulatory issues.",
+    quote: "The AI risk assessment identified crucial compliance gaps we would have missed. Atoro's approach saved us from potential regulatory issues.",
     author: "Thomas Grant",
     title: "CIO",
     company: "Algorythm",
     rating: 5
   },
   {
-    quote: "Comprehensive yet practical - their assessment translated complex AI risks into clear action items our development team could implement.",
+    quote: "Comprehensive yet practical - their assessment translated complex AI risks into clear action items our team could implement.",
     author: "Leila Martinez",
     title: "VP Engineering",
     company: "DataPoint",

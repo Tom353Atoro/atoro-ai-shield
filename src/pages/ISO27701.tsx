@@ -15,19 +15,19 @@ const ISO27701 = () => {
   // ISO 27701 specific testimonials
   const isoTestimonials = [
     {
-      quote: "Atoro's ISO 27701 implementation process was structured and efficient. Their team's expertise helped us extend our existing ISO 27001 certification with minimal disruption.",
+      quote: "Atoro's ISO 27701 implementation was structured and efficient. Their expertise helped us extend our ISO 27001 certification with minimal disruption.",
       author: "James Wilson",
       title: "Information Security Officer",
       company: "DataSecure Technologies",
       rating: 5
     }, {
-      quote: "The gap assessment provided by Atoro gave us clear visibility into what we needed to address for ISO 27701. Their guidance throughout the certification process was invaluable.",
+      quote: "The gap assessment provided by Atoro gave us clear visibility into what we needed to address for ISO 27701.",
       author: "Elena Martinez",
       title: "Privacy Director",
       company: "CloudPrivacy Solutions",
       rating: 4.5
     }, {
-      quote: "Implementing ISO 27701 with Atoro has significantly streamlined our approach to privacy management and helped us meet multiple compliance requirements simultaneously.",
+      quote: "Implementing ISO 27701 with Atoro has significantly streamlined our approach to privacy management.",
       author: "Michael Chang",
       title: "CTO",
       company: "SecureData Systems",
