@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ClientLogos from '@/components/shared/ClientLogos';
 import LogoBanner from '@/components/home/LogoBanner';
@@ -19,7 +20,7 @@ interface ClientSectionProps {
 }
 
 const ClientSection: React.FC<ClientSectionProps> = ({
-  title = "Trusted by Industry Leaders",
+  title = "",
   description,
   className,
   bgColor = "bg-gray-50",
