@@ -41,10 +41,10 @@ const Logos3 = ({
   const displayTitle = heading || title || "Trusted by these companies";
   
   return (
-    <section className={`py-6 md:py-10 ${bgColor} ${className}`}>
+    <section className={`py-8 md:py-12 ${bgColor} ${className}`}>
       <div className="container flex flex-col items-center text-center">
         {displayTitle && (
-          <h2 className="mb-3 text-pretty text-2xl font-bold lg:text-3xl">
+          <h2 className="mb-4 text-pretty text-2xl font-bold lg:text-3xl">
             {displayTitle}
           </h2>
         )}
@@ -54,21 +54,17 @@ const Logos3 = ({
           </p>
         )}
       </div>
-      <div className="pt-4">
+      <div className="pt-6">
         <div className="relative mx-auto flex items-center justify-center lg:max-w-5xl">
           <Carousel
             opts={{ 
               loop: true,
-              align: "center",
-              dragFree: true,
-              skipSnaps: true,
+              align: "start"
             }}
             plugins={[
               AutoScroll({ 
                 playOnInit: true, 
-                speed: 0.5,
-                stopOnInteraction: false,
-                stopOnMouseEnter: false,
+                speed: 0.5 
               })
             ]}
           >
@@ -76,17 +72,16 @@ const Logos3 = ({
               {logos.map((logo) => (
                 <CarouselItem
                   key={logo.id}
-                  className="flex min-w-[75px] max-w-[130px] basis-1/4 justify-center pl-0 xs:basis-1/5 sm:basis-1/6 md:basis-1/7"
+                  className="flex min-w-[80px] max-w-[140px] basis-1/3 justify-center pl-0 xs:basis-1/4 sm:basis-1/5 md:basis-1/6 lg:basis-1/7"
                 >
-                  <div className="mx-0.5 flex shrink-0 items-center justify-center">
-                    <div className="flex h-10 items-center justify-center">
+                  <div className="mx-0.5 sm:mx-1 flex shrink-0 items-center justify-center">
+                    <div className="flex h-10 sm:h-12 items-center justify-center">
                       <img
                         src={logo.image || logo.imagePath}
                         alt={logo.alt || logo.description || `${logo.name || ''} logo`}
-                        className={logo.className || "max-h-8 w-auto object-contain"}
-                        style={logo.width ? { width: `${Math.min(logo.width, 90)}px` } : undefined}
+                        className={logo.className || "max-h-8 sm:max-h-10 w-auto object-contain"}
+                        style={logo.width ? { width: `${Math.min(logo.width, 100)}px` } : undefined}
                         loading="eager"
-                        decoding="sync"
                       />
                     </div>
                   </div>
@@ -94,9 +89,8 @@ const Logos3 = ({
               ))}
             </CarouselContent>
           </Carousel>
-          {/* Reduced gradient width to show more of the logos */}
-          <div className="absolute inset-y-0 left-0 w-4 sm:w-6 bg-gradient-to-r from-background to-transparent z-10"></div>
-          <div className="absolute inset-y-0 right-0 w-4 sm:w-6 bg-gradient-to-l from-background to-transparent z-10"></div>
+          <div className="absolute inset-y-0 left-0 w-8 sm:w-12 bg-gradient-to-r from-background to-transparent"></div>
+          <div className="absolute inset-y-0 right-0 w-8 sm:w-12 bg-gradient-to-l from-background to-transparent"></div>
         </div>
       </div>
     </section>
