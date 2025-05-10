@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Shield, FileSearch, ArrowRight, CheckCircle, Bug, Network, ServerCog } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import TestimonialSection from '@/components/shared/TestimonialSection';
+import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
 
 const PenetrationTesting = () => {
   // Penetration testing specific testimonials
@@ -200,12 +200,12 @@ const PenetrationTesting = () => {
       </section>
 
       {/* Customer Testimonials */}
-      <TestimonialSection 
+      <AnimatedTestimonials 
         testimonials={pentestTestimonials} 
         title="What Our Clients Say" 
         description="Read how our penetration testing has helped organizations improve their security posture." 
         variant="featured" 
-        showRatings={true} 
+        badgeText="Client Testimonials"
         bgColor="bg-white" 
       />
 

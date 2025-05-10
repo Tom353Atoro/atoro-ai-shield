@@ -2,7 +2,7 @@
 import React from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
 import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
-import LogoCarousel from '@/components/shared/LogoCarousel';
+import ClientLogos from '@/components/shared/ClientLogos';
 import ServiceSectionWrapper from '@/components/services/ServiceSectionWrapper';
 
 // Import ISO 27701 specific components
@@ -70,11 +70,11 @@ const ISO27701 = () => {
       <HeroSection />
 
       {/* Client logos */}
-      <LogoCarousel 
+      <ClientLogos 
         logos={clientLogos} 
         title="Trusted by Leading Organizations" 
         description="We've helped companies across industries achieve ISO 27701 certification"
-        className="bg-gray-50"
+        bgColor="bg-gray-50"
       />
 
       {/* Implementation Process Section */}

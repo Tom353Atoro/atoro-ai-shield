@@ -1,11 +1,11 @@
 
 import React from 'react';
-import LogoCarousel from '@/components/shared/LogoCarousel';
+import ClientLogos from '@/components/shared/ClientLogos';
 
 /**
  * LogoBanner Component
  * 
- * Displays a smooth, fast-scrolling banner of partner logos
+ * Displays a smooth, auto-scrolling banner of partner logos
  * 
  * HOW TO UPDATE:
  * 1. Upload your logo images to the public/logos directory
@@ -54,14 +54,11 @@ const LogoBanner: React.FC = () => {
   ];
 
   return (
-    <LogoCarousel
+    <ClientLogos
       logos={logoData}
       title="Trusted by and Building Trust with"
       description="Forward thinking SaaS trust Atoro"
-      className="bg-gray-50"
-      autoScroll={true}
-      scrollInterval={1500}  // Faster scrolling (from 2000ms to 1500ms)
-      speed={300}  // Quicker transitions (from 500ms to 300ms)
+      bgColor="bg-gray-50"
     />
   );
 };

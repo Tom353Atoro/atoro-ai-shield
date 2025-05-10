@@ -7,8 +7,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Users, CheckCircle, ArrowRight, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import TestimonialSection from '@/components/shared/TestimonialSection';
-import LogoCarousel from '@/components/shared/LogoCarousel';
+import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
+import ClientLogos from '@/components/shared/ClientLogos';
 
 const EURepresentative = () => {
   // EU Representative specific testimonials
@@ -95,11 +95,11 @@ const EURepresentative = () => {
       </section>
 
       {/* Client logos */}
-      <LogoCarousel 
+      <ClientLogos 
         logos={clientLogos} 
         title="Trusted by Global Companies" 
         description="Non-EU organizations that rely on Atoro for their EU Representative needs"
-        className="bg-gray-50"
+        bgColor="bg-gray-50"
       />
 
       {/* What is an EU Representative Section */}
@@ -243,12 +243,12 @@ const EURepresentative = () => {
       </section>
 
       {/* Customer Testimonials */}
-      <TestimonialSection 
+      <AnimatedTestimonials 
         testimonials={euRepTestimonials} 
         title="What Our Clients Say" 
         description="Non-EU companies that rely on our EU Representative service" 
         variant="featured" 
-        showRatings={true} 
+        badgeText="Client Testimonials"
         bgColor="bg-gray-50" 
       />
 
