@@ -1,10 +1,8 @@
-
 import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Shield, Users, Award } from 'lucide-react';
-
 const AboutAtoro = () => {
   const values = [{
     icon: Shield,
@@ -19,7 +17,6 @@ const AboutAtoro = () => {
     title: 'Excellence',
     description: 'We hold ourselves to the highest standards in everything we deliver.'
   }];
-
   return <section className="py-20 bg-white">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -33,15 +30,7 @@ const AboutAtoro = () => {
               that growing tech companies face when balancing rapid innovation with robust security practices.
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-              {values.map(value => <div key={value.title} className="flex flex-col items-center text-center">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-atoro-green/20 to-atoro-blue/20 flex items-center justify-center mb-4">
-                    <value.icon className="w-6 h-6 text-atoro-teal" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2">{value.title}</h3>
-                  <p className="text-sm text-gray-600">{value.description}</p>
-                </div>)}
-            </div>
+            
             
             <Button variant="outline" asChild>
               <Link to="/about" className="group">
@@ -64,5 +53,4 @@ const AboutAtoro = () => {
       </Container>
     </section>;
 };
-
 export default AboutAtoro;
