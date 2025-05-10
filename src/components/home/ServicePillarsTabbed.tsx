@@ -2,8 +2,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FeatureTabs } from '@/components/ui/feature-tabs';
-import { Shield, FileKey, Brain } from 'lucide-react';
+import { Shield, FileKey, Brain, ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Button } from '@/components/ui/button';
 
 const ServicePillarsTabbed = () => {
   const isMobile = useIsMobile();
@@ -56,15 +57,65 @@ const ServicePillarsTabbed = () => {
     },
   ];
 
+  // Mobile card version
+  const MobileServiceCards = () => (
+    <div className="space-y-6">
+      {serviceTabs.map((service) => (
+        <div 
+          key={service.value}
+          className="bg-muted/70 rounded-lg p-5 border border-gray-200"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            {service.icon}
+            <span className="text-sm font-medium bg-background px-2 py-0.5 rounded">
+              {service.content.badge}
+            </span>
+          </div>
+          <h3 className="text-xl font-bold mb-2">{service.content.title}</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            {service.content.description}
+          </p>
+          <img
+            src={service.content.imageSrc}
+            alt={service.content.imageAlt}
+            className="w-full h-40 object-cover rounded-md mb-4"
+          />
+          <Button asChild size="sm" className="w-full">
+            <Link to={service.content.buttonLink} className="flex items-center justify-center">
+              {service.content.buttonText}
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+      ))}
+    </div>
+  );
+
   return (
-    <FeatureTabs
-      badge="Our Services"
-      heading="Our Three Integrated Pillars"
-      description="We protect and empower SaaS businesses through three tightly integrated service pillars, designed to work together seamlessly."
-      tabs={serviceTabs}
-      backgroundClass="gradient-bg-subtle"
-      className="overflow-hidden"
-    />
+    <div className="overflow-hidden">
+      {isMobile ? (
+        <section className="py-12 bg-muted/30">
+          <div className="container px-4">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold mb-2">Our Three Integrated Pillars</h2>
+              <p className="text-muted-foreground text-sm">
+                We protect and empower SaaS businesses through three tightly integrated service pillars.
+              </p>
+            </div>
+            <MobileServiceCards />
+          </div>
+        </section>
+      ) : (
+        <FeatureTabs
+          badge="Our Services"
+          heading="Our Three Integrated Pillars"
+          description="We protect and empower SaaS businesses through three tightly integrated service pillars, designed to work together seamlessly."
+          tabs={serviceTabs}
+          backgroundClass="gradient-bg-subtle"
+          className="overflow-hidden"
+        />
+      )}
+    </div>
   );
 };
 

@@ -69,15 +69,15 @@ const Logos3 = ({
               {logos.map((logo) => (
                 <CarouselItem
                   key={logo.id}
-                  className="flex basis-1/3 justify-center pl-0 sm:basis-1/4 md:basis-1/5 lg:basis-1/6"
+                  className="flex min-w-[120px] basis-1/2 justify-center pl-0 xs:basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6"
                 >
-                  <div className="mx-6 flex shrink-0 items-center justify-center">
-                    <div className="flex h-16 items-center justify-center">
+                  <div className="mx-2 sm:mx-4 md:mx-6 flex shrink-0 items-center justify-center">
+                    <div className="flex h-14 sm:h-16 items-center justify-center">
                       <img
                         src={logo.image || logo.imagePath}
                         alt={logo.alt || logo.description || `${logo.name || ''} logo`}
-                        className={logo.className || "max-h-10 w-auto object-contain"}
-                        style={logo.width ? { width: `${logo.width}px` } : undefined}
+                        className={logo.className || "max-h-8 sm:max-h-10 w-auto object-contain"}
+                        style={logo.width ? { width: `${Math.min(logo.width, 120)}px` } : undefined}
                       />
                     </div>
                   </div>
@@ -85,8 +85,8 @@ const Logos3 = ({
               ))}
             </CarouselContent>
           </Carousel>
-          <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-background to-transparent"></div>
-          <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-background to-transparent"></div>
+          <div className="absolute inset-y-0 left-0 w-8 sm:w-12 bg-gradient-to-r from-background to-transparent"></div>
+          <div className="absolute inset-y-0 right-0 w-8 sm:w-12 bg-gradient-to-l from-background to-transparent"></div>
         </div>
       </div>
     </section>
