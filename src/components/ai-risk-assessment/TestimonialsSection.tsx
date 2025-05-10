@@ -1,6 +1,6 @@
 
 import React from 'react';
-import TestimonialSection from '@/components/shared/TestimonialSection';
+import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
 
 const testimonials = [
   {
@@ -21,12 +21,11 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   return (
-    <TestimonialSection 
+    <AnimatedTestimonials 
       testimonials={testimonials}
       title="Assessment Outcomes"
       description="Our AI risk assessments deliver tangible results for SaaS companies"
-      variant="grid"
-      showRatings={true}
+      badgeText="Client Success"
       bgColor="bg-white"
     />
   );

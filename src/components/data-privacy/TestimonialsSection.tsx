@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { AnimatedTestimonials } from '@/components/ui/animated-testimonials';
+import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
 
 const TestimonialsSection = () => {
   const testimonials = [
@@ -38,7 +38,7 @@ const TestimonialsSection = () => {
   return (
     <AnimatedTestimonials
       title="Trusted by Privacy-Conscious Companies"
-      subtitle="Our privacy solutions have helped SaaS businesses of all sizes comply with regulations while building customer trust."
+      description="Our privacy solutions have helped SaaS businesses of all sizes comply with regulations while building customer trust."
       badgeText="Privacy Excellence"
       testimonials={testimonials}
       trustedCompanies={trustedCompanies}

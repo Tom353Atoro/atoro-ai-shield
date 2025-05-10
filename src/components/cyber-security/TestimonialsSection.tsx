@@ -1,6 +1,6 @@
 
 import React from 'react';
-import TestimonialSection from '@/components/shared/TestimonialSection';
+import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
 
 const TestimonialsSection = () => {
   // Security-specific testimonials
@@ -27,12 +27,11 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <TestimonialSection 
+    <AnimatedTestimonials 
       testimonials={securityTestimonials} 
       title="What Our Security Clients Say" 
       description="Read how we've helped companies like yours strengthen their security posture." 
-      variant="featured" 
-      showRatings={true} 
+      badgeText="Security Excellence" 
       bgColor="bg-white" 
     />
   );

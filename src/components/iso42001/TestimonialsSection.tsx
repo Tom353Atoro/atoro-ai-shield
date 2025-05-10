@@ -1,6 +1,6 @@
 
 import React from 'react';
-import TestimonialSection from '@/components/shared/TestimonialSection';
+import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
 
 const testimonials = [
   {
@@ -21,12 +21,11 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   return (
-    <TestimonialSection 
+    <AnimatedTestimonials 
       testimonials={testimonials}
       title="ISO 42001 Success Stories"
       description="See how we've helped companies achieve ISO 42001 certification"
-      variant="carousel"
-      showRatings={true}
+      badgeText="Certification Excellence"
       bgColor="bg-gray-50"
     />
   );

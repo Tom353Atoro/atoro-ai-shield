@@ -1,6 +1,6 @@
 
 import React from 'react';
-import TestimonialSection from '@/components/shared/TestimonialSection';
+import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
 
 const Testimonials = () => {
   const testimonials = [
@@ -35,12 +35,11 @@ const Testimonials = () => {
   ];
 
   return (
-    <TestimonialSection 
+    <AnimatedTestimonials 
       testimonials={testimonials}
       title="What Our Clients Say"
       description="Don't just take our word for it. See what our customers have to say about their experience working with Atoro Security."
-      variant="grid"
-      showAvatars={true}
+      badgeText="Client Success Stories"
       bgColor="bg-gray-50"
     />
   );
