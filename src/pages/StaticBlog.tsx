@@ -5,6 +5,7 @@ import { Container } from '@/components/ui/Container';
 import { blogPosts, blogCategories, getPostsByCategory } from '@/lib/data/staticBlogData';
 import StaticBlogCard from '@/components/blog/StaticBlogCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import Newsletter from '@/components/home/Newsletter';
 
 const StaticBlog = () => {
   const [currentCategory, setCurrentCategory] = useState<string>("all");
@@ -89,6 +90,9 @@ const StaticBlog = () => {
           )}
         </Container>
       </section>
+      
+      {/* Newsletter Section */}
+      <Newsletter />
     </Layout>
   );
 };

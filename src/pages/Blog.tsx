@@ -6,6 +6,7 @@ import { Container } from '@/components/ui/Container';
 import { toast } from 'sonner';
 import { getAllBlogPosts, getBlogCategories, getBlogPostsByCategory, testSanityConnection } from '@/lib/api/blogService';
 import { checkSanityConnection } from '@/lib/sanity';
+import Newsletter from '@/components/home/Newsletter';
 
 // Import the new components
 import BlogHero from '@/components/blog/BlogHero';
@@ -194,6 +195,9 @@ const Blog = () => {
           />
         </Container>
       </section>
+      
+      {/* Add Newsletter Section */}
+      <Newsletter />
     </Layout>
   );
 };

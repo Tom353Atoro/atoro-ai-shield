@@ -8,6 +8,7 @@ import { ArrowLeft, ShieldCheck, LockKeyhole, Brain } from 'lucide-react';
 import { getPostBySlug } from '@/lib/data/staticBlogData';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import NeetoCalPopup from '@/components/shared/NeetoCalPopup';
+import Newsletter from '@/components/home/Newsletter';
 import { 
   Breadcrumb, 
   BreadcrumbList, 
@@ -163,6 +164,9 @@ const StaticBlogPost = () => {
           </div>
         </Container>
       </article>
+      
+      {/* Newsletter Section */}
+      <Newsletter />
     </Layout>
   );
 };

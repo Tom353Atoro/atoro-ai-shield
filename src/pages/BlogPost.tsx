@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ArrowLeft } from 'lucide-react';
 import PortableTextRenderer from '@/components/blog/PortableTextRenderer';
+import Newsletter from '@/components/home/Newsletter';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -163,6 +164,9 @@ const BlogPost = () => {
           </div>
         </Container>
       </article>
+      
+      {/* Newsletter Section */}
+      <Newsletter />
     </Layout>
   );
 };
