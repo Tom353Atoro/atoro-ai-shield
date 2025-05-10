@@ -146,11 +146,9 @@ export function AnimatedTestimonials({
               >
                 <div className="bg-card border shadow-lg rounded-xl p-8 h-full flex flex-col">
                   <div className="mb-6 flex gap-2">
-                    {Array(testimonial.rating)
-                      .fill(0)
-                      .map((_, i) => (
-                        <Star key={i} className="h-5 w-5 fill-yellow-500 text-yellow-500" />
-                      ))}
+                    {Array.from({ length: Math.min(Math.max(0, testimonial.rating), 5) }).map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-yellow-500 text-yellow-500" />
+                    ))}
                   </div>
 
                   <div className="relative mb-6 flex-1">
@@ -182,13 +180,13 @@ export function AnimatedTestimonials({
           </motion.div>
         </motion.div>
 
-        {/* Logo cloud */}
-        {trustedCompanies.length > 0 && (
+        {/* Logo cloud - Fixed to ensure trustedCompanies is valid */}
+        {trustedCompanies && trustedCompanies.length > 0 && (
           <motion.div variants={itemVariants} initial="hidden" animate={controls} className="mt-24 text-center">
             <h3 className="text-sm font-medium text-muted-foreground mb-8">{trustedCompaniesTitle}</h3>
             <div className="flex flex-wrap justify-center gap-x-12 gap-y-8">
-              {trustedCompanies.map((company) => (
-                <div key={company} className="text-2xl font-semibold text-muted-foreground/50">
+              {trustedCompanies.map((company, index) => (
+                <div key={`company-${index}`} className="text-2xl font-semibold text-muted-foreground/50">
                   {company}
                 </div>
               ))}
