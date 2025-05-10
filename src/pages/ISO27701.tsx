@@ -1,7 +1,7 @@
 
 import React from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
-import TestimonialSection from '@/components/shared/TestimonialSection';
+import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
 import LogoCarousel from '@/components/shared/LogoCarousel';
 import ServiceSectionWrapper from '@/components/services/ServiceSectionWrapper';
 
@@ -83,13 +83,12 @@ const ISO27701 = () => {
       {/* Benefits Section */}
       <BenefitsSection />
 
-      {/* Customer Testimonials */}
-      <TestimonialSection 
+      {/* Customer Testimonials - Updated to use AnimatedTestimonials */}
+      <AnimatedTestimonials 
         testimonials={isoTestimonials} 
         title="What Our Clients Say" 
-        description="Read how we've helped organizations implement ISO 27701 and strengthen their privacy posture." 
-        variant="featured" 
-        showRatings={true} 
+        description="Read how we've helped organizations implement ISO 27701 and strengthen their privacy posture."
+        badgeText="ISO 27701 Excellence"
         bgColor="bg-white" 
       />
 

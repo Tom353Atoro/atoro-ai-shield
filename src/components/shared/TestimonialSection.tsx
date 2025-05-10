@@ -6,7 +6,12 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Star, StarHalf, StarOff, MessageCircle } from 'lucide-react';
+import { toast } from 'sonner';
 
+/**
+ * @deprecated This component is deprecated. Please use AnimatedTestimonials instead.
+ * Import from '@/components/shared/AnimatedTestimonials'
+ */
 export type Testimonial = {
   quote: string;
   author: string;
@@ -32,6 +37,10 @@ export interface TestimonialSectionProps {
   sectionId?: string;
 }
 
+/**
+ * @deprecated This component is deprecated. Please use AnimatedTestimonials instead.
+ * Import from '@/components/shared/AnimatedTestimonials'
+ */
 const TestimonialSection: React.FC<TestimonialSectionProps> = ({
   testimonials,
   title = 'Trusted by Innovative SaaS Leaders',
@@ -44,6 +53,16 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
   bgColor = 'bg-gray-50',
   sectionId,
 }) => {
+  // Show deprecation warning in development
+  React.useEffect(() => {
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn(
+        'TestimonialSection is deprecated. Please use AnimatedTestimonials instead. ' +
+        'Import from @/components/shared/AnimatedTestimonials'
+      );
+    }
+  }, []);
+
   // Function to get initials from name
   const getInitials = (name: string) => {
     return name

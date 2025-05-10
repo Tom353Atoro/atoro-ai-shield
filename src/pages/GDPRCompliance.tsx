@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
 import { Container } from '@/components/ui/Container';
@@ -7,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { FileKey, CheckCircle, ArrowRight, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import TestimonialSection from '@/components/shared/TestimonialSection';
+import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
 import LogoCarousel from '@/components/shared/LogoCarousel';
 
 const GDPRCompliance = () => {
@@ -208,13 +207,12 @@ const GDPRCompliance = () => {
         </Container>
       </section>
 
-      {/* Customer Testimonials */}
-      <TestimonialSection 
+      {/* Customer Testimonials - Updated to use AnimatedTestimonials */}
+      <AnimatedTestimonials 
         testimonials={gdprTestimonials} 
         title="What Our Clients Say" 
         description="Read how we've helped companies achieve GDPR compliance while growing their business." 
-        variant="featured" 
-        showRatings={true} 
+        badgeText="GDPR Success Stories"
         bgColor="bg-white" 
       />
 

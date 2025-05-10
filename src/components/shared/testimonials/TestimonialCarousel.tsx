@@ -7,6 +7,10 @@ import { MessageCircle } from "lucide-react"
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
 import { format } from "date-fns"
 
+/**
+ * @deprecated This component is deprecated. Please use AnimatedTestimonials instead.
+ * Import from '@/components/shared/AnimatedTestimonials'
+ */
 export type TestimonialItem = {
   quote: string
   author: string
@@ -22,10 +26,24 @@ interface TestimonialCarouselProps {
   autoplayDelay?: number
 }
 
+/**
+ * @deprecated This component is deprecated. Please use AnimatedTestimonials instead.
+ * Import from '@/components/shared/AnimatedTestimonials'
+ */
 const TestimonialCarousel = ({
   testimonials,
   className,
 }: TestimonialCarouselProps) => {
+  // Show deprecation warning in development
+  React.useEffect(() => {
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn(
+        'TestimonialCarousel is deprecated. Please use AnimatedTestimonials instead. ' +
+        'Import from @/components/shared/AnimatedTestimonials'
+      );
+    }
+  }, []);
+
   const { ref: intersectionRef, hasIntersected } = useIntersectionObserver({
     threshold: 0.2,
     rootMargin: "100px",
