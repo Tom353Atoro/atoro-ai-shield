@@ -1,6 +1,7 @@
 
 import React from 'react';
 import ServicePageTemplate from '@/components/services/ServicePageTemplate';
+import ISO42001Overview from '@/components/iso42001/ISO42001Overview';
 import BenefitsSection from '@/components/iso42001/BenefitsSection';
 import ISO42001Section from '@/components/ai-governance/ISO42001Section';
 import TestimonialsSection from '@/components/iso42001/TestimonialsSection';
@@ -40,6 +41,9 @@ const ISO42001 = () => {
       testimonialsBadgeText="ISO 42001 Success Stories"
       serviceSections={
         <>
+          {/* Overview Section - added first */}
+          <ISO42001Overview />
+          
           {/* Benefits Section */}
           <BenefitsSection />
           

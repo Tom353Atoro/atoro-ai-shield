@@ -1,6 +1,7 @@
 
 import React from 'react';
 import ServicePageTemplate from '@/components/services/ServicePageTemplate';
+import Iso27001Overview from '@/components/iso27001/Iso27001Overview';
 import BenefitsSection from '@/components/iso27001/BenefitsSection';
 import ProcessSection from '@/components/iso27001/ProcessSection';
 import ScopeSection from '@/components/iso27001/ScopeSection';
@@ -56,6 +57,9 @@ const Iso27001Service = () => {
       testimonialsBadgeText="ISO 27001 Excellence"
       serviceSections={
         <>
+          {/* Overview Section - added first */}
+          <Iso27001Overview />
+          
           {/* Benefits Section */}
           <BenefitsSection />
           
