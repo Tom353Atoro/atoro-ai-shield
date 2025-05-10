@@ -5,8 +5,9 @@ import SharedClientSection from '@/components/shared/ClientSection';
 const ClientSection = () => {
   return (
     <SharedClientSection 
-      title="Trusted by AI Innovators"
-      description="Leading companies trust Atoro for responsible AI governance and compliance."
+      // Removing the title and description to avoid redundancy with the "Trusted by" text
+      // that already appears in the LogoBanner component
+      bgColor="bg-gray-50"
     />
   );
 };
