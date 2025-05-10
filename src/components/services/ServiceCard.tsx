@@ -2,6 +2,7 @@
 import React, { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
+import { ArrowRight } from 'lucide-react';
 
 interface ServiceCardProps {
   icon?: ReactNode;
@@ -12,6 +13,11 @@ interface ServiceCardProps {
   titleClassName?: string;
   descriptionClassName?: string;
   onClick?: () => void;
+  // Add missing properties
+  linkText?: string;
+  linkUrl?: string;
+  hoverEffect?: boolean;
+  variant?: string;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
@@ -23,11 +29,16 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   titleClassName,
   descriptionClassName,
   onClick,
+  linkText,
+  linkUrl,
+  hoverEffect = false,
+  variant = 'default',
 }) => {
   return (
     <Card 
       className={cn(
-        "border border-gray-100 hover:border-atoro-green/30 hover:shadow-md transition-all overflow-hidden group h-full",
+        "border border-gray-100 hover:border-atoro-green/30 transition-all overflow-hidden group h-full",
+        hoverEffect && "hover:shadow-md",
         onClick && "cursor-pointer",
         className
       )}
@@ -47,6 +58,17 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         <p className={cn("text-gray-600 text-center text-sm", descriptionClassName)}>
           {description}
         </p>
+        {linkText && linkUrl && (
+          <div className="mt-4 text-center">
+            <a 
+              href={linkUrl} 
+              className="inline-flex items-center text-atoro-green hover:text-atoro-teal transition-colors text-sm font-medium"
+            >
+              {linkText}
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </a>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
