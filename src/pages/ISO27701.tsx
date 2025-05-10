@@ -1,11 +1,6 @@
 
 import React from 'react';
-import ServiceLayout from '@/components/layout/ServiceLayout';
-import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
-import ClientLogos from '@/components/shared/ClientLogos';
-import ServiceSectionWrapper from '@/components/services/ServiceSectionWrapper';
-
-// Import ISO 27701 specific components
+import ServicePageTemplate from '@/components/services/ServicePageTemplate';
 import HeroSection from '@/components/iso27701/HeroSection';
 import ProcessSection from '@/components/iso27701/ProcessSection';
 import BenefitsSection from '@/components/iso27701/BenefitsSection';
@@ -13,7 +8,7 @@ import CTASection from '@/components/iso27701/CTASection';
 
 const ISO27701 = () => {
   // ISO 27701 specific testimonials
-  const isoTestimonials = [
+  const testimonials = [
     {
       quote: "Atoro's ISO 27701 implementation was structured and efficient. Their expertise helped us extend our ISO 27001 certification with minimal disruption.",
       author: "James Wilson",
@@ -65,36 +60,33 @@ const ISO27701 = () => {
   ];
   
   return (
-    <ServiceLayout>
-      {/* Hero Section */}
-      <HeroSection />
+    <ServicePageTemplate
+      heroProps={{
+        title: <><span className="text-atoro-green">ISO 27701</span> Privacy Certification</>,
+        description: "Extend your information security management system with privacy controls. Our experts guide you through the ISO 27701 implementation process efficiently.",
+        primaryButtonText: "Schedule a Consultation",
+        primaryButtonLink: "/contact",
+        secondaryButtonText: "Learn More",
+        secondaryButtonLink: "/services/privacy",
+        badgeText: "Privacy Management",
+        backgroundClass: "bg-gradient-to-br from-atoro-blue to-atoro-dark-teal"
+      }}
+      clientLogosData={clientLogos}
+      clientLogosTitle="Trusted by Leading Organizations"
+      clientLogosDescription="We've helped companies across industries achieve ISO 27701 certification"
+      testimonials={testimonials}
+      testimonialsBadgeText="ISO 27701 Excellence"
+      serviceSections={
+        <>
+          {/* Implementation Process Section */}
+          <ProcessSection />
 
-      {/* Client logos */}
-      <ClientLogos 
-        logos={clientLogos} 
-        title="Trusted by Leading Organizations" 
-        description="We've helped companies across industries achieve ISO 27701 certification"
-        bgColor="bg-gray-50"
-      />
-
-      {/* Implementation Process Section */}
-      <ProcessSection />
-
-      {/* Benefits Section */}
-      <BenefitsSection />
-
-      {/* Customer Testimonials - Updated to use AnimatedTestimonials */}
-      <AnimatedTestimonials 
-        testimonials={isoTestimonials} 
-        title="What Our Clients Say" 
-        description="Read how we've helped organizations implement ISO 27701 and strengthen their privacy posture."
-        badgeText="ISO 27701 Excellence"
-        bgColor="bg-white" 
-      />
-
-      {/* CTA Section */}
-      <CTASection />
-    </ServiceLayout>
+          {/* Benefits Section */}
+          <BenefitsSection />
+        </>
+      }
+      ctaSection={<CTASection />}
+    />
   );
 };
 
