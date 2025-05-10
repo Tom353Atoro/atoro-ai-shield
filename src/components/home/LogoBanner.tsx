@@ -1,6 +1,6 @@
 
 import React from 'react';
-import ClientLogos from '@/components/shared/ClientLogos';
+import { Logos3 } from '@/components/ui/logos3';
 
 /**
  * LogoBanner Component
@@ -54,10 +54,9 @@ const LogoBanner: React.FC = () => {
   ];
 
   return (
-    <ClientLogos
+    <Logos3
       logos={logoData}
-      title="Trusted by and Building Trust with"
-      description="Forward thinking SaaS trust Atoro"
+      title="Trusted by"
       bgColor="bg-gray-50"
     />
   );
