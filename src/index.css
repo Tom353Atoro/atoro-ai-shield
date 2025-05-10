@@ -87,6 +87,16 @@
   }
 }
 
+/* Extra small screens utilities */
+@media (max-width: 475px) {
+  .xs\:inline {
+    display: inline;
+  }
+  .xs\:hidden {
+    display: none;
+  }
+}
+
 /* Honeycomb Layout Styles */
 .honeycomb-container {
   position: relative;

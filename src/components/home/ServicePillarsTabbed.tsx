@@ -3,12 +3,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FeatureTabs } from '@/components/ui/feature-tabs';
 import { Shield, FileKey, Brain } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const ServicePillarsTabbed = () => {
+  const isMobile = useIsMobile();
+  
   const serviceTabs = [
     {
       value: "cyber-security",
-      icon: <Shield className="h-5 w-5 text-atoro-green" />,
+      icon: <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-atoro-green" />,
       label: "Cyber Security",
       content: {
         badge: "Security Services",
@@ -23,7 +26,7 @@ const ServicePillarsTabbed = () => {
     },
     {
       value: "data-privacy",
-      icon: <FileKey className="h-5 w-5 text-atoro-blue" />,
+      icon: <FileKey className="h-4 w-4 sm:h-5 sm:w-5 text-atoro-blue" />,
       label: "Data Privacy",
       content: {
         badge: "Privacy Management",
@@ -38,7 +41,7 @@ const ServicePillarsTabbed = () => {
     },
     {
       value: "ai-governance",
-      icon: <Brain className="h-5 w-5 text-atoro-teal" />,
+      icon: <Brain className="h-4 w-4 sm:h-5 sm:w-5 text-atoro-teal" />,
       label: "AI Governance",
       content: {
         badge: "AI Solutions",
@@ -60,6 +63,7 @@ const ServicePillarsTabbed = () => {
       description="We protect and empower SaaS businesses through three tightly integrated service pillars, designed to work together seamlessly."
       tabs={serviceTabs}
       backgroundClass="gradient-bg-subtle"
+      className="overflow-hidden"
     />
   );
 };
