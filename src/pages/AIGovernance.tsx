@@ -2,11 +2,10 @@
 import React from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
 import HeroSection from '@/components/ai-governance/HeroSection';
-import ClientSection from '@/components/ai-governance/ClientSection';
-import ISO42001Section from '@/components/ai-governance/ISO42001Section';
-import RiskAssessmentSection from '@/components/ai-governance/RiskAssessmentSection';
-import FeaturedServiceSection from '@/components/ai-governance/FeaturedServiceSection';
 import ServicesSection from '@/components/ai-governance/ServicesSection';
+import FeaturedServiceSection from '@/components/ai-governance/FeaturedServiceSection';
+import ApproachSection from '@/components/ai-governance/ApproachSection';
+import ClientSection from '@/components/ai-governance/ClientSection';
 import TestimonialsSection from '@/components/ai-governance/TestimonialsSection';
 import CTASection from '@/components/ai-governance/CTASection';
 
@@ -16,20 +15,17 @@ const AIGovernance = () => {
       {/* Hero Section */}
       <HeroSection />
       
-      {/* Client Logos */}
-      <ClientSection />
-      
-      {/* ISO42001 Section */}
-      <ISO42001Section />
-      
-      {/* Risk Assessment Section */}
-      <RiskAssessmentSection />
+      {/* Services Section */}
+      <ServicesSection />
       
       {/* Featured Service Section */}
       <FeaturedServiceSection />
       
-      {/* Services Section */}
-      <ServicesSection />
+      {/* Approach Section */}
+      <ApproachSection />
+      
+      {/* Client Logos */}
+      <ClientSection />
       
       {/* Testimonials */}
       <TestimonialsSection />

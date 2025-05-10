@@ -2,10 +2,11 @@
 import React from 'react';
 import Layout from '@/components/layout/Layout';
 import ServiceCTA from '@/components/services/ServiceCTA';
-import FeaturedServiceSection from '@/components/data-privacy/FeaturedServiceSection';
-import ServicesSection from '@/components/data-privacy/ServicesSection';
-import ProcessSection from '@/components/data-privacy/ProcessSection';
 import HeroSection from '@/components/data-privacy/HeroSection';
+import ServicesSection from '@/components/data-privacy/ServicesSection';
+import FeaturedServiceSection from '@/components/data-privacy/FeaturedServiceSection';
+import ApproachSection from '@/components/data-privacy/ApproachSection';
+import ClientSection from '@/components/data-privacy/ClientSection';
 import TestimonialsSection from '@/components/data-privacy/TestimonialsSection';
 
 const DataPrivacy = () => {
@@ -14,14 +15,17 @@ const DataPrivacy = () => {
       {/* Hero Section */}
       <HeroSection />
       
-      {/* Process Section */}
-      <ProcessSection />
+      {/* Services Section */}
+      <ServicesSection />
       
       {/* Featured Service Section */}
       <FeaturedServiceSection />
       
-      {/* Services Section */}
-      <ServicesSection />
+      {/* Approach Section */}
+      <ApproachSection />
+      
+      {/* Client Section */}
+      <ClientSection />
       
       {/* Testimonials Section */}
       <TestimonialsSection />
