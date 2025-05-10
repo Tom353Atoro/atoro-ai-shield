@@ -1,11 +1,20 @@
 
 import React from 'react';
 import { AnimatedTestimonials as UIAnimatedTestimonials } from "@/components/ui/animated-testimonials";
-import type { Testimonial as SharedTestimonial } from "@/components/shared/TestimonialSection";
 import type { Testimonial as UITestimonial } from "@/components/ui/animated-testimonials";
 
+// Define the shared testimonial type that was previously imported
+export interface Testimonial {
+  quote: string;
+  author: string;
+  title: string;
+  company?: string;
+  avatarSrc?: string;
+  rating?: number;
+}
+
 // Adapter function to convert from the shared testimonial format to the UI component format
-const convertToUITestimonial = (testimonial: SharedTestimonial, index: number): UITestimonial => {
+const convertToUITestimonial = (testimonial: Testimonial, index: number): UITestimonial => {
   return {
     id: index,
     name: testimonial.author,
@@ -32,7 +41,7 @@ const convertGenericToUITestimonial = (testimonial: any, index: number): UITesti
 };
 
 interface AnimatedTestimonialsProps {
-  testimonials: Array<SharedTestimonial | any>;
+  testimonials: Array<Testimonial | any>;
   title?: string;
   description?: string;
   badgeText?: string;
@@ -57,7 +66,7 @@ const AnimatedTestimonials: React.FC<AnimatedTestimonialsProps> = ({
   // Convert the testimonials to the format expected by the UI component
   const uiTestimonials = testimonials.map((testimonial, index) => {
     if ('quote' in testimonial) {
-      return convertToUITestimonial(testimonial as SharedTestimonial, index);
+      return convertToUITestimonial(testimonial as Testimonial, index);
     }
     return convertGenericToUITestimonial(testimonial, index);
   });
