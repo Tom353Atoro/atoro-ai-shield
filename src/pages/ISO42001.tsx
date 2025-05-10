@@ -5,7 +5,7 @@ import ISO42001Overview from '@/components/iso42001/ISO42001Overview';
 import BenefitsSection from '@/components/iso42001/BenefitsSection';
 import ISO42001Section from '@/components/ai-governance/ISO42001Section';
 import TestimonialsSection from '@/components/iso42001/TestimonialsSection';
-import CTASection from '@/components/iso42001/CTASection';
+import ISO42001CTASection from '@/components/iso42001/ISO42001CTASection';
 
 const ISO42001 = () => {
   // ISO 42001 specific testimonials (extracted from TestimonialsSection)
@@ -51,7 +51,7 @@ const ISO42001 = () => {
           <ISO42001Section />
         </>
       }
-      ctaSection={<CTASection />}
+      ctaSection={<ISO42001CTASection />}
     />
   );
 };
