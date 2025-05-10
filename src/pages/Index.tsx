@@ -3,7 +3,7 @@ import React from 'react';
 import Layout from '@/components/layout/Layout';
 import Hero from '@/components/home/Hero';
 import LogoBanner from '@/components/home/LogoBanner';
-import PillarsSection from '@/components/home/PillarsSection';
+import ServicePillarsTabbed from '@/components/home/ServicePillarsTabbed';
 import FlagshipService from '@/components/home/FlagshipService';
 import Partners from '@/components/home/Partners';
 import AboutAtoro from '@/components/home/AboutAtoro';
@@ -16,7 +16,7 @@ const Index = () => {
     <Layout>
       <Hero />
       <LogoBanner />
-      <PillarsSection />
+      <ServicePillarsTabbed />
       <FlagshipService />
       <Partners />
       <AboutAtoro />
