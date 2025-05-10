@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -12,7 +11,7 @@ const TestimonialsPage = () => {
       author: "Yass Omar",
       title: "Head of Legal",
       company: "Heidi Health",
-      avatarSrc: "/lovable-uploads/c3b2775f-5246-4ccc-b27c-85e69efbe307.png",
+      avatarSrc: "/lovable-uploads/0587c9dd-34df-40fd-98e6-d1e687f36909.png", // Swapped with Camil's avatar
       rating: 5
     },
     {
@@ -28,7 +27,7 @@ const TestimonialsPage = () => {
       author: "Camil Blanaru",
       title: "CTO",
       company: "Prezly BV",
-      avatarSrc: "/lovable-uploads/0587c9dd-34df-40fd-98e6-d1e687f36909.png",
+      avatarSrc: "/lovable-uploads/c3b2775f-5246-4ccc-b27c-85e69efbe307.png", // Swapped with Yass's avatar
       rating: 5
     },
     {

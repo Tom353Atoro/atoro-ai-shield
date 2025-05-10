@@ -9,7 +9,7 @@ const Testimonials = () => {
       author: "Yass Omar",
       title: "Head of Legal",
       company: "Heidi Health",
-      avatarSrc: "/lovable-uploads/c3b2775f-5246-4ccc-b27c-85e69efbe307.png",
+      avatarSrc: "/lovable-uploads/0587c9dd-34df-40fd-98e6-d1e687f36909.png", // Swapped with Camil's avatar
     },
     {
       quote: "The Atoro team kept us organized and communicated effectively. We met our GDPR compliance deadline within 12 weeks.",
@@ -23,7 +23,7 @@ const Testimonials = () => {
       author: "Camil Blanaru",
       title: "CTO",
       company: "Prezly BV",
-      avatarSrc: "/lovable-uploads/0587c9dd-34df-40fd-98e6-d1e687f36909.png",
+      avatarSrc: "/lovable-uploads/c3b2775f-5246-4ccc-b27c-85e69efbe307.png", // Swapped with Yass's avatar
     },
     {
       quote: "Atoro guided us through ISO 27001 certification with a hands-on approach. They kept us informed and fully prepared for the audit.",
