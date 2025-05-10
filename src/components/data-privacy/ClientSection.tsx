@@ -5,8 +5,7 @@ import SharedClientSection from '@/components/shared/ClientSection';
 const ClientSection = () => {
   return (
     <SharedClientSection 
-      title="Trusted by Privacy-Conscious Organizations"
-      description="See how we've helped companies implement effective data privacy programs"
+      // Removing the title and description to avoid redundancy
       bgColor="bg-gray-50"
     />
   );
