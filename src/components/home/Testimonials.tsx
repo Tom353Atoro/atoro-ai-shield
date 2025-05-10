@@ -41,6 +41,7 @@ const Testimonials = () => {
       description="Don't just take our word for it. See what our customers have to say about their experience working with Atoro Security."
       badgeText="Client Success Stories"
       bgColor="bg-gray-50"
+      showCompanyInCard={true}
     />
   );
 };

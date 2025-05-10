@@ -63,7 +63,7 @@ const AnimatedTestimonials: React.FC<AnimatedTestimonialsProps> = ({
   bgColor,
   trustedCompanies = [],
   trustedCompaniesTitle = "Trusted by companies worldwide",
-  showCompanyInCard = false,
+  showCompanyInCard = true,
 }) => {
   // Convert the testimonials to the format expected by the UI component
   const uiTestimonials = testimonials.map((testimonial, index) => {
@@ -73,11 +73,6 @@ const AnimatedTestimonials: React.FC<AnimatedTestimonialsProps> = ({
     return convertGenericToUITestimonial(testimonial, index);
   });
 
-  // Extract company names for the trusted companies section
-  const companies = trustedCompanies.length > 0 
-    ? trustedCompanies 
-    : testimonials.map(t => t.company || '').filter(Boolean);
-
   return (
     <UIAnimatedTestimonials
       title={title}
@@ -85,8 +80,6 @@ const AnimatedTestimonials: React.FC<AnimatedTestimonialsProps> = ({
       badgeText={badgeText}
       testimonials={uiTestimonials}
       className={`${bgColor || ''} ${className || ''}`}
-      trustedCompanies={companies.length > 0 ? Array.from(new Set(companies)) : []}
-      trustedCompaniesTitle={trustedCompaniesTitle}
       showCompanyInCard={showCompanyInCard}
     />
   );

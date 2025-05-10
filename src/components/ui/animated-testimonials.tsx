@@ -23,8 +23,6 @@ export interface AnimatedTestimonialsProps {
   badgeText?: string
   testimonials?: Testimonial[]
   autoRotateInterval?: number
-  trustedCompanies?: string[]
-  trustedCompaniesTitle?: string
   className?: string
   showCompanyInCard?: boolean
 }
@@ -35,10 +33,8 @@ export function AnimatedTestimonials({
   badgeText = "Trusted by developers",
   testimonials = [],
   autoRotateInterval = 6000,
-  trustedCompanies = [],
-  trustedCompaniesTitle = "Trusted by companies worldwide",
   className,
-  showCompanyInCard = false,
+  showCompanyInCard = true,
 }: AnimatedTestimonialsProps) {
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -168,7 +164,7 @@ export function AnimatedTestimonials({
                     <div>
                       <h3 className="text-sm sm:text-base font-semibold">{testimonial.name}</h3>
                       <p className="text-xs sm:text-sm text-muted-foreground">
-                        {showCompanyInCard ? `${testimonial.role}, ${testimonial.company}` : testimonial.role}
+                        {testimonial.role}{showCompanyInCard && testimonial.company ? `, ${testimonial.company}` : ''}
                       </p>
                     </div>
                   </div>
@@ -181,28 +177,6 @@ export function AnimatedTestimonials({
             <div className="absolute -top-6 -right-6 h-16 w-16 sm:h-24 sm:w-24 rounded-xl bg-primary/5 hidden sm:block"></div>
           </motion.div>
         </motion.div>
-
-        {/* Logo cloud - Fixed to ensure trustedCompanies is valid */}
-        {trustedCompanies && trustedCompanies.length > 0 && (
-          <motion.div 
-            variants={itemVariants} 
-            initial="hidden" 
-            animate={controls} 
-            className="mt-12 sm:mt-16 md:mt-24 text-center px-2"
-          >
-            <h3 className="text-sm font-medium text-muted-foreground mb-4 sm:mb-8">{trustedCompaniesTitle}</h3>
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-4 sm:gap-x-8 sm:gap-y-6 md:gap-x-12 md:gap-y-8">
-              {trustedCompanies.map((company, index) => (
-                <div 
-                  key={`company-${index}`} 
-                  className="text-lg sm:text-xl md:text-2xl font-semibold text-muted-foreground/50 px-2"
-                >
-                  {company}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
       </div>
     </section>
   )

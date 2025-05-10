@@ -80,7 +80,7 @@ const TestimonialsPage = () => {
           variant="featured"
           badgeText="Featured Stories"
           bgColor="bg-white"
-          showCompanyInCard={false}
+          showCompanyInCard={true}
         />
 
         <AnimatedTestimonials 
@@ -90,7 +90,7 @@ const TestimonialsPage = () => {
           variant="carousel"
           badgeText="Client Success Stories"
           bgColor="bg-gray-50"
-          showCompanyInCard={false}
+          showCompanyInCard={true}
         />
       </main>
       <Footer />
