@@ -1,14 +1,27 @@
+
+# robots.txt for atoro.ai
+User-agent: *
+Allow: /
+Disallow: /testimonial-demo
+Disallow: /design-system
+
+# Allow search bots access to all relevant sections
 User-agent: Googlebot
 Allow: /
+Disallow: /testimonial-demo
+Disallow: /design-system
 
 User-agent: Bingbot
 Allow: /
+Disallow: /testimonial-demo
+Disallow: /design-system
 
+# Social media crawlers
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
-Allow: /
+# Sitemap reference
+Sitemap: https://atoro.ai/sitemap.xml

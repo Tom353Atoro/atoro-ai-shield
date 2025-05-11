@@ -10,6 +10,7 @@ const CTASection = () => {
       description="Whether you already have ISO 27001 or are starting fresh, our expert consultants can guide you through the entire ISO 27701 implementation and certification process."
       primaryButtonText="Schedule a Consultation"
       primaryButtonId="iso27701-consultation-btn"
+      primaryButtonLink="/contact"
       secondaryButtonText="Download ISO 27701 Guide"
       secondaryButtonLink="/resources/iso-27701-guide"
       backgroundClass={tokens.colors.bg.greenLight}

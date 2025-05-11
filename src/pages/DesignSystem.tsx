@@ -6,10 +6,15 @@ import { Container } from '@/components/ui/Container';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Helmet } from 'react-helmet';
 
 const DesignSystem = () => {
   return (
     <Layout>
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+        <title>Design System | Internal | Atoro</title>
+      </Helmet>
       <Container className="py-12">
         <div className="mb-8">
           <Badge className="mb-3">Design System</Badge>

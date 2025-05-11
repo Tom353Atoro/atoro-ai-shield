@@ -11,7 +11,6 @@ import Testimonials from '@/pages/Testimonials'
 import NotFound from '@/pages/NotFound'
 import CyberSecurity from '@/pages/CyberSecurity'
 import Iso27001Service from '@/pages/Iso27001Service'
-import ISO27701 from '@/pages/ISO27701'
 import PenetrationTesting from '@/pages/PenetrationTesting'
 import Soc2 from '@/pages/Soc2'
 import DataPrivacy from '@/pages/DataPrivacy'
@@ -28,6 +27,7 @@ import Webinars from '@/pages/resources/Webinars'
 import TestimonialCarouselDemo from '@/pages/TestimonialCarouselDemo'
 import DesignSystem from '@/pages/DesignSystem'
 import CaseStudy from '@/pages/CaseStudy'
+import ISO27701 from '@/pages/ISO27701'
 
 function App() {
   return (
@@ -43,13 +43,13 @@ function App() {
         <Route path="/resources/tools-templates" element={<ToolsTemplates />} />
         <Route path="/resources/webinars" element={<Webinars />} />
         <Route path="/services/cyber-security" element={<CyberSecurity />} />
-        <Route path="/services/iso-27001" element={<Iso27001Service />} />
-        <Route path="/services/iso-27701" element={<ISO27701 />} />
+        <Route path="/services/cyber-security/iso-27001" element={<Iso27001Service />} />
         <Route path="/services/cyber-security/penetration-testing" element={<PenetrationTesting />} />
         <Route path="/services/cyber-security/soc2" element={<Soc2 />} />
         <Route path="/services/data-privacy" element={<DataPrivacy />} />
         <Route path="/services/data-privacy/gdpr-compliance" element={<GDPRCompliance />} />
         <Route path="/services/data-privacy/eu-representative" element={<EURepresentative />} />
+        <Route path="/services/data-privacy/iso-27701" element={<ISO27701 />} />
         <Route path="/services/ai-governance" element={<AIGovernance />} />
         <Route path="/services/ai-governance/iso-42001" element={<ISO42001 />} />
         <Route path="/services/ai-governance/ai-risk-assessment" element={<AIRiskAssessment />} />
