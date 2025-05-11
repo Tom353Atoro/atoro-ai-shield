@@ -29,6 +29,7 @@ import ToolsTemplates from '@/pages/resources/ToolsTemplates'
 import Webinars from '@/pages/resources/Webinars'
 import TestimonialCarouselDemo from '@/pages/TestimonialCarouselDemo'
 import DesignSystem from '@/pages/DesignSystem'
+import CaseStudy from '@/pages/CaseStudy'
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/testimonial-demo" element={<TestimonialCarouselDemo />} />
         <Route path="/design-system" element={<DesignSystem />} />
+        <Route path="/case-study-iso42001" element={<CaseStudy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />
