@@ -2,13 +2,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';
-import { ArrowRight, Brain } from 'lucide-react';
+import { ArrowRight, Brain, BookOpen } from 'lucide-react';
 import { blogPosts } from '@/lib/data/staticBlogData';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 
 const StaticThoughtLeadership = () => {
-  // Get the 3 most recent posts for display
-  const recentPosts = blogPosts.slice(0, 3);
+  // Get the 2 most recent posts for display to make space for a case study feature
+  const recentPosts = blogPosts.slice(0, 2);
 
   return (
     <section className="py-20 bg-white">
@@ -30,6 +31,38 @@ const StaticThoughtLeadership = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Featured Case Study */}
+          <Link 
+            to="/resources/case-studies/iso-42001"
+            className="block group"
+          >
+            <div className="h-48 rounded-lg bg-atoro-teal/10 mb-4 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
+                alt="Atoro ISO 42001 Case Study"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="inline-block bg-atoro-teal/10 text-atoro-teal rounded-full px-3 py-1 text-sm font-medium">
+                Case Study
+              </span>
+            </div>
+            <h3 className="text-xl font-bold mb-2 group-hover:text-atoro-blue transition-colors">
+              Atoro Becomes Europe's First ISO 42001-Certified Consultancy
+            </h3>
+            <p className="text-gray-700">
+              How Atoro achieved ISO 42001 certification, setting the standard for responsible AI governance under the EU AI Act.
+            </p>
+            <Button variant="link" className="mt-2 p-0 h-auto text-atoro-teal" asChild>
+              <span className="flex items-center">
+                <BookOpen className="mr-1 h-4 w-4" />
+                Read case study
+              </span>
+            </Button>
+          </Link>
+
+          {/* Blog Posts */}
           {recentPosts.map(post => (
             <Link 
               key={post.id} 

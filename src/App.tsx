@@ -6,8 +6,6 @@ import Index from '@/pages/Index'
 import Contact from '@/pages/Contact'
 import StaticBlog from '@/pages/StaticBlog'
 import StaticBlogPost from '@/pages/StaticBlogPost'
-import Blog from '@/pages/Blog'
-import BlogPost from '@/pages/BlogPost'
 import Resources from '@/pages/Resources'
 import Testimonials from '@/pages/Testimonials'
 import NotFound from '@/pages/NotFound'
@@ -39,8 +37,6 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<StaticBlog />} />
         <Route path="/blog/:slug" element={<StaticBlogPost />} />
-        <Route path="/dynamic-blog" element={<Blog />} />
-        <Route path="/dynamic-blog/:slug" element={<BlogPost />} />
         <Route path="/resources" element={<Resources />} />
         <Route path="/resources/whitepapers" element={<Whitepapers />} />
         <Route path="/resources/case-studies" element={<CaseStudies />} />
@@ -61,7 +57,7 @@ function App() {
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/testimonial-demo" element={<TestimonialCarouselDemo />} />
         <Route path="/design-system" element={<DesignSystem />} />
-        <Route path="/case-study-iso42001" element={<CaseStudy />} />
+        <Route path="/resources/case-studies/iso-42001" element={<CaseStudy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />
