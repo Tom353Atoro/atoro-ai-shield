@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';
@@ -6,6 +5,14 @@ import { Facebook, Twitter, Instagram, Linkedin, Github } from 'lucide-react';
 import Logo from '@/components/shared/Logo';
 
 const Footer = () => {
+  // Service URL mapping for consistency
+  const serviceUrls = {
+    'Cyber Security': '/services/cyber-security',
+    'Data Privacy': '/services/data-privacy',
+    'AI Governance': '/services/ai-governance',
+    'Security Team as a Service': '/services/security-team-aas'
+  };
+
   return (
     <footer className="bg-atoro-teal text-white pb-6">
       <Container>
@@ -25,10 +32,10 @@ const Footer = () => {
             <div className="space-y-4">
               <h3 className="font-bold text-lg">Services</h3>
               <ul className="space-y-2">
-                {['Cyber Security', 'Data Privacy', 'AI Governance', 'Security Team as a Service'].map((item) => (
-                  <li key={item}>
-                    <Link to={`/services/${item.toLowerCase().replace(/\s+/g, '-')}`} className="text-gray-300 hover:text-white transition-colors">
-                      {item}
+                {Object.entries(serviceUrls).map(([name, url]) => (
+                  <li key={name}>
+                    <Link to={url} className="text-gray-300 hover:text-white transition-colors">
+                      {name}
                     </Link>
                   </li>
                 ))}

@@ -1,11 +1,9 @@
-
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import { Toaster } from '@/components/ui/toaster'
 import Index from '@/pages/Index'
 import Contact from '@/pages/Contact'
 import StaticBlog from '@/pages/StaticBlog'
-import StaticBlogPost from '@/pages/StaticBlogPost'
 import Resources from '@/pages/Resources'
 import Testimonials from '@/pages/Testimonials'
 import NotFound from '@/pages/NotFound'
@@ -24,10 +22,9 @@ import Whitepapers from '@/pages/resources/Whitepapers'
 import CaseStudies from '@/pages/resources/CaseStudies'
 import ToolsTemplates from '@/pages/resources/ToolsTemplates'
 import Webinars from '@/pages/resources/Webinars'
-import TestimonialCarouselDemo from '@/pages/TestimonialCarouselDemo'
-import DesignSystem from '@/pages/DesignSystem'
 import CaseStudy from '@/pages/CaseStudy'
 import ISO27701 from '@/pages/ISO27701'
+import VDPO from '@/pages/VDPO'
 
 function App() {
   return (
@@ -36,7 +33,6 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<StaticBlog />} />
-        <Route path="/blog/:slug" element={<StaticBlogPost />} />
         <Route path="/resources" element={<Resources />} />
         <Route path="/resources/whitepapers" element={<Whitepapers />} />
         <Route path="/resources/case-studies" element={<CaseStudies />} />
@@ -50,13 +46,12 @@ function App() {
         <Route path="/services/data-privacy/gdpr-compliance" element={<GDPRCompliance />} />
         <Route path="/services/data-privacy/eu-representative" element={<EURepresentative />} />
         <Route path="/services/data-privacy/iso-27701" element={<ISO27701 />} />
+        <Route path="/services/data-privacy/vdpo" element={<VDPO />} />
         <Route path="/services/ai-governance" element={<AIGovernance />} />
         <Route path="/services/ai-governance/iso-42001" element={<ISO42001 />} />
         <Route path="/services/ai-governance/ai-risk-assessment" element={<AIRiskAssessment />} />
         <Route path="/services/security-team-aas" element={<SecurityTeamService />} />
         <Route path="/testimonials" element={<Testimonials />} />
-        <Route path="/testimonial-demo" element={<TestimonialCarouselDemo />} />
-        <Route path="/design-system" element={<DesignSystem />} />
         <Route path="/resources/case-studies/iso-42001" element={<CaseStudy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

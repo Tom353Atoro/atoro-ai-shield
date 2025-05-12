@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Shield, FileSearch, Lock } from 'lucide-react';
 import ServiceSectionWrapper from '@/components/services/ServiceSectionWrapper';
@@ -21,7 +20,7 @@ const ServicesSection = () => {
       description: "Structured approach to implementing the ISO 27001 framework for information security.",
       icon: <FileSearch className="text-atoro-green" />,
       linkText: "Learn more", 
-      linkUrl: "/services/iso-27001"
+      linkUrl: "/services/cyber-security/iso-27001"
     }, 
     {
       title: "SOC 2 Readiness",
