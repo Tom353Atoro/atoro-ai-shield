@@ -1,0 +1,29 @@
+# Atoro AI Shield Code Standards
+
+## URL Structure Standards
+- All service URLs must follow the pattern: /services/cyber-security/[service-name]
+- Use kebab-case for URLs (e.g., iso-27001, not iso27001)
+
+## Component Architecture
+- Use functional components with explicit TypeScript interfaces
+- Follow consistent naming: Service pages should use PascalCase (e.g., Iso27001Service)
+- Keep components focused on a single responsibility
+- Extract reusable UI elements into shared components
+
+## Performance Requirements
+- Optimize all images with responsive sizing and lazy loading
+- Implement code splitting for all route components
+- Only render content when needed (use lazy loading for below-fold content)
+- Use memoization for list components
+
+## Security Standards
+- No development/test pages in production builds
+- Sanitize all HTML content with DOMPurify before rendering
+- Implement proper Content Security Policy
+- No hardcoded credentials, even placeholders
+
+## SEO & Accessibility
+- All images must have descriptive alt text
+- Use semantic HTML elements instead of generic divs
+- Implement proper ARIA attributes for interactive elements
+- Each page must have standardized metadata 
