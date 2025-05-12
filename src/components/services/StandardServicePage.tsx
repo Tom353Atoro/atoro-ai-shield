@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
-import ClientLogos from '@/components/shared/ClientLogos';
+import ClientLogos from '@/components/services/ClientLogos';
 import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
 import { Container } from '@/components/ui/Container';
 import { Badge } from '@/components/ui/badge';
@@ -13,17 +13,25 @@ import {
   ClientLogoItem,
   ServiceSectionProps,
   ServicePageProps,
-  ErrorBoundaryProps
+  ErrorBoundaryProps,
+  SEOProps
 } from '@/types';
+import SEO from '@/components/shared/SEO';
 
-// Service Section Wrapper Component
-export const ServiceSection: React.FC<ServiceSectionProps> = ({ 
+export interface ServiceSection extends React.HTMLAttributes<HTMLElement> {
+  id?: string;
+  className?: string;
+  children: ReactNode;
+}
+
+export const ServiceSection: React.FC<ServiceSection> = ({ 
+  children, 
   id, 
-  className = "py-12 bg-white", 
-  children 
+  className = '',
+  ...props 
 }) => {
   return (
-    <section id={id} className={className}>
+    <section id={id} className={className} {...props}>
       <Container>
         {children}
       </Container>
@@ -137,163 +145,172 @@ const handleServicePageError = (error: Error, errorInfo: React.ErrorInfo, pageNa
   handleBoundaryError(error, errorInfo, `ServicePage:${pageName || 'Unknown'}`);
 };
 
+export interface StandardServicePageProps {
+  seo: SEOProps;
+  heroProps: ServiceHeroProps;
+  
+  // Client logos section
+  clientLogos?: ClientLogoItem[];
+  clientLogosTitle?: string;
+  clientLogosDescription?: string;
+  
+  // Content sections
+  overviewSection?: ReactNode;
+  benefitsSection?: ReactNode;
+  processSection?: ReactNode;
+  additionalSections?: ReactNode[];
+  faqSection?: ReactNode;
+  ctaSection?: ReactNode;
+  
+  // Standard testimonials section
+  testimonials?: TestimonialItem[];
+  testimonialsTitle?: string;
+  testimonialsDescription?: string;
+  testimonialsBadgeText?: string;
+  testimonialsBgColor?: string;
+  
+  // Custom testimonials section (overrides standard section)
+  testimonialsSectionOverride?: ReactNode;
+}
+
 /**
- * StandardServicePage - A standardized template for service pages
+ * StandardServicePage Component
  * 
- * This component provides a consistent structure for all service pages
- * with typed props and proper error handling.
+ * A standardized page template for all service pages with consistent
+ * structure and styling.
  */
-const StandardServicePage: React.FC<ServicePageProps> = ({
-  // SEO & Metadata
+const StandardServicePage: React.FC<StandardServicePageProps> = ({
   seo,
-  
-  // Hero Section
   heroProps,
-  
-  // Client Logos Section
-  showClientLogos = true,
   clientLogos,
-  clientLogosTitle = "Trusted by Leading Organizations",
-  clientLogosDescription = "We've helped companies across industries strengthen their security posture",
-  clientLogosBgColor = "bg-gray-50",
-  
-  // Main Content
+  clientLogosTitle,
+  clientLogosDescription,
   overviewSection,
   benefitsSection,
   processSection,
-  additionalSections = [],
-  
-  // Testimonials
-  testimonials,
-  testimonialsTitle = "What Our Clients Say",
-  testimonialsDescription = "Read how we've helped companies like yours achieve their goals",
-  testimonialsBadgeText = "Success Stories",
-  testimonialsBgColor = "bg-white",
-  
-  // FAQ and CTA
+  additionalSections,
   faqSection,
-  ctaSection
+  ctaSection,
+  testimonials,
+  testimonialsTitle,
+  testimonialsDescription,
+  testimonialsBadgeText,
+  testimonialsBgColor = "bg-white",
+  testimonialsSectionOverride
 }) => {
-  // Extract page name from SEO title for error reporting
-  const pageName = seo.pageTitle.split('|')[0]?.trim() || 'Service Page';
-
-  // In a real implementation, we would use Next.js Head or other meta tag component
-  // to set SEO metadata based on the seo prop
-  
   return (
-    <EnhancedErrorBoundary 
-      fallback={<ServiceErrorFallback />} 
-      onError={(error, errorInfo) => handleServicePageError(error, errorInfo, pageName)}
-      showDetails={import.meta.env.DEV}
-    >
-      <ServiceLayout>
-        {/* Title and meta tags would go here in a real implementation */}
-        {/* <Head>
-          <title>{seo.pageTitle}</title>
-          <meta name="description" content={seo.metaDescription} />
-          {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
-          {seo.ogImageUrl && <meta property="og:image" content={seo.ogImageUrl} />}
-        </Head> */}
-
-        {/* Hero Section */}
-        <ErrorBoundary 
-          fallback={<SectionErrorFallback sectionName="Hero" />}
-          onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:Hero`)}
-        >
-          <ServiceHero {...heroProps} />
-        </ErrorBoundary>
-
-        {/* Client Logo Section */}
-        {showClientLogos && clientLogos && clientLogos.length > 0 && (
+    <>
+      <SEO {...seo} />
+      
+      <EnhancedErrorBoundary 
+        fallback={<ServiceErrorFallback />} 
+        onError={(error, errorInfo) => handleServicePageError(error, errorInfo)}
+        showDetails={import.meta.env.DEV}
+      >
+        <ServiceLayout>
+          {/* Hero Section */}
           <ErrorBoundary 
-            fallback={<SectionErrorFallback sectionName="Client Logos" />}
-            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:ClientLogos`)}
+            fallback={<SectionErrorFallback sectionName="Hero" />}
+            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, "Hero")}
           >
-            <section className={`py-12 ${clientLogosBgColor}`}>
-              <ClientLogos 
-                logos={clientLogos}
-                title={clientLogosTitle}
-                description={clientLogosDescription}
-                bgColor={clientLogosBgColor}
+            <ServiceHero {...heroProps} />
+          </ErrorBoundary>
+
+          {/* Client Logos */}
+          {clientLogos && (
+            <ErrorBoundary 
+              fallback={<SectionErrorFallback sectionName="Client Logos" />}
+              onError={(error, errorInfo) => handleServicePageError(error, errorInfo, "ClientLogos")}
+            >
+              <section className={`py-12 bg-gray-50`}>
+                <ClientLogos 
+                  logos={clientLogos}
+                  title={clientLogosTitle}
+                  description={clientLogosDescription}
+                />
+              </section>
+            </ErrorBoundary>
+          )}
+
+          {/* Overview Section */}
+          <ErrorBoundary 
+            fallback={<SectionErrorFallback sectionName="Overview" />}
+            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, "Overview")}
+          >
+            {overviewSection}
+          </ErrorBoundary>
+          
+          {/* Benefits Section */}
+          {benefitsSection && (
+            <ErrorBoundary 
+              fallback={<SectionErrorFallback sectionName="Benefits" />}
+              onError={(error, errorInfo) => handleServicePageError(error, errorInfo, "Benefits")}
+            >
+              {benefitsSection}
+            </ErrorBoundary>
+          )}
+          
+          {/* Process Section */}
+          {processSection && (
+            <ErrorBoundary 
+              fallback={<SectionErrorFallback sectionName="Process" />}
+              onError={(error, errorInfo) => handleServicePageError(error, errorInfo, "Process")}
+            >
+              {processSection}
+            </ErrorBoundary>
+          )}
+          
+          {/* Testimonials Section */}
+          {testimonialsSectionOverride ? (
+            testimonialsSectionOverride
+          ) : testimonials && testimonials.length > 0 ? (
+            <ErrorBoundary 
+              fallback={<SectionErrorFallback sectionName="Testimonials" />}
+              onError={(error, errorInfo) => handleServicePageError(error, errorInfo, "Testimonials")}
+            >
+              <AnimatedTestimonials 
+                testimonials={testimonials} 
+                title={testimonialsTitle || "What Our Clients Say"}
+                description={testimonialsDescription || "Hear from organizations that have worked with us."}
+                badgeText={testimonialsBadgeText || "Testimonials"}
+                bgColor={testimonialsBgColor}
               />
-            </section>
-          </ErrorBoundary>
-        )}
-
-        {/* Main Content Sections */}
-        <ErrorBoundary 
-          fallback={<SectionErrorFallback sectionName="Overview" />}
-          onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:Overview`)}
-        >
-          {overviewSection}
-        </ErrorBoundary>
-        
-        {benefitsSection && (
-          <ErrorBoundary 
-            fallback={<SectionErrorFallback sectionName="Benefits" />}
-            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:Benefits`)}
-          >
-            {benefitsSection}
-          </ErrorBoundary>
-        )}
-        
-        {processSection && (
-          <ErrorBoundary 
-            fallback={<SectionErrorFallback sectionName="Process" />}
-            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:Process`)}
-          >
-            {processSection}
-          </ErrorBoundary>
-        )}
-        
-        {/* Additional custom sections */}
-        {additionalSections.map((section, index) => (
-          <ErrorBoundary 
-            key={`additional-section-${index}`}
-            fallback={<SectionErrorFallback sectionName={`Additional Section ${index + 1}`} />}
-            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:AdditionalSection${index}`)}
-          >
-            {section}
-          </ErrorBoundary>
-        ))}
-
-        {/* Testimonials Section */}
-        {testimonials && testimonials.length > 0 && (
-          <ErrorBoundary 
-            fallback={<SectionErrorFallback sectionName="Testimonials" />}
-            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:Testimonials`)}
-          >
-            <AnimatedTestimonials 
-              testimonials={testimonials} 
-              title={testimonialsTitle} 
-              description={testimonialsDescription} 
-              badgeText={testimonialsBadgeText}
-              bgColor={testimonialsBgColor}
-            />
-          </ErrorBoundary>
-        )}
-
-        {/* FAQ Section */}
-        {faqSection && (
-          <ErrorBoundary 
-            fallback={<SectionErrorFallback sectionName="FAQ" />}
-            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:FAQ`)}
-          >
-            {faqSection}
-          </ErrorBoundary>
-        )}
-
-        {/* CTA Section */}
-        {ctaSection && (
-          <ErrorBoundary 
-            fallback={<SectionErrorFallback sectionName="CTA" />}
-            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:CTA`)}
-          >
-            {ctaSection}
-          </ErrorBoundary>
-        )}
-      </ServiceLayout>
-    </EnhancedErrorBoundary>
+            </ErrorBoundary>
+          ) : null}
+          
+          {/* Additional Sections */}
+          {additionalSections && additionalSections.map((section, index) => (
+            <ErrorBoundary 
+              key={`additional-section-${index}`}
+              fallback={<SectionErrorFallback sectionName={`Additional Section ${index + 1}`} />}
+              onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `AdditionalSection${index}`)}
+            >
+              {section}
+            </ErrorBoundary>
+          ))}
+          
+          {/* FAQ Section */}
+          {faqSection && (
+            <ErrorBoundary 
+              fallback={<SectionErrorFallback sectionName="FAQ" />}
+              onError={(error, errorInfo) => handleServicePageError(error, errorInfo, "FAQ")}
+            >
+              {faqSection}
+            </ErrorBoundary>
+          )}
+          
+          {/* CTA Section */}
+          {ctaSection && (
+            <ErrorBoundary 
+              fallback={<SectionErrorFallback sectionName="CTA" />}
+              onError={(error, errorInfo) => handleServicePageError(error, errorInfo, "CTA")}
+            >
+              {ctaSection}
+            </ErrorBoundary>
+          )}
+        </ServiceLayout>
+      </EnhancedErrorBoundary>
+    </>
   );
 };
 

@@ -1,65 +1,53 @@
 import React from 'react';
 import { Container } from '@/components/ui/Container';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
-import { ServiceSection } from './StandardServicePage';
-import { OverviewFeature, OverviewSectionProps } from '@/types';
+import { OverviewFeature } from '@/types';
+import { SectionHeader, FeatureCard } from '@/components/ui';
+
+export interface StandardOverviewSectionProps {
+  badgeText: string;
+  title: string | React.ReactNode;
+  description: string;
+  features: OverviewFeature[];
+  className?: string;
+  bgColor?: string;
+}
 
 /**
- * StandardOverviewSection - A standardized component for service overview sections
+ * StandardOverviewSection Component
  * 
- * This component provides a consistent layout for describing a service
- * with a title, description, and key features.
+ * A standardized section for displaying service overview with featured capabilities.
  */
-const StandardOverviewSection: React.FC<OverviewSectionProps> = ({
+const StandardOverviewSection: React.FC<StandardOverviewSectionProps> = ({
   badgeText,
   title,
   description,
   features,
-  className = "bg-white",
-  id = "overview"
+  className = '',
+  bgColor = 'bg-white'
 }) => {
   return (
-    <ServiceSection id={id} className={`py-12 ${className}`}>
-      <div className="text-center mb-10">
-        {badgeText && (
-          <Badge className="mb-3 bg-atoro-teal/10 text-atoro-teal hover:bg-atoro-teal/20">
-            {badgeText}
-          </Badge>
-        )}
-        <h2 className="mb-3">{title}</h2>
-        <p className="text-gray-700 max-w-2xl mx-auto">
-          {description}
-        </p>
-      </div>
+    <section className={`py-12 ${bgColor} ${className}`}>
+      <Container>
+        <SectionHeader
+          badgeText={badgeText}
+          title={title}
+          description={description}
+          textAlign="center"
+        />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {features.map((feature, index) => {
-          const Icon = feature.icon;
-          const iconColor = feature.iconColor || "text-atoro-teal";
-          const iconBgColor = feature.iconBgColor || "bg-atoro-teal/5";
-          
-          return (
-            <Card 
-              key={`feature-${index}`}
-              className="border border-gray-100 hover:border-atoro-green/30 hover:shadow-md transition-all overflow-hidden group h-full"
-            >
-              <CardContent className="pt-6">
-                <div className="mb-4 flex justify-center">
-                  <div className={`p-3 rounded-lg ${iconBgColor}`}>
-                    <Icon className={iconColor} />
-                  </div>
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-center">{feature.title}</h3>
-                <p className="text-gray-600 text-center text-sm">
-                  {feature.description}
-                </p>
-              </CardContent>
-            </Card>
-          );
-        })}
-      </div>
-    </ServiceSection>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          {features.map((feature, index) => (
+            <FeatureCard
+              key={index}
+              icon={feature.icon}
+              title={feature.title}
+              description={feature.description}
+              iconColor={feature.iconColor}
+            />
+          ))}
+        </div>
+      </Container>
+    </section>
   );
 };
 

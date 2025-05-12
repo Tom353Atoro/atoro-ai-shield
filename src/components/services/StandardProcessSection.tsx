@@ -1,85 +1,56 @@
-import React, { ReactNode } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { ServiceSection } from './StandardServicePage';
-
-export interface ProcessStep {
-  title: string;
-  description: string;
-  icon?: ReactNode;
-  stepNumber: number;
-  highlightColor?: string;
-}
+import React from 'react';
+import { Container } from '@/components/ui/Container';
+import { ProcessStep as ProcessStepType } from '@/types';
+import { SectionHeader, ProcessStep } from '@/components/ui';
 
 export interface StandardProcessSectionProps {
-  badgeText?: string;
-  title: string;
-  description?: string;
-  steps: ProcessStep[];
+  badgeText: string;
+  title: string | React.ReactNode;
+  description: string;
+  steps: ProcessStepType[];
   className?: string;
-  id?: string;
+  bgColor?: string;
+  layout?: 'horizontal' | 'vertical';
 }
 
 /**
- * StandardProcessSection - A standardized component for service process sections
+ * StandardProcessSection Component
  * 
- * This component provides a consistent layout for showing the process/steps
- * involved in a service with numbered steps.
+ * A standardized section for displaying service process steps.
  */
 const StandardProcessSection: React.FC<StandardProcessSectionProps> = ({
   badgeText,
   title,
   description,
   steps,
-  className = "bg-white",
-  id = "process"
+  className = '',
+  bgColor = 'bg-gray-50',
+  layout = 'horizontal'
 }) => {
   return (
-    <ServiceSection id={id} className={`py-16 ${className}`}>
-      <div className="text-center mb-12">
-        {badgeText && (
-          <Badge className="mb-3 bg-atoro-teal/10 text-atoro-teal hover:bg-atoro-teal/20">
-            {badgeText}
-          </Badge>
-        )}
-        <h2 className="mb-3">{title}</h2>
-        {description && (
-          <p className="text-gray-700 max-w-2xl mx-auto">
-            {description}
-          </p>
-        )}
-      </div>
+    <section className={`py-16 ${bgColor} ${className}`}>
+      <Container>
+        <SectionHeader
+          badgeText={badgeText}
+          title={title}
+          description={description}
+          textAlign="center"
+        />
 
-      <div className="relative">
-        {/* Optional connector line between steps */}
-        <div className="absolute left-[29px] top-0 bottom-0 w-1 bg-gray-200 hidden md:block" />
-
-        <div className="space-y-12">
+        <div className={`mt-12 grid ${layout === 'horizontal' ? 'md:grid-cols-4' : 'md:grid-cols-1'} gap-8`}>
           {steps.map((step, index) => (
-            <div key={`step-${index}`} className="flex gap-6 relative">
-              <div className="flex-shrink-0 z-10">
-                {step.icon ? (
-                  <div className="rounded-full h-14 w-14 flex items-center justify-center bg-atoro-teal text-white font-bold text-lg">
-                    {step.icon}
-                  </div>
-                ) : (
-                  <div className="rounded-full h-14 w-14 flex items-center justify-center bg-atoro-teal text-white font-bold text-lg">
-                    {step.stepNumber}
-                  </div>
-                )}
-              </div>
-              <div>
-                <h3 className={`text-xl font-semibold mb-2 ${step.highlightColor || 'text-atoro-dark-teal'}`}>
-                  {step.title}
-                </h3>
-                <p className="text-gray-600">
-                  {step.description}
-                </p>
-              </div>
-            </div>
+            <ProcessStep
+              key={index}
+              stepNumber={step.stepNumber}
+              title={step.title}
+              description={step.description}
+              isLast={index === steps.length - 1}
+              layout={layout}
+            />
           ))}
         </div>
-      </div>
-    </ServiceSection>
+      </Container>
+    </section>
   );
 };
 

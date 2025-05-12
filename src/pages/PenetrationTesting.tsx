@@ -1,16 +1,18 @@
 import React from 'react';
-import { Bug, Network, ServerCog, Shield, Lock, FileText } from 'lucide-react';
+import { Bug, Network, ServerCog } from 'lucide-react';
 import StandardServicePage from '@/components/services/StandardServicePage';
 import StandardOverviewSection from '@/components/services/StandardOverviewSection';
 import StandardBenefitsSection from '@/components/services/StandardBenefitsSection';
 import StandardProcessSection from '@/components/services/StandardProcessSection';
 import StandardFAQSection from '@/components/services/StandardFAQSection';
 import StandardCTASection from '@/components/services/StandardCTASection';
+import { Container } from '@/components/ui/Container';
+import { SectionHeader, FeatureCard, BenefitItem, TestimonialCard } from '@/components/ui';
 import {
   TestimonialItem,
   ClientLogoItem,
   OverviewFeature,
-  BenefitItem,
+  BenefitItem as BenefitItemType,
   ProcessStep,
   FAQItem,
   SEOProps
@@ -116,7 +118,7 @@ const PenetrationTesting: React.FC = () => {
   ];
 
   // Benefits section data
-  const benefits: BenefitItem[] = [
+  const benefits: BenefitItemType[] = [
     {
       title: "Identify Critical Vulnerabilities",
       description: "Discover security flaws that automated tools miss with thorough manual testing."
@@ -216,6 +218,7 @@ const PenetrationTesting: React.FC = () => {
       clientLogosTitle="Trusted by Security-Conscious Organizations"
       clientLogosDescription="We help companies across industries identify and remediate security vulnerabilities"
       
+      // Standard component approach
       overviewSection={
         <StandardOverviewSection
           badgeText="Our Approach"
@@ -225,15 +228,36 @@ const PenetrationTesting: React.FC = () => {
         />
       }
       
+      // Direct use of UI components approach for benefits section
       benefitsSection={
-        <StandardBenefitsSection
-          badgeText="Benefits"
-          title="Why Penetration Testing Matters"
-          description="Regular penetration testing provides critical insights to strengthen your security posture and protect your business."
-          benefits={benefits}
-          imageUrl="/lovable-uploads/pentest-benefits.png"
-          imageAlt="Penetration testing benefits illustration"
-        />
+        <section className="py-16 bg-gray-50">
+          <Container>
+            <SectionHeader
+              badgeText="Benefits"
+              title="Why Penetration Testing Matters"
+              description="Regular penetration testing provides critical insights to strengthen your security posture and protect your business."
+            />
+            
+            <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {benefits.map((benefit, index) => (
+                <BenefitItem
+                  key={index}
+                  title={benefit.title}
+                  description={benefit.description}
+                  className="mb-4"
+                />
+              ))}
+            </div>
+            
+            <div className="mt-12 flex justify-center">
+              <img
+                src="/lovable-uploads/pentest-benefits.png"
+                alt="Penetration testing benefits illustration"
+                className="max-w-full md:max-w-3xl rounded-lg shadow-md"
+              />
+            </div>
+          </Container>
+        </section>
       }
       
       processSection={
@@ -245,10 +269,28 @@ const PenetrationTesting: React.FC = () => {
         />
       }
       
-      testimonials={testimonials}
-      testimonialsTitle="What Our Clients Say"
-      testimonialsDescription="Read how our penetration testing has helped organizations improve their security posture."
-      testimonialsBadgeText="Client Testimonials"
+      // Direct use of UI components for testimonials section
+      testimonialsSectionOverride={
+        <section className="py-16 bg-white">
+          <Container>
+            <SectionHeader
+              badgeText="Client Testimonials"
+              title="What Our Clients Say"
+              description="Read how our penetration testing has helped organizations improve their security posture."
+            />
+            
+            <div className="mt-10 grid md:grid-cols-3 gap-6">
+              {testimonials.map((testimonial, index) => (
+                <TestimonialCard
+                  key={index}
+                  testimonial={testimonial}
+                  showRating={true}
+                />
+              ))}
+            </div>
+          </Container>
+        </section>
+      }
       
       faqSection={
         <StandardFAQSection
