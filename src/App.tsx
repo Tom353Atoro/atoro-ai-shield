@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import { Toaster } from '@/components/ui/toaster'
+import ErrorBoundary from '@/components/ui/ErrorBoundary'
 import Index from '@/pages/Index'
 import Contact from '@/pages/Contact'
 import StaticBlog from '@/pages/StaticBlog'
@@ -37,9 +38,43 @@ const DevOnlyComponents = import.meta.env.DEV
     }
   : null;
 
+// Root level fallback UI for catastrophic errors
+const AppErrorFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="max-w-md w-full p-8 bg-white rounded-lg shadow-lg text-center">
+      <div className="text-red-600 mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+      </div>
+      <h1 className="text-2xl font-bold text-gray-900 mb-3">Something Went Wrong</h1>
+      <p className="text-gray-600 mb-6">We apologize for the inconvenience. Our team has been notified and is working to fix the issue.</p>
+      <a 
+        href="/"
+        className="inline-block bg-atoro-teal hover:bg-atoro-teal/90 text-white font-medium px-6 py-2 rounded"
+      >
+        Return to Home
+      </a>
+    </div>
+  </div>
+);
+
+// Error logging function
+const logError = (error: Error, errorInfo: React.ErrorInfo) => {
+  // Log to console in development
+  console.error('Application Error:', error);
+  console.error('Component Stack:', errorInfo.componentStack);
+  
+  // In production, you would send this to your error tracking service
+  if (import.meta.env.PROD) {
+    // Example: Send to error tracking service
+    // errorTrackingService.captureException(error, { extra: errorInfo });
+  }
+};
+
 function App() {
   return (
-    <>
+    <ErrorBoundary fallback={<AppErrorFallback />} onError={logError}>
       <Routes>
         {/* Production Routes */}
         <Route path="/" element={<Index />} />
@@ -79,7 +114,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />
-    </>
+    </ErrorBoundary>
   )
 }
 

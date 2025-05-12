@@ -5,6 +5,8 @@ import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
 import { Container } from '@/components/ui/Container';
 import { Badge } from '@/components/ui/badge';
 import ErrorBoundary from '@/components/ui/ErrorBoundary';
+import EnhancedErrorBoundary from '@/components/ui/EnhancedErrorBoundary';
+import { handleBoundaryError } from '@/utils/errorReporting';
 import {
   ServiceHeroProps,
   TestimonialItem,
@@ -100,6 +102,69 @@ const ServiceHero: React.FC<ServiceHeroProps> = ({
   );
 };
 
+// Custom error fallback components
+const ServiceErrorFallback: React.FC = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="text-center p-8">
+      <h1 className="text-2xl font-bold text-red-600 mb-4">Service Page Error</h1>
+      <p className="mb-4">We're sorry, but there was an error loading this service page.</p>
+      <a href="/" className="text-atoro-teal hover:text-atoro-green">
+        Return to Home
+      </a>
+    </div>
+  </div>
+);
+
+const SectionErrorFallback: React.FC<{ sectionName: string }> = ({ sectionName }) => (
+  <section className="py-12 bg-gray-50">
+    <Container>
+      <div className="border border-red-200 rounded-lg p-6 bg-red-50">
+        <h3 className="text-red-600 font-medium mb-2">
+          {sectionName} Section Error
+        </h3>
+        <p className="text-gray-700">
+          We encountered an issue loading this section. Please try refreshing the page.
+        </p>
+      </div>
+    </Container>
+  </section>
+);
+
+// Custom error fallback components
+const ServiceErrorFallback: React.FC = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="text-center p-8">
+      <h1 className="text-2xl font-bold text-red-600 mb-4">Service Page Error</h1>
+      <p className="mb-4">We're sorry, but there was an error loading this service page.</p>
+      <a href="/" className="text-atoro-teal hover:text-atoro-green">
+        Return to Home
+      </a>
+    </div>
+  </div>
+);
+
+const SectionErrorFallback: React.FC<{ sectionName: string }> = ({ sectionName }) => (
+  <section className="py-12 bg-gray-50">
+    <Container>
+      <div className="border border-red-200 rounded-lg p-6 bg-red-50">
+        <h3 className="text-red-600 font-medium mb-2">
+          {sectionName} Section Error
+        </h3>
+        <p className="text-gray-700">
+          We encountered an issue loading this section. Please try refreshing the page.
+        </p>
+      </div>
+    </Container>
+  </section>
+);
+
+/**
+ * Error handler for service page components
+ */
+const handleServicePageError = (error: Error, errorInfo: React.ErrorInfo, pageName?: string) => {
+  handleBoundaryError(error, errorInfo, `ServicePage:${pageName || 'Unknown'}`);
+};
+
 /**
  * StandardServicePage - A standardized template for service pages
  * 
@@ -137,11 +202,18 @@ const StandardServicePage: React.FC<ServicePageProps> = ({
   faqSection,
   ctaSection
 }) => {
+  // Extract page name from SEO title for error reporting
+  const pageName = seo.pageTitle.split('|')[0]?.trim() || 'Service Page';
+
   // In a real implementation, we would use Next.js Head or other meta tag component
   // to set SEO metadata based on the seo prop
   
   return (
-    <ErrorBoundary fallback={<ServiceErrorFallback />}>
+    <EnhancedErrorBoundary 
+      fallback={<ServiceErrorFallback />} 
+      onError={(error, errorInfo) => handleServicePageError(error, errorInfo, pageName)}
+      showDetails={import.meta.env.DEV}
+    >
       <ServiceLayout>
         {/* Title and meta tags would go here in a real implementation */}
         {/* <Head>
@@ -152,33 +224,52 @@ const StandardServicePage: React.FC<ServicePageProps> = ({
         </Head> */}
 
         {/* Hero Section */}
-        <ServiceHero {...heroProps} />
+        <ErrorBoundary 
+          fallback={<SectionErrorFallback sectionName="Hero" />}
+          onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:Hero`)}
+        >
+          <ServiceHero {...heroProps} />
+        </ErrorBoundary>
 
         {/* Client Logo Section */}
         {showClientLogos && clientLogos && clientLogos.length > 0 && (
-          <section className={`py-12 ${clientLogosBgColor}`}>
-            <ClientLogos 
-              logos={clientLogos}
-              title={clientLogosTitle}
-              description={clientLogosDescription}
-              bgColor={clientLogosBgColor}
-            />
-          </section>
+          <ErrorBoundary 
+            fallback={<SectionErrorFallback sectionName="Client Logos" />}
+            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:ClientLogos`)}
+          >
+            <section className={`py-12 ${clientLogosBgColor}`}>
+              <ClientLogos 
+                logos={clientLogos}
+                title={clientLogosTitle}
+                description={clientLogosDescription}
+                bgColor={clientLogosBgColor}
+              />
+            </section>
+          </ErrorBoundary>
         )}
 
         {/* Main Content Sections */}
-        <ErrorBoundary fallback={<SectionErrorFallback sectionName="Overview" />}>
+        <ErrorBoundary 
+          fallback={<SectionErrorFallback sectionName="Overview" />}
+          onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:Overview`)}
+        >
           {overviewSection}
         </ErrorBoundary>
         
         {benefitsSection && (
-          <ErrorBoundary fallback={<SectionErrorFallback sectionName="Benefits" />}>
+          <ErrorBoundary 
+            fallback={<SectionErrorFallback sectionName="Benefits" />}
+            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:Benefits`)}
+          >
             {benefitsSection}
           </ErrorBoundary>
         )}
         
         {processSection && (
-          <ErrorBoundary fallback={<SectionErrorFallback sectionName="Process" />}>
+          <ErrorBoundary 
+            fallback={<SectionErrorFallback sectionName="Process" />}
+            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:Process`)}
+          >
             {processSection}
           </ErrorBoundary>
         )}
@@ -188,6 +279,7 @@ const StandardServicePage: React.FC<ServicePageProps> = ({
           <ErrorBoundary 
             key={`additional-section-${index}`}
             fallback={<SectionErrorFallback sectionName={`Additional Section ${index + 1}`} />}
+            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:AdditionalSection${index}`)}
           >
             {section}
           </ErrorBoundary>
@@ -195,7 +287,10 @@ const StandardServicePage: React.FC<ServicePageProps> = ({
 
         {/* Testimonials Section */}
         {testimonials && testimonials.length > 0 && (
-          <ErrorBoundary fallback={<SectionErrorFallback sectionName="Testimonials" />}>
+          <ErrorBoundary 
+            fallback={<SectionErrorFallback sectionName="Testimonials" />}
+            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:Testimonials`)}
+          >
             <AnimatedTestimonials 
               testimonials={testimonials} 
               title={testimonialsTitle} 
@@ -208,48 +303,26 @@ const StandardServicePage: React.FC<ServicePageProps> = ({
 
         {/* FAQ Section */}
         {faqSection && (
-          <ErrorBoundary fallback={<SectionErrorFallback sectionName="FAQ" />}>
+          <ErrorBoundary 
+            fallback={<SectionErrorFallback sectionName="FAQ" />}
+            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:FAQ`)}
+          >
             {faqSection}
           </ErrorBoundary>
         )}
 
         {/* CTA Section */}
         {ctaSection && (
-          <ErrorBoundary fallback={<SectionErrorFallback sectionName="CTA" />}>
+          <ErrorBoundary 
+            fallback={<SectionErrorFallback sectionName="CTA" />}
+            onError={(error, errorInfo) => handleServicePageError(error, errorInfo, `${pageName}:CTA`)}
+          >
             {ctaSection}
           </ErrorBoundary>
         )}
       </ServiceLayout>
-    </ErrorBoundary>
+    </EnhancedErrorBoundary>
   );
 };
-
-// Custom error fallback components
-const ServiceErrorFallback: React.FC = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gray-50">
-    <div className="text-center p-8">
-      <h1 className="text-2xl font-bold text-red-600 mb-4">Service Page Error</h1>
-      <p className="mb-4">We're sorry, but there was an error loading this service page.</p>
-      <a href="/" className="text-atoro-teal hover:text-atoro-green">
-        Return to Home
-      </a>
-    </div>
-  </div>
-);
-
-const SectionErrorFallback: React.FC<{ sectionName: string }> = ({ sectionName }) => (
-  <section className="py-12 bg-gray-50">
-    <Container>
-      <div className="border border-red-200 rounded-lg p-6 bg-red-50">
-        <h3 className="text-red-600 font-medium mb-2">
-          {sectionName} Section Error
-        </h3>
-        <p className="text-gray-700">
-          We encountered an issue loading this section. Please try refreshing the page.
-        </p>
-      </div>
-    </Container>
-  </section>
-);
 
 export default StandardServicePage; 
