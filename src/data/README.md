@@ -101,6 +101,11 @@ The database includes several utility functions:
 - `getRandomClientLogos(count)`: Get a random selection of logos
 - `getLogosForService(service)`: Get logos relevant to a specific service
 
+### Important Notes
+
+- The ClientLogos component uses standard `<img>` tags for compatibility with Vite. Do not use Next.js components like `next/image` as they are not supported in this project.
+- When implementing new components, ensure they use libraries compatible with the Vite build system.
+
 ## Best Practices
 
 1. Always use the centralized logo database instead of hardcoding logo information

@@ -1,7 +1,6 @@
 import React from 'react';
 import { ClientLogoItem } from '@/types';
 import { getLogosForService, getRandomClientLogos } from '@/data/clientLogos';
-import Image from 'next/image';
 
 interface ClientLogosProps {
   /**
@@ -79,12 +78,10 @@ const ClientLogos: React.FC<ClientLogosProps> = ({
               className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm"
               style={{ height: '100px', width: '250px' }}
             >
-              <Image
+              <img
                 src={logo.imagePath}
                 alt={logo.altText || `${logo.name} logo`}
-                width={200}
-                height={75}
-                objectFit="contain"
+                style={{ maxHeight: '75px', maxWidth: '200px' }}
                 className="max-h-14 w-auto opacity-80 hover:opacity-100 transition-opacity"
               />
             </div>
