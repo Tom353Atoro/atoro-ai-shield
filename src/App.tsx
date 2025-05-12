@@ -1,3 +1,4 @@
+import React from 'react'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import { Toaster } from '@/components/ui/toaster'
@@ -25,11 +26,22 @@ import Webinars from '@/pages/resources/Webinars'
 import CaseStudy from '@/pages/CaseStudy'
 import ISO27701 from '@/pages/ISO27701'
 import VDPO from '@/pages/VDPO'
+import VAIGO from '@/pages/VAIGO'
+
+// Development-only imports
+// These imports are conditionally included based on environment
+const DevOnlyComponents = import.meta.env.DEV
+  ? {
+      TestimonialCarouselDemo: React.lazy(() => import('@/pages/TestimonialCarouselDemo')),
+      DesignSystem: React.lazy(() => import('@/pages/DesignSystem'))
+    }
+  : null;
 
 function App() {
   return (
     <>
       <Routes>
+        {/* Production Routes */}
         <Route path="/" element={<Index />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<StaticBlog />} />
@@ -51,8 +63,19 @@ function App() {
         <Route path="/services/ai-governance" element={<AIGovernance />} />
         <Route path="/services/ai-governance/iso-42001" element={<ISO42001 />} />
         <Route path="/services/ai-governance/ai-risk-assessment" element={<AIRiskAssessment />} />
+        <Route path="/services/ai-governance/vaigo" element={<VAIGO />} />
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/resources/case-studies/iso-42001" element={<CaseStudy />} />
+        
+        {/* Development-only Routes */}
+        {import.meta.env.DEV && DevOnlyComponents && (
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <Route path="/dev/testimonial-demo" element={<DevOnlyComponents.TestimonialCarouselDemo />} />
+            <Route path="/dev/design-system" element={<DevOnlyComponents.DesignSystem />} />
+          </React.Suspense>
+        )}
+        
+        {/* 404 Route */}
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />
