@@ -1,10 +1,11 @@
-
 import React from 'react';
 import ServicePageTemplate from '@/components/services/ServicePageTemplate';
-import HeroSection from '@/components/iso27701/HeroSection';
-import ProcessSection from '@/components/iso27701/ProcessSection';
+import ISO27701Overview from '@/components/iso27701/ISO27701Overview';
 import BenefitsSection from '@/components/iso27701/BenefitsSection';
+import ProcessSection from '@/components/iso27701/ProcessSection';
 import CTASection from '@/components/iso27701/CTASection';
+import ISO27701FAQ from '@/components/iso27701/ISO27701FAQ';
+import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
 
 const ISO27701 = () => {
   // ISO 27701 specific testimonials
@@ -74,17 +75,29 @@ const ISO27701 = () => {
       clientLogosData={clientLogos}
       clientLogosTitle="Trusted by Leading Organizations"
       clientLogosDescription="We've helped companies across industries achieve ISO 27701 certification"
-      testimonials={testimonials}
-      testimonialsBadgeText="ISO 27701 Excellence"
       serviceSections={
         <>
-          {/* Implementation Process Section */}
-          <ProcessSection />
-
+          {/* Overview Section */}
+          <ISO27701Overview />
+          
           {/* Benefits Section */}
           <BenefitsSection />
+          
+          {/* Process Section */}
+          <ProcessSection />
+          
+          {/* Testimonials after process */}
+          <AnimatedTestimonials 
+            testimonials={testimonials} 
+            title="What Our Clients Say"
+            description="Read how we've helped organizations achieve ISO 27701 certification."
+            badgeText="ISO 27701 Excellence"
+            bgColor="bg-white"
+          />
         </>
       }
+      testimonials={undefined}
+      faqSection={<ISO27701FAQ />}
       ctaSection={<CTASection />}
     />
   );

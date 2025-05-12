@@ -1,6 +1,5 @@
-
 import React from 'react';
-import ServicePageTemplate from '@/components/services/ServicePageTemplate';
+import PillarPageTemplate from '@/components/layout/PillarPageTemplate';
 import ServicesSection from '@/components/cyber-security/ServicesSection';
 import FeaturedServiceSection from '@/components/cyber-security/FeaturedServiceSection';
 import ApproachSection from '@/components/cyber-security/ApproachSection';
@@ -31,7 +30,7 @@ const CyberSecurity = () => {
   ];
 
   return (
-    <ServicePageTemplate
+    <PillarPageTemplate
       heroProps={{
         title: <><span className="text-atoro-green">Move Fast</span> with Confidence</>,
         description: "In the SaaS world, a single security slip-up can break customer trust. Our holistic cyber security solutions help you move quickly without compromising safety.",
@@ -45,18 +44,9 @@ const CyberSecurity = () => {
       testimonialsTitle="What Our Security Clients Say"
       testimonialsDescription="Read how we've helped companies like yours strengthen their security posture."
       testimonialsBadgeText="Security Excellence"
-      serviceSections={
-        <>
-          {/* Services Section */}
-          <ServicesSection />
-
-          {/* Featured Service Section */}
-          <FeaturedServiceSection />
-
-          {/* Approach Section */}
-          <ApproachSection />
-        </>
-      }
+      servicesSection={<ServicesSection />}
+      featuredServiceSection={<FeaturedServiceSection />}
+      approachSection={<ApproachSection />}
       ctaSection={<CTASection />}
     />
   );

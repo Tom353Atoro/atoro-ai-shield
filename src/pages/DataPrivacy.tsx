@@ -1,10 +1,9 @@
-
 import React from 'react';
-import ServicePageTemplate from '@/components/services/ServicePageTemplate';
+import PillarPageTemplate from '@/components/layout/PillarPageTemplate';
 import ServicesSection from '@/components/data-privacy/ServicesSection';
 import FeaturedServiceSection from '@/components/data-privacy/FeaturedServiceSection';
 import ApproachSection from '@/components/data-privacy/ApproachSection';
-import TestimonialsSection from '@/components/data-privacy/TestimonialsSection';
+import ClientSection from '@/components/data-privacy/ClientSection';
 import CTASection from '@/components/data-privacy/CTASection';
 
 const DataPrivacy = () => {
@@ -34,7 +33,7 @@ const DataPrivacy = () => {
   ];
 
   return (
-    <ServicePageTemplate
+    <PillarPageTemplate
       heroProps={{
         title: <><span className="text-atoro-green">Data Privacy</span> Solutions</>,
         description: "Navigate complex privacy regulations with confidence. Our data privacy expertise helps you protect customer data while maintaining business agility.",
@@ -45,18 +44,10 @@ const DataPrivacy = () => {
       }}
       testimonials={testimonials}
       testimonialsBadgeText="Privacy Excellence"
-      serviceSections={
-        <>
-          {/* Services Section */}
-          <ServicesSection />
-          
-          {/* Featured Service Section */}
-          <FeaturedServiceSection />
-          
-          {/* Approach Section */}
-          <ApproachSection />
-        </>
-      }
+      servicesSection={<ServicesSection />}
+      featuredServiceSection={<FeaturedServiceSection />}
+      approachSection={<ApproachSection />}
+      clientSection={<ClientSection />}
       ctaSection={<CTASection />}
     />
   );

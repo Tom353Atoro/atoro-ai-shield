@@ -1,12 +1,10 @@
-
 import React from 'react';
-import ServicePageTemplate from '@/components/services/ServicePageTemplate';
+import PillarPageTemplate from '@/components/layout/PillarPageTemplate';
 import ServicesSection from '@/components/ai-governance/ServicesSection';
 import FeaturedServiceSection from '@/components/ai-governance/FeaturedServiceSection';
 import ApproachSection from '@/components/ai-governance/ApproachSection';
-import TestimonialsSection from '@/components/ai-governance/TestimonialsSection';
-import CTASection from '@/components/ai-governance/CTASection';
 import ClientSection from '@/components/ai-governance/ClientSection';
+import CTASection from '@/components/ai-governance/CTASection';
 
 const AIGovernance = () => {
   // Extract testimonials from TestimonialsSection component
@@ -35,7 +33,7 @@ const AIGovernance = () => {
   ];
 
   return (
-    <ServicePageTemplate
+    <PillarPageTemplate
       heroProps={{
         title: <><span className="text-atoro-green">AI Governance</span> Solutions</>,
         description: "Build trust in your AI systems with comprehensive governance frameworks that ensure ethical, transparent, and compliant artificial intelligence.",
@@ -44,24 +42,12 @@ const AIGovernance = () => {
         badgeText: "AI Governance",
         backgroundClass: "bg-gradient-to-br from-atoro-purple to-atoro-blue"
       }}
-      showClientLogos={true}
       testimonials={testimonials}
       testimonialsBadgeText="AI Governance Excellence"
-      serviceSections={
-        <>
-          {/* Services Section */}
-          <ServicesSection />
-          
-          {/* Featured Service Section */}
-          <FeaturedServiceSection />
-          
-          {/* Approach Section */}
-          <ApproachSection />
-          
-          {/* Client Logos - Custom Implementation */}
-          <ClientSection />
-        </>
-      }
+      servicesSection={<ServicesSection />}
+      featuredServiceSection={<FeaturedServiceSection />}
+      approachSection={<ApproachSection />}
+      clientSection={<ClientSection />}
       ctaSection={<CTASection />}
     />
   );
