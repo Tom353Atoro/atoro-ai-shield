@@ -1,5 +1,5 @@
-
 import React, { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
@@ -60,13 +60,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         </p>
         {linkText && linkUrl && (
           <div className="mt-4 text-center">
-            <a 
-              href={linkUrl} 
+            <Link 
+              to={linkUrl} 
               className="inline-flex items-center text-atoro-green hover:text-atoro-teal transition-colors text-sm font-medium"
             >
               {linkText}
               <ArrowRight className="ml-1 h-4 w-4" />
-            </a>
+            </Link>
           </div>
         )}
       </CardContent>
