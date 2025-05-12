@@ -1,0 +1,10 @@
+[build]
+  publish = "dist"
+  command = "bun run build"
+
+# This redirect rule ensures that all routes are handled by the index.html file
+# This is essential for single-page applications using client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200 
