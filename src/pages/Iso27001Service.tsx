@@ -17,6 +17,7 @@ import {
   FAQItem,
   SEOProps
 } from '@/types';
+import ClientLogos from '@/components/services/ClientLogos';
 
 /**
  * ISO 27001 Service Page
@@ -282,7 +283,13 @@ const Iso27001Service: React.FC = () => {
           imageUrl="/lovable-uploads/iso27001-cta.png"
         />
       }
-    />
+    >
+      <ClientLogos 
+        service="iso27001" 
+        title="Trusted by Leading Organizations" 
+        description="Join these companies who achieved ISO 27001 certification with Atoro AI Shield" 
+      />
+    </StandardServicePage>
   );
 };
 

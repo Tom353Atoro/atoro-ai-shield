@@ -101,6 +101,8 @@ export interface ClientLogoItem {
   imagePath: string;
   /** Alt text for accessibility */
   altText?: string;
+  /** Industries the client operates in (for filtering) */
+  industries?: string[];
 }
 
 /**
