@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Brain, FileCode, Settings } from 'lucide-react';
 import ServiceSectionWrapper from '@/components/services/ServiceSectionWrapper';
@@ -11,7 +10,7 @@ const ServicesSection = () => {
     icon: <Brain className={tokens.colors.brand.green} />,
     title: "AI Risk Assessment",
     description: "Comprehensive evaluation of AI systems for potential risks, biases, and compliance gaps.",
-    link: "/services/ai-governance/risk-assessment",
+    link: "/services/ai-governance/ai-risk-assessment",
     linkText: "Learn more"
   }, {
     icon: <FileCode className={tokens.colors.brand.green} />,

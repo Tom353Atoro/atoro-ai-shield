@@ -26,7 +26,7 @@ const FlagshipService = () => {
             </ul>
             
             <Button size="lg" asChild>
-              <Link to="/services/security-team-aas">Learn More</Link>
+              <Link to="/services/cyber-security/security-team-aas">Learn More</Link>
             </Button>
           </div>
           

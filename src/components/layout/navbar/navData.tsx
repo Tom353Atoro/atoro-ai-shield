@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Shield, FileKey, Brain, Users } from 'lucide-react';
 import { NavLink } from './types';
@@ -30,7 +29,7 @@ export const navLinks: NavLink[] = [
       },
       { 
         name: 'Security Team as a Service', 
-        href: '/services/security-team-aas', 
+        href: '/services/cyber-security/security-team-aas', 
         featured: true,
         description: 'Your dedicated virtual security department.',
         icon: <Users className="h-5 w-5 text-atoro-green" />

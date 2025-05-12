@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ServiceFeaturedSection from '@/components/services/ServiceFeaturedSection';
 import { tokens } from '@/lib/designTokens';
@@ -27,7 +26,7 @@ const FeaturedServiceSection = () => {
       features={featuredServiceFeatures}
       challenges={featuredServiceChallenges}
       ctaText="Learn More"
-      ctaLink="/services/security-team-aas"
+      ctaLink="/services/cyber-security/security-team-aas"
       backgroundClass={tokens.gradients.sectionTeal}
     />
   );

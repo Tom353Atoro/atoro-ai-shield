@@ -10,7 +10,7 @@ const Footer = () => {
     'Cyber Security': '/services/cyber-security',
     'Data Privacy': '/services/data-privacy',
     'AI Governance': '/services/ai-governance',
-    'Security Team as a Service': '/services/security-team-aas'
+    'Security Team as a Service': '/services/cyber-security/security-team-aas'
   };
 
   return (
