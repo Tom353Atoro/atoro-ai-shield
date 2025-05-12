@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { 
   Carousel, 
   CarouselContent, 
@@ -33,7 +33,7 @@ interface LogoCarouselProps {
 
 /**
  * LogoCarousel Component
- * Displays logos in a scrolling carousel
+ * Displays logos in a scrolling carousel with grayscale hover effect
  * 
  * @param logos - Array of logo objects with id, name, and image path
  * @param title - Optional title for the carousel section
@@ -80,7 +80,7 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
                 key={logo.id} 
                 className="pl-4 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
               >
-                <div className="flex items-center justify-center h-20 bg-white p-4 rounded-lg">
+                <div className="flex items-center justify-center h-24 bg-gray-100 hover:bg-white p-4 rounded-lg shadow-sm transition-all duration-300">
                   {!loaded[logo.id.toString()] && (
                     <Skeleton className="w-full h-12 rounded-md" />
                   )}
@@ -88,7 +88,7 @@ const LogoCarousel: React.FC<LogoCarouselProps> = ({
                     src={logo.imagePath}
                     alt={logo.alt || `${logo.name} logo`}
                     className={cn(
-                      "max-h-12 mx-auto object-contain transition-opacity duration-300",
+                      "max-h-12 mx-auto object-contain transition-all duration-300 filter grayscale hover:grayscale-0",
                       loaded[logo.id.toString()] ? "opacity-100" : "opacity-0"
                     )}
                     style={{ 

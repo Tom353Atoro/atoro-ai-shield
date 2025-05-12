@@ -22,7 +22,7 @@ interface ClientLogosProps {
 
 /**
  * ClientLogos Component
- * Modern auto-scrolling client logos carousel
+ * Modern auto-scrolling client logos carousel with grayscale hover effect
  * 
  * @param logos - Array of logo objects with id, name, and image path
  * @param title - Optional title for the carousel section

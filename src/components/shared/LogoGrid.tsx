@@ -37,14 +37,14 @@ const LogoGrid: React.FC<LogoGridProps> = ({
           {logos.map((logo) => (
             <div 
               key={logo.id} 
-              className="flex items-center justify-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow w-full"
+              className="flex items-center justify-center p-6 bg-gray-100 hover:bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 w-full"
             >
               <div className="w-full max-w-[220px] mx-auto">
                 <AspectRatio ratio={3/2} className="flex items-center justify-center">
                   <img 
                     src={logo.src || logo.imagePath} 
                     alt={logo.alt || `${logo.name || 'Logo'}`}
-                    className="max-h-16 object-contain"
+                    className="max-h-16 object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
                     width={logo.width || 220}
                     height={80}
                   />

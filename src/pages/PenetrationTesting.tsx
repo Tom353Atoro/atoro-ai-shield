@@ -38,7 +38,6 @@ const PenetrationTesting = () => {
   // Hero section properties
   const heroProps: HeroProps = {
     title: "Penetration Testing",
-    subtitle: "Identify and address security vulnerabilities before attackers do",
     description: "Our expert ethical hackers perform thorough penetration testing to uncover security weaknesses, helping you strengthen your defenses against real-world attacks.",
     imagePath: "/images/services/pentest-hero.png",
     ctaText: "Request a Penetration Test",
@@ -53,7 +52,7 @@ const PenetrationTesting = () => {
   };
 
   // Overview section features
-  const features: FeatureCardProps[] = [
+  const features: OverviewFeature[] = [
     {
       title: "Web Application Testing",
       description: "Identify vulnerabilities in your web applications and APIs",
@@ -82,7 +81,7 @@ const PenetrationTesting = () => {
   ];
 
   // Benefits section items
-  const benefits: BenefitItemProps[] = [
+  const benefits: BenefitItemType[] = [
     {
       title: "Identify Real Vulnerabilities",
       description: "Discover exploitable security issues that automated tools miss"
@@ -110,39 +109,46 @@ const PenetrationTesting = () => {
   ];
 
   // Process section steps
-  const processSteps: ProcessStepProps[] = [
+  const processSteps: ProcessStep[] = [
     {
       title: "Scoping & Planning",
-      description: "Define testing objectives, scope, and methodology"
+      description: "Define testing objectives, scope, and methodology",
+      stepNumber: 1
     },
     {
       title: "Reconnaissance",
-      description: "Gather information about the target environment"
+      description: "Gather information about the target environment",
+      stepNumber: 2
     },
     {
       title: "Vulnerability Discovery",
-      description: "Identify potential security weaknesses"
+      description: "Identify potential security weaknesses",
+      stepNumber: 3
     },
     {
       title: "Exploitation",
-      description: "Safely attempt to exploit discovered vulnerabilities"
+      description: "Safely attempt to exploit discovered vulnerabilities",
+      stepNumber: 4
     },
     {
       title: "Analysis & Documentation",
-      description: "Document findings and develop remediation recommendations"
+      description: "Document findings and develop remediation recommendations",
+      stepNumber: 5
     },
     {
       title: "Reporting & Debriefing",
-      description: "Deliver comprehensive report and discuss findings"
+      description: "Deliver comprehensive report and discuss findings",
+      stepNumber: 6
     },
     {
       title: "Remediation Guidance",
-      description: "Provide support in addressing identified vulnerabilities"
+      description: "Provide support in addressing identified vulnerabilities",
+      stepNumber: 7
     }
   ];
 
   // FAQ section questions and answers
-  const faqs: FAQProps[] = [
+  const faqs: FAQItem[] = [
     {
       question: "What types of penetration testing do you offer?",
       answer: "We offer a comprehensive range of penetration testing services including web application testing, network infrastructure testing, mobile application assessment, cloud security testing, API security testing, and social engineering simulations."
@@ -176,53 +182,43 @@ const PenetrationTesting = () => {
         imageUrl: "/images/services/pentest-hero.png",
         badgeText: "Security Testing"
       }}
-      overviewSection={
-        <StandardOverviewSection 
-          badgeText="Overview"
-          title="Penetration Testing Services"
-          description="Our ethical hackers identify vulnerabilities before malicious actors can exploit them."
-          features={features}
-          id="overview"
-        />
-      }
-      benefitsSection={
-        <StandardBenefitsSection 
-          badgeText="Benefits"
-          title="Benefits of Penetration Testing"
-          description="Regular penetration testing provides numerous security and business advantages."
-          benefits={benefits}
-          id="benefits"
-        />
-      }
-      processSection={
-        <StandardProcessSection 
-          badgeText="Process"
-          title="Our Penetration Testing Process"
-          description="Our methodical approach ensures thorough security assessment and actionable results."
-          steps={processSteps}
-          id="process"
-        />
-      }
-      faqSection={
-        <StandardFAQSection 
-          badgeText="FAQ"
-          title="Penetration Testing FAQs"
-          description="Common questions about our penetration testing services."
-          faqs={faqs}
-          id="faq"
-        />
-      }
-      ctaSection={
-        <StandardCTASection 
-          badgeText="Get Started"
-          title="Ready to Test Your Security?"
-          description="Contact us to discuss your penetration testing needs."
-          primaryButtonText="Request a Penetration Test"
-          primaryButtonLink="/contact"
-          id="cta"
-        />
-      }
     >
+      <StandardOverviewSection 
+        badgeText="Overview"
+        title="Penetration Testing Services"
+        description="Our ethical hackers identify vulnerabilities before malicious actors can exploit them."
+        features={features}
+        id="overview"
+      />
+      <StandardBenefitsSection 
+        badgeText="Benefits"
+        title="Benefits of Penetration Testing"
+        description="Regular penetration testing provides numerous security and business advantages."
+        benefits={benefits}
+        id="benefits"
+      />
+      <StandardProcessSection 
+        badgeText="Process"
+        title="Our Penetration Testing Process"
+        description="Our methodical approach ensures thorough security assessment and actionable results."
+        steps={processSteps}
+        id="process"
+      />
+      <StandardFAQSection 
+        badgeText="FAQ"
+        title="Penetration Testing FAQs"
+        description="Common questions about our penetration testing services."
+        faqs={faqs}
+        id="faq"
+      />
+      <StandardCTASection 
+        badgeText="Get Started"
+        title="Ready to Test Your Security?"
+        description="Contact us to discuss your penetration testing needs."
+        primaryButtonText="Request a Penetration Test"
+        primaryButtonLink="/contact"
+        id="cta"
+      />
       {/* Add ClientLogos component for penetration testing clients */}
       <ClientLogos 
         service="penetration-testing" 

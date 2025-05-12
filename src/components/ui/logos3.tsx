@@ -75,11 +75,11 @@ const Logos3 = ({
                   className="flex min-w-[80px] max-w-[140px] basis-1/3 justify-center pl-0 xs:basis-1/4 sm:basis-1/5 md:basis-1/6 lg:basis-1/7"
                 >
                   <div className="mx-0.5 sm:mx-1 flex shrink-0 items-center justify-center">
-                    <div className="flex h-10 sm:h-12 items-center justify-center">
+                    <div className="flex h-14 sm:h-16 items-center justify-center p-2 bg-gray-100 hover:bg-white rounded-md transition-all duration-300">
                       <img
                         src={logo.image || logo.imagePath}
                         alt={logo.alt || logo.description || `${logo.name || ''} logo`}
-                        className={logo.className || "max-h-8 sm:max-h-10 w-auto object-contain"}
+                        className="max-h-10 sm:max-h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
                         style={logo.width ? { width: `${Math.min(logo.width, 100)}px` } : undefined}
                         loading="eager"
                       />

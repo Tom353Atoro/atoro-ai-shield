@@ -24,6 +24,12 @@ export interface HeroProps {
   badgeText?: string;
   /** Optional CSS class for background gradient/color */
   backgroundClass?: string;
+  /** @deprecated - Use imageUrl instead */
+  imagePath?: string;
+  /** @deprecated - Use primaryButtonText instead */
+  ctaText?: string;
+  /** @deprecated - Use primaryButtonLink instead */
+  ctaLink?: string;
 }
 
 /**
