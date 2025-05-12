@@ -4,6 +4,28 @@
 
 **URL**: https://lovable.dev/projects/49b1f906-a8dc-4992-9017-6a9fb543eb04
 
+## Service Page Standardization
+
+The service pages in this project have been standardized using a common component architecture:
+
+- All service pages now use the `StandardServicePage` component
+- Consistent TypeScript interfaces and types are defined in `src/types/index.ts`
+- Standard sections (Overview, Benefits, Process, FAQ, CTA) use shared components
+- Each page follows proper TypeScript typing patterns
+- URL structure follows `/services/cyber-security/[service-name]` standard
+- All components use functional component patterns with proper typings
+
+### Standardized Service Pages:
+- VDPO.tsx
+- Soc2.tsx 
+- AIRiskAssessment.tsx
+- ISO42001.tsx
+- GDPRCompliance.tsx
+- SecurityTeamService.tsx
+- PenetrationTesting.tsx
+
+This standardization improves code maintainability, type safety, and ensures consistent UI patterns across all service pages.
+
 ## How can I edit this code?
 
 There are several ways of editing your application.
