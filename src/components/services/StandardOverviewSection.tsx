@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { OverviewFeature } from '@/types';
@@ -10,6 +11,7 @@ export interface StandardOverviewSectionProps {
   features: OverviewFeature[];
   className?: string;
   bgColor?: string;
+  id?: string;
 }
 
 /**
@@ -23,10 +25,11 @@ const StandardOverviewSection: React.FC<StandardOverviewSectionProps> = ({
   description,
   features,
   className = '',
-  bgColor = 'bg-white'
+  bgColor = 'bg-white',
+  id
 }) => {
   return (
-    <section className={`py-12 ${bgColor} ${className}`}>
+    <section id={id} className={`py-12 ${bgColor} ${className}`}>
       <Container>
         <SectionHeader
           badgeText={badgeText}

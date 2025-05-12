@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ClientLogoItem } from '@/types';
 import { getLogosForService, getRandomClientLogos } from '@/data/clientLogos';
@@ -14,6 +15,12 @@ interface ClientLogosProps {
    * If provided, overrides the service-based selection
    */
   logoIds?: string[];
+  
+  /**
+   * Optional array of logo items to display directly
+   * If provided, overrides both service and logoIds
+   */
+  logos?: ClientLogoItem[];
   
   /**
    * Optional title above the logos section
@@ -38,20 +45,24 @@ interface ClientLogosProps {
 const ClientLogos: React.FC<ClientLogosProps> = ({
   service,
   logoIds,
+  logos,
   title = "Our Clients",
   description = "Trusted by leading organizations",
   count = 3
 }) => {
   // Determine which logos to display based on props
   const logosToDisplay: ClientLogoItem[] = React.useMemo(() => {
-    if (logoIds && logoIds.length > 0) {
+    if (logos && logos.length > 0) {
+      // If logos are directly provided, use those
+      return logos;
+    } else if (logoIds && logoIds.length > 0) {
       // If specific logo IDs are provided, use those
-      const logos = logoIds.map(id => ({ 
+      const logoItems = logoIds.map(id => ({ 
         id: id.toString(),
         name: id, // Fallback name
         imagePath: `/logos/${id}-logo.png` // Fallback path
       })) as ClientLogoItem[];
-      return logos;
+      return logoItems;
     } else if (service) {
       // If a service is specified, get relevant logos
       return getLogosForService(service);
@@ -59,7 +70,7 @@ const ClientLogos: React.FC<ClientLogosProps> = ({
       // Otherwise, get a random selection
       return getRandomClientLogos(count);
     }
-  }, [service, logoIds, count]);
+  }, [service, logoIds, logos, count]);
 
   return (
     <section className="py-8 bg-gray-50">
@@ -83,6 +94,7 @@ const ClientLogos: React.FC<ClientLogosProps> = ({
                 alt={logo.altText || `${logo.name} logo`}
                 style={{ maxHeight: '75px', maxWidth: '200px' }}
                 className="max-h-14 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                loading="lazy"
               />
             </div>
           ))}

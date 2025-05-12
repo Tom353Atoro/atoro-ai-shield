@@ -1,3 +1,4 @@
+
 import React, { ReactNode } from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
 import ClientLogos from '@/components/services/ClientLogos';
@@ -171,6 +172,9 @@ export interface StandardServicePageProps {
   
   // Custom testimonials section (overrides standard section)
   testimonialsSectionOverride?: ReactNode;
+  
+  // Children elements
+  children?: ReactNode;
 }
 
 /**
@@ -196,7 +200,8 @@ const StandardServicePage: React.FC<StandardServicePageProps> = ({
   testimonialsDescription,
   testimonialsBadgeText,
   testimonialsBgColor = "bg-white",
-  testimonialsSectionOverride
+  testimonialsSectionOverride,
+  children
 }) => {
   return (
     <>
@@ -257,6 +262,16 @@ const StandardServicePage: React.FC<StandardServicePageProps> = ({
               onError={(error, errorInfo) => handleServicePageError(error, errorInfo, "Process")}
             >
               {processSection}
+            </ErrorBoundary>
+          )}
+          
+          {/* Custom children content if provided */}
+          {children && (
+            <ErrorBoundary 
+              fallback={<SectionErrorFallback sectionName="Custom Content" />}
+              onError={(error, errorInfo) => handleServicePageError(error, errorInfo, "CustomContent")}
+            >
+              {children}
             </ErrorBoundary>
           )}
           

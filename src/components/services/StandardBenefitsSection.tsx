@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { BenefitItem as BenefitItemType } from '@/types';
@@ -12,6 +13,7 @@ export interface StandardBenefitsSectionProps {
   imageAlt?: string;
   className?: string;
   bgColor?: string;
+  id?: string;
 }
 
 /**
@@ -27,10 +29,11 @@ const StandardBenefitsSection: React.FC<StandardBenefitsSectionProps> = ({
   imageUrl,
   imageAlt = "Benefits illustration",
   className = '',
-  bgColor = 'bg-white'
+  bgColor = 'bg-white',
+  id
 }) => {
   return (
-    <section className={`py-16 ${bgColor} ${className}`}>
+    <section id={id} className={`py-16 ${bgColor} ${className}`}>
       <Container>
         <SectionHeader
           badgeText={badgeText}

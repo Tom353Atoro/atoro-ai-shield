@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Shield, Bug, Lock, FileCheck, BarChart3, Users } from 'lucide-react';
 import StandardServicePage from '@/components/services/StandardServicePage';
@@ -14,13 +15,19 @@ import {
   OverviewFeature,
   BenefitItem as BenefitItemType,
   ProcessStep,
-  FAQItem,
+  FAQItem, 
   SEOProps,
-  HeroProps,
-  FeatureCardProps,
-  ProcessStepProps,
-  FAQProps
 } from '@/types';
+
+// Import the service-page types
+import { 
+  HeroProps, 
+  FeatureCardProps, 
+  ProcessStepProps, 
+  FAQProps, 
+  BenefitItemProps 
+} from '@/types/service-page';
+
 import ClientLogos from '@/components/services/ClientLogos';
 
 /**
@@ -35,7 +42,14 @@ const PenetrationTesting = () => {
     description: "Our expert ethical hackers perform thorough penetration testing to uncover security weaknesses, helping you strengthen your defenses against real-world attacks.",
     imagePath: "/images/services/pentest-hero.png",
     ctaText: "Request a Penetration Test",
-    ctaLink: "/contact"
+    ctaLink: "/contact",
+    imageUrl: "/images/services/pentest-hero.png",
+  };
+
+  // SEO data
+  const seoData: SEOProps = {
+    pageTitle: "Penetration Testing Services | Atoro AI Shield",
+    metaDescription: "Our expert ethical hackers perform thorough penetration testing to uncover security weaknesses in your web applications, networks, and cloud environments."
   };
 
   // Overview section features
@@ -153,51 +167,67 @@ const PenetrationTesting = () => {
 
   return (
     <StandardServicePage 
-      heroProps={heroProps}
-      metaTitle="Penetration Testing Services | Atoro AI Shield"
-      metaDescription="Our expert ethical hackers perform thorough penetration testing to uncover security weaknesses in your web applications, networks, and cloud environments."
+      seo={seoData}
+      heroProps={{
+        title: "Penetration Testing",
+        description: "Our expert ethical hackers perform thorough penetration testing to uncover security weaknesses, helping you strengthen your defenses against real-world attacks.",
+        primaryButtonText: "Request a Penetration Test",
+        primaryButtonLink: "/contact",
+        imageUrl: "/images/services/pentest-hero.png",
+        badgeText: "Security Testing"
+      }}
+      overviewSection={
+        <StandardOverviewSection 
+          badgeText="Overview"
+          title="Penetration Testing Services"
+          description="Our ethical hackers identify vulnerabilities before malicious actors can exploit them."
+          features={features}
+          id="overview"
+        />
+      }
+      benefitsSection={
+        <StandardBenefitsSection 
+          badgeText="Benefits"
+          title="Benefits of Penetration Testing"
+          description="Regular penetration testing provides numerous security and business advantages."
+          benefits={benefits}
+          id="benefits"
+        />
+      }
+      processSection={
+        <StandardProcessSection 
+          badgeText="Process"
+          title="Our Penetration Testing Process"
+          description="Our methodical approach ensures thorough security assessment and actionable results."
+          steps={processSteps}
+          id="process"
+        />
+      }
+      faqSection={
+        <StandardFAQSection 
+          badgeText="FAQ"
+          title="Penetration Testing FAQs"
+          description="Common questions about our penetration testing services."
+          faqs={faqs}
+          id="faq"
+        />
+      }
+      ctaSection={
+        <StandardCTASection 
+          badgeText="Get Started"
+          title="Ready to Test Your Security?"
+          description="Contact us to discuss your penetration testing needs."
+          primaryButtonText="Request a Penetration Test"
+          primaryButtonLink="/contact"
+          id="cta"
+        />
+      }
     >
-      <StandardOverviewSection 
-        id="overview"
-        title="Penetration Testing Services"
-        description="Our ethical hackers identify vulnerabilities before malicious actors can exploit them."
-        features={features}
-      />
-      
       {/* Add ClientLogos component for penetration testing clients */}
       <ClientLogos 
         service="penetration-testing" 
         title="Securing Industry Leaders" 
         description="These organizations trust Atoro AI Shield with their penetration testing needs" 
-      />
-      
-      <StandardBenefitsSection 
-        id="benefits"
-        title="Benefits of Penetration Testing"
-        description="Regular penetration testing provides numerous security and business advantages."
-        benefits={benefits}
-      />
-      
-      <StandardProcessSection 
-        id="process"
-        title="Our Penetration Testing Process"
-        description="Our methodical approach ensures thorough security assessment and actionable results."
-        steps={processSteps}
-      />
-      
-      <StandardFAQSection 
-        id="faq"
-        title="Penetration Testing FAQs"
-        description="Common questions about our penetration testing services."
-        faqs={faqs}
-      />
-      
-      <StandardCTASection 
-        id="cta"
-        title="Ready to Test Your Security?"
-        description="Contact us to discuss your penetration testing needs."
-        buttonText="Request a Penetration Test"
-        buttonLink="/contact"
       />
     </StandardServicePage>
   );

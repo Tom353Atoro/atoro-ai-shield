@@ -1,3 +1,4 @@
+
 import React, { ReactNode } from 'react';
 import { Helmet } from 'react-helmet';
 import Navbar from '@/components/layout/Navbar';
@@ -10,7 +11,7 @@ interface HeroProps {
   primaryButtonText: string;
   primaryButtonLink: string;
   badgeText: string;
-  imageUrl: string;
+  imageUrl?: string; // Make imageUrl optional
   backgroundClass?: string;
 }
 
@@ -73,13 +74,15 @@ const PillarPageTemplate: React.FC<PillarPageTemplateProps> = ({
                     {heroProps.primaryButtonText}
                   </a>
                 </div>
-                <div className="lg:w-1/2">
-                  <img
-                    src={heroProps.imageUrl}
-                    alt={typeof heroProps.title === 'string' ? heroProps.title : 'Hero image'}
-                    className="w-full h-auto rounded-xl shadow-2xl"
-                  />
-                </div>
+                {heroProps.imageUrl && (
+                  <div className="lg:w-1/2">
+                    <img
+                      src={heroProps.imageUrl}
+                      alt={typeof heroProps.title === 'string' ? heroProps.title : 'Hero image'}
+                      className="w-full h-auto rounded-xl shadow-2xl"
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </section>

@@ -1,6 +1,9 @@
 import { ReactNode } from 'react';
 import { LucideIcon } from 'lucide-react';
 
+// Import and re-export service page types
+export * from './service-page';
+
 /**
  * ===========================
  * COMMON UI ELEMENTS
@@ -411,4 +414,4 @@ export interface ContactFormData {
   referralSource?: string;
   /** Service they're interested in */
   serviceInterest?: string;
-} 
+}

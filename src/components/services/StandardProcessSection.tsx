@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { ProcessStep as ProcessStepType } from '@/types';
@@ -11,6 +12,7 @@ export interface StandardProcessSectionProps {
   className?: string;
   bgColor?: string;
   layout?: 'horizontal' | 'vertical';
+  id?: string;
 }
 
 /**
@@ -25,10 +27,11 @@ const StandardProcessSection: React.FC<StandardProcessSectionProps> = ({
   steps,
   className = '',
   bgColor = 'bg-gray-50',
-  layout = 'horizontal'
+  layout = 'horizontal',
+  id
 }) => {
   return (
-    <section className={`py-16 ${bgColor} ${className}`}>
+    <section id={id} className={`py-16 ${bgColor} ${className}`}>
       <Container>
         <SectionHeader
           badgeText={badgeText}
@@ -41,7 +44,7 @@ const StandardProcessSection: React.FC<StandardProcessSectionProps> = ({
           {steps.map((step, index) => (
             <ProcessStep
               key={index}
-              stepNumber={step.stepNumber}
+              stepNumber={step.stepNumber || index + 1}
               title={step.title}
               description={step.description}
               isLast={index === steps.length - 1}
