@@ -1,7 +1,7 @@
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { ServiceSection } from './StandardServicePage';
-import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
+import { Disclosure } from '@headlessui/react';
 import { ChevronDown } from 'lucide-react';
 
 export interface FAQItem {
@@ -54,19 +54,19 @@ const StandardFAQSection: React.FC<StandardFAQSectionProps> = ({
             <Disclosure key={`faq-${index}`} as="div" className="bg-white rounded-lg shadow-sm overflow-hidden">
               {({ open }) => (
                 <>
-                  <DisclosureButton className="flex justify-between w-full px-6 py-4 text-left font-medium text-atoro-dark-teal focus:outline-none focus:ring-2 focus:ring-atoro-green/50">
+                  <Disclosure.Button className="flex justify-between w-full px-6 py-4 text-left font-medium text-atoro-dark-teal focus:outline-none focus:ring-2 focus:ring-atoro-green/50">
                     <span>{faq.question}</span>
                     <ChevronDown 
                       className={`${open ? "transform rotate-180" : ""} w-5 h-5 text-atoro-green transition-transform duration-200`} 
                     />
-                  </DisclosureButton>
-                  <DisclosurePanel className="px-6 pb-4 pt-2 text-gray-600">
+                  </Disclosure.Button>
+                  <Disclosure.Panel className="px-6 pb-4 pt-2 text-gray-600">
                     {typeof faq.answer === 'string' ? (
                       <p>{faq.answer}</p>
                     ) : (
                       faq.answer
                     )}
-                  </DisclosurePanel>
+                  </Disclosure.Panel>
                 </>
               )}
             </Disclosure>
