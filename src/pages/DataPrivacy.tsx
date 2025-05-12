@@ -1,3 +1,4 @@
+
 import React from 'react';
 import PillarPageTemplate from '@/components/layout/PillarPageTemplate';
 import ServicesSection from '@/components/data-privacy/ServicesSection';
@@ -40,7 +41,8 @@ const DataPrivacy = () => {
         primaryButtonText: "Schedule Privacy Assessment",
         primaryButtonLink: "/contact",
         badgeText: "Privacy Solutions",
-        backgroundClass: "bg-gradient-to-br from-atoro-blue to-atoro-teal"
+        backgroundClass: "bg-gradient-to-br from-atoro-blue to-atoro-teal",
+        imageUrl: "/lovable-uploads/data-privacy-hero.jpg" // Added imageUrl
       }}
       testimonials={testimonials}
       testimonialsBadgeText="Privacy Excellence"

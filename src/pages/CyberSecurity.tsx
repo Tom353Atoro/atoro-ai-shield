@@ -1,9 +1,11 @@
+
 import React from 'react';
 import PillarPageTemplate from '@/components/layout/PillarPageTemplate';
 import ServicesSection from '@/components/cyber-security/ServicesSection';
 import FeaturedServiceSection from '@/components/cyber-security/FeaturedServiceSection';
 import ApproachSection from '@/components/cyber-security/ApproachSection';
 import CTASection from '@/components/cyber-security/CTASection';
+import ClientSection from '@/components/cyber-security/ClientSection';
 
 const CyberSecurity = () => {
   // Security-specific testimonials
@@ -47,6 +49,7 @@ const CyberSecurity = () => {
       servicesSection={<ServicesSection />}
       featuredServiceSection={<FeaturedServiceSection />}
       approachSection={<ApproachSection />}
+      clientSection={<ClientSection />}
       ctaSection={<CTASection />}
     />
   );

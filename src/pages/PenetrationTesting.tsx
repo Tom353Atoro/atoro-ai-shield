@@ -7,25 +7,14 @@ import StandardBenefitsSection from '@/components/services/StandardBenefitsSecti
 import StandardProcessSection from '@/components/services/StandardProcessSection';
 import StandardFAQSection from '@/components/services/StandardFAQSection';
 import StandardCTASection from '@/components/services/StandardCTASection';
-import { Container } from '@/components/ui/Container';
-import { SectionHeader, FeatureCard, BenefitItem, TestimonialCard } from '@/components/ui';
-import {
-  TestimonialItem,
-  ClientLogoItem,
-  OverviewFeature,
-  BenefitItem as BenefitItemType,
-  ProcessStep,
-  FAQItem, 
-  SEOProps,
-} from '@/types';
-
-// Import the service-page types
+import { TestimonialItem, ClientLogoItem, SEOProps } from '@/types';
 import { 
-  HeroProps, 
   FeatureCardProps, 
   ProcessStepProps, 
   FAQProps, 
-  BenefitItemProps 
+  BenefitItemProps,
+  HeroProps,
+  StandardServicePageProps
 } from '@/types/service-page';
 
 import ClientLogos from '@/components/services/ClientLogos';
@@ -39,10 +28,10 @@ const PenetrationTesting = () => {
   const heroProps: HeroProps = {
     title: "Penetration Testing",
     description: "Our expert ethical hackers perform thorough penetration testing to uncover security weaknesses, helping you strengthen your defenses against real-world attacks.",
-    imagePath: "/images/services/pentest-hero.png",
-    ctaText: "Request a Penetration Test",
-    ctaLink: "/contact",
+    primaryButtonText: "Request a Penetration Test",
+    primaryButtonLink: "/contact",
     imageUrl: "/images/services/pentest-hero.png",
+    badgeText: "Security Testing"
   };
 
   // SEO data
@@ -52,7 +41,7 @@ const PenetrationTesting = () => {
   };
 
   // Overview section features
-  const features: OverviewFeature[] = [
+  const features: FeatureCardProps[] = [
     {
       title: "Web Application Testing",
       description: "Identify vulnerabilities in your web applications and APIs",
@@ -81,7 +70,7 @@ const PenetrationTesting = () => {
   ];
 
   // Benefits section items
-  const benefits: BenefitItemType[] = [
+  const benefits: BenefitItemProps[] = [
     {
       title: "Identify Real Vulnerabilities",
       description: "Discover exploitable security issues that automated tools miss"
@@ -109,7 +98,7 @@ const PenetrationTesting = () => {
   ];
 
   // Process section steps
-  const processSteps: ProcessStep[] = [
+  const processSteps: ProcessStepProps[] = [
     {
       title: "Scoping & Planning",
       description: "Define testing objectives, scope, and methodology",
@@ -148,7 +137,7 @@ const PenetrationTesting = () => {
   ];
 
   // FAQ section questions and answers
-  const faqs: FAQItem[] = [
+  const faqs: FAQProps[] = [
     {
       question: "What types of penetration testing do you offer?",
       answer: "We offer a comprehensive range of penetration testing services including web application testing, network infrastructure testing, mobile application assessment, cloud security testing, API security testing, and social engineering simulations."
@@ -174,14 +163,7 @@ const PenetrationTesting = () => {
   return (
     <StandardServicePage 
       seo={seoData}
-      heroProps={{
-        title: "Penetration Testing",
-        description: "Our expert ethical hackers perform thorough penetration testing to uncover security weaknesses, helping you strengthen your defenses against real-world attacks.",
-        primaryButtonText: "Request a Penetration Test",
-        primaryButtonLink: "/contact",
-        imageUrl: "/images/services/pentest-hero.png",
-        badgeText: "Security Testing"
-      }}
+      heroProps={heroProps}
     >
       <StandardOverviewSection 
         badgeText="Overview"

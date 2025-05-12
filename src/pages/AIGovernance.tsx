@@ -1,3 +1,4 @@
+
 import React from 'react';
 import PillarPageTemplate from '@/components/layout/PillarPageTemplate';
 import ServicesSection from '@/components/ai-governance/ServicesSection';
@@ -40,7 +41,8 @@ const AIGovernance = () => {
         primaryButtonText: "Schedule Consultation",
         primaryButtonLink: "/contact",
         badgeText: "AI Governance",
-        backgroundClass: "bg-gradient-to-br from-atoro-purple to-atoro-blue"
+        backgroundClass: "bg-gradient-to-br from-atoro-purple to-atoro-blue",
+        imageUrl: "/lovable-uploads/ai-governance-hero.jpg" // Added imageUrl
       }}
       testimonials={testimonials}
       testimonialsBadgeText="AI Governance Excellence"

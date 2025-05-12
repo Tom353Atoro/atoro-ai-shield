@@ -2,13 +2,18 @@
 import React from 'react';
 import Layout from '@/components/layout/Layout';
 import SEO from '@/components/shared/SEO';
-import { SEOProps } from '@/types';
+import { SEOProps, ClientLogoItem } from '@/types';
 import { HeroProps } from '@/types/service-page';
 
 interface StandardServicePageProps {
   seo: SEOProps;
   heroProps: HeroProps;
   children: React.ReactNode;
+  clientLogos?: ClientLogoItem[];
+  clientLogosTitle?: string;
+  clientLogosDescription?: string;
+  clientLogosBgColor?: string;
+  showClientLogos?: boolean;
 }
 
 /**
@@ -20,11 +25,16 @@ interface StandardServicePageProps {
 const StandardServicePage: React.FC<StandardServicePageProps> = ({
   seo,
   heroProps,
-  children
+  children,
+  clientLogos,
+  clientLogosTitle,
+  clientLogosDescription,
+  clientLogosBgColor,
+  showClientLogos = true
 }) => {
   return (
     <Layout>
-      <SEO title={seo.pageTitle} description={seo.metaDescription} />
+      <SEO pageTitle={seo.pageTitle} metaDescription={seo.metaDescription} />
       {/* Service Hero Section */}
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16 lg:py-24">
         <div className="container mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
@@ -66,6 +76,21 @@ const StandardServicePage: React.FC<StandardServicePageProps> = ({
           </div>
         </div>
       </section>
+
+      {/* Client Logos Section if applicable */}
+      {showClientLogos && clientLogos && (
+        <section className={clientLogosBgColor || "bg-gray-50"}>
+          <div className="container mx-auto px-4 py-12">
+            {clientLogosTitle && (
+              <h2 className="text-2xl font-bold text-center mb-4">{clientLogosTitle}</h2>
+            )}
+            {clientLogosDescription && (
+              <p className="text-center mb-8 max-w-2xl mx-auto">{clientLogosDescription}</p>
+            )}
+            {/* Client logos would be rendered here */}
+          </div>
+        </section>
+      )}
 
       {/* Render child sections */}
       {children}

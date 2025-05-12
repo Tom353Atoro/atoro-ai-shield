@@ -19,7 +19,7 @@ export interface HeroProps {
   /** Secondary action button link */
   secondaryButtonLink?: string;
   /** URL to the hero image */
-  imageUrl: string;
+  imageUrl?: string; // Made optional to fix errors
   /** Optional badge text displayed above the title */
   badgeText?: string;
   /** Optional CSS class for background gradient/color */
@@ -82,4 +82,120 @@ export interface BenefitItemProps {
   icon?: ReactNode;
   /** Optional title color class */
   highlightColor?: string;
+}
+
+/**
+ * Standard Service Page Props
+ */
+export interface StandardServicePageProps {
+  /** SEO metadata */
+  seo: {
+    pageTitle: string;
+    metaDescription: string;
+    canonicalUrl?: string;
+    ogImageUrl?: string;
+  };
+  /** Hero section props */
+  heroProps: HeroProps;
+  /** Client logos data */
+  clientLogos?: Array<{
+    id: number | string;
+    name: string;
+    imagePath: string;
+    altText?: string;
+  }>;
+  /** Title for client logos section */
+  clientLogosTitle?: string;
+  /** Description for client logos section */
+  clientLogosDescription?: string;
+  /** Background color for client logos section */
+  clientLogosBgColor?: string;
+  /** Whether to show client logos section */
+  showClientLogos?: boolean;
+  /** Children components (service sections) */
+  children: React.ReactNode;
+}
+
+/**
+ * Standard Section Components Props
+ */
+export interface StandardSectionProps {
+  /** Optional section ID for anchor links */
+  id?: string;
+  /** Optional additional CSS classes */
+  className?: string;
+}
+
+/**
+ * Standard Overview Section Props
+ */
+export interface StandardOverviewSectionProps extends StandardSectionProps {
+  /** Badge text displayed above section title */
+  badgeText?: string;
+  /** Section title */
+  title: string;
+  /** Section description */
+  description: string;
+  /** Features to display in this section */
+  features: FeatureCardProps[];
+}
+
+/**
+ * Standard Benefits Section Props
+ */
+export interface StandardBenefitsSectionProps extends StandardSectionProps {
+  /** Badge text displayed above section title */
+  badgeText?: string;
+  /** Section title */
+  title: string;
+  /** Section description */
+  description?: string;
+  /** Benefits to display in this section */
+  benefits: BenefitItemProps[];
+  /** URL to image */
+  imageUrl?: string;
+  /** Alt text for image */
+  imageAlt?: string;
+  /** Custom highlight color for titles */
+  highlightColor?: string;
+}
+
+/**
+ * Standard Process Section Props
+ */
+export interface StandardProcessSectionProps extends StandardSectionProps {
+  /** Badge text displayed above section title */
+  badgeText?: string;
+  /** Section title */
+  title: string;
+  /** Section description */
+  description?: string;
+  /** Process steps to display */
+  steps: ProcessStepProps[];
+}
+
+/**
+ * Standard CTA Section Props
+ */
+export interface StandardCTASectionProps extends StandardSectionProps {
+  /** Badge text displayed above section title */
+  badgeText?: string;
+  /** Section title */
+  title: ReactNode;
+  /** Section description */
+  description?: string;
+  /** Primary button text */
+  primaryButtonText: string;
+  /** Primary button link */
+  primaryButtonLink: string;
+  /** Secondary button text */
+  secondaryButtonText?: string;
+  /** Secondary button link */
+  secondaryButtonLink?: string;
+  /** Background class for gradient/color */
+  backgroundClass?: string;
+  /** URL to image */
+  imageUrl?: string;
+  /** Alt text for image */
+  imageAlt?: string;
 }
