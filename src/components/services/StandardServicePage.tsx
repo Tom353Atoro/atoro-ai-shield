@@ -130,34 +130,6 @@ const SectionErrorFallback: React.FC<{ sectionName: string }> = ({ sectionName }
   </section>
 );
 
-// Custom error fallback components
-const ServiceErrorFallback: React.FC = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gray-50">
-    <div className="text-center p-8">
-      <h1 className="text-2xl font-bold text-red-600 mb-4">Service Page Error</h1>
-      <p className="mb-4">We're sorry, but there was an error loading this service page.</p>
-      <a href="/" className="text-atoro-teal hover:text-atoro-green">
-        Return to Home
-      </a>
-    </div>
-  </div>
-);
-
-const SectionErrorFallback: React.FC<{ sectionName: string }> = ({ sectionName }) => (
-  <section className="py-12 bg-gray-50">
-    <Container>
-      <div className="border border-red-200 rounded-lg p-6 bg-red-50">
-        <h3 className="text-red-600 font-medium mb-2">
-          {sectionName} Section Error
-        </h3>
-        <p className="text-gray-700">
-          We encountered an issue loading this section. Please try refreshing the page.
-        </p>
-      </div>
-    </Container>
-  </section>
-);
-
 /**
  * Error handler for service page components
  */
