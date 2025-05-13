@@ -1,3 +1,4 @@
+
 import React from 'react'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
@@ -102,12 +103,26 @@ function App() {
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/resources/case-studies/iso-42001" element={<CaseStudy />} />
         
-        {/* Development-only Routes */}
+        {/* Development-only Routes - Properly wrapped with conditional rendering */}
         {import.meta.env.DEV && DevOnlyComponents && (
-          <React.Suspense fallback={<div>Loading...</div>}>
-            <Route path="/dev/testimonial-demo" element={<DevOnlyComponents.TestimonialCarouselDemo />} />
-            <Route path="/dev/design-system" element={<DevOnlyComponents.DesignSystem />} />
-          </React.Suspense>
+          <React.Fragment>
+            <Route 
+              path="/dev/testimonial-demo" 
+              element={
+                <React.Suspense fallback={<div>Loading...</div>}>
+                  <DevOnlyComponents.TestimonialCarouselDemo />
+                </React.Suspense>
+              } 
+            />
+            <Route 
+              path="/dev/design-system" 
+              element={
+                <React.Suspense fallback={<div>Loading...</div>}>
+                  <DevOnlyComponents.DesignSystem />
+                </React.Suspense>
+              } 
+            />
+          </React.Fragment>
         )}
         
         {/* 404 Route */}
