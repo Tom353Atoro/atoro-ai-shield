@@ -10,11 +10,8 @@ import StandardCTASection from '@/components/services/StandardCTASection';
 import { TestimonialItem, ClientLogoItem, SEOProps } from '@/types';
 import { 
   FeatureCardProps, 
-  ProcessStepProps, 
-  FAQProps, 
   BenefitItemProps,
-  HeroProps,
-  StandardServicePageProps
+  HeroProps
 } from '@/types/service-page';
 
 import ClientLogos from '@/components/services/ClientLogos';
@@ -97,8 +94,8 @@ const PenetrationTesting = () => {
     }
   ];
 
-  // Process section steps
-  const processSteps: ProcessStepProps[] = [
+  // Process steps data - make sure stepNumber is required
+  const processSteps = [
     {
       title: "Scoping & Planning",
       description: "Define testing objectives, scope, and methodology",
@@ -137,7 +134,7 @@ const PenetrationTesting = () => {
   ];
 
   // FAQ section questions and answers
-  const faqs: FAQProps[] = [
+  const faqs = [
     {
       question: "What types of penetration testing do you offer?",
       answer: "We offer a comprehensive range of penetration testing services including web application testing, network infrastructure testing, mobile application assessment, cloud security testing, API security testing, and social engineering simulations."

@@ -5,15 +5,40 @@ import SEO from '@/components/shared/SEO';
 import { SEOProps, ClientLogoItem } from '@/types';
 import { HeroProps } from '@/types/service-page';
 
+// Add ServiceSection component directly to StandardServicePage.tsx
+export const ServiceSection: React.FC<React.PropsWithChildren<{
+  className?: string;
+  id?: string;
+}>> = ({ children, className = "", id }) => {
+  return (
+    <section id={id} className={className}>
+      <div className="container mx-auto px-4">
+        {children}
+      </div>
+    </section>
+  );
+};
+
 interface StandardServicePageProps {
   seo: SEOProps;
   heroProps: HeroProps;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   clientLogos?: ClientLogoItem[];
   clientLogosTitle?: string;
   clientLogosDescription?: string;
   clientLogosBgColor?: string;
   showClientLogos?: boolean;
+  // Add these additional props to match what's being used
+  overviewSection?: React.ReactNode;
+  benefitsSection?: React.ReactNode;
+  processSection?: React.ReactNode;
+  testimonials?: any[];
+  testimonialsTitle?: string;
+  testimonialsDescription?: string;
+  testimonialsBadgeText?: string;
+  faqSection?: React.ReactNode;
+  ctaSection?: React.ReactNode;
+  additionalSections?: React.ReactNode[];
 }
 
 /**
@@ -30,7 +55,18 @@ const StandardServicePage: React.FC<StandardServicePageProps> = ({
   clientLogosTitle,
   clientLogosDescription,
   clientLogosBgColor,
-  showClientLogos = true
+  showClientLogos = true,
+  // Add support for the additional sections
+  overviewSection,
+  benefitsSection,
+  processSection,
+  testimonials,
+  testimonialsTitle,
+  testimonialsDescription,
+  testimonialsBadgeText,
+  faqSection,
+  ctaSection,
+  additionalSections
 }) => {
   return (
     <Layout>
@@ -91,6 +127,23 @@ const StandardServicePage: React.FC<StandardServicePageProps> = ({
           </div>
         </section>
       )}
+
+      {/* Render additional sections if provided */}
+      {overviewSection}
+      {benefitsSection}
+      {processSection}
+      
+      {/* Render additional sections array if provided */}
+      {additionalSections && additionalSections.map((section, index) => (
+        <React.Fragment key={`additional-section-${index}`}>{section}</React.Fragment>
+      ))}
+
+      {/* Testimonials section would go here if implemented */}
+      {/* FAQ section would go here if implemented */}
+      {faqSection}
+      
+      {/* CTA section */}
+      {ctaSection}
 
       {/* Render child sections */}
       {children}

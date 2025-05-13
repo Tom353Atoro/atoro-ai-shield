@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { TestimonialItem } from '@/types';
 
 // Add the missing clientSection property to the PillarPageTemplateProps interface

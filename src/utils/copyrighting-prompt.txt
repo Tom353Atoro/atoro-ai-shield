@@ -1,0 +1,56 @@
+
+# Copywriting Prompt for Atoro AI Shield Website Pages
+
+## Core Brand Voice Elements
+
+- **Expert & Authoritative**: Speak from a position of deep knowledge about cyber security, privacy, and AI governance
+- **Specific & Technical**: Use precise industry terminology and concrete examples, not vague claims
+- **Trustworthy & Transparent**: Focus on real results, challenges, and solutions, not marketing hype
+- **Human & Relatable**: Write like a veteran tech professional having a direct conversation
+- **Outcome-Focused**: Always emphasize how services directly benefit fast-growing SaaS businesses
+
+## Page Optimization Instructions
+
+1. **Replace Generic Statements With Specifics**
+   - Instead of: "We help improve security"
+   - Write: "We identify critical OWASP Top 10 vulnerabilities in your codebase within 48 hours"
+
+2. **Add Industry Context**
+   - Connect solutions to current regulatory requirements (GDPR, EU AI Act, etc.)
+   - Reference specific security frameworks (NIST CSF, ISO 27001, etc.)
+   - Mention real-world threat models relevant to SaaS companies
+
+3. **Use Technical Precision**
+   - Include specific methodologies used in your services
+   - Reference actual tools, systems, or platforms used
+   - Specify measurable outcomes (time savings, risk reduction percentages)
+
+4. **Incorporate Conversational Elements**
+   - Use rhetorical questions that address client pain points
+   - Include transitional phrases a human expert would use
+   - Vary sentence structure and length for natural rhythm
+
+5. **Create Urgency Through Relevance**
+   - Connect to current cyber threats or regulatory changes
+   - Highlight competitive advantages of early adoption
+   - Emphasize business impact of implementation delays
+
+## Anti-AI Detection Techniques
+
+- Avoid perfect symmetry in paragraph structures
+- Include industry idioms and specialized terminology
+- Occasionally use contractions and informal transitions
+- Introduce purposeful imperfections in phrasing
+- Vary headline and subheading patterns
+- Use analogies and metaphors specific to tech/security
+
+## For Each Page, Focus On:
+
+1. **Hero Section**: Craft a compelling, specific promise that addresses the primary pain point
+2. **Overview**: Explain the service in technical but accessible terms using industry-specific language
+3. **Benefits**: Transform generic advantages into concrete, measurable business outcomes
+4. **Process/Approach**: Detail your methodology with enough specifics to demonstrate expertise
+5. **Social Proof**: Make testimonial sections sound authentically human
+6. **CTA**: Create urgency based on business impact, not generic calls to action
+
+Remember: The goal is to sound like a seasoned cybersecurity professional speaking to a tech-savvy business leader, not a marketing department or an AI.
