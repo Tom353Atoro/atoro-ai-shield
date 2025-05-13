@@ -8,9 +8,8 @@ interface ServiceSectionProps {
 }
 
 /**
- * ServiceSection Component
- * 
- * A standard wrapper for service page sections with consistent styling
+ * Base section component used in service pages
+ * Provides consistent padding and container styling
  */
 const ServiceSection: React.FC<ServiceSectionProps> = ({
   id,
