@@ -1,14 +1,14 @@
 
 import React from 'react';
-import ServiceLayout from '@/components/layout/ServiceLayout';
+import StandardServicePage from '@/components/services/StandardServicePage';
+import SectionWrapper from '@/components/shared/SectionWrapper';
+import ServiceCTASection from '@/components/services/ServiceCTASection';
 import { Container } from '@/components/ui/Container';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Users, CheckCircle, ArrowRight, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import AnimatedTestimonials from '@/components/shared/AnimatedTestimonials';
-import ClientLogos from '@/components/shared/ClientLogos';
+import { CheckCircle, Users, Shield } from 'lucide-react';
+import { tokens } from '@/lib/designTokens';
 
 const EURepresentative = () => {
   // EU Representative specific testimonials
@@ -64,215 +64,162 @@ const EURepresentative = () => {
   ];
   
   return (
-    <ServiceLayout>
-      {/* Hero Section */}
-      <section className="pt-16 pb-8 bg-gradient-to-br from-atoro-teal to-black text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20 z-0">
-          <div className="absolute inset-0 bg-grid-white/10"></div>
-        </div>
-        
-        <Container>
-          <div className="grid md:grid-cols-2 gap-8 items-center relative z-10">
-            <div>
-              <h1 className="mb-4 text-3xl md:text-4xl lg:text-5xl">
-                <span className="text-atoro-green">EU Representative</span> Service
-              </h1>
-              <p className="text-lg mb-6 opacity-90">
-                Meet your GDPR Article 27 obligations with our dedicated EU Representative service, 
-                designed specifically for non-EU organizations that process European personal data.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green" asChild>
-                  <Link to="/contact">Appoint Atoro as Your EU Rep</Link>
-                </Button>
-              </div>
-            </div>
-            <div className="hidden md:block">
-              <img alt="EU Representative service illustration" className="object-cover w-full rounded-lg" src="/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg" />
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Client logos */}
-      <ClientLogos 
-        logos={clientLogos} 
-        title="Trusted by Global Companies" 
-        description="Non-EU organizations that rely on Atoro for their EU Representative needs"
-        bgColor="bg-gray-50"
-      />
-
+    <StandardServicePage
+      heroProps={{
+        title: "Service",
+        highlightText: "EU Representative",
+        subtitle: "Meet your GDPR Article 27 obligations with our dedicated EU Representative service, designed specifically for non-EU organizations that process European personal data.",
+        primaryButtonText: "Appoint Atoro as Your EU Rep",
+        primaryButtonLink: "/contact",
+        imageUrl: "/lovable-uploads/62277257-f565-473b-943c-a6746c4c657b.jpg",
+        backgroundClass: tokens.gradients.heroDarkTeal,
+      }}
+      clientLogos={clientLogos}
+      clientLogosTitle="Trusted by Global Companies"
+      clientLogosDescription="Non-EU organizations that rely on Atoro for their EU Representative needs"
+      testimonials={euRepTestimonials}
+      testimonialsTitle="What Our Clients Say"
+      testimonialsDescription="Non-EU companies that rely on our EU Representative service"
+      testimonialsBadgeText="Client Testimonials"
+    >
       {/* What is an EU Representative Section */}
-      <section className="py-12 bg-white">
-        <Container>
-          <div className="text-center mb-10">
-            <Badge className="mb-3 bg-atoro-teal/10 text-atoro-teal hover:bg-atoro-teal/20">Understanding GDPR Requirements</Badge>
-            <h2 className="mb-3">What is an EU Representative?</h2>
-            <p className="text-gray-700 max-w-2xl mx-auto">
-              Under GDPR Article 27, organizations without an establishment in the EU but processing EU resident data 
-              must designate an official representative within an EU member state.
+      <SectionWrapper
+        title="What is an EU Representative?"
+        description="Under GDPR Article 27, organizations without an establishment in the EU but processing EU resident data must designate an official representative within an EU member state."
+        badgeText="Understanding GDPR Requirements"
+        bgColor="bg-white"
+        spacingSize="lg"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <h3 className="text-xl font-semibold mb-4">Who Needs an EU Representative?</h3>
+            <p className="text-gray-600 mb-4">
+              Your organization needs an EU Representative if:
             </p>
+            <ul className="space-y-3">
+              {[
+                "Your organization is established outside the EU",
+                "You offer goods or services to individuals in the EU",
+                "You monitor the behavior of individuals in the EU",
+                "You don't have an office, branch or other establishment in the EU"
+              ].map((point, index) => (
+                <li key={index} className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-atoro-green mt-0.5 flex-shrink-0" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">Who Needs an EU Representative?</h3>
-              <p className="text-gray-600 mb-4">
-                Your organization needs an EU Representative if:
-              </p>
-              <ul className="space-y-3">
-                {[
-                  "Your organization is established outside the EU",
-                  "You offer goods or services to individuals in the EU",
-                  "You monitor the behavior of individuals in the EU",
-                  "You don't have an office, branch or other establishment in the EU"
-                ].map((point, index) => (
-                  <li key={index} className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-atoro-green mt-0.5 flex-shrink-0" />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">What Does an EU Representative Do?</h3>
-              <ul className="space-y-3">
-                {[
-                  "Acts as your point of contact for data subjects and supervisory authorities in the EU",
-                  "Maintains a record of your processing activities",
-                  "Cooperates with supervisory authorities on your behalf",
-                  "Receives and forwards any official communication from EU data protection authorities",
-                  "Represents your organization in case of GDPR inquiries or investigations"
-                ].map((point, index) => (
-                  <li key={index} className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-atoro-green mt-0.5 flex-shrink-0" />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <h3 className="text-xl font-semibold mb-4">What Does an EU Representative Do?</h3>
+            <ul className="space-y-3">
+              {[
+                "Acts as your point of contact for data subjects and supervisory authorities in the EU",
+                "Maintains a record of your processing activities",
+                "Cooperates with supervisory authorities on your behalf",
+                "Receives and forwards any official communication from EU data protection authorities",
+                "Represents your organization in case of GDPR inquiries or investigations"
+              ].map((point, index) => (
+                <li key={index} className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-atoro-green mt-0.5 flex-shrink-0" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-        </Container>
-      </section>
+        </div>
+      </SectionWrapper>
 
       {/* Our Service Section */}
-      <section className="py-16 bg-gradient-to-br from-atoro-teal to-atoro-dark-teal text-white">
-        <Container>
-          <div className="text-center mb-10">
-            <Badge className="mb-3 bg-white/10 text-white hover:bg-white/20">Our Offering</Badge>
-            <h2 className="mb-3 text-white">Our EU Representative Service</h2>
-            <p className="text-white opacity-90 max-w-2xl mx-auto">
-              Atoro provides a comprehensive EU Representative service that ensures your full compliance with GDPR Article 27.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            {[{
-              icon: <Users className="text-atoro-green" />,
-              title: "Official Designation",
-              description: "Formal appointment as your EU Representative in compliance with GDPR Article 27."
-            }, {
-              icon: <Shield className="text-atoro-green" />,
-              title: "Communication Management",
-              description: "Receipt and forwarding of all communications from EU authorities and data subjects."
-            }, {
-              icon: <Users className="text-atoro-green" />,
-              title: "Records Maintenance",
-              description: "Maintenance of your processing records and documentation as required by Article 30."
-            }].map((service, index) => (
-              <div key={index} className="bg-white/10 p-6 rounded-lg border border-white/20 hover:bg-white/15 transition-colors">
-                <div className="mb-4 flex justify-center">
-                  <div className="p-3 bg-white/10 rounded-lg">
-                    {service.icon}
-                  </div>
+      <SectionWrapper
+        title="Our EU Representative Service"
+        description="Atoro provides a comprehensive EU Representative service that ensures your full compliance with GDPR Article 27."
+        badgeText="Our Offering"
+        bgColor={tokens.gradients.sectionTeal}
+        spacingSize="lg"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          {[{
+            icon: <Users className="text-atoro-green" />,
+            title: "Official Designation",
+            description: "Formal appointment as your EU Representative in compliance with GDPR Article 27."
+          }, {
+            icon: <Shield className="text-atoro-green" />,
+            title: "Communication Management",
+            description: "Receipt and forwarding of all communications from EU authorities and data subjects."
+          }, {
+            icon: <Users className="text-atoro-green" />,
+            title: "Records Maintenance",
+            description: "Maintenance of your processing records and documentation as required by Article 30."
+          }].map((service, index) => (
+            <div key={index} className="bg-white/10 p-6 rounded-lg border border-white/20 hover:bg-white/15 transition-colors">
+              <div className="mb-4 flex justify-center">
+                <div className="p-3 bg-white/10 rounded-lg">
+                  {service.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-center">{service.title}</h3>
-                <p className="text-center text-sm opacity-90">{service.description}</p>
               </div>
-            ))}
-          </div>
+              <h3 className="text-xl font-semibold mb-2 text-center text-white">{service.title}</h3>
+              <p className="text-center text-sm text-white opacity-90">{service.description}</p>
+            </div>
+          ))}
+        </div>
 
-          <div className="text-center mt-8">
-            <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green" asChild>
-              <Link to="/contact">Get a Quote</Link>
-            </Button>
-          </div>
-        </Container>
-      </section>
+        <div className="text-center mt-8">
+          <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green" asChild>
+            <Link to="/contact">Get a Quote</Link>
+          </Button>
+        </div>
+      </SectionWrapper>
 
       {/* Process Section */}
-      <section className="py-16 bg-white">
-        <Container>
-          <div className="text-center mb-12">
-            <Badge className="mb-3 bg-atoro-teal/10 text-atoro-teal hover:bg-atoro-teal/20">Simple Process</Badge>
-            <h2 className="mb-3">Getting Started is Easy</h2>
-            <p className="text-gray-700 max-w-2xl mx-auto">
-              Our streamlined process makes appointing Atoro as your EU Representative quick and straightforward.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {[{
-              number: "01",
-              title: "Initial Consultation",
-              description: "We assess your specific EU Representative requirements."
-            }, {
-              number: "02",
-              title: "Service Agreement",
-              description: "We prepare and finalize a simple service agreement."
-            }, {
-              number: "03",
-              title: "Documentation",
-              description: "We collect necessary information about your processing activities."
-            }, {
-              number: "04",
-              title: "Appointment",
-              description: "We formally establish our role as your EU Representative."
-            }].map((step, index) => <div key={index} className="relative">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-full bg-atoro-green/10 text-atoro-green flex items-center justify-center font-semibold mr-3">
-                    {step.number}
-                  </div>
-                  <h3 className="font-semibold">{step.title}</h3>
+      <SectionWrapper
+        title="Getting Started is Easy"
+        description="Our streamlined process makes appointing Atoro as your EU Representative quick and straightforward."
+        badgeText="Simple Process"
+        bgColor="bg-white"
+        spacingSize="lg"
+      >
+        <div className="grid md:grid-cols-4 gap-8">
+          {[{
+            number: "01",
+            title: "Initial Consultation",
+            description: "We assess your specific EU Representative requirements."
+          }, {
+            number: "02",
+            title: "Service Agreement",
+            description: "We prepare and finalize a simple service agreement."
+          }, {
+            number: "03",
+            title: "Documentation",
+            description: "We collect necessary information about your processing activities."
+          }, {
+            number: "04",
+            title: "Appointment",
+            description: "We formally establish our role as your EU Representative."
+          }].map((step, index) => <div key={index} className="relative">
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 rounded-full bg-atoro-green/10 text-atoro-green flex items-center justify-center font-semibold mr-3">
+                  {step.number}
                 </div>
-                <p className="text-gray-600 text-sm pl-14">{step.description}</p>
-                {index < 3 && <div className="hidden md:block absolute top-5 left-5 w-[calc(100%-10px)] h-0.5 bg-atoro-green/10"></div>}
-              </div>)}
-          </div>
-        </Container>
-      </section>
-
-      {/* Customer Testimonials */}
-      <AnimatedTestimonials 
-        testimonials={euRepTestimonials} 
-        title="What Our Clients Say" 
-        description="Non-EU companies that rely on our EU Representative service" 
-        variant="featured" 
-        badgeText="Client Testimonials"
-        bgColor="bg-gray-50" 
-      />
+                <h3 className="font-semibold">{step.title}</h3>
+              </div>
+              <p className="text-gray-600 text-sm pl-14">{step.description}</p>
+              {index < 3 && <div className="hidden md:block absolute top-5 left-5 w-[calc(100%-10px)] h-0.5 bg-atoro-green/10"></div>}
+            </div>)}
+        </div>
+      </SectionWrapper>
 
       {/* CTA Section */}
-      <section className="py-12 bg-gradient-to-br from-atoro-blue/10 to-atoro-green/10">
-        <Container>
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="mb-4">Appoint Your EU Representative Today</h2>
-            <p className="text-gray-700 mb-6">
-              Ensure your GDPR compliance with our professional EU Representative service.
-              Get started quickly with a simple, cost-effective solution.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-atoro-green text-atoro-teal hover:bg-atoro-light-green" asChild>
-                <Link to="/contact">Request a Quote</Link>
-              </Button>
-              <Button size="lg" variant="outline" className="border-atoro-teal text-atoro-teal hover:bg-atoro-teal/5" asChild>
-                <Link to="/resources/eu-rep-guide">Download EU Rep Guide</Link>
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </section>
-    </ServiceLayout>
+      <ServiceCTASection
+        title="Appoint Your EU Representative Today"
+        description="Ensure your GDPR compliance with our professional EU Representative service. Get started quickly with a simple, cost-effective solution."
+        primaryButtonText="Request a Quote"
+        primaryButtonLink="/contact"
+        secondaryButtonText="Download EU Rep Guide"
+        secondaryButtonLink="/resources/eu-rep-guide"
+        backgroundClass="bg-gradient-to-br from-atoro-blue/10 to-atoro-green/10"
+      />
+    </StandardServicePage>
   );
 };
 

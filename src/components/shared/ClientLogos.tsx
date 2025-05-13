@@ -1,50 +1,36 @@
 
 import React from 'react';
+import { Container } from '@/components/ui/Container';
 import { Logos3 } from '@/components/ui/logos3';
-
-interface LogoItem {
-  id: string | number;
-  name: string;
-  imagePath: string;
-  alt?: string;
-  width?: number;
-  className?: string;
-}
+import { cn } from '@/lib/utils';
+import { ClientLogoItem } from '@/types';
 
 interface ClientLogosProps {
-  logos: LogoItem[];
+  logos: ClientLogoItem[];
   title?: string;
   description?: string;
-  className?: string;
   bgColor?: string;
-  autoScroll?: boolean;
+  className?: string;
 }
 
-/**
- * ClientLogos Component
- * Modern auto-scrolling client logos carousel with grayscale hover effect
- * 
- * @param logos - Array of logo objects with id, name, and image path
- * @param title - Optional title for the carousel section
- * @param description - Optional description text
- * @param className - Optional additional CSS classes
- * @param bgColor - Background color class (default: "bg-background")
- */
 const ClientLogos: React.FC<ClientLogosProps> = ({
   logos,
-  title,
-  description,
-  className = '',
-  bgColor = "bg-background",
+  title = "Trusted by Leading Organizations",
+  description = "Companies that rely on our services",
+  bgColor = "bg-gray-50",
+  className
 }) => {
   return (
-    <Logos3
-      title={title}
-      description={description}
-      logos={logos}
-      className={className}
-      bgColor={bgColor}
-    />
+    <section className={cn(bgColor, "py-12", className)}>
+      <Container>
+        <Logos3
+          heading={title}
+          description={description}
+          logos={logos}
+          bgColor={bgColor}
+        />
+      </Container>
+    </section>
   );
 };
 

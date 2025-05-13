@@ -2,106 +2,80 @@
 /**
  * Design System
  * 
- * This file provides documentation and guidance for our component architecture.
- * It serves as a central reference for maintaining consistent UI patterns.
+ * This file contains design system utilities for consistent spacing and styling
  */
 
-import { tokens } from '@/lib/designTokens';
-
-/**
- * Component Hierarchy
- * 
- * Our components are organized in a hierarchy:
- * 
- * 1. Base Components: Fundamental building blocks (buttons, inputs, etc.)
- * 2. Compound Components: Combinations of base components (forms, cards, etc.)
- * 3. Section Components: Page sections with specific layouts and purposes
- * 4. Layout Components: Control the overall page structure
- * 5. Page Components: Full pages assembled from sections
- */
-
-export const componentCategories = {
-  base: 'Basic UI elements',
-  compound: 'Combinations of base components',
-  section: 'Page sections with specific purposes',
-  layout: 'Page structure components',
-  page: 'Full pages assembled from sections',
-};
-
-/**
- * Component Naming Conventions
- * 
- * - Use PascalCase for component names
- * - Base components: Simple descriptive names (Button, Input, etc.)
- * - Compound components: Descriptive of their purpose (Card, Form, etc.)
- * - Section components: Descriptive with "Section" suffix (HeroSection, etc.)
- * - Layout components: Descriptive of their layout purpose (ServiceLayout, etc.)
- * - Page components: Named after the page they represent (HomePage, etc.)
- */
-
-/**
- * Component Patterns
- * 
- * Common patterns for our components:
- */
-export const componentPatterns = {
-  hero: {
-    description: 'Top section of a page that introduces the main concept',
-    variants: ['Primary', 'Secondary', 'Minimal'],
-    defaultBackground: tokens.gradients.heroDarkTeal,
+export const spacing = {
+  section: {
+    sm: 'py-8',
+    md: 'py-12',
+    lg: 'py-16',
+    xl: 'py-20',
   },
-  cta: {
-    description: 'Call-to-action sections that prompt user interaction',
-    variants: ['Primary', 'Secondary', 'Newsletter'],
-    defaultBackground: tokens.gradients.ctaLight,
+  container: {
+    sm: 'max-w-4xl',
+    md: 'max-w-5xl',
+    lg: 'max-w-6xl',
+    xl: 'max-w-7xl',
   },
-  services: {
-    description: 'Sections that display our service offerings',
-    variants: ['Grid', 'List', 'Featured'],
+  padding: {
+    sm: 'p-4',
+    md: 'p-6',
+    lg: 'p-8',
+    xl: 'p-10',
   },
-  testimonials: {
-    description: 'Sections that display client testimonials',
-    variants: ['Carousel', 'Grid', 'Featured'],
+  margin: {
+    sm: 'm-4',
+    md: 'm-6',
+    lg: 'm-8',
+    xl: 'm-10',
   },
-  content: {
-    description: 'General content sections with text and optional media',
-    variants: ['TextOnly', 'TextWithMedia', 'MediaWithText', 'TwoColumn'],
+  gap: {
+    sm: 'gap-4',
+    md: 'gap-6',
+    lg: 'gap-8',
+    xl: 'gap-10',
   }
 };
 
-/**
- * Spacing System
- * 
- * Consistent spacing throughout the application
- */
-export const spacing = {
-  section: {
-    default: 'py-16',
-    compact: 'py-12',
-    minimal: 'py-8',
-    spacious: 'py-20',
+export const typography = {
+  heading: {
+    h1: 'text-3xl md:text-4xl lg:text-5xl font-bold',
+    h2: 'text-2xl md:text-3xl font-bold',
+    h3: 'text-xl md:text-2xl font-bold',
+    h4: 'text-lg md:text-xl font-semibold',
+    h5: 'text-lg font-semibold',
+    h6: 'text-base font-semibold',
   },
-  container: {
-    default: 'max-w-6xl mx-auto px-4 sm:px-6 lg:px-8',
-    narrow: 'max-w-4xl mx-auto px-4 sm:px-6',
-    wide: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
-  },
-  stack: {
-    default: 'space-y-6',
-    tight: 'space-y-4',
-    loose: 'space-y-8',
-    spacious: 'space-y-12',
-  },
-  inline: {
-    default: 'space-x-4',
-    tight: 'space-x-2',
-    loose: 'space-x-6',
-    spacious: 'space-x-8',
-  },
+  body: {
+    lg: 'text-lg',
+    base: 'text-base',
+    sm: 'text-sm',
+    xs: 'text-xs',
+  }
+};
+
+export const elevation = {
+  none: '',
+  sm: 'shadow-sm',
+  md: 'shadow-md',
+  lg: 'shadow-lg',
+  xl: 'shadow-xl',
+  inner: 'shadow-inner',
+};
+
+export const corner = {
+  none: 'rounded-none',
+  sm: 'rounded-sm',
+  md: 'rounded-md',
+  lg: 'rounded-lg',
+  xl: 'rounded-xl',
+  full: 'rounded-full',
 };
 
 export default {
-  componentCategories,
-  componentPatterns,
   spacing,
+  typography,
+  elevation,
+  corner,
 };

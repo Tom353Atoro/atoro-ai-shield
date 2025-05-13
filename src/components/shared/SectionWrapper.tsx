@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import { Container } from '@/components/ui/Container';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
-import { spacing } from '@/lib/designSystem';
+import { tokens } from '@/lib/designTokens';
 
 export interface SectionWrapperProps {
   children: ReactNode;
@@ -15,8 +15,8 @@ export interface SectionWrapperProps {
   containerClassName?: string;
   headerClassName?: string;
   bgColor?: string;
-  spacingSize?: 'default' | 'compact' | 'minimal' | 'spacious';
-  containerSize?: 'default' | 'narrow' | 'wide';
+  spacingSize?: 'sm' | 'md' | 'lg' | 'xl';
+  containerSize?: 'sm' | 'md' | 'lg' | 'xl';
   centered?: boolean;
   id?: string;
 }
@@ -31,21 +31,24 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({
   containerClassName,
   headerClassName = "mb-10",
   bgColor = "bg-white",
-  spacingSize = 'default',
-  containerSize = 'default',
+  spacingSize = 'lg',
+  containerSize = 'lg',
   centered = true,
   id,
 }) => {
   return (
     <section 
       className={cn(
-        spacing.section[spacingSize],
+        tokens.spacing.section[spacingSize],
         bgColor,
         className
       )}
       id={id}
     >
-      <Container className={cn(containerClassName)}>
+      <Container className={cn(
+        tokens.spacing.container[containerSize],
+        containerClassName
+      )}>
         {(title || description || badgeText) && (
           <div className={cn(
             "mb-10", 

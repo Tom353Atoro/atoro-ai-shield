@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { tokens } from '@/lib/designTokens';
-import NeetoCalPopup from '@/components/shared/NeetoCalPopup';
 
 export interface UnifiedHeroProps {
   // Core content
@@ -19,12 +18,12 @@ export interface UnifiedHeroProps {
   // Cycling text options
   enableCyclingText?: boolean;
   cyclingWords?: string[];
-  cyclingTextColor?: string; // CSS class for the cycling text color
+  cyclingTextColor?: string;
   
   // Button options
   primaryButtonText?: string;
   primaryButtonLink?: string;
-  primaryButtonId?: string; // For connecting with NeetoCal or other tools
+  primaryButtonId?: string;
   secondaryButtonText?: string;
   secondaryButtonLink?: string;
   
@@ -35,7 +34,7 @@ export interface UnifiedHeroProps {
   badgeText?: string;
   
   // Text formatting
-  highlightText?: string; // Text to highlight in the title
+  highlightText?: string;
   highlightTextClassName?: string;
   titleClassName?: string;
   
@@ -60,11 +59,11 @@ const UnifiedHero: React.FC<UnifiedHeroProps> = ({
   // Cycling text options
   enableCyclingText = false,
   cyclingWords = ["Cybersecurity", "Privacy", "AI Governance"],
-  cyclingTextColor = "gradient-text",
+  cyclingTextColor = "text-atoro-green",
   
   // Button options
   primaryButtonText,
-  primaryButtonLink = '#',
+  primaryButtonLink = '/contact',
   primaryButtonId,
   secondaryButtonText,
   secondaryButtonLink = '#',
@@ -78,7 +77,7 @@ const UnifiedHero: React.FC<UnifiedHeroProps> = ({
   // Text formatting
   highlightText,
   highlightTextClassName = "text-atoro-green",
-  titleClassName = 'mb-4 text-3xl md:text-4xl lg:text-5xl',
+  titleClassName = 'text-3xl md:text-4xl lg:text-5xl font-bold mb-4',
   
   // Additional customization
   className,
@@ -97,25 +96,22 @@ const UnifiedHero: React.FC<UnifiedHeroProps> = ({
     if (!enableCyclingText) return;
     
     const interval = setInterval(() => {
-      // Start fade out
       setFadeState('fade-out');
 
-      // After fade out completes, change word and fade in
       setTimeout(() => {
         setCurrentWordIndex(prev => (prev + 1) % cyclingWords.length);
         setFadeState('fade-in');
-      }, 1000); // This duration should match the CSS transition duration
-    }, 3000); // Total time each word is displayed
+      }, 1000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [enableCyclingText, cyclingWords.length]);
 
   // Render title based on layout and options
   const renderTitle = () => {
-    // For homepage-style layout with cycling words
     if (enableCyclingText) {
       return (
-        <h1 className="mb-6">
+        <h1 className={titleClassName}>
           <span className={`${cyclingTextColor} transition-opacity duration-1000 ${fadeState === 'fade-in' ? 'opacity-100' : 'opacity-0'}`}>
             {cyclingWords[currentWordIndex]}
           </span>{' '}
@@ -124,7 +120,6 @@ const UnifiedHero: React.FC<UnifiedHeroProps> = ({
       );
     }
     
-    // For service page style with highlight
     if (highlightText) {
       return (
         <h1 className={titleClassName}>
@@ -133,13 +128,11 @@ const UnifiedHero: React.FC<UnifiedHeroProps> = ({
       );
     }
     
-    // Default title rendering
     return <h1 className={titleClassName}>{title}</h1>;
   };
 
   // Determine container content based on layout
   const renderContent = () => {
-    // Centered layout (homepage style)
     if (layout === 'centered') {
       return (
         <div className="max-w-4xl mx-auto text-center">
@@ -151,7 +144,7 @@ const UnifiedHero: React.FC<UnifiedHeroProps> = ({
           
           {renderTitle()}
           
-          <p className={cn("text-lg md:text-xl mb-8 md:mb-10", layout === 'centered' ? "mx-auto max-w-3xl" : "")}>
+          <p className={cn("text-lg md:text-xl mb-6", layout === 'centered' ? "mx-auto max-w-3xl" : "")}>
             {subtitle}
           </p>
           
@@ -193,13 +186,10 @@ const UnifiedHero: React.FC<UnifiedHeroProps> = ({
               )}
             </div>
           )}
-          
-          {primaryButtonId && <NeetoCalPopup elementSelector={`#${primaryButtonId}`} />}
         </div>
       );
     }
     
-    // Two-column layout (service page style)
     return (
       <div className={cn(
         "grid md:grid-cols-2 gap-8 items-center relative z-10",
@@ -253,8 +243,6 @@ const UnifiedHero: React.FC<UnifiedHeroProps> = ({
               )}
             </div>
           )}
-          
-          {primaryButtonId && <NeetoCalPopup elementSelector={`#${primaryButtonId}`} />}
         </div>
         
         {imageUrl && (
