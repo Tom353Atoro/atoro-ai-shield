@@ -15,8 +15,8 @@ export interface SectionWrapperProps {
   containerClassName?: string;
   headerClassName?: string;
   bgColor?: string;
-  spacingSize?: 'sm' | 'md' | 'lg' | 'xl';
-  containerSize?: 'sm' | 'md' | 'lg' | 'xl';
+  spacingSize?: 'sm' | 'md' | 'lg' | 'xl' | 'default' | 'compact' | 'minimal' | 'spacious' | 'narrow';
+  containerSize?: 'sm' | 'md' | 'lg' | 'xl' | 'narrow';
   centered?: boolean;
   id?: string;
 }
@@ -36,17 +36,37 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({
   centered = true,
   id,
 }) => {
+  // Map legacy spacing values to new system
+  const getSpacingClass = (size: string) => {
+    switch(size) {
+      case 'default': return tokens.spacing.section.md;
+      case 'compact': return tokens.spacing.section.sm;
+      case 'minimal': return 'py-4';
+      case 'spacious': return tokens.spacing.section.xl;
+      case 'narrow': return tokens.spacing.section.md;
+      default: return tokens.spacing.section[size as 'sm' | 'md' | 'lg' | 'xl'] || tokens.spacing.section.md;
+    }
+  };
+
+  // Map legacy container values to new system
+  const getContainerClass = (size: string) => {
+    switch(size) {
+      case 'narrow': return 'max-w-4xl mx-auto';
+      default: return tokens.spacing.container[size as 'sm' | 'md' | 'lg' | 'xl'] || tokens.spacing.container.lg;
+    }
+  };
+
   return (
     <section 
       className={cn(
-        tokens.spacing.section[spacingSize],
+        getSpacingClass(spacingSize),
         bgColor,
         className
       )}
       id={id}
     >
       <Container className={cn(
-        tokens.spacing.container[containerSize],
+        getContainerClass(containerSize),
         containerClassName
       )}>
         {(title || description || badgeText) && (

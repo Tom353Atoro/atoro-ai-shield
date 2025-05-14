@@ -1,14 +1,14 @@
 
 import React from 'react';
 import { Container } from '@/components/ui/Container';
-import { BenefitItem as BenefitItemType } from '@/types';
-import { SectionHeader, BenefitItem } from '@/components/ui';
+import { BenefitItem } from '@/types';
+import { SectionHeader, BenefitItem as BenefitItemComponent } from '@/components/ui';
 
 export interface StandardBenefitsSectionProps {
   badgeText: string;
   title: string | React.ReactNode;
   description: string;
-  benefits: BenefitItemType[];
+  benefits: BenefitItem[];
   imageUrl?: string;
   imageAlt?: string;
   className?: string;
@@ -44,7 +44,7 @@ const StandardBenefitsSection: React.FC<StandardBenefitsSectionProps> = ({
 
         <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {benefits.map((benefit, index) => (
-            <BenefitItem
+            <BenefitItemComponent
               key={index}
               title={benefit.title}
               description={benefit.description}
@@ -67,4 +67,4 @@ const StandardBenefitsSection: React.FC<StandardBenefitsSectionProps> = ({
   );
 };
 
-export default StandardBenefitsSection; 
+export default StandardBenefitsSection;

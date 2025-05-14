@@ -24,6 +24,8 @@ export interface HeroProps {
   badgeText?: string;
   /** Optional CSS class for background gradient/color */
   backgroundClass?: string;
+  /** Subtitle text for the hero section */
+  subtitle?: string;
   /** @deprecated - Use imageUrl instead */
   imagePath?: string;
   /** @deprecated - Use primaryButtonText instead */
@@ -112,6 +114,33 @@ export interface StandardServicePageProps {
   clientLogosBgColor?: string;
   /** Whether to show client logos section */
   showClientLogos?: boolean;
+  /** Testimonials data */
+  testimonials?: Array<{
+    quote: string;
+    author: string;
+    title: string;
+    company: string;
+    rating: number;
+    avatarSrc?: string;
+  }>;
+  /** Title for testimonials section */
+  testimonialsTitle?: string;
+  /** Description for testimonials section */
+  testimonialsDescription?: string;
+  /** Badge text for testimonials section */
+  testimonialsBadgeText?: string;
+  /** Background color for testimonials section */
+  testimonialsBgColor?: string;
+  /** Overview section component */
+  overviewSection?: ReactNode;
+  /** Benefits section component */
+  benefitsSection?: ReactNode;
+  /** Process section component */
+  processSection?: ReactNode;
+  /** FAQ section component */
+  faqSection?: ReactNode;
+  /** CTA section component */
+  ctaSection?: ReactNode;
   /** Children components (service sections) */
   children: React.ReactNode;
 }
@@ -133,7 +162,7 @@ export interface StandardOverviewSectionProps extends StandardSectionProps {
   /** Badge text displayed above section title */
   badgeText?: string;
   /** Section title */
-  title: string;
+  title: string | ReactNode;
   /** Section description */
   description: string;
   /** Features to display in this section */
@@ -147,7 +176,7 @@ export interface StandardBenefitsSectionProps extends StandardSectionProps {
   /** Badge text displayed above section title */
   badgeText?: string;
   /** Section title */
-  title: string;
+  title: string | ReactNode;
   /** Section description */
   description?: string;
   /** Benefits to display in this section */
@@ -167,7 +196,7 @@ export interface StandardProcessSectionProps extends StandardSectionProps {
   /** Badge text displayed above section title */
   badgeText?: string;
   /** Section title */
-  title: string;
+  title: string | ReactNode;
   /** Section description */
   description?: string;
   /** Process steps to display */

@@ -9,7 +9,7 @@ interface ClientSectionProps {
   description?: string;
   className?: string;
   bgColor?: string;
-  spacingSize?: 'default' | 'compact' | 'minimal' | 'spacious';
+  spacingSize?: 'sm' | 'md' | 'lg' | 'xl';
   logos?: Array<{
     id: string | number;
     name: string;
@@ -24,7 +24,7 @@ const ClientSection: React.FC<ClientSectionProps> = ({
   description,
   className,
   bgColor = "bg-gray-50",
-  spacingSize = "compact",
+  spacingSize = "sm",
   logos
 }) => {
   // If specific logos are provided, use ClientLogos directly

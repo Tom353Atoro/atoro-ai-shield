@@ -1,208 +1,140 @@
 
 import React from 'react';
-import { Shield, Bug, Lock, FileCheck, BarChart3, Users } from 'lucide-react';
 import StandardServicePage from '@/components/services/StandardServicePage';
-import StandardOverviewSection from '@/components/services/StandardOverviewSection';
-import StandardBenefitsSection from '@/components/services/StandardBenefitsSection';
-import StandardProcessSection from '@/components/services/StandardProcessSection';
 import StandardFAQSection from '@/components/services/StandardFAQSection';
 import StandardCTASection from '@/components/services/StandardCTASection';
-import { TestimonialItem, ClientLogoItem, SEOProps } from '@/types';
-import { 
-  FeatureCardProps, 
-  BenefitItemProps,
-  HeroProps
-} from '@/types/service-page';
+import { SEOProps } from '@/types';
 
-import ClientLogos from '@/components/services/ClientLogos';
-
-/**
- * Penetration Testing Service Page
- * Uses standardized service page structure
- */
-const PenetrationTesting = () => {
-  // Hero section properties
-  const heroProps: HeroProps = {
-    title: "Penetration Testing",
-    description: "Our expert ethical hackers perform thorough penetration testing to uncover security weaknesses, helping you strengthen your defenses against real-world attacks.",
-    primaryButtonText: "Request a Penetration Test",
-    primaryButtonLink: "/contact",
-    imageUrl: "/images/services/pentest-hero.png",
-    badgeText: "Security Testing"
-  };
-
-  // SEO data
+const PenetrationTesting: React.FC = () => {
+  // SEO metadata
   const seoData: SEOProps = {
     pageTitle: "Penetration Testing Services | Atoro AI Shield",
-    metaDescription: "Our expert ethical hackers perform thorough penetration testing to uncover security weaknesses in your web applications, networks, and cloud environments."
+    metaDescription: "Identify and remediate security vulnerabilities before attackers exploit them. Our expert-led penetration testing simulates real-world attacks on your systems.",
+    canonicalUrl: "https://www.atoroaishield.com/services/cyber-security/penetration-testing",
+    ogImageUrl: "/lovable-uploads/penetration-testing-hero.jpg"
   };
 
-  // Overview section features
-  const features: FeatureCardProps[] = [
+  // Penetration testing specific testimonials
+  const testimonials = [
     {
-      title: "Web Application Testing",
-      description: "Identify vulnerabilities in your web applications and APIs",
-      icon: Shield,
+      quote: "Atoro's penetration testers found critical vulnerabilities our internal team had missed. Their remediation guidance was practical and effective.",
+      author: "Michael Chen",
+      title: "CTO",
+      company: "FinSecure",
+      rating: 5
     },
     {
-      title: "Network Penetration Testing",
-      description: "Uncover weaknesses in your network infrastructure",
-      icon: Bug,
+      quote: "The detailed reporting and risk prioritization helped us focus our security efforts where they mattered most.",
+      author: "Sarah Johnson",
+      title: "CISO",
+      company: "MedTech Solutions",
+      rating: 4.5
     },
     {
-      title: "Cloud Security Assessment",
-      description: "Evaluate security of your cloud environments and configurations",
-      icon: Lock,
-    },
-    {
-      title: "Mobile Application Testing",
-      description: "Test security of iOS and Android applications",
-      icon: FileCheck,
-    },
-    {
-      title: "Social Engineering Tests",
-      description: "Assess employee security awareness and susceptibility",
-      icon: Users,
+      quote: "We've been using Atoro for annual penetration tests for three years. Each time, their thorough methodology uncovers new potential vulnerabilities as our systems evolve.",
+      author: "David Rodriguez",
+      title: "Security Director",
+      company: "DataSphere",
+      rating: 5
     }
   ];
 
-  // Benefits section items
-  const benefits: BenefitItemProps[] = [
+  // Client logos
+  const clientLogos = [
     {
-      title: "Identify Real Vulnerabilities",
-      description: "Discover exploitable security issues that automated tools miss"
+      id: 1,
+      name: "TechCorp",
+      imagePath: "/lovable-uploads/273bf97c-b513-4a94-8fdd-7a5bc90eb254.png",
+      altText: "TechCorp logo"
     },
     {
-      title: "Reduce Security Incidents",
-      description: "Proactively fix vulnerabilities before attackers can exploit them"
+      id: 2,
+      name: "Innovex",
+      imagePath: "/lovable-uploads/67e0fd6c-3db8-4cd6-a32b-c0841aa5535e.png",
+      altText: "Innovex logo"
     },
     {
-      title: "Meet Compliance Requirements",
-      description: "Satisfy penetration testing requirements for SOC 2, PCI DSS, and more"
+      id: 3,
+      name: "DataFlow",
+      imagePath: "/lovable-uploads/697c806d-2cfd-402a-8b50-65ceecb5c88c.png",
+      altText: "DataFlow logo"
     },
     {
-      title: "Validate Security Controls",
-      description: "Verify your existing security measures are working effectively"
+      id: 4,
+      name: "SecureTech",
+      imagePath: "/lovable-uploads/9b3556f3-0651-4ed7-b0d6-42ede4d99feb.png",
+      altText: "SecureTech logo"
     },
     {
-      title: "Prioritize Security Investments",
-      description: "Focus resources on fixing the most critical security issues first"
-    },
-    {
-      title: "Build Customer Trust",
-      description: "Demonstrate your commitment to security to clients and partners"
-    }
-  ];
-
-  // Process steps data - make sure stepNumber is required
-  const processSteps = [
-    {
-      title: "Scoping & Planning",
-      description: "Define testing objectives, scope, and methodology",
-      stepNumber: 1
-    },
-    {
-      title: "Reconnaissance",
-      description: "Gather information about the target environment",
-      stepNumber: 2
-    },
-    {
-      title: "Vulnerability Discovery",
-      description: "Identify potential security weaknesses",
-      stepNumber: 3
-    },
-    {
-      title: "Exploitation",
-      description: "Safely attempt to exploit discovered vulnerabilities",
-      stepNumber: 4
-    },
-    {
-      title: "Analysis & Documentation",
-      description: "Document findings and develop remediation recommendations",
-      stepNumber: 5
-    },
-    {
-      title: "Reporting & Debriefing",
-      description: "Deliver comprehensive report and discuss findings",
-      stepNumber: 6
-    },
-    {
-      title: "Remediation Guidance",
-      description: "Provide support in addressing identified vulnerabilities",
-      stepNumber: 7
-    }
-  ];
-
-  // FAQ section questions and answers
-  const faqs = [
-    {
-      question: "What types of penetration testing do you offer?",
-      answer: "We offer a comprehensive range of penetration testing services including web application testing, network infrastructure testing, mobile application assessment, cloud security testing, API security testing, and social engineering simulations."
-    },
-    {
-      question: "How often should we conduct penetration tests?",
-      answer: "We recommend conducting penetration tests at least annually, and additionally after significant changes to your infrastructure, applications, or security controls. Some compliance frameworks like PCI DSS require annual testing."
-    },
-    {
-      question: "What's the difference between a vulnerability scan and a penetration test?",
-      answer: "Vulnerability scanning uses automated tools to identify known vulnerabilities. Penetration testing goes further by having skilled security professionals manually attempt to exploit vulnerabilities to determine real-world impact and find issues that automated tools miss."
-    },
-    {
-      question: "How long does a penetration test take?",
-      answer: "The duration depends on the scope and complexity of the environment being tested. Typically, a comprehensive application or network penetration test requires 1-3 weeks from initial scoping to final report delivery."
-    },
-    {
-      question: "Will penetration testing disrupt our operations?",
-      answer: "We take precautions to minimize disruption. Most testing can be conducted without impact to production systems. For more sensitive tests, we can schedule testing during off-hours or in staging environments."
+      id: 5,
+      name: "CloudNet",
+      imagePath: "/lovable-uploads/5c1f26c2-fb1a-41c2-9088-86b87a45c090.png",
+      altText: "CloudNet logo"
     }
   ];
 
   return (
-    <StandardServicePage 
+    <StandardServicePage
       seo={seoData}
-      heroProps={heroProps}
+      
+      heroProps={{
+        title: <><span className="text-atoro-green">Penetration</span> Testing</>,
+        description: "Identify and remediate security vulnerabilities before attackers exploit them. Our expert-led penetration testing simulates real-world attacks on your systems.",
+        primaryButtonText: "Schedule a Penetration Test",
+        primaryButtonLink: "/contact",
+        secondaryButtonText: "Learn More",
+        secondaryButtonLink: "/resources/pentest-guide",
+        badgeText: "Security Testing",
+        imageUrl: "/lovable-uploads/penetration-testing-hero.jpg",
+        backgroundClass: "bg-gradient-to-br from-atoro-blue to-black",
+        subtitle: "Find Security Weaknesses Before Attackers Do" // Added subtitle to match UnifiedHeroProps
+      }}
+      
+      clientLogos={clientLogos}
+      clientLogosTitle="Trusted by Security-Conscious Organizations"
+      clientLogosDescription="Organizations that rely on our penetration testing expertise"
+      
+      testimonials={testimonials}
+      testimonialsTitle="What Our Penetration Testing Clients Say"
+      testimonialsDescription="Hear from organizations that have strengthened their security posture with our penetration testing services"
+      testimonialsBadgeText="Client Testimonials"
     >
-      <StandardOverviewSection 
-        badgeText="Overview"
-        title="Penetration Testing Services"
-        description="Our ethical hackers identify vulnerabilities before malicious actors can exploit them."
-        features={features}
-        id="overview"
-      />
-      <StandardBenefitsSection 
-        badgeText="Benefits"
-        title="Benefits of Penetration Testing"
-        description="Regular penetration testing provides numerous security and business advantages."
-        benefits={benefits}
-        id="benefits"
-      />
-      <StandardProcessSection 
-        badgeText="Process"
-        title="Our Penetration Testing Process"
-        description="Our methodical approach ensures thorough security assessment and actionable results."
-        steps={processSteps}
-        id="process"
-      />
-      <StandardFAQSection 
+      {/* Main content will be imported from external components */}
+      
+      {/* FAQ Section */}
+      <StandardFAQSection
         badgeText="FAQ"
-        title="Penetration Testing FAQs"
-        description="Common questions about our penetration testing services."
-        faqs={faqs}
-        id="faq"
+        title="Frequently Asked Questions"
+        description="Get answers to common questions about our penetration testing services"
+        faqs={[
+          {
+            question: "What is penetration testing?",
+            answer: "Penetration testing, also known as ethical hacking, is a simulated cyber attack against your computer system, network, or web application to identify exploitable vulnerabilities. Unlike vulnerability scanning, penetration testing involves active exploitation of vulnerabilities to demonstrate how an attacker might gain access to your systems or data."
+          },
+          {
+            question: "How often should we conduct penetration tests?",
+            answer: "Most organizations should conduct penetration tests at least annually, but more frequent testing is recommended if you: 1) Release new major applications or infrastructure, 2) Make significant changes to your existing systems, 3) Establish new offices or data centers, 4) Apply major security patches, or 5) Are in a highly regulated industry. Some compliance frameworks like PCI DSS require annual penetration testing."
+          },
+          {
+            question: "What's the difference between automated scanning and penetration testing?",
+            answer: "Automated vulnerability scanning uses tools to identify known vulnerabilities in your systems but often produces false positives and lacks context. Penetration testing combines automated tools with human expertise to actually exploit vulnerabilities, chain multiple weaknesses together, and determine their real-world impact. Our penetration testers can identify complex vulnerabilities that automated tools miss."
+          },
+          {
+            question: "What types of penetration testing do you offer?",
+            answer: "We offer a comprehensive range of penetration testing services, including: 1) Network penetration testing (internal and external), 2) Web application penetration testing, 3) Mobile application penetration testing, 4) Cloud infrastructure penetration testing, 5) API security testing, 6) Social engineering assessments, and 7) Red team exercises. We customize our approach based on your specific security needs and objectives."
+          }
+        ]}
+        className="bg-gray-50"
       />
-      <StandardCTASection 
+      
+      {/* CTA Section */}
+      <StandardCTASection
         badgeText="Get Started"
-        title="Ready to Test Your Security?"
-        description="Contact us to discuss your penetration testing needs."
-        primaryButtonText="Request a Penetration Test"
+        title="Ready to Identify Your Security Vulnerabilities?"
+        description="Schedule a penetration test to discover and address security weaknesses before attackers exploit them."
+        primaryButtonText="Schedule a Consultation"
         primaryButtonLink="/contact"
-        id="cta"
-      />
-      {/* Add ClientLogos component for penetration testing clients */}
-      <ClientLogos 
-        service="penetration-testing" 
-        title="Securing Industry Leaders" 
-        description="These organizations trust Atoro AI Shield with their penetration testing needs" 
+        id="cta-section"
       />
     </StandardServicePage>
   );

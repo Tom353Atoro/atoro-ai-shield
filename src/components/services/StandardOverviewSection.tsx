@@ -54,4 +54,4 @@ const StandardOverviewSection: React.FC<StandardOverviewSectionProps> = ({
   );
 };
 
-export default StandardOverviewSection; 
+export default StandardOverviewSection;
